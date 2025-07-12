@@ -1,0 +1,161 @@
+syntax = "proto3";
+
+package notification.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/JrMarcco/kuryr-api/api/notification/v1";
+
+// 发送渠道
+// v1
+//  |-- sms   - 短信
+//  |-- email - 邮件
+enum Channel {
+  CHANNEL_UNSPECIFIED = 0;
+  SMS = 1;
+  EMAIL = 2;
+}
+
+// 发送状态
+// v1
+//  |-- PREPARE  - 准备中
+//  |-- CANCELED - 已取消
+//  |-- PENDING  - 挂起
+//  |-- SUCCESS  - 成功
+//  |-- FAILURE  - 失败
+enum SendStatus {
+  STATUS_UNSPECIFIED = 0;
+  PREPARE = 1;
+  CANCELED = 2;
+  PENDING = 3;
+  SUCCESS = 4;
+  FAILURE = 5;
+}
+
+// 错误码
+enum ErrCode {
+  ERR_UNSPECIFIED = 0;
+  INVALID_PARAM = 1;
+  RATE_LIMITED = 2;
+  NO_AVAILABLE_CHANNEL = 3;
+  NO_AVAILABLE_PROVIDER = 4;
+  CHANNEL_NOT_FOUND = 5;
+  PROVIDER_NOT_FOUND = 6;
+  TEMPLATE_NOT_FOUND = 7;
+  BIZ_ID_NOT_FOUND = 8;
+  CONFIG_NOT_FOUND = 9;
+  QUOTA_CONFIG_NOT_FOUND = 10;
+  QUOTA_RECORD_NOT_FOUND = 11;
+  NOTIFICATION_NOT_FOUND = 12;
+  CREATE_NOTIFICATION_FAILED = 13;
+  SEND_NOTIFICATION_FAILED = 14;
+  QUOTA_NOT_ENOUGH = 15;
+}
+
+// 发送策略
+message SendStrategy {
+  oneof strategy_type {
+    ImmediatelyStrategy immediate = 1;
+    DelayedStrategy delayed = 2;
+    ScheduledStrategy scheduled = 3;
+    TimeWindowStrategy time_window = 4;
+    DeadlineStrategy deadline = 5;
+  }
+}
+
+// 发送策略 - 立即发送
+message ImmediatelyStrategy {}
+
+// 发送策略 - 延迟发送
+message DelayedStrategy {
+  int64 delay_seconds = 1;
+}
+
+// 发送策略 - 调度发送
+message ScheduledStrategy {
+  google.protobuf.Timestamp send_time = 1;
+}
+
+// 发送策略 - 时间窗口内发送
+message TimeWindowStrategy {
+  int64 start_time_millis = 1;
+  int64 end_time_millis = 2;
+}
+
+// 发送策略 - 截止时间前发送
+message DeadlineStrategy {
+  google.protobuf.Timestamp deadline = 1;
+}
+
+// 消息
+message Notification {
+  string biz_code = 1;
+  repeated string receivers = 2;
+  Channel channel = 3;
+  string tpl_id = 4;
+  map<string, string> tpl_params = 5;
+  SendStrategy strategy = 6;
+}
+
+// 消息发送服务
+service NotificationService {
+  // 单条消息发送
+  rpc Send(SendRequest) returns (SendResponse);
+  // 单条消息异步发送
+  rpc AsyncSend(AsyncSendRequest) returns (AsyncSendResponse);
+
+  // 批量消息发送
+  rpc BatchSend(BatchSendRequest) returns (BatchSendResponse);
+  // 批量消息异步发送
+  rpc AsyncBatchSend(AsyncBatchSendRequest) returns (AsyncBatchSendResponse);
+}
+
+// 发送结果，包含消息 id 以及发送状态和错误信息
+message SendResult {
+  uint64 notification_id = 1;
+  SendStatus status = 2;
+  ErrCode err_code = 3;
+  string err_msg = 4;
+}
+
+// 单条消息发送请求
+message SendRequest {
+  Notification notification = 1;
+}
+
+// 单条消息发送响应
+message SendResponse {
+  SendResult result = 1;
+}
+
+// 单条消息异步发送请求
+message AsyncSendRequest {
+  Notification notification = 1;
+}
+
+// 单条消息异步发送响应
+message AsyncSendResponse {
+  SendResult result = 1;
+}
+
+// 批量消息发送请求
+message BatchSendRequest {
+  repeated Notification notifications = 1;
+}
+
+// 批量消息发送响应
+message BatchSendResponse {
+  repeated SendResult results = 1;
+  int32 total_cnt = 2;
+  int32 success_cnt = 3;
+}
+
+// 批量消息异步发送请求
+message AsyncBatchSendRequest {
+  repeated Notification notifications = 1;
+}
+
+// 批量消息异步发送响应
+message AsyncBatchSendResponse {
+  repeated uint64 notification_ids = 1;
+}
