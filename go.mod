@@ -1,6 +1,6 @@
 module github.com/JrMarcco/kuryr-api
 
-go 1.24.5
+go 1.24
 
 require (
 	google.golang.org/grpc v1.73.0
