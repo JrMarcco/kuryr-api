@@ -7,7 +7,6 @@ import "google/protobuf/timestamp.proto";
 option go_package = "github.com/JrMarcco/kuryr-api/api/notification/v1";
 
 // 发送渠道
-// v1
 //  |-- sms   - 短信
 //  |-- email - 邮件
 enum Channel {
@@ -17,7 +16,6 @@ enum Channel {
 }
 
 // 发送状态
-// v1
 //  |-- PREPARE  - 准备中
 //  |-- CANCELED - 已取消
 //  |-- PENDING  - 挂起
@@ -89,7 +87,7 @@ message DeadlineStrategy {
 
 // 消息
 message Notification {
-  string biz_code = 1;
+  string biz_key = 1;
   repeated string receivers = 2;
   Channel channel = 3;
   string tpl_id = 4;

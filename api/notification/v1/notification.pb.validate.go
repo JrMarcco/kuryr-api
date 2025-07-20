@@ -936,7 +936,7 @@ func (m *Notification) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for BizCode
+	// no validation rules for BizKey
 
 	// no validation rules for Channel
 

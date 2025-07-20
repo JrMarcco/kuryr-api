@@ -23,7 +23,6 @@ const (
 )
 
 // 发送渠道
-// v1
 //
 //	|-- sms   - 短信
 //	|-- email - 邮件
@@ -77,7 +76,6 @@ func (Channel) EnumDescriptor() ([]byte, []int) {
 }
 
 // 发送状态
-// v1
 //
 //	|-- PREPARE  - 准备中
 //	|-- CANCELED - 已取消
@@ -590,7 +588,7 @@ func (x *DeadlineStrategy) GetDeadline() *timestamppb.Timestamp {
 // 消息
 type Notification struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BizCode       string                 `protobuf:"bytes,1,opt,name=biz_code,json=bizCode,proto3" json:"biz_code,omitempty"`
+	BizKey        string                 `protobuf:"bytes,1,opt,name=biz_key,json=bizKey,proto3" json:"biz_key,omitempty"`
 	Receivers     []string               `protobuf:"bytes,2,rep,name=receivers,proto3" json:"receivers,omitempty"`
 	Channel       Channel                `protobuf:"varint,3,opt,name=channel,proto3,enum=notification.v1.Channel" json:"channel,omitempty"`
 	TplId         string                 `protobuf:"bytes,4,opt,name=tpl_id,json=tplId,proto3" json:"tpl_id,omitempty"`
@@ -630,9 +628,9 @@ func (*Notification) Descriptor() ([]byte, []int) {
 	return file_notification_v1_notification_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *Notification) GetBizCode() string {
+func (x *Notification) GetBizKey() string {
 	if x != nil {
-		return x.BizCode
+		return x.BizKey
 	}
 	return ""
 }
@@ -1139,9 +1137,9 @@ const file_notification_v1_notification_proto_rawDesc = "" +
 	"\x11start_time_millis\x18\x01 \x01(\x03R\x0fstartTimeMillis\x12&\n" +
 	"\x0fend_time_millis\x18\x02 \x01(\x03R\rendTimeMillis\"J\n" +
 	"\x10DeadlineStrategy\x126\n" +
-	"\bdeadline\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\bdeadline\"\xd8\x02\n" +
-	"\fNotification\x12\x19\n" +
-	"\bbiz_code\x18\x01 \x01(\tR\abizCode\x12\x1c\n" +
+	"\bdeadline\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\bdeadline\"\xd6\x02\n" +
+	"\fNotification\x12\x17\n" +
+	"\abiz_key\x18\x01 \x01(\tR\x06bizKey\x12\x1c\n" +
 	"\treceivers\x18\x02 \x03(\tR\treceivers\x122\n" +
 	"\achannel\x18\x03 \x01(\x0e2\x18.notification.v1.ChannelR\achannel\x12\x15\n" +
 	"\x06tpl_id\x18\x04 \x01(\tR\x05tplId\x12K\n" +
