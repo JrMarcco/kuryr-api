@@ -61,7 +61,7 @@ message SaveRequest {
 message SaveResponse {
   bool success = 1;
   uint64 id = 2;
-  string msg = 3;
+  string err_msg = 3;
 }
 
 message DeleteRequest {
@@ -70,7 +70,7 @@ message DeleteRequest {
 
 message DeleteResponse {
   bool success = 1;
-  string msg = 2;
+  string err_msg = 2;
 }
 
 message GetByIdRequest {
