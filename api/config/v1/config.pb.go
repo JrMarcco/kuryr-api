@@ -537,7 +537,7 @@ type SaveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	Id            uint64                 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Msg           string                 `protobuf:"bytes,3,opt,name=msg,proto3" json:"msg,omitempty"`
+	ErrMsg        string                 `protobuf:"bytes,3,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -586,9 +586,9 @@ func (x *SaveResponse) GetId() uint64 {
 	return 0
 }
 
-func (x *SaveResponse) GetMsg() string {
+func (x *SaveResponse) GetErrMsg() string {
 	if x != nil {
-		return x.Msg
+		return x.ErrMsg
 	}
 	return ""
 }
@@ -640,7 +640,7 @@ func (x *DeleteRequest) GetId() uint64 {
 type DeleteResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -682,9 +682,9 @@ func (x *DeleteResponse) GetSuccess() bool {
 	return false
 }
 
-func (x *DeleteResponse) GetMsg() string {
+func (x *DeleteResponse) GetErrMsg() string {
 	if x != nil {
-		return x.Msg
+		return x.ErrMsg
 	}
 	return ""
 }
@@ -903,16 +903,16 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"\n" +
 	"rate_limit\x18\x05 \x01(\x05R\trateLimit\";\n" +
 	"\vSaveRequest\x12,\n" +
-	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config\"J\n" +
+	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config\"Q\n" +
 	"\fSaveResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\x04R\x02id\x12\x10\n" +
-	"\x03msg\x18\x03 \x01(\tR\x03msg\"\x1f\n" +
+	"\x02id\x18\x02 \x01(\x04R\x02id\x12\x17\n" +
+	"\aerr_msg\x18\x03 \x01(\tR\x06errMsg\"\x1f\n" +
 	"\rDeleteRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"<\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"C\n" +
 	"\x0eDeleteResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\" \n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
+	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\" \n" +
 	"\x0eGetByIdRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"?\n" +
 	"\x0fGetByIdResponse\x12,\n" +
