@@ -9,7 +9,6 @@ message RetryPolicyConfig {
   int32 max_retry_times = 1;
   int32 init_interval_ms = 2;
   int32 max_interval_ms = 3;
-  double backoff_multiplier = 4;
 }
 
 // CallbackConfig 回调通知配置
@@ -30,19 +29,14 @@ message ChannelConfig {
   RetryPolicyConfig retry_policy = 2;
 }
 
-message MonthlyQuota {
-  int32 sms = 1;
-  int32 email = 2;
-}
-
-message DailyQuota {
+message QuotaDetail {
   int32 sms = 1;
   int32 email = 2;
 }
 
 message QuotaConfig {
-  MonthlyQuota monthly = 1;
-  DailyQuota daily = 2;
+  QuotaDetail monthly = 1;
+  QuotaDetail daily = 2;
 }
 
 // BizConfig 业务方配置

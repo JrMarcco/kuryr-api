@@ -23,13 +23,12 @@ const (
 
 // RetryConfig 重试策略配置
 type RetryPolicyConfig struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	MaxRetryTimes     int32                  `protobuf:"varint,1,opt,name=max_retry_times,json=maxRetryTimes,proto3" json:"max_retry_times,omitempty"`
-	InitIntervalMs    int32                  `protobuf:"varint,2,opt,name=init_interval_ms,json=initIntervalMs,proto3" json:"init_interval_ms,omitempty"`
-	MaxIntervalMs     int32                  `protobuf:"varint,3,opt,name=max_interval_ms,json=maxIntervalMs,proto3" json:"max_interval_ms,omitempty"`
-	BackoffMultiplier float64                `protobuf:"fixed64,4,opt,name=backoff_multiplier,json=backoffMultiplier,proto3" json:"backoff_multiplier,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	MaxRetryTimes  int32                  `protobuf:"varint,1,opt,name=max_retry_times,json=maxRetryTimes,proto3" json:"max_retry_times,omitempty"`
+	InitIntervalMs int32                  `protobuf:"varint,2,opt,name=init_interval_ms,json=initIntervalMs,proto3" json:"init_interval_ms,omitempty"`
+	MaxIntervalMs  int32                  `protobuf:"varint,3,opt,name=max_interval_ms,json=maxIntervalMs,proto3" json:"max_interval_ms,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *RetryPolicyConfig) Reset() {
@@ -79,13 +78,6 @@ func (x *RetryPolicyConfig) GetInitIntervalMs() int32 {
 func (x *RetryPolicyConfig) GetMaxIntervalMs() int32 {
 	if x != nil {
 		return x.MaxIntervalMs
-	}
-	return 0
-}
-
-func (x *RetryPolicyConfig) GetBackoffMultiplier() float64 {
-	if x != nil {
-		return x.BackoffMultiplier
 	}
 	return 0
 }
@@ -256,7 +248,7 @@ func (x *ChannelConfig) GetRetryPolicy() *RetryPolicyConfig {
 	return nil
 }
 
-type MonthlyQuota struct {
+type QuotaDetail struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Sms           int32                  `protobuf:"varint,1,opt,name=sms,proto3" json:"sms,omitempty"`
 	Email         int32                  `protobuf:"varint,2,opt,name=email,proto3" json:"email,omitempty"`
@@ -264,20 +256,20 @@ type MonthlyQuota struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *MonthlyQuota) Reset() {
-	*x = MonthlyQuota{}
+func (x *QuotaDetail) Reset() {
+	*x = QuotaDetail{}
 	mi := &file_config_v1_config_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MonthlyQuota) String() string {
+func (x *QuotaDetail) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MonthlyQuota) ProtoMessage() {}
+func (*QuotaDetail) ProtoMessage() {}
 
-func (x *MonthlyQuota) ProtoReflect() protoreflect.Message {
+func (x *QuotaDetail) ProtoReflect() protoreflect.Message {
 	mi := &file_config_v1_config_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -289,71 +281,19 @@ func (x *MonthlyQuota) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MonthlyQuota.ProtoReflect.Descriptor instead.
-func (*MonthlyQuota) Descriptor() ([]byte, []int) {
+// Deprecated: Use QuotaDetail.ProtoReflect.Descriptor instead.
+func (*QuotaDetail) Descriptor() ([]byte, []int) {
 	return file_config_v1_config_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *MonthlyQuota) GetSms() int32 {
+func (x *QuotaDetail) GetSms() int32 {
 	if x != nil {
 		return x.Sms
 	}
 	return 0
 }
 
-func (x *MonthlyQuota) GetEmail() int32 {
-	if x != nil {
-		return x.Email
-	}
-	return 0
-}
-
-type DailyQuota struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Sms           int32                  `protobuf:"varint,1,opt,name=sms,proto3" json:"sms,omitempty"`
-	Email         int32                  `protobuf:"varint,2,opt,name=email,proto3" json:"email,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DailyQuota) Reset() {
-	*x = DailyQuota{}
-	mi := &file_config_v1_config_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DailyQuota) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DailyQuota) ProtoMessage() {}
-
-func (x *DailyQuota) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DailyQuota.ProtoReflect.Descriptor instead.
-func (*DailyQuota) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *DailyQuota) GetSms() int32 {
-	if x != nil {
-		return x.Sms
-	}
-	return 0
-}
-
-func (x *DailyQuota) GetEmail() int32 {
+func (x *QuotaDetail) GetEmail() int32 {
 	if x != nil {
 		return x.Email
 	}
@@ -362,15 +302,15 @@ func (x *DailyQuota) GetEmail() int32 {
 
 type QuotaConfig struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Monthly       *MonthlyQuota          `protobuf:"bytes,1,opt,name=monthly,proto3" json:"monthly,omitempty"`
-	Daily         *DailyQuota            `protobuf:"bytes,2,opt,name=daily,proto3" json:"daily,omitempty"`
+	Monthly       *QuotaDetail           `protobuf:"bytes,1,opt,name=monthly,proto3" json:"monthly,omitempty"`
+	Daily         *QuotaDetail           `protobuf:"bytes,2,opt,name=daily,proto3" json:"daily,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *QuotaConfig) Reset() {
 	*x = QuotaConfig{}
-	mi := &file_config_v1_config_proto_msgTypes[6]
+	mi := &file_config_v1_config_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -382,7 +322,7 @@ func (x *QuotaConfig) String() string {
 func (*QuotaConfig) ProtoMessage() {}
 
 func (x *QuotaConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[6]
+	mi := &file_config_v1_config_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -395,17 +335,17 @@ func (x *QuotaConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuotaConfig.ProtoReflect.Descriptor instead.
 func (*QuotaConfig) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{6}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *QuotaConfig) GetMonthly() *MonthlyQuota {
+func (x *QuotaConfig) GetMonthly() *QuotaDetail {
 	if x != nil {
 		return x.Monthly
 	}
 	return nil
 }
 
-func (x *QuotaConfig) GetDaily() *DailyQuota {
+func (x *QuotaConfig) GetDaily() *QuotaDetail {
 	if x != nil {
 		return x.Daily
 	}
@@ -426,7 +366,7 @@ type BizConfig struct {
 
 func (x *BizConfig) Reset() {
 	*x = BizConfig{}
-	mi := &file_config_v1_config_proto_msgTypes[7]
+	mi := &file_config_v1_config_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -438,7 +378,7 @@ func (x *BizConfig) String() string {
 func (*BizConfig) ProtoMessage() {}
 
 func (x *BizConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[7]
+	mi := &file_config_v1_config_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -451,7 +391,7 @@ func (x *BizConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BizConfig.ProtoReflect.Descriptor instead.
 func (*BizConfig) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{7}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *BizConfig) GetOwnerId() uint64 {
@@ -498,7 +438,7 @@ type SaveRequest struct {
 
 func (x *SaveRequest) Reset() {
 	*x = SaveRequest{}
-	mi := &file_config_v1_config_proto_msgTypes[8]
+	mi := &file_config_v1_config_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -510,7 +450,7 @@ func (x *SaveRequest) String() string {
 func (*SaveRequest) ProtoMessage() {}
 
 func (x *SaveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[8]
+	mi := &file_config_v1_config_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -523,7 +463,7 @@ func (x *SaveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveRequest.ProtoReflect.Descriptor instead.
 func (*SaveRequest) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{8}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *SaveRequest) GetConfig() *BizConfig {
@@ -544,7 +484,7 @@ type SaveResponse struct {
 
 func (x *SaveResponse) Reset() {
 	*x = SaveResponse{}
-	mi := &file_config_v1_config_proto_msgTypes[9]
+	mi := &file_config_v1_config_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -556,7 +496,7 @@ func (x *SaveResponse) String() string {
 func (*SaveResponse) ProtoMessage() {}
 
 func (x *SaveResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[9]
+	mi := &file_config_v1_config_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -569,7 +509,7 @@ func (x *SaveResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveResponse.ProtoReflect.Descriptor instead.
 func (*SaveResponse) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{9}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *SaveResponse) GetSuccess() bool {
@@ -602,7 +542,7 @@ type DeleteRequest struct {
 
 func (x *DeleteRequest) Reset() {
 	*x = DeleteRequest{}
-	mi := &file_config_v1_config_proto_msgTypes[10]
+	mi := &file_config_v1_config_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -614,7 +554,7 @@ func (x *DeleteRequest) String() string {
 func (*DeleteRequest) ProtoMessage() {}
 
 func (x *DeleteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[10]
+	mi := &file_config_v1_config_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -627,7 +567,7 @@ func (x *DeleteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteRequest.ProtoReflect.Descriptor instead.
 func (*DeleteRequest) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{10}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *DeleteRequest) GetId() uint64 {
@@ -647,7 +587,7 @@ type DeleteResponse struct {
 
 func (x *DeleteResponse) Reset() {
 	*x = DeleteResponse{}
-	mi := &file_config_v1_config_proto_msgTypes[11]
+	mi := &file_config_v1_config_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -659,7 +599,7 @@ func (x *DeleteResponse) String() string {
 func (*DeleteResponse) ProtoMessage() {}
 
 func (x *DeleteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[11]
+	mi := &file_config_v1_config_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -672,7 +612,7 @@ func (x *DeleteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteResponse.ProtoReflect.Descriptor instead.
 func (*DeleteResponse) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{11}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DeleteResponse) GetSuccess() bool {
@@ -698,7 +638,7 @@ type GetByIdRequest struct {
 
 func (x *GetByIdRequest) Reset() {
 	*x = GetByIdRequest{}
-	mi := &file_config_v1_config_proto_msgTypes[12]
+	mi := &file_config_v1_config_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -710,7 +650,7 @@ func (x *GetByIdRequest) String() string {
 func (*GetByIdRequest) ProtoMessage() {}
 
 func (x *GetByIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[12]
+	mi := &file_config_v1_config_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -723,7 +663,7 @@ func (x *GetByIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetByIdRequest.ProtoReflect.Descriptor instead.
 func (*GetByIdRequest) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{12}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetByIdRequest) GetId() uint64 {
@@ -742,7 +682,7 @@ type GetByIdResponse struct {
 
 func (x *GetByIdResponse) Reset() {
 	*x = GetByIdResponse{}
-	mi := &file_config_v1_config_proto_msgTypes[13]
+	mi := &file_config_v1_config_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -754,7 +694,7 @@ func (x *GetByIdResponse) String() string {
 func (*GetByIdResponse) ProtoMessage() {}
 
 func (x *GetByIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[13]
+	mi := &file_config_v1_config_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -767,7 +707,7 @@ func (x *GetByIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetByIdResponse.ProtoReflect.Descriptor instead.
 func (*GetByIdResponse) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{13}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetByIdResponse) GetConfig() *BizConfig {
@@ -786,7 +726,7 @@ type GetByIdsRequest struct {
 
 func (x *GetByIdsRequest) Reset() {
 	*x = GetByIdsRequest{}
-	mi := &file_config_v1_config_proto_msgTypes[14]
+	mi := &file_config_v1_config_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -798,7 +738,7 @@ func (x *GetByIdsRequest) String() string {
 func (*GetByIdsRequest) ProtoMessage() {}
 
 func (x *GetByIdsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[14]
+	mi := &file_config_v1_config_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -811,7 +751,7 @@ func (x *GetByIdsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetByIdsRequest.ProtoReflect.Descriptor instead.
 func (*GetByIdsRequest) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{14}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetByIdsRequest) GetIds() []uint64 {
@@ -830,7 +770,7 @@ type GetByIdsResponse struct {
 
 func (x *GetByIdsResponse) Reset() {
 	*x = GetByIdsResponse{}
-	mi := &file_config_v1_config_proto_msgTypes[15]
+	mi := &file_config_v1_config_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -842,7 +782,7 @@ func (x *GetByIdsResponse) String() string {
 func (*GetByIdsResponse) ProtoMessage() {}
 
 func (x *GetByIdsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[15]
+	mi := &file_config_v1_config_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -855,7 +795,7 @@ func (x *GetByIdsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetByIdsResponse.ProtoReflect.Descriptor instead.
 func (*GetByIdsResponse) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{15}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetByIdsResponse) GetConfigs() map[uint64]*BizConfig {
@@ -869,12 +809,11 @@ var File_config_v1_config_proto protoreflect.FileDescriptor
 
 const file_config_v1_config_proto_rawDesc = "" +
 	"\n" +
-	"\x16config/v1/config.proto\x12\tconfig.v1\"\xbc\x01\n" +
+	"\x16config/v1/config.proto\x12\tconfig.v1\"\x8d\x01\n" +
 	"\x11RetryPolicyConfig\x12&\n" +
 	"\x0fmax_retry_times\x18\x01 \x01(\x05R\rmaxRetryTimes\x12(\n" +
 	"\x10init_interval_ms\x18\x02 \x01(\x05R\x0einitIntervalMs\x12&\n" +
-	"\x0fmax_interval_ms\x18\x03 \x01(\x05R\rmaxIntervalMs\x12-\n" +
-	"\x12backoff_multiplier\x18\x04 \x01(\x01R\x11backoffMultiplier\"t\n" +
+	"\x0fmax_interval_ms\x18\x03 \x01(\x05R\rmaxIntervalMs\"t\n" +
 	"\x0eCallbackConfig\x12!\n" +
 	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12?\n" +
 	"\fretry_policy\x18\x02 \x01(\v2\x1c.config.v1.RetryPolicyConfigR\vretryPolicy\"]\n" +
@@ -884,17 +823,13 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"~\n" +
 	"\rChannelConfig\x12,\n" +
 	"\x05items\x18\x01 \x03(\v2\x16.config.v1.ChannelItemR\x05items\x12?\n" +
-	"\fretry_policy\x18\x02 \x01(\v2\x1c.config.v1.RetryPolicyConfigR\vretryPolicy\"6\n" +
-	"\fMonthlyQuota\x12\x10\n" +
-	"\x03sms\x18\x01 \x01(\x05R\x03sms\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\x05R\x05email\"4\n" +
-	"\n" +
-	"DailyQuota\x12\x10\n" +
+	"\fretry_policy\x18\x02 \x01(\v2\x1c.config.v1.RetryPolicyConfigR\vretryPolicy\"5\n" +
+	"\vQuotaDetail\x12\x10\n" +
 	"\x03sms\x18\x01 \x01(\x05R\x03sms\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\x05R\x05email\"m\n" +
-	"\vQuotaConfig\x121\n" +
-	"\amonthly\x18\x01 \x01(\v2\x17.config.v1.MonthlyQuotaR\amonthly\x12+\n" +
-	"\x05daily\x18\x02 \x01(\v2\x15.config.v1.DailyQuotaR\x05daily\"\xf8\x01\n" +
+	"\vQuotaConfig\x120\n" +
+	"\amonthly\x18\x01 \x01(\v2\x16.config.v1.QuotaDetailR\amonthly\x12,\n" +
+	"\x05daily\x18\x02 \x01(\v2\x16.config.v1.QuotaDetailR\x05daily\"\xf8\x01\n" +
 	"\tBizConfig\x12\x19\n" +
 	"\bowner_id\x18\x01 \x01(\x04R\aownerId\x12?\n" +
 	"\x0echannel_config\x18\x02 \x01(\v2\x18.config.v1.ChannelConfigR\rchannelConfig\x12,\n" +
@@ -944,47 +879,46 @@ func file_config_v1_config_proto_rawDescGZIP() []byte {
 	return file_config_v1_config_proto_rawDescData
 }
 
-var file_config_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_config_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_config_v1_config_proto_goTypes = []any{
 	(*RetryPolicyConfig)(nil), // 0: config.v1.RetryPolicyConfig
 	(*CallbackConfig)(nil),    // 1: config.v1.CallbackConfig
 	(*ChannelItem)(nil),       // 2: config.v1.ChannelItem
 	(*ChannelConfig)(nil),     // 3: config.v1.ChannelConfig
-	(*MonthlyQuota)(nil),      // 4: config.v1.MonthlyQuota
-	(*DailyQuota)(nil),        // 5: config.v1.DailyQuota
-	(*QuotaConfig)(nil),       // 6: config.v1.QuotaConfig
-	(*BizConfig)(nil),         // 7: config.v1.BizConfig
-	(*SaveRequest)(nil),       // 8: config.v1.SaveRequest
-	(*SaveResponse)(nil),      // 9: config.v1.SaveResponse
-	(*DeleteRequest)(nil),     // 10: config.v1.DeleteRequest
-	(*DeleteResponse)(nil),    // 11: config.v1.DeleteResponse
-	(*GetByIdRequest)(nil),    // 12: config.v1.GetByIdRequest
-	(*GetByIdResponse)(nil),   // 13: config.v1.GetByIdResponse
-	(*GetByIdsRequest)(nil),   // 14: config.v1.GetByIdsRequest
-	(*GetByIdsResponse)(nil),  // 15: config.v1.GetByIdsResponse
-	nil,                       // 16: config.v1.GetByIdsResponse.ConfigsEntry
+	(*QuotaDetail)(nil),       // 4: config.v1.QuotaDetail
+	(*QuotaConfig)(nil),       // 5: config.v1.QuotaConfig
+	(*BizConfig)(nil),         // 6: config.v1.BizConfig
+	(*SaveRequest)(nil),       // 7: config.v1.SaveRequest
+	(*SaveResponse)(nil),      // 8: config.v1.SaveResponse
+	(*DeleteRequest)(nil),     // 9: config.v1.DeleteRequest
+	(*DeleteResponse)(nil),    // 10: config.v1.DeleteResponse
+	(*GetByIdRequest)(nil),    // 11: config.v1.GetByIdRequest
+	(*GetByIdResponse)(nil),   // 12: config.v1.GetByIdResponse
+	(*GetByIdsRequest)(nil),   // 13: config.v1.GetByIdsRequest
+	(*GetByIdsResponse)(nil),  // 14: config.v1.GetByIdsResponse
+	nil,                       // 15: config.v1.GetByIdsResponse.ConfigsEntry
 }
 var file_config_v1_config_proto_depIdxs = []int32{
 	0,  // 0: config.v1.CallbackConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
 	2,  // 1: config.v1.ChannelConfig.items:type_name -> config.v1.ChannelItem
 	0,  // 2: config.v1.ChannelConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
-	4,  // 3: config.v1.QuotaConfig.monthly:type_name -> config.v1.MonthlyQuota
-	5,  // 4: config.v1.QuotaConfig.daily:type_name -> config.v1.DailyQuota
+	4,  // 3: config.v1.QuotaConfig.monthly:type_name -> config.v1.QuotaDetail
+	4,  // 4: config.v1.QuotaConfig.daily:type_name -> config.v1.QuotaDetail
 	3,  // 5: config.v1.BizConfig.channel_config:type_name -> config.v1.ChannelConfig
-	6,  // 6: config.v1.BizConfig.quota:type_name -> config.v1.QuotaConfig
+	5,  // 6: config.v1.BizConfig.quota:type_name -> config.v1.QuotaConfig
 	1,  // 7: config.v1.BizConfig.callback_config:type_name -> config.v1.CallbackConfig
-	7,  // 8: config.v1.SaveRequest.config:type_name -> config.v1.BizConfig
-	7,  // 9: config.v1.GetByIdResponse.config:type_name -> config.v1.BizConfig
-	16, // 10: config.v1.GetByIdsResponse.configs:type_name -> config.v1.GetByIdsResponse.ConfigsEntry
-	7,  // 11: config.v1.GetByIdsResponse.ConfigsEntry.value:type_name -> config.v1.BizConfig
-	8,  // 12: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
-	10, // 13: config.v1.BizConfigService.Delete:input_type -> config.v1.DeleteRequest
-	12, // 14: config.v1.BizConfigService.GetById:input_type -> config.v1.GetByIdRequest
-	14, // 15: config.v1.BizConfigService.GetByIds:input_type -> config.v1.GetByIdsRequest
-	9,  // 16: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
-	11, // 17: config.v1.BizConfigService.Delete:output_type -> config.v1.DeleteResponse
-	13, // 18: config.v1.BizConfigService.GetById:output_type -> config.v1.GetByIdResponse
-	15, // 19: config.v1.BizConfigService.GetByIds:output_type -> config.v1.GetByIdsResponse
+	6,  // 8: config.v1.SaveRequest.config:type_name -> config.v1.BizConfig
+	6,  // 9: config.v1.GetByIdResponse.config:type_name -> config.v1.BizConfig
+	15, // 10: config.v1.GetByIdsResponse.configs:type_name -> config.v1.GetByIdsResponse.ConfigsEntry
+	6,  // 11: config.v1.GetByIdsResponse.ConfigsEntry.value:type_name -> config.v1.BizConfig
+	7,  // 12: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
+	9,  // 13: config.v1.BizConfigService.Delete:input_type -> config.v1.DeleteRequest
+	11, // 14: config.v1.BizConfigService.GetById:input_type -> config.v1.GetByIdRequest
+	13, // 15: config.v1.BizConfigService.GetByIds:input_type -> config.v1.GetByIdsRequest
+	8,  // 16: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
+	10, // 17: config.v1.BizConfigService.Delete:output_type -> config.v1.DeleteResponse
+	12, // 18: config.v1.BizConfigService.GetById:output_type -> config.v1.GetByIdResponse
+	14, // 19: config.v1.BizConfigService.GetByIds:output_type -> config.v1.GetByIdsResponse
 	16, // [16:20] is the sub-list for method output_type
 	12, // [12:16] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
@@ -1003,7 +937,7 @@ func file_config_v1_config_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_config_v1_config_proto_rawDesc), len(file_config_v1_config_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

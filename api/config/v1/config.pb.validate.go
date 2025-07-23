@@ -63,8 +63,6 @@ func (m *RetryPolicyConfig) validate(all bool) error {
 
 	// no validation rules for MaxIntervalMs
 
-	// no validation rules for BackoffMultiplier
-
 	if len(errors) > 0 {
 		return RetryPolicyConfigMultiError(errors)
 	}
@@ -544,125 +542,22 @@ var _ interface {
 	ErrorName() string
 } = ChannelConfigValidationError{}
 
-// Validate checks the field values on MonthlyQuota with the rules defined in
+// Validate checks the field values on QuotaDetail with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *MonthlyQuota) Validate() error {
+func (m *QuotaDetail) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on MonthlyQuota with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in MonthlyQuotaMultiError, or
-// nil if none found.
-func (m *MonthlyQuota) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *MonthlyQuota) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Sms
-
-	// no validation rules for Email
-
-	if len(errors) > 0 {
-		return MonthlyQuotaMultiError(errors)
-	}
-
-	return nil
-}
-
-// MonthlyQuotaMultiError is an error wrapping multiple validation errors
-// returned by MonthlyQuota.ValidateAll() if the designated constraints aren't met.
-type MonthlyQuotaMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m MonthlyQuotaMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m MonthlyQuotaMultiError) AllErrors() []error { return m }
-
-// MonthlyQuotaValidationError is the validation error returned by
-// MonthlyQuota.Validate if the designated constraints aren't met.
-type MonthlyQuotaValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e MonthlyQuotaValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e MonthlyQuotaValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e MonthlyQuotaValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e MonthlyQuotaValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e MonthlyQuotaValidationError) ErrorName() string { return "MonthlyQuotaValidationError" }
-
-// Error satisfies the builtin error interface
-func (e MonthlyQuotaValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sMonthlyQuota.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = MonthlyQuotaValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = MonthlyQuotaValidationError{}
-
-// Validate checks the field values on DailyQuota with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *DailyQuota) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on DailyQuota with the rules defined in
+// ValidateAll checks the field values on QuotaDetail with the rules defined in
 // the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in DailyQuotaMultiError, or
+// result is a list of violation errors wrapped in QuotaDetailMultiError, or
 // nil if none found.
-func (m *DailyQuota) ValidateAll() error {
+func (m *QuotaDetail) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *DailyQuota) validate(all bool) error {
+func (m *QuotaDetail) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -674,18 +569,18 @@ func (m *DailyQuota) validate(all bool) error {
 	// no validation rules for Email
 
 	if len(errors) > 0 {
-		return DailyQuotaMultiError(errors)
+		return QuotaDetailMultiError(errors)
 	}
 
 	return nil
 }
 
-// DailyQuotaMultiError is an error wrapping multiple validation errors
-// returned by DailyQuota.ValidateAll() if the designated constraints aren't met.
-type DailyQuotaMultiError []error
+// QuotaDetailMultiError is an error wrapping multiple validation errors
+// returned by QuotaDetail.ValidateAll() if the designated constraints aren't met.
+type QuotaDetailMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m DailyQuotaMultiError) Error() string {
+func (m QuotaDetailMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -694,11 +589,11 @@ func (m DailyQuotaMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m DailyQuotaMultiError) AllErrors() []error { return m }
+func (m QuotaDetailMultiError) AllErrors() []error { return m }
 
-// DailyQuotaValidationError is the validation error returned by
-// DailyQuota.Validate if the designated constraints aren't met.
-type DailyQuotaValidationError struct {
+// QuotaDetailValidationError is the validation error returned by
+// QuotaDetail.Validate if the designated constraints aren't met.
+type QuotaDetailValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -706,22 +601,22 @@ type DailyQuotaValidationError struct {
 }
 
 // Field function returns field value.
-func (e DailyQuotaValidationError) Field() string { return e.field }
+func (e QuotaDetailValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DailyQuotaValidationError) Reason() string { return e.reason }
+func (e QuotaDetailValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DailyQuotaValidationError) Cause() error { return e.cause }
+func (e QuotaDetailValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DailyQuotaValidationError) Key() bool { return e.key }
+func (e QuotaDetailValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DailyQuotaValidationError) ErrorName() string { return "DailyQuotaValidationError" }
+func (e QuotaDetailValidationError) ErrorName() string { return "QuotaDetailValidationError" }
 
 // Error satisfies the builtin error interface
-func (e DailyQuotaValidationError) Error() string {
+func (e QuotaDetailValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -733,14 +628,14 @@ func (e DailyQuotaValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDailyQuota.%s: %s%s",
+		"invalid %sQuotaDetail.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DailyQuotaValidationError{}
+var _ error = QuotaDetailValidationError{}
 
 var _ interface {
 	Field() string
@@ -748,7 +643,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DailyQuotaValidationError{}
+} = QuotaDetailValidationError{}
 
 // Validate checks the field values on QuotaConfig with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
