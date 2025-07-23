@@ -823,7 +823,7 @@ func (m *BizConfig) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for OwnerId
+	// no validation rules for BizId
 
 	if all {
 		switch v := interface{}(m.GetChannelConfig()).(type) {

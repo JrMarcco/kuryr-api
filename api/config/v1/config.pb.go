@@ -355,7 +355,7 @@ func (x *QuotaConfig) GetDaily() *Quota {
 // BizConfig 业务方配置
 type BizConfig struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	OwnerId        uint64                 `protobuf:"varint,1,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"` // 对应 biz_info 表的 id
+	BizId          uint64                 `protobuf:"varint,1,opt,name=biz_id,json=bizId,proto3" json:"biz_id,omitempty"` // 对应 biz_info 表的 id
 	ChannelConfig  *ChannelConfig         `protobuf:"bytes,2,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
 	QuotaConfig    *QuotaConfig           `protobuf:"bytes,3,opt,name=quota_config,json=quotaConfig,proto3" json:"quota_config,omitempty"`
 	CallbackConfig *CallbackConfig        `protobuf:"bytes,4,opt,name=callback_config,json=callbackConfig,proto3" json:"callback_config,omitempty"`
@@ -394,9 +394,9 @@ func (*BizConfig) Descriptor() ([]byte, []int) {
 	return file_config_v1_config_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *BizConfig) GetOwnerId() uint64 {
+func (x *BizConfig) GetBizId() uint64 {
 	if x != nil {
-		return x.OwnerId
+		return x.BizId
 	}
 	return 0
 }
@@ -829,9 +829,9 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"\x05email\x18\x02 \x01(\x05R\x05email\"a\n" +
 	"\vQuotaConfig\x12*\n" +
 	"\amonthly\x18\x01 \x01(\v2\x10.config.v1.QuotaR\amonthly\x12&\n" +
-	"\x05daily\x18\x02 \x01(\v2\x10.config.v1.QuotaR\x05daily\"\x85\x02\n" +
-	"\tBizConfig\x12\x19\n" +
-	"\bowner_id\x18\x01 \x01(\x04R\aownerId\x12?\n" +
+	"\x05daily\x18\x02 \x01(\v2\x10.config.v1.QuotaR\x05daily\"\x81\x02\n" +
+	"\tBizConfig\x12\x15\n" +
+	"\x06biz_id\x18\x01 \x01(\x04R\x05bizId\x12?\n" +
 	"\x0echannel_config\x18\x02 \x01(\v2\x18.config.v1.ChannelConfigR\rchannelConfig\x129\n" +
 	"\fquota_config\x18\x03 \x01(\v2\x16.config.v1.QuotaConfigR\vquotaConfig\x12B\n" +
 	"\x0fcallback_config\x18\x04 \x01(\v2\x19.config.v1.CallbackConfigR\x0ecallbackConfig\x12\x1d\n" +
