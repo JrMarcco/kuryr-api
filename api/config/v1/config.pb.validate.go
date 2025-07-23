@@ -856,11 +856,11 @@ func (m *BizConfig) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetQuota()).(type) {
+		switch v := interface{}(m.GetQuotaConfig()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, BizConfigValidationError{
-					field:  "Quota",
+					field:  "QuotaConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -868,16 +868,16 @@ func (m *BizConfig) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, BizConfigValidationError{
-					field:  "Quota",
+					field:  "QuotaConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetQuota()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetQuotaConfig()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return BizConfigValidationError{
-				field:  "Quota",
+				field:  "QuotaConfig",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}

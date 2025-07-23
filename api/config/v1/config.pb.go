@@ -357,7 +357,7 @@ type BizConfig struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	OwnerId        uint64                 `protobuf:"varint,1,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"` // 对应 biz_info 表的 id
 	ChannelConfig  *ChannelConfig         `protobuf:"bytes,2,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
-	Quota          *QuotaConfig           `protobuf:"bytes,3,opt,name=quota,proto3" json:"quota,omitempty"`
+	QuotaConfig    *QuotaConfig           `protobuf:"bytes,3,opt,name=quota_config,json=quotaConfig,proto3" json:"quota_config,omitempty"`
 	CallbackConfig *CallbackConfig        `protobuf:"bytes,4,opt,name=callback_config,json=callbackConfig,proto3" json:"callback_config,omitempty"`
 	RateLimit      int32                  `protobuf:"varint,5,opt,name=rate_limit,json=rateLimit,proto3" json:"rate_limit,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -408,9 +408,9 @@ func (x *BizConfig) GetChannelConfig() *ChannelConfig {
 	return nil
 }
 
-func (x *BizConfig) GetQuota() *QuotaConfig {
+func (x *BizConfig) GetQuotaConfig() *QuotaConfig {
 	if x != nil {
-		return x.Quota
+		return x.QuotaConfig
 	}
 	return nil
 }
@@ -829,11 +829,11 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"\x05email\x18\x02 \x01(\x05R\x05email\"m\n" +
 	"\vQuotaConfig\x120\n" +
 	"\amonthly\x18\x01 \x01(\v2\x16.config.v1.QuotaDetailR\amonthly\x12,\n" +
-	"\x05daily\x18\x02 \x01(\v2\x16.config.v1.QuotaDetailR\x05daily\"\xf8\x01\n" +
+	"\x05daily\x18\x02 \x01(\v2\x16.config.v1.QuotaDetailR\x05daily\"\x85\x02\n" +
 	"\tBizConfig\x12\x19\n" +
 	"\bowner_id\x18\x01 \x01(\x04R\aownerId\x12?\n" +
-	"\x0echannel_config\x18\x02 \x01(\v2\x18.config.v1.ChannelConfigR\rchannelConfig\x12,\n" +
-	"\x05quota\x18\x03 \x01(\v2\x16.config.v1.QuotaConfigR\x05quota\x12B\n" +
+	"\x0echannel_config\x18\x02 \x01(\v2\x18.config.v1.ChannelConfigR\rchannelConfig\x129\n" +
+	"\fquota_config\x18\x03 \x01(\v2\x16.config.v1.QuotaConfigR\vquotaConfig\x12B\n" +
 	"\x0fcallback_config\x18\x04 \x01(\v2\x19.config.v1.CallbackConfigR\x0ecallbackConfig\x12\x1d\n" +
 	"\n" +
 	"rate_limit\x18\x05 \x01(\x05R\trateLimit\";\n" +
@@ -905,7 +905,7 @@ var file_config_v1_config_proto_depIdxs = []int32{
 	4,  // 3: config.v1.QuotaConfig.monthly:type_name -> config.v1.QuotaDetail
 	4,  // 4: config.v1.QuotaConfig.daily:type_name -> config.v1.QuotaDetail
 	3,  // 5: config.v1.BizConfig.channel_config:type_name -> config.v1.ChannelConfig
-	5,  // 6: config.v1.BizConfig.quota:type_name -> config.v1.QuotaConfig
+	5,  // 6: config.v1.BizConfig.quota_config:type_name -> config.v1.QuotaConfig
 	1,  // 7: config.v1.BizConfig.callback_config:type_name -> config.v1.CallbackConfig
 	6,  // 8: config.v1.SaveRequest.config:type_name -> config.v1.BizConfig
 	6,  // 9: config.v1.GetByIdResponse.config:type_name -> config.v1.BizConfig
