@@ -29,14 +29,14 @@ message ChannelConfig {
   RetryPolicyConfig retry_policy = 2;
 }
 
-message QuotaDetail {
+message Quota {
   int32 sms = 1;
   int32 email = 2;
 }
 
 message QuotaConfig {
-  QuotaDetail monthly = 1;
-  QuotaDetail daily = 2;
+  Quota monthly = 1;
+  Quota daily = 2;
 }
 
 // BizConfig 业务方配置

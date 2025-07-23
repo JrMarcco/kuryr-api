@@ -248,7 +248,7 @@ func (x *ChannelConfig) GetRetryPolicy() *RetryPolicyConfig {
 	return nil
 }
 
-type QuotaDetail struct {
+type Quota struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Sms           int32                  `protobuf:"varint,1,opt,name=sms,proto3" json:"sms,omitempty"`
 	Email         int32                  `protobuf:"varint,2,opt,name=email,proto3" json:"email,omitempty"`
@@ -256,20 +256,20 @@ type QuotaDetail struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *QuotaDetail) Reset() {
-	*x = QuotaDetail{}
+func (x *Quota) Reset() {
+	*x = Quota{}
 	mi := &file_config_v1_config_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *QuotaDetail) String() string {
+func (x *Quota) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QuotaDetail) ProtoMessage() {}
+func (*Quota) ProtoMessage() {}
 
-func (x *QuotaDetail) ProtoReflect() protoreflect.Message {
+func (x *Quota) ProtoReflect() protoreflect.Message {
 	mi := &file_config_v1_config_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -281,19 +281,19 @@ func (x *QuotaDetail) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QuotaDetail.ProtoReflect.Descriptor instead.
-func (*QuotaDetail) Descriptor() ([]byte, []int) {
+// Deprecated: Use Quota.ProtoReflect.Descriptor instead.
+func (*Quota) Descriptor() ([]byte, []int) {
 	return file_config_v1_config_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *QuotaDetail) GetSms() int32 {
+func (x *Quota) GetSms() int32 {
 	if x != nil {
 		return x.Sms
 	}
 	return 0
 }
 
-func (x *QuotaDetail) GetEmail() int32 {
+func (x *Quota) GetEmail() int32 {
 	if x != nil {
 		return x.Email
 	}
@@ -302,8 +302,8 @@ func (x *QuotaDetail) GetEmail() int32 {
 
 type QuotaConfig struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Monthly       *QuotaDetail           `protobuf:"bytes,1,opt,name=monthly,proto3" json:"monthly,omitempty"`
-	Daily         *QuotaDetail           `protobuf:"bytes,2,opt,name=daily,proto3" json:"daily,omitempty"`
+	Monthly       *Quota                 `protobuf:"bytes,1,opt,name=monthly,proto3" json:"monthly,omitempty"`
+	Daily         *Quota                 `protobuf:"bytes,2,opt,name=daily,proto3" json:"daily,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -338,14 +338,14 @@ func (*QuotaConfig) Descriptor() ([]byte, []int) {
 	return file_config_v1_config_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *QuotaConfig) GetMonthly() *QuotaDetail {
+func (x *QuotaConfig) GetMonthly() *Quota {
 	if x != nil {
 		return x.Monthly
 	}
 	return nil
 }
 
-func (x *QuotaConfig) GetDaily() *QuotaDetail {
+func (x *QuotaConfig) GetDaily() *Quota {
 	if x != nil {
 		return x.Daily
 	}
@@ -823,13 +823,13 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"~\n" +
 	"\rChannelConfig\x12,\n" +
 	"\x05items\x18\x01 \x03(\v2\x16.config.v1.ChannelItemR\x05items\x12?\n" +
-	"\fretry_policy\x18\x02 \x01(\v2\x1c.config.v1.RetryPolicyConfigR\vretryPolicy\"5\n" +
-	"\vQuotaDetail\x12\x10\n" +
+	"\fretry_policy\x18\x02 \x01(\v2\x1c.config.v1.RetryPolicyConfigR\vretryPolicy\"/\n" +
+	"\x05Quota\x12\x10\n" +
 	"\x03sms\x18\x01 \x01(\x05R\x03sms\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\x05R\x05email\"m\n" +
-	"\vQuotaConfig\x120\n" +
-	"\amonthly\x18\x01 \x01(\v2\x16.config.v1.QuotaDetailR\amonthly\x12,\n" +
-	"\x05daily\x18\x02 \x01(\v2\x16.config.v1.QuotaDetailR\x05daily\"\x85\x02\n" +
+	"\x05email\x18\x02 \x01(\x05R\x05email\"a\n" +
+	"\vQuotaConfig\x12*\n" +
+	"\amonthly\x18\x01 \x01(\v2\x10.config.v1.QuotaR\amonthly\x12&\n" +
+	"\x05daily\x18\x02 \x01(\v2\x10.config.v1.QuotaR\x05daily\"\x85\x02\n" +
 	"\tBizConfig\x12\x19\n" +
 	"\bowner_id\x18\x01 \x01(\x04R\aownerId\x12?\n" +
 	"\x0echannel_config\x18\x02 \x01(\v2\x18.config.v1.ChannelConfigR\rchannelConfig\x129\n" +
@@ -885,7 +885,7 @@ var file_config_v1_config_proto_goTypes = []any{
 	(*CallbackConfig)(nil),    // 1: config.v1.CallbackConfig
 	(*ChannelItem)(nil),       // 2: config.v1.ChannelItem
 	(*ChannelConfig)(nil),     // 3: config.v1.ChannelConfig
-	(*QuotaDetail)(nil),       // 4: config.v1.QuotaDetail
+	(*Quota)(nil),             // 4: config.v1.Quota
 	(*QuotaConfig)(nil),       // 5: config.v1.QuotaConfig
 	(*BizConfig)(nil),         // 6: config.v1.BizConfig
 	(*SaveRequest)(nil),       // 7: config.v1.SaveRequest
@@ -902,8 +902,8 @@ var file_config_v1_config_proto_depIdxs = []int32{
 	0,  // 0: config.v1.CallbackConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
 	2,  // 1: config.v1.ChannelConfig.items:type_name -> config.v1.ChannelItem
 	0,  // 2: config.v1.ChannelConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
-	4,  // 3: config.v1.QuotaConfig.monthly:type_name -> config.v1.QuotaDetail
-	4,  // 4: config.v1.QuotaConfig.daily:type_name -> config.v1.QuotaDetail
+	4,  // 3: config.v1.QuotaConfig.monthly:type_name -> config.v1.Quota
+	4,  // 4: config.v1.QuotaConfig.daily:type_name -> config.v1.Quota
 	3,  // 5: config.v1.BizConfig.channel_config:type_name -> config.v1.ChannelConfig
 	5,  // 6: config.v1.BizConfig.quota_config:type_name -> config.v1.QuotaConfig
 	1,  // 7: config.v1.BizConfig.callback_config:type_name -> config.v1.CallbackConfig

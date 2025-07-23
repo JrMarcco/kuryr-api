@@ -542,22 +542,21 @@ var _ interface {
 	ErrorName() string
 } = ChannelConfigValidationError{}
 
-// Validate checks the field values on QuotaDetail with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
+// Validate checks the field values on Quota with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *QuotaDetail) Validate() error {
+func (m *Quota) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on QuotaDetail with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in QuotaDetailMultiError, or
-// nil if none found.
-func (m *QuotaDetail) ValidateAll() error {
+// ValidateAll checks the field values on Quota with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in QuotaMultiError, or nil if none found.
+func (m *Quota) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *QuotaDetail) validate(all bool) error {
+func (m *Quota) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -569,18 +568,18 @@ func (m *QuotaDetail) validate(all bool) error {
 	// no validation rules for Email
 
 	if len(errors) > 0 {
-		return QuotaDetailMultiError(errors)
+		return QuotaMultiError(errors)
 	}
 
 	return nil
 }
 
-// QuotaDetailMultiError is an error wrapping multiple validation errors
-// returned by QuotaDetail.ValidateAll() if the designated constraints aren't met.
-type QuotaDetailMultiError []error
+// QuotaMultiError is an error wrapping multiple validation errors returned by
+// Quota.ValidateAll() if the designated constraints aren't met.
+type QuotaMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m QuotaDetailMultiError) Error() string {
+func (m QuotaMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -589,11 +588,11 @@ func (m QuotaDetailMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m QuotaDetailMultiError) AllErrors() []error { return m }
+func (m QuotaMultiError) AllErrors() []error { return m }
 
-// QuotaDetailValidationError is the validation error returned by
-// QuotaDetail.Validate if the designated constraints aren't met.
-type QuotaDetailValidationError struct {
+// QuotaValidationError is the validation error returned by Quota.Validate if
+// the designated constraints aren't met.
+type QuotaValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -601,22 +600,22 @@ type QuotaDetailValidationError struct {
 }
 
 // Field function returns field value.
-func (e QuotaDetailValidationError) Field() string { return e.field }
+func (e QuotaValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e QuotaDetailValidationError) Reason() string { return e.reason }
+func (e QuotaValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e QuotaDetailValidationError) Cause() error { return e.cause }
+func (e QuotaValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e QuotaDetailValidationError) Key() bool { return e.key }
+func (e QuotaValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e QuotaDetailValidationError) ErrorName() string { return "QuotaDetailValidationError" }
+func (e QuotaValidationError) ErrorName() string { return "QuotaValidationError" }
 
 // Error satisfies the builtin error interface
-func (e QuotaDetailValidationError) Error() string {
+func (e QuotaValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -628,14 +627,14 @@ func (e QuotaDetailValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sQuotaDetail.%s: %s%s",
+		"invalid %sQuota.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = QuotaDetailValidationError{}
+var _ error = QuotaValidationError{}
 
 var _ interface {
 	Field() string
@@ -643,7 +642,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = QuotaDetailValidationError{}
+} = QuotaValidationError{}
 
 // Validate checks the field values on QuotaConfig with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
