@@ -417,9 +417,9 @@ type BizConfig struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	OwnerId        uint64                 `protobuf:"varint,1,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"` // 对应 biz_info 表的 id
 	ChannelConfig  *ChannelConfig         `protobuf:"bytes,2,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
-	RateLimit      int32                  `protobuf:"varint,3,opt,name=rate_limit,json=rateLimit,proto3" json:"rate_limit,omitempty"`
-	Quota          *QuotaConfig           `protobuf:"bytes,4,opt,name=quota,proto3" json:"quota,omitempty"`
-	CallbackConfig *CallbackConfig        `protobuf:"bytes,5,opt,name=callback_config,json=callbackConfig,proto3" json:"callback_config,omitempty"`
+	Quota          *QuotaConfig           `protobuf:"bytes,3,opt,name=quota,proto3" json:"quota,omitempty"`
+	CallbackConfig *CallbackConfig        `protobuf:"bytes,4,opt,name=callback_config,json=callbackConfig,proto3" json:"callback_config,omitempty"`
+	RateLimit      int32                  `protobuf:"varint,5,opt,name=rate_limit,json=rateLimit,proto3" json:"rate_limit,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -468,13 +468,6 @@ func (x *BizConfig) GetChannelConfig() *ChannelConfig {
 	return nil
 }
 
-func (x *BizConfig) GetRateLimit() int32 {
-	if x != nil {
-		return x.RateLimit
-	}
-	return 0
-}
-
 func (x *BizConfig) GetQuota() *QuotaConfig {
 	if x != nil {
 		return x.Quota
@@ -487,6 +480,13 @@ func (x *BizConfig) GetCallbackConfig() *CallbackConfig {
 		return x.CallbackConfig
 	}
 	return nil
+}
+
+func (x *BizConfig) GetRateLimit() int32 {
+	if x != nil {
+		return x.RateLimit
+	}
+	return 0
 }
 
 type SaveRequest struct {
@@ -537,7 +537,7 @@ type SaveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	Id            uint64                 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Msg           string                 `protobuf:"bytes,3,opt,name=msg,proto3" json:"msg,omitempty"`
+	ErrMsg        string                 `protobuf:"bytes,3,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -586,9 +586,9 @@ func (x *SaveResponse) GetId() uint64 {
 	return 0
 }
 
-func (x *SaveResponse) GetMsg() string {
+func (x *SaveResponse) GetErrMsg() string {
 	if x != nil {
-		return x.Msg
+		return x.ErrMsg
 	}
 	return ""
 }
@@ -640,7 +640,7 @@ func (x *DeleteRequest) GetId() uint64 {
 type DeleteResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -682,9 +682,9 @@ func (x *DeleteResponse) GetSuccess() bool {
 	return false
 }
 
-func (x *DeleteResponse) GetMsg() string {
+func (x *DeleteResponse) GetErrMsg() string {
 	if x != nil {
-		return x.Msg
+		return x.ErrMsg
 	}
 	return ""
 }
@@ -897,22 +897,22 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"\x05daily\x18\x02 \x01(\v2\x15.config.v1.DailyQuotaR\x05daily\"\xf8\x01\n" +
 	"\tBizConfig\x12\x19\n" +
 	"\bowner_id\x18\x01 \x01(\x04R\aownerId\x12?\n" +
-	"\x0echannel_config\x18\x02 \x01(\v2\x18.config.v1.ChannelConfigR\rchannelConfig\x12\x1d\n" +
+	"\x0echannel_config\x18\x02 \x01(\v2\x18.config.v1.ChannelConfigR\rchannelConfig\x12,\n" +
+	"\x05quota\x18\x03 \x01(\v2\x16.config.v1.QuotaConfigR\x05quota\x12B\n" +
+	"\x0fcallback_config\x18\x04 \x01(\v2\x19.config.v1.CallbackConfigR\x0ecallbackConfig\x12\x1d\n" +
 	"\n" +
-	"rate_limit\x18\x03 \x01(\x05R\trateLimit\x12,\n" +
-	"\x05quota\x18\x04 \x01(\v2\x16.config.v1.QuotaConfigR\x05quota\x12B\n" +
-	"\x0fcallback_config\x18\x05 \x01(\v2\x19.config.v1.CallbackConfigR\x0ecallbackConfig\";\n" +
+	"rate_limit\x18\x05 \x01(\x05R\trateLimit\";\n" +
 	"\vSaveRequest\x12,\n" +
-	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config\"J\n" +
+	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config\"Q\n" +
 	"\fSaveResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\x04R\x02id\x12\x10\n" +
-	"\x03msg\x18\x03 \x01(\tR\x03msg\"\x1f\n" +
+	"\x02id\x18\x02 \x01(\x04R\x02id\x12\x17\n" +
+	"\aerr_msg\x18\x03 \x01(\tR\x06errMsg\"\x1f\n" +
 	"\rDeleteRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"<\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"C\n" +
 	"\x0eDeleteResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\" \n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
+	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\" \n" +
 	"\x0eGetByIdRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"?\n" +
 	"\x0fGetByIdResponse\x12,\n" +

@@ -960,8 +960,6 @@ func (m *BizConfig) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for RateLimit
-
 	if all {
 		switch v := interface{}(m.GetQuota()).(type) {
 		case interface{ ValidateAll() error }:
@@ -1019,6 +1017,8 @@ func (m *BizConfig) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for RateLimit
 
 	if len(errors) > 0 {
 		return BizConfigMultiError(errors)
@@ -1251,7 +1251,7 @@ func (m *SaveResponse) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for Msg
+	// no validation rules for ErrMsg
 
 	if len(errors) > 0 {
 		return SaveResponseMultiError(errors)
@@ -1456,7 +1456,7 @@ func (m *DeleteResponse) validate(all bool) error {
 
 	// no validation rules for Success
 
-	// no validation rules for Msg
+	// no validation rules for ErrMsg
 
 	if len(errors) > 0 {
 		return DeleteResponseMultiError(errors)

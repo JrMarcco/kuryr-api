@@ -49,9 +49,9 @@ message QuotaConfig {
 message BizConfig {
   uint64 owner_id = 1; // 对应 biz_info 表的 id
   ChannelConfig channel_config = 2;
-  int32 rate_limit = 3;
-  QuotaConfig quota = 4;
-  CallbackConfig callback_config = 5;
+  QuotaConfig quota = 3;
+  CallbackConfig callback_config = 4;
+  int32 rate_limit = 5;
 }
 
 message SaveRequest {
@@ -61,7 +61,7 @@ message SaveRequest {
 message SaveResponse {
   bool success = 1;
   uint64 id = 2;
-  string msg = 3;
+  string err_msg = 3;
 }
 
 message DeleteRequest {
@@ -70,7 +70,7 @@ message DeleteRequest {
 
 message DeleteResponse {
   bool success = 1;
-  string msg = 2;
+  string err_msg = 2;
 }
 
 message GetByIdRequest {
