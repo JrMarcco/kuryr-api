@@ -75,19 +75,8 @@ message GetByIdResponse {
   BizConfig config = 1;
 }
 
-message GetByIdsRequest {
-  repeated uint64 ids = 1;
-}
-
-message GetByIdsResponse {
-  map<uint64, BizConfig> configs = 1;
-}
-
 service BizConfigService {
   rpc Save(SaveRequest) returns (SaveResponse);
-
   rpc Delete(DeleteRequest) returns (DeleteResponse);
-
   rpc GetById(GetByIdRequest) returns (GetByIdResponse);
-  rpc GetByIds(GetByIdsRequest) returns (GetByIdsResponse);
 }
