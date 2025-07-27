@@ -19,10 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BizConfigService_Save_FullMethodName     = "/config.v1.BizConfigService/Save"
-	BizConfigService_Delete_FullMethodName   = "/config.v1.BizConfigService/Delete"
-	BizConfigService_GetById_FullMethodName  = "/config.v1.BizConfigService/GetById"
-	BizConfigService_GetByIds_FullMethodName = "/config.v1.BizConfigService/GetByIds"
+	BizConfigService_Save_FullMethodName    = "/config.v1.BizConfigService/Save"
+	BizConfigService_Delete_FullMethodName  = "/config.v1.BizConfigService/Delete"
+	BizConfigService_GetById_FullMethodName = "/config.v1.BizConfigService/GetById"
 )
 
 // BizConfigServiceClient is the client API for BizConfigService service.
@@ -32,7 +31,6 @@ type BizConfigServiceClient interface {
 	Save(ctx context.Context, in *SaveRequest, opts ...grpc.CallOption) (*SaveResponse, error)
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 	GetById(ctx context.Context, in *GetByIdRequest, opts ...grpc.CallOption) (*GetByIdResponse, error)
-	GetByIds(ctx context.Context, in *GetByIdsRequest, opts ...grpc.CallOption) (*GetByIdsResponse, error)
 }
 
 type bizConfigServiceClient struct {
@@ -73,16 +71,6 @@ func (c *bizConfigServiceClient) GetById(ctx context.Context, in *GetByIdRequest
 	return out, nil
 }
 
-func (c *bizConfigServiceClient) GetByIds(ctx context.Context, in *GetByIdsRequest, opts ...grpc.CallOption) (*GetByIdsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetByIdsResponse)
-	err := c.cc.Invoke(ctx, BizConfigService_GetByIds_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BizConfigServiceServer is the server API for BizConfigService service.
 // All implementations should embed UnimplementedBizConfigServiceServer
 // for forward compatibility.
@@ -90,7 +78,6 @@ type BizConfigServiceServer interface {
 	Save(context.Context, *SaveRequest) (*SaveResponse, error)
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	GetById(context.Context, *GetByIdRequest) (*GetByIdResponse, error)
-	GetByIds(context.Context, *GetByIdsRequest) (*GetByIdsResponse, error)
 }
 
 // UnimplementedBizConfigServiceServer should be embedded to have
@@ -108,9 +95,6 @@ func (UnimplementedBizConfigServiceServer) Delete(context.Context, *DeleteReques
 }
 func (UnimplementedBizConfigServiceServer) GetById(context.Context, *GetByIdRequest) (*GetByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetById not implemented")
-}
-func (UnimplementedBizConfigServiceServer) GetByIds(context.Context, *GetByIdsRequest) (*GetByIdsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetByIds not implemented")
 }
 func (UnimplementedBizConfigServiceServer) testEmbeddedByValue() {}
 
@@ -186,24 +170,6 @@ func _BizConfigService_GetById_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BizConfigService_GetByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetByIdsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BizConfigServiceServer).GetByIds(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BizConfigService_GetByIds_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BizConfigServiceServer).GetByIds(ctx, req.(*GetByIdsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // BizConfigService_ServiceDesc is the grpc.ServiceDesc for BizConfigService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -222,10 +188,6 @@ var BizConfigService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetById",
 			Handler:    _BizConfigService_GetById_Handler,
-		},
-		{
-			MethodName: "GetByIds",
-			Handler:    _BizConfigService_GetByIds_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
