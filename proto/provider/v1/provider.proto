@@ -65,7 +65,7 @@ message FindByIdRequest {
 }
 
 message FindByIdResponse {
-  uint64 id = 1;
+  Provider provider = 1;
 }
 
 service ProviderService {
