@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BizConfigService_Save_FullMethodName    = "/config.v1.BizConfigService/Save"
-	BizConfigService_Delete_FullMethodName  = "/config.v1.BizConfigService/Delete"
-	BizConfigService_GetById_FullMethodName = "/config.v1.BizConfigService/GetById"
+	BizConfigService_Save_FullMethodName     = "/config.v1.BizConfigService/Save"
+	BizConfigService_Delete_FullMethodName   = "/config.v1.BizConfigService/Delete"
+	BizConfigService_FindById_FullMethodName = "/config.v1.BizConfigService/FindById"
 )
 
 // BizConfigServiceClient is the client API for BizConfigService service.
@@ -30,7 +30,7 @@ const (
 type BizConfigServiceClient interface {
 	Save(ctx context.Context, in *SaveRequest, opts ...grpc.CallOption) (*SaveResponse, error)
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
-	GetById(ctx context.Context, in *GetByIdRequest, opts ...grpc.CallOption) (*GetByIdResponse, error)
+	FindById(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error)
 }
 
 type bizConfigServiceClient struct {
@@ -61,10 +61,10 @@ func (c *bizConfigServiceClient) Delete(ctx context.Context, in *DeleteRequest, 
 	return out, nil
 }
 
-func (c *bizConfigServiceClient) GetById(ctx context.Context, in *GetByIdRequest, opts ...grpc.CallOption) (*GetByIdResponse, error) {
+func (c *bizConfigServiceClient) FindById(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetByIdResponse)
-	err := c.cc.Invoke(ctx, BizConfigService_GetById_FullMethodName, in, out, cOpts...)
+	out := new(FindByIdResponse)
+	err := c.cc.Invoke(ctx, BizConfigService_FindById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (c *bizConfigServiceClient) GetById(ctx context.Context, in *GetByIdRequest
 type BizConfigServiceServer interface {
 	Save(context.Context, *SaveRequest) (*SaveResponse, error)
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
-	GetById(context.Context, *GetByIdRequest) (*GetByIdResponse, error)
+	FindById(context.Context, *FindByIdRequest) (*FindByIdResponse, error)
 }
 
 // UnimplementedBizConfigServiceServer should be embedded to have
@@ -93,8 +93,8 @@ func (UnimplementedBizConfigServiceServer) Save(context.Context, *SaveRequest) (
 func (UnimplementedBizConfigServiceServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedBizConfigServiceServer) GetById(context.Context, *GetByIdRequest) (*GetByIdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetById not implemented")
+func (UnimplementedBizConfigServiceServer) FindById(context.Context, *FindByIdRequest) (*FindByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindById not implemented")
 }
 func (UnimplementedBizConfigServiceServer) testEmbeddedByValue() {}
 
@@ -152,20 +152,20 @@ func _BizConfigService_Delete_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BizConfigService_GetById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetByIdRequest)
+func _BizConfigService_FindById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BizConfigServiceServer).GetById(ctx, in)
+		return srv.(BizConfigServiceServer).FindById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BizConfigService_GetById_FullMethodName,
+		FullMethod: BizConfigService_FindById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BizConfigServiceServer).GetById(ctx, req.(*GetByIdRequest))
+		return srv.(BizConfigServiceServer).FindById(ctx, req.(*FindByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -186,8 +186,8 @@ var BizConfigService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BizConfigService_Delete_Handler,
 		},
 		{
-			MethodName: "GetById",
-			Handler:    _BizConfigService_GetById_Handler,
+			MethodName: "FindById",
+			Handler:    _BizConfigService_FindById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

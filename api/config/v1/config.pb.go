@@ -484,8 +484,7 @@ func (x *SaveRequest) GetConfig() *BizConfig {
 type SaveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Id            uint64                 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	ErrMsg        string                 `protobuf:"bytes,3,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
+	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -525,13 +524,6 @@ func (x *SaveResponse) GetSuccess() bool {
 		return x.Success
 	}
 	return false
-}
-
-func (x *SaveResponse) GetId() uint64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
 }
 
 func (x *SaveResponse) GetErrMsg() string {
@@ -637,27 +629,27 @@ func (x *DeleteResponse) GetErrMsg() string {
 	return ""
 }
 
-type GetByIdRequest struct {
+type FindByIdRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetByIdRequest) Reset() {
-	*x = GetByIdRequest{}
+func (x *FindByIdRequest) Reset() {
+	*x = FindByIdRequest{}
 	mi := &file_config_v1_config_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetByIdRequest) String() string {
+func (x *FindByIdRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetByIdRequest) ProtoMessage() {}
+func (*FindByIdRequest) ProtoMessage() {}
 
-func (x *GetByIdRequest) ProtoReflect() protoreflect.Message {
+func (x *FindByIdRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_config_v1_config_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -669,39 +661,39 @@ func (x *GetByIdRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetByIdRequest.ProtoReflect.Descriptor instead.
-func (*GetByIdRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use FindByIdRequest.ProtoReflect.Descriptor instead.
+func (*FindByIdRequest) Descriptor() ([]byte, []int) {
 	return file_config_v1_config_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *GetByIdRequest) GetId() uint64 {
+func (x *FindByIdRequest) GetId() uint64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-type GetByIdResponse struct {
+type FindByIdResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Config        *BizConfig             `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetByIdResponse) Reset() {
-	*x = GetByIdResponse{}
+func (x *FindByIdResponse) Reset() {
+	*x = FindByIdResponse{}
 	mi := &file_config_v1_config_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetByIdResponse) String() string {
+func (x *FindByIdResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetByIdResponse) ProtoMessage() {}
+func (*FindByIdResponse) ProtoMessage() {}
 
-func (x *GetByIdResponse) ProtoReflect() protoreflect.Message {
+func (x *FindByIdResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_config_v1_config_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -713,12 +705,12 @@ func (x *GetByIdResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetByIdResponse.ProtoReflect.Descriptor instead.
-func (*GetByIdResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use FindByIdResponse.ProtoReflect.Descriptor instead.
+func (*FindByIdResponse) Descriptor() ([]byte, []int) {
 	return file_config_v1_config_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *GetByIdResponse) GetConfig() *BizConfig {
+func (x *FindByIdResponse) GetConfig() *BizConfig {
 	if x != nil {
 		return x.Config
 	}
@@ -760,24 +752,23 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"\n" +
 	"rate_limit\x18\x06 \x01(\x05R\trateLimit\";\n" +
 	"\vSaveRequest\x12,\n" +
-	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config\"Q\n" +
+	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config\"A\n" +
 	"\fSaveResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\x04R\x02id\x12\x17\n" +
-	"\aerr_msg\x18\x03 \x01(\tR\x06errMsg\"\x1f\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
+	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"\x1f\n" +
 	"\rDeleteRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"C\n" +
 	"\x0eDeleteResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\" \n" +
-	"\x0eGetByIdRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"?\n" +
-	"\x0fGetByIdResponse\x12,\n" +
-	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config2\xcc\x01\n" +
+	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"!\n" +
+	"\x0fFindByIdRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"@\n" +
+	"\x10FindByIdResponse\x12,\n" +
+	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config2\xcf\x01\n" +
 	"\x10BizConfigService\x127\n" +
 	"\x04Save\x12\x16.config.v1.SaveRequest\x1a\x17.config.v1.SaveResponse\x12=\n" +
-	"\x06Delete\x12\x18.config.v1.DeleteRequest\x1a\x19.config.v1.DeleteResponse\x12@\n" +
-	"\aGetById\x12\x19.config.v1.GetByIdRequest\x1a\x1a.config.v1.GetByIdResponseB\x97\x01\n" +
+	"\x06Delete\x12\x18.config.v1.DeleteRequest\x1a\x19.config.v1.DeleteResponse\x12C\n" +
+	"\bFindById\x12\x1a.config.v1.FindByIdRequest\x1a\x1b.config.v1.FindByIdResponseB\x97\x01\n" +
 	"\rcom.config.v1B\vConfigProtoP\x01Z4github.com/JrMarcco/kuryr-api/api/config/v1;configv1\xa2\x02\x03CXX\xaa\x02\tConfig.V1\xca\x02\tConfig\\V1\xe2\x02\x15Config\\V1\\GPBMetadata\xea\x02\n" +
 	"Config::V1b\x06proto3"
 
@@ -806,8 +797,8 @@ var file_config_v1_config_proto_goTypes = []any{
 	(*SaveResponse)(nil),      // 8: config.v1.SaveResponse
 	(*DeleteRequest)(nil),     // 9: config.v1.DeleteRequest
 	(*DeleteResponse)(nil),    // 10: config.v1.DeleteResponse
-	(*GetByIdRequest)(nil),    // 11: config.v1.GetByIdRequest
-	(*GetByIdResponse)(nil),   // 12: config.v1.GetByIdResponse
+	(*FindByIdRequest)(nil),   // 11: config.v1.FindByIdRequest
+	(*FindByIdResponse)(nil),  // 12: config.v1.FindByIdResponse
 }
 var file_config_v1_config_proto_depIdxs = []int32{
 	0,  // 0: config.v1.CallbackConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
@@ -819,13 +810,13 @@ var file_config_v1_config_proto_depIdxs = []int32{
 	5,  // 6: config.v1.BizConfig.quota_config:type_name -> config.v1.QuotaConfig
 	1,  // 7: config.v1.BizConfig.callback_config:type_name -> config.v1.CallbackConfig
 	6,  // 8: config.v1.SaveRequest.config:type_name -> config.v1.BizConfig
-	6,  // 9: config.v1.GetByIdResponse.config:type_name -> config.v1.BizConfig
+	6,  // 9: config.v1.FindByIdResponse.config:type_name -> config.v1.BizConfig
 	7,  // 10: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
 	9,  // 11: config.v1.BizConfigService.Delete:input_type -> config.v1.DeleteRequest
-	11, // 12: config.v1.BizConfigService.GetById:input_type -> config.v1.GetByIdRequest
+	11, // 12: config.v1.BizConfigService.FindById:input_type -> config.v1.FindByIdRequest
 	8,  // 13: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
 	10, // 14: config.v1.BizConfigService.Delete:output_type -> config.v1.DeleteResponse
-	12, // 15: config.v1.BizConfigService.GetById:output_type -> config.v1.GetByIdResponse
+	12, // 15: config.v1.BizConfigService.FindById:output_type -> config.v1.FindByIdResponse
 	13, // [13:16] is the sub-list for method output_type
 	10, // [10:13] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name

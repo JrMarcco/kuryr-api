@@ -1145,8 +1145,6 @@ func (m *SaveResponse) validate(all bool) error {
 
 	// no validation rules for Success
 
-	// no validation rules for Id
-
 	// no validation rules for ErrMsg
 
 	if len(errors) > 0 {
@@ -1432,22 +1430,22 @@ var _ interface {
 	ErrorName() string
 } = DeleteResponseValidationError{}
 
-// Validate checks the field values on GetByIdRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *GetByIdRequest) Validate() error {
+// Validate checks the field values on FindByIdRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *FindByIdRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetByIdRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in GetByIdRequestMultiError,
-// or nil if none found.
-func (m *GetByIdRequest) ValidateAll() error {
+// ValidateAll checks the field values on FindByIdRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// FindByIdRequestMultiError, or nil if none found.
+func (m *FindByIdRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetByIdRequest) validate(all bool) error {
+func (m *FindByIdRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1457,19 +1455,19 @@ func (m *GetByIdRequest) validate(all bool) error {
 	// no validation rules for Id
 
 	if len(errors) > 0 {
-		return GetByIdRequestMultiError(errors)
+		return FindByIdRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetByIdRequestMultiError is an error wrapping multiple validation errors
-// returned by GetByIdRequest.ValidateAll() if the designated constraints
+// FindByIdRequestMultiError is an error wrapping multiple validation errors
+// returned by FindByIdRequest.ValidateAll() if the designated constraints
 // aren't met.
-type GetByIdRequestMultiError []error
+type FindByIdRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetByIdRequestMultiError) Error() string {
+func (m FindByIdRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1478,11 +1476,11 @@ func (m GetByIdRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetByIdRequestMultiError) AllErrors() []error { return m }
+func (m FindByIdRequestMultiError) AllErrors() []error { return m }
 
-// GetByIdRequestValidationError is the validation error returned by
-// GetByIdRequest.Validate if the designated constraints aren't met.
-type GetByIdRequestValidationError struct {
+// FindByIdRequestValidationError is the validation error returned by
+// FindByIdRequest.Validate if the designated constraints aren't met.
+type FindByIdRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1490,22 +1488,22 @@ type GetByIdRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetByIdRequestValidationError) Field() string { return e.field }
+func (e FindByIdRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetByIdRequestValidationError) Reason() string { return e.reason }
+func (e FindByIdRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetByIdRequestValidationError) Cause() error { return e.cause }
+func (e FindByIdRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetByIdRequestValidationError) Key() bool { return e.key }
+func (e FindByIdRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetByIdRequestValidationError) ErrorName() string { return "GetByIdRequestValidationError" }
+func (e FindByIdRequestValidationError) ErrorName() string { return "FindByIdRequestValidationError" }
 
 // Error satisfies the builtin error interface
-func (e GetByIdRequestValidationError) Error() string {
+func (e FindByIdRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1517,14 +1515,14 @@ func (e GetByIdRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetByIdRequest.%s: %s%s",
+		"invalid %sFindByIdRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetByIdRequestValidationError{}
+var _ error = FindByIdRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1532,24 +1530,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetByIdRequestValidationError{}
+} = FindByIdRequestValidationError{}
 
-// Validate checks the field values on GetByIdResponse with the rules defined
+// Validate checks the field values on FindByIdResponse with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
-func (m *GetByIdResponse) Validate() error {
+func (m *FindByIdResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetByIdResponse with the rules
+// ValidateAll checks the field values on FindByIdResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetByIdResponseMultiError, or nil if none found.
-func (m *GetByIdResponse) ValidateAll() error {
+// FindByIdResponseMultiError, or nil if none found.
+func (m *FindByIdResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetByIdResponse) validate(all bool) error {
+func (m *FindByIdResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1560,7 +1558,7 @@ func (m *GetByIdResponse) validate(all bool) error {
 		switch v := interface{}(m.GetConfig()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetByIdResponseValidationError{
+				errors = append(errors, FindByIdResponseValidationError{
 					field:  "Config",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1568,7 +1566,7 @@ func (m *GetByIdResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetByIdResponseValidationError{
+				errors = append(errors, FindByIdResponseValidationError{
 					field:  "Config",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1577,7 +1575,7 @@ func (m *GetByIdResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetConfig()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetByIdResponseValidationError{
+			return FindByIdResponseValidationError{
 				field:  "Config",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -1586,19 +1584,19 @@ func (m *GetByIdResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetByIdResponseMultiError(errors)
+		return FindByIdResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetByIdResponseMultiError is an error wrapping multiple validation errors
-// returned by GetByIdResponse.ValidateAll() if the designated constraints
+// FindByIdResponseMultiError is an error wrapping multiple validation errors
+// returned by FindByIdResponse.ValidateAll() if the designated constraints
 // aren't met.
-type GetByIdResponseMultiError []error
+type FindByIdResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetByIdResponseMultiError) Error() string {
+func (m FindByIdResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1607,11 +1605,11 @@ func (m GetByIdResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetByIdResponseMultiError) AllErrors() []error { return m }
+func (m FindByIdResponseMultiError) AllErrors() []error { return m }
 
-// GetByIdResponseValidationError is the validation error returned by
-// GetByIdResponse.Validate if the designated constraints aren't met.
-type GetByIdResponseValidationError struct {
+// FindByIdResponseValidationError is the validation error returned by
+// FindByIdResponse.Validate if the designated constraints aren't met.
+type FindByIdResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1619,22 +1617,22 @@ type GetByIdResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetByIdResponseValidationError) Field() string { return e.field }
+func (e FindByIdResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetByIdResponseValidationError) Reason() string { return e.reason }
+func (e FindByIdResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetByIdResponseValidationError) Cause() error { return e.cause }
+func (e FindByIdResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetByIdResponseValidationError) Key() bool { return e.key }
+func (e FindByIdResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetByIdResponseValidationError) ErrorName() string { return "GetByIdResponseValidationError" }
+func (e FindByIdResponseValidationError) ErrorName() string { return "FindByIdResponseValidationError" }
 
 // Error satisfies the builtin error interface
-func (e GetByIdResponseValidationError) Error() string {
+func (e FindByIdResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1646,14 +1644,14 @@ func (e GetByIdResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetByIdResponse.%s: %s%s",
+		"invalid %sFindByIdResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetByIdResponseValidationError{}
+var _ error = FindByIdResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1661,4 +1659,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetByIdResponseValidationError{}
+} = FindByIdResponseValidationError{}

@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package common.v1;
+
+option go_package = "github.com/JrMarcco/kuryr-api/api/common/v1";
+
+// 错误码
+enum ErrCode {
+  ERR_UNSPECIFIED = 0;
+  INVALID_PARAM = 1;
+  RATE_LIMITED = 2;
+  NO_AVAILABLE_CHANNEL = 3;
+  NO_AVAILABLE_PROVIDER = 4;
+  CHANNEL_NOT_FOUND = 5;
+  PROVIDER_NOT_FOUND = 6;
+  TEMPLATE_NOT_FOUND = 7;
+  BIZ_ID_NOT_FOUND = 8;
+  CONFIG_NOT_FOUND = 9;
+  QUOTA_CONFIG_NOT_FOUND = 10;
+  QUOTA_RECORD_NOT_FOUND = 11;
+  NOTIFICATION_NOT_FOUND = 12;
+  CREATE_NOTIFICATION_FAILED = 13;
+  SEND_NOTIFICATION_FAILED = 14;
+  QUOTA_NOT_ENOUGH = 15;
+}
+
+// 发送渠道
+//  |-- sms   - 短信
+//  |-- email - 邮件
+enum Channel {
+  CHANNEL_UNSPECIFIED = 0;
+  SMS = 1;
+  EMAIL = 2;
+}

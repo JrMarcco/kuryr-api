@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package provider.v1;
+
+import "common/v1/types.proto";
+
+option go_package = "github.com/JrMarcco/kuryr-api/api/provider/v1";
+
+message Provider {
+  uint64 id = 1;
+  string provider_name = 2;
+  common.v1.Channel channel = 3;
+
+  string endpoint = 4;
+  string region_id = 5;
+
+  string app_id = 6;
+  string api_key = 7;
+  string api_secret = 8;
+
+  int32 weight = 9;
+  int32 qps_limit = 10;
+  int32 daily_limit = 11;
+
+  string audit_callback_url = 12;
+
+  string active_status = 13;
+}
+
+message SaveRequest {
+  Provider provider = 1;
+}
+
+message SaveResponse {
+  bool success = 1;
+  string err_msg = 2;
+}
+
+message DeleteRequest {
+  uint64 id = 1;
+}
+
+message DeleteResponse {
+  bool success = 1;
+  string err_msg = 2;
+}
+
+message UpdateRequest {
+  Provider provider = 1;
+}
+
+message UpdateResponse {
+  bool success = 1;
+  string err_msg = 2;
+}
+
+message ListRequest {}
+
+message ListResponse {
+  repeated Provider providers = 1;
+}
+
+message FindByIdRequest {
+  uint64 id = 1;
+}
+
+message FindByIdResponse {
+  uint64 id = 1;
+}
+
+service ProviderService {
+  rpc Save(SaveRequest) returns (SaveResponse);
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+  rpc Update(UpdateRequest) returns (UpdateResponse);
+
+  rpc List(ListRequest) returns (ListResponse);
+  rpc FindById(FindByIdRequest) returns (FindByIdResponse);
+}

@@ -55,8 +55,7 @@ message SaveRequest {
 
 message SaveResponse {
   bool success = 1;
-  uint64 id = 2;
-  string err_msg = 3;
+  string err_msg = 2;
 }
 
 message DeleteRequest {
@@ -68,16 +67,16 @@ message DeleteResponse {
   string err_msg = 2;
 }
 
-message GetByIdRequest {
+message FindByIdRequest {
   uint64 id = 1;
 }
 
-message GetByIdResponse {
+message FindByIdResponse {
   BizConfig config = 1;
 }
 
 service BizConfigService {
   rpc Save(SaveRequest) returns (SaveResponse);
   rpc Delete(DeleteRequest) returns (DeleteResponse);
-  rpc GetById(GetByIdRequest) returns (GetByIdResponse);
+  rpc FindById(FindByIdRequest) returns (FindByIdResponse);
 }

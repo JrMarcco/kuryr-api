@@ -2,52 +2,24 @@ syntax = "proto3";
 
 package notification.v1;
 
+import "common/v1/types.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/JrMarcco/kuryr-api/api/notification/v1";
 
-// 发送渠道
-//  |-- sms   - 短信
-//  |-- email - 邮件
-enum Channel {
-  CHANNEL_UNSPECIFIED = 0;
-  SMS = 1;
-  EMAIL = 2;
-}
-
 // 发送状态
 //  |-- PREPARE  - 准备中
-//  |-- CANCELED - 已取消
 //  |-- PENDING  - 挂起
 //  |-- SUCCESS  - 成功
 //  |-- FAILURE  - 失败
+//  |-- CANCELED - 已取消
 enum SendStatus {
   STATUS_UNSPECIFIED = 0;
   PREPARE = 1;
-  CANCELED = 2;
-  PENDING = 3;
-  SUCCESS = 4;
-  FAILURE = 5;
-}
-
-// 错误码
-enum ErrCode {
-  ERR_UNSPECIFIED = 0;
-  INVALID_PARAM = 1;
-  RATE_LIMITED = 2;
-  NO_AVAILABLE_CHANNEL = 3;
-  NO_AVAILABLE_PROVIDER = 4;
-  CHANNEL_NOT_FOUND = 5;
-  PROVIDER_NOT_FOUND = 6;
-  TEMPLATE_NOT_FOUND = 7;
-  BIZ_ID_NOT_FOUND = 8;
-  CONFIG_NOT_FOUND = 9;
-  QUOTA_CONFIG_NOT_FOUND = 10;
-  QUOTA_RECORD_NOT_FOUND = 11;
-  NOTIFICATION_NOT_FOUND = 12;
-  CREATE_NOTIFICATION_FAILED = 13;
-  SEND_NOTIFICATION_FAILED = 14;
-  QUOTA_NOT_ENOUGH = 15;
+  PENDING = 2;
+  SUCCESS = 3;
+  FAILURE = 4;
+  CANCEL = 5;
 }
 
 // 发送策略
@@ -89,7 +61,7 @@ message DeadlineStrategy {
 message Notification {
   string biz_key = 1;
   repeated string receivers = 2;
-  Channel channel = 3;
+  common.v1.Channel channel = 3;
   string tpl_id = 4;
   map<string, string> tpl_params = 5;
   SendStrategy strategy = 6;
@@ -112,7 +84,7 @@ service NotificationService {
 message SendResult {
   uint64 notification_id = 1;
   SendStatus status = 2;
-  ErrCode err_code = 3;
+  common.v1.ErrCode err_code = 3;
   string err_msg = 4;
 }
 
