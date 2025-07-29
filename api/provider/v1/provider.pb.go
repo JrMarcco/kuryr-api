@@ -576,7 +576,7 @@ func (x *FindByIdRequest) GetId() uint64 {
 
 type FindByIdResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Provider      *Provider              `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -611,11 +611,11 @@ func (*FindByIdResponse) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *FindByIdResponse) GetId() uint64 {
+func (x *FindByIdResponse) GetProvider() *Provider {
 	if x != nil {
-		return x.Id
+		return x.Provider
 	}
-	return 0
+	return nil
 }
 
 var File_provider_v1_provider_proto protoreflect.FileDescriptor
@@ -659,9 +659,9 @@ const file_provider_v1_provider_proto_rawDesc = "" +
 	"\fListResponse\x123\n" +
 	"\tproviders\x18\x01 \x03(\v2\x15.provider.v1.ProviderR\tproviders\"!\n" +
 	"\x0fFindByIdRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"\"\n" +
-	"\x10FindByIdResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id2\xda\x02\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"E\n" +
+	"\x10FindByIdResponse\x121\n" +
+	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider2\xda\x02\n" +
 	"\x0fProviderService\x12;\n" +
 	"\x04Save\x12\x18.provider.v1.SaveRequest\x1a\x19.provider.v1.SaveResponse\x12A\n" +
 	"\x06Delete\x12\x1a.provider.v1.DeleteRequest\x1a\x1b.provider.v1.DeleteResponse\x12A\n" +
@@ -702,21 +702,22 @@ var file_provider_v1_provider_proto_depIdxs = []int32{
 	0,  // 1: provider.v1.SaveRequest.provider:type_name -> provider.v1.Provider
 	0,  // 2: provider.v1.UpdateRequest.provider:type_name -> provider.v1.Provider
 	0,  // 3: provider.v1.ListResponse.providers:type_name -> provider.v1.Provider
-	1,  // 4: provider.v1.ProviderService.Save:input_type -> provider.v1.SaveRequest
-	3,  // 5: provider.v1.ProviderService.Delete:input_type -> provider.v1.DeleteRequest
-	5,  // 6: provider.v1.ProviderService.Update:input_type -> provider.v1.UpdateRequest
-	7,  // 7: provider.v1.ProviderService.List:input_type -> provider.v1.ListRequest
-	9,  // 8: provider.v1.ProviderService.FindById:input_type -> provider.v1.FindByIdRequest
-	2,  // 9: provider.v1.ProviderService.Save:output_type -> provider.v1.SaveResponse
-	4,  // 10: provider.v1.ProviderService.Delete:output_type -> provider.v1.DeleteResponse
-	6,  // 11: provider.v1.ProviderService.Update:output_type -> provider.v1.UpdateResponse
-	8,  // 12: provider.v1.ProviderService.List:output_type -> provider.v1.ListResponse
-	10, // 13: provider.v1.ProviderService.FindById:output_type -> provider.v1.FindByIdResponse
-	9,  // [9:14] is the sub-list for method output_type
-	4,  // [4:9] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	0,  // 4: provider.v1.FindByIdResponse.provider:type_name -> provider.v1.Provider
+	1,  // 5: provider.v1.ProviderService.Save:input_type -> provider.v1.SaveRequest
+	3,  // 6: provider.v1.ProviderService.Delete:input_type -> provider.v1.DeleteRequest
+	5,  // 7: provider.v1.ProviderService.Update:input_type -> provider.v1.UpdateRequest
+	7,  // 8: provider.v1.ProviderService.List:input_type -> provider.v1.ListRequest
+	9,  // 9: provider.v1.ProviderService.FindById:input_type -> provider.v1.FindByIdRequest
+	2,  // 10: provider.v1.ProviderService.Save:output_type -> provider.v1.SaveResponse
+	4,  // 11: provider.v1.ProviderService.Delete:output_type -> provider.v1.DeleteResponse
+	6,  // 12: provider.v1.ProviderService.Update:output_type -> provider.v1.UpdateResponse
+	8,  // 13: provider.v1.ProviderService.List:output_type -> provider.v1.ListResponse
+	10, // 14: provider.v1.ProviderService.FindById:output_type -> provider.v1.FindByIdResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_provider_v1_provider_proto_init() }
