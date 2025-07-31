@@ -22,7 +22,7 @@ const (
 	ProviderService_Save_FullMethodName     = "/provider.v1.ProviderService/Save"
 	ProviderService_Delete_FullMethodName   = "/provider.v1.ProviderService/Delete"
 	ProviderService_Update_FullMethodName   = "/provider.v1.ProviderService/Update"
-	ProviderService_List_FullMethodName     = "/provider.v1.ProviderService/List"
+	ProviderService_Search_FullMethodName   = "/provider.v1.ProviderService/Search"
 	ProviderService_FindById_FullMethodName = "/provider.v1.ProviderService/FindById"
 )
 
@@ -33,7 +33,7 @@ type ProviderServiceClient interface {
 	Save(ctx context.Context, in *SaveRequest, opts ...grpc.CallOption) (*SaveResponse, error)
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
-	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
+	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
 	FindById(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error)
 }
 
@@ -75,10 +75,10 @@ func (c *providerServiceClient) Update(ctx context.Context, in *UpdateRequest, o
 	return out, nil
 }
 
-func (c *providerServiceClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error) {
+func (c *providerServiceClient) Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListResponse)
-	err := c.cc.Invoke(ctx, ProviderService_List_FullMethodName, in, out, cOpts...)
+	out := new(SearchResponse)
+	err := c.cc.Invoke(ctx, ProviderService_Search_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type ProviderServiceServer interface {
 	Save(context.Context, *SaveRequest) (*SaveResponse, error)
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
-	List(context.Context, *ListRequest) (*ListResponse, error)
+	Search(context.Context, *SearchRequest) (*SearchResponse, error)
 	FindById(context.Context, *FindByIdRequest) (*FindByIdResponse, error)
 }
 
@@ -122,8 +122,8 @@ func (UnimplementedProviderServiceServer) Delete(context.Context, *DeleteRequest
 func (UnimplementedProviderServiceServer) Update(context.Context, *UpdateRequest) (*UpdateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedProviderServiceServer) List(context.Context, *ListRequest) (*ListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+func (UnimplementedProviderServiceServer) Search(context.Context, *SearchRequest) (*SearchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
 func (UnimplementedProviderServiceServer) FindById(context.Context, *FindByIdRequest) (*FindByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindById not implemented")
@@ -202,20 +202,20 @@ func _ProviderService_Update_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProviderService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListRequest)
+func _ProviderService_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProviderServiceServer).List(ctx, in)
+		return srv.(ProviderServiceServer).Search(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProviderService_List_FullMethodName,
+		FullMethod: ProviderService_Search_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProviderServiceServer).List(ctx, req.(*ListRequest))
+		return srv.(ProviderServiceServer).Search(ctx, req.(*SearchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -258,8 +258,8 @@ var ProviderService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProviderService_Update_Handler,
 		},
 		{
-			MethodName: "List",
-			Handler:    _ProviderService_List_Handler,
+			MethodName: "Search",
+			Handler:    _ProviderService_Search_Handler,
 		},
 		{
 			MethodName: "FindById",

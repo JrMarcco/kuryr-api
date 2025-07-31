@@ -7,6 +7,7 @@
 package configv1
 
 import (
+	v1 "github.com/JrMarcco/kuryr-api/api/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -138,7 +139,7 @@ func (x *CallbackConfig) GetRetryPolicy() *RetryPolicyConfig {
 // ChannelItem 渠道项
 type ChannelItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Channel       string                 `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
+	Channel       v1.Channel             `protobuf:"varint,1,opt,name=channel,proto3,enum=common.v1.Channel" json:"channel,omitempty"`
 	Priority      int32                  `protobuf:"varint,2,opt,name=priority,proto3" json:"priority,omitempty"` // 优先级
 	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -175,11 +176,11 @@ func (*ChannelItem) Descriptor() ([]byte, []int) {
 	return file_config_v1_config_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ChannelItem) GetChannel() string {
+func (x *ChannelItem) GetChannel() v1.Channel {
 	if x != nil {
 		return x.Channel
 	}
-	return ""
+	return v1.Channel(0)
 }
 
 func (x *ChannelItem) GetPriority() int32 {
@@ -721,16 +722,16 @@ var File_config_v1_config_proto protoreflect.FileDescriptor
 
 const file_config_v1_config_proto_rawDesc = "" +
 	"\n" +
-	"\x16config/v1/config.proto\x12\tconfig.v1\"\x8d\x01\n" +
+	"\x16config/v1/config.proto\x12\tconfig.v1\x1a\x15common/v1/types.proto\"\x8d\x01\n" +
 	"\x11RetryPolicyConfig\x12&\n" +
 	"\x0fmax_retry_times\x18\x01 \x01(\x05R\rmaxRetryTimes\x12(\n" +
 	"\x10init_interval_ms\x18\x02 \x01(\x05R\x0einitIntervalMs\x12&\n" +
 	"\x0fmax_interval_ms\x18\x03 \x01(\x05R\rmaxIntervalMs\"t\n" +
 	"\x0eCallbackConfig\x12!\n" +
 	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12?\n" +
-	"\fretry_policy\x18\x02 \x01(\v2\x1c.config.v1.RetryPolicyConfigR\vretryPolicy\"]\n" +
-	"\vChannelItem\x12\x18\n" +
-	"\achannel\x18\x01 \x01(\tR\achannel\x12\x1a\n" +
+	"\fretry_policy\x18\x02 \x01(\v2\x1c.config.v1.RetryPolicyConfigR\vretryPolicy\"q\n" +
+	"\vChannelItem\x12,\n" +
+	"\achannel\x18\x01 \x01(\x0e2\x12.common.v1.ChannelR\achannel\x12\x1a\n" +
 	"\bpriority\x18\x02 \x01(\x05R\bpriority\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"~\n" +
 	"\rChannelConfig\x12,\n" +
@@ -799,29 +800,31 @@ var file_config_v1_config_proto_goTypes = []any{
 	(*DeleteResponse)(nil),    // 10: config.v1.DeleteResponse
 	(*FindByIdRequest)(nil),   // 11: config.v1.FindByIdRequest
 	(*FindByIdResponse)(nil),  // 12: config.v1.FindByIdResponse
+	(v1.Channel)(0),           // 13: common.v1.Channel
 }
 var file_config_v1_config_proto_depIdxs = []int32{
 	0,  // 0: config.v1.CallbackConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
-	2,  // 1: config.v1.ChannelConfig.items:type_name -> config.v1.ChannelItem
-	0,  // 2: config.v1.ChannelConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
-	4,  // 3: config.v1.QuotaConfig.monthly:type_name -> config.v1.Quota
-	4,  // 4: config.v1.QuotaConfig.daily:type_name -> config.v1.Quota
-	3,  // 5: config.v1.BizConfig.channel_config:type_name -> config.v1.ChannelConfig
-	5,  // 6: config.v1.BizConfig.quota_config:type_name -> config.v1.QuotaConfig
-	1,  // 7: config.v1.BizConfig.callback_config:type_name -> config.v1.CallbackConfig
-	6,  // 8: config.v1.SaveRequest.config:type_name -> config.v1.BizConfig
-	6,  // 9: config.v1.FindByIdResponse.config:type_name -> config.v1.BizConfig
-	7,  // 10: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
-	9,  // 11: config.v1.BizConfigService.Delete:input_type -> config.v1.DeleteRequest
-	11, // 12: config.v1.BizConfigService.FindById:input_type -> config.v1.FindByIdRequest
-	8,  // 13: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
-	10, // 14: config.v1.BizConfigService.Delete:output_type -> config.v1.DeleteResponse
-	12, // 15: config.v1.BizConfigService.FindById:output_type -> config.v1.FindByIdResponse
-	13, // [13:16] is the sub-list for method output_type
-	10, // [10:13] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	13, // 1: config.v1.ChannelItem.channel:type_name -> common.v1.Channel
+	2,  // 2: config.v1.ChannelConfig.items:type_name -> config.v1.ChannelItem
+	0,  // 3: config.v1.ChannelConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
+	4,  // 4: config.v1.QuotaConfig.monthly:type_name -> config.v1.Quota
+	4,  // 5: config.v1.QuotaConfig.daily:type_name -> config.v1.Quota
+	3,  // 6: config.v1.BizConfig.channel_config:type_name -> config.v1.ChannelConfig
+	5,  // 7: config.v1.BizConfig.quota_config:type_name -> config.v1.QuotaConfig
+	1,  // 8: config.v1.BizConfig.callback_config:type_name -> config.v1.CallbackConfig
+	6,  // 9: config.v1.SaveRequest.config:type_name -> config.v1.BizConfig
+	6,  // 10: config.v1.FindByIdResponse.config:type_name -> config.v1.BizConfig
+	7,  // 11: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
+	9,  // 12: config.v1.BizConfigService.Delete:input_type -> config.v1.DeleteRequest
+	11, // 13: config.v1.BizConfigService.FindById:input_type -> config.v1.FindByIdRequest
+	8,  // 14: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
+	10, // 15: config.v1.BizConfigService.Delete:output_type -> config.v1.DeleteResponse
+	12, // 16: config.v1.BizConfigService.FindById:output_type -> config.v1.FindByIdResponse
+	14, // [14:17] is the sub-list for method output_type
+	11, // [11:14] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_config_v1_config_proto_init() }

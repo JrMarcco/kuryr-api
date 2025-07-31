@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package config.v1;
 
+import "common/v1/types.proto";
+
 option go_package = "github.com/JrMarcco/kuryr-api/api/config/v1";
 
 // RetryConfig 重试策略配置
@@ -19,7 +21,7 @@ message CallbackConfig {
 
 // ChannelItem 渠道项
 message ChannelItem {
-  string channel = 1;
+  common.v1.Channel channel = 1;
   int32 priority = 2; // 优先级
   bool enabled = 3;
 }

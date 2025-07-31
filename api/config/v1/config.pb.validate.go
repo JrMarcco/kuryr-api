@@ -17,6 +17,8 @@ import (
 	"unicode/utf8"
 
 	"google.golang.org/protobuf/types/known/anypb"
+
+	commonv1 "github.com/JrMarcco/kuryr-api/api/common/v1"
 )
 
 // ensure the imports are used
@@ -33,6 +35,8 @@ var (
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
 	_ = sort.Sort
+
+	_ = commonv1.Channel(0)
 )
 
 // Validate checks the field values on RetryPolicyConfig with the rules defined

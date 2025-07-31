@@ -834,41 +834,50 @@ var _ interface {
 	ErrorName() string
 } = UpdateResponseValidationError{}
 
-// Validate checks the field values on ListRequest with the rules defined in
+// Validate checks the field values on SearchRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *ListRequest) Validate() error {
+func (m *SearchRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in ListRequestMultiError, or
+// ValidateAll checks the field values on SearchRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in SearchRequestMultiError, or
 // nil if none found.
-func (m *ListRequest) ValidateAll() error {
+func (m *SearchRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListRequest) validate(all bool) error {
+func (m *SearchRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
+	// no validation rules for Offset
+
+	// no validation rules for Limit
+
+	// no validation rules for ProviderName
+
+	// no validation rules for Channel
+
 	if len(errors) > 0 {
-		return ListRequestMultiError(errors)
+		return SearchRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListRequestMultiError is an error wrapping multiple validation errors
-// returned by ListRequest.ValidateAll() if the designated constraints aren't met.
-type ListRequestMultiError []error
+// SearchRequestMultiError is an error wrapping multiple validation errors
+// returned by SearchRequest.ValidateAll() if the designated constraints
+// aren't met.
+type SearchRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListRequestMultiError) Error() string {
+func (m SearchRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -877,11 +886,11 @@ func (m ListRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListRequestMultiError) AllErrors() []error { return m }
+func (m SearchRequestMultiError) AllErrors() []error { return m }
 
-// ListRequestValidationError is the validation error returned by
-// ListRequest.Validate if the designated constraints aren't met.
-type ListRequestValidationError struct {
+// SearchRequestValidationError is the validation error returned by
+// SearchRequest.Validate if the designated constraints aren't met.
+type SearchRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -889,22 +898,22 @@ type ListRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListRequestValidationError) Field() string { return e.field }
+func (e SearchRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListRequestValidationError) Reason() string { return e.reason }
+func (e SearchRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListRequestValidationError) Cause() error { return e.cause }
+func (e SearchRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListRequestValidationError) Key() bool { return e.key }
+func (e SearchRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListRequestValidationError) ErrorName() string { return "ListRequestValidationError" }
+func (e SearchRequestValidationError) ErrorName() string { return "SearchRequestValidationError" }
 
 // Error satisfies the builtin error interface
-func (e ListRequestValidationError) Error() string {
+func (e SearchRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -916,14 +925,14 @@ func (e ListRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListRequest.%s: %s%s",
+		"invalid %sSearchRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListRequestValidationError{}
+var _ error = SearchRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -931,29 +940,31 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListRequestValidationError{}
+} = SearchRequestValidationError{}
 
-// Validate checks the field values on ListResponse with the rules defined in
+// Validate checks the field values on SearchResponse with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *ListResponse) Validate() error {
+func (m *SearchResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListResponse with the rules defined
+// ValidateAll checks the field values on SearchResponse with the rules defined
 // in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in ListResponseMultiError, or
-// nil if none found.
-func (m *ListResponse) ValidateAll() error {
+// result is a list of violation errors wrapped in SearchResponseMultiError,
+// or nil if none found.
+func (m *SearchResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListResponse) validate(all bool) error {
+func (m *SearchResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
+
+	// no validation rules for Total
 
 	for idx, item := range m.GetProviders() {
 		_, _ = idx, item
@@ -962,7 +973,7 @@ func (m *ListResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListResponseValidationError{
+					errors = append(errors, SearchResponseValidationError{
 						field:  fmt.Sprintf("Providers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -970,7 +981,7 @@ func (m *ListResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListResponseValidationError{
+					errors = append(errors, SearchResponseValidationError{
 						field:  fmt.Sprintf("Providers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -979,7 +990,7 @@ func (m *ListResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListResponseValidationError{
+				return SearchResponseValidationError{
 					field:  fmt.Sprintf("Providers[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -990,18 +1001,19 @@ func (m *ListResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListResponseMultiError(errors)
+		return SearchResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListResponseMultiError is an error wrapping multiple validation errors
-// returned by ListResponse.ValidateAll() if the designated constraints aren't met.
-type ListResponseMultiError []error
+// SearchResponseMultiError is an error wrapping multiple validation errors
+// returned by SearchResponse.ValidateAll() if the designated constraints
+// aren't met.
+type SearchResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListResponseMultiError) Error() string {
+func (m SearchResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1010,11 +1022,11 @@ func (m ListResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListResponseMultiError) AllErrors() []error { return m }
+func (m SearchResponseMultiError) AllErrors() []error { return m }
 
-// ListResponseValidationError is the validation error returned by
-// ListResponse.Validate if the designated constraints aren't met.
-type ListResponseValidationError struct {
+// SearchResponseValidationError is the validation error returned by
+// SearchResponse.Validate if the designated constraints aren't met.
+type SearchResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1022,22 +1034,22 @@ type ListResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListResponseValidationError) Field() string { return e.field }
+func (e SearchResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListResponseValidationError) Reason() string { return e.reason }
+func (e SearchResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListResponseValidationError) Cause() error { return e.cause }
+func (e SearchResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListResponseValidationError) Key() bool { return e.key }
+func (e SearchResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListResponseValidationError) ErrorName() string { return "ListResponseValidationError" }
+func (e SearchResponseValidationError) ErrorName() string { return "SearchResponseValidationError" }
 
 // Error satisfies the builtin error interface
-func (e ListResponseValidationError) Error() string {
+func (e SearchResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1049,14 +1061,14 @@ func (e ListResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListResponse.%s: %s%s",
+		"invalid %sSearchResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListResponseValidationError{}
+var _ error = SearchResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1064,7 +1076,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListResponseValidationError{}
+} = SearchResponseValidationError{}
 
 // Validate checks the field values on FindByIdRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
