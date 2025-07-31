@@ -677,6 +677,7 @@ func (x *FindByIdRequest) GetId() uint64 {
 type FindByIdResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Config        *BizConfig             `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+	ErrCode       v1.ErrCode             `protobuf:"varint,2,opt,name=err_code,json=errCode,proto3,enum=common.v1.ErrCode" json:"err_code,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -716,6 +717,13 @@ func (x *FindByIdResponse) GetConfig() *BizConfig {
 		return x.Config
 	}
 	return nil
+}
+
+func (x *FindByIdResponse) GetErrCode() v1.ErrCode {
+	if x != nil {
+		return x.ErrCode
+	}
+	return v1.ErrCode(0)
 }
 
 var File_config_v1_config_proto protoreflect.FileDescriptor
@@ -763,9 +771,10 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
 	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"!\n" +
 	"\x0fFindByIdRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"@\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"o\n" +
 	"\x10FindByIdResponse\x12,\n" +
-	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config2\xcf\x01\n" +
+	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config\x12-\n" +
+	"\berr_code\x18\x02 \x01(\x0e2\x12.common.v1.ErrCodeR\aerrCode2\xcf\x01\n" +
 	"\x10BizConfigService\x127\n" +
 	"\x04Save\x12\x16.config.v1.SaveRequest\x1a\x17.config.v1.SaveResponse\x12=\n" +
 	"\x06Delete\x12\x18.config.v1.DeleteRequest\x1a\x19.config.v1.DeleteResponse\x12C\n" +
@@ -801,6 +810,7 @@ var file_config_v1_config_proto_goTypes = []any{
 	(*FindByIdRequest)(nil),   // 11: config.v1.FindByIdRequest
 	(*FindByIdResponse)(nil),  // 12: config.v1.FindByIdResponse
 	(v1.Channel)(0),           // 13: common.v1.Channel
+	(v1.ErrCode)(0),           // 14: common.v1.ErrCode
 }
 var file_config_v1_config_proto_depIdxs = []int32{
 	0,  // 0: config.v1.CallbackConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
@@ -814,17 +824,18 @@ var file_config_v1_config_proto_depIdxs = []int32{
 	1,  // 8: config.v1.BizConfig.callback_config:type_name -> config.v1.CallbackConfig
 	6,  // 9: config.v1.SaveRequest.config:type_name -> config.v1.BizConfig
 	6,  // 10: config.v1.FindByIdResponse.config:type_name -> config.v1.BizConfig
-	7,  // 11: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
-	9,  // 12: config.v1.BizConfigService.Delete:input_type -> config.v1.DeleteRequest
-	11, // 13: config.v1.BizConfigService.FindById:input_type -> config.v1.FindByIdRequest
-	8,  // 14: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
-	10, // 15: config.v1.BizConfigService.Delete:output_type -> config.v1.DeleteResponse
-	12, // 16: config.v1.BizConfigService.FindById:output_type -> config.v1.FindByIdResponse
-	14, // [14:17] is the sub-list for method output_type
-	11, // [11:14] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	14, // 11: config.v1.FindByIdResponse.err_code:type_name -> common.v1.ErrCode
+	7,  // 12: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
+	9,  // 13: config.v1.BizConfigService.Delete:input_type -> config.v1.DeleteRequest
+	11, // 14: config.v1.BizConfigService.FindById:input_type -> config.v1.FindByIdRequest
+	8,  // 15: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
+	10, // 16: config.v1.BizConfigService.Delete:output_type -> config.v1.DeleteResponse
+	12, // 17: config.v1.BizConfigService.FindById:output_type -> config.v1.FindByIdResponse
+	15, // [15:18] is the sub-list for method output_type
+	12, // [12:15] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_config_v1_config_proto_init() }

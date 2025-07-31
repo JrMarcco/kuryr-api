@@ -75,6 +75,7 @@ message FindByIdRequest {
 
 message FindByIdResponse {
   BizConfig config = 1;
+  common.v1.ErrCode err_code = 2;
 }
 
 service BizConfigService {

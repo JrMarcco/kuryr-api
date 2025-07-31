@@ -34,7 +34,7 @@ const (
 	ErrCode_PROVIDER_NOT_FOUND         ErrCode = 6
 	ErrCode_TEMPLATE_NOT_FOUND         ErrCode = 7
 	ErrCode_BIZ_ID_NOT_FOUND           ErrCode = 8
-	ErrCode_CONFIG_NOT_FOUND           ErrCode = 9
+	ErrCode_BIZ_CONFIG_NOT_FOUND       ErrCode = 9
 	ErrCode_QUOTA_CONFIG_NOT_FOUND     ErrCode = 10
 	ErrCode_QUOTA_RECORD_NOT_FOUND     ErrCode = 11
 	ErrCode_NOTIFICATION_NOT_FOUND     ErrCode = 12
@@ -55,7 +55,7 @@ var (
 		6:  "PROVIDER_NOT_FOUND",
 		7:  "TEMPLATE_NOT_FOUND",
 		8:  "BIZ_ID_NOT_FOUND",
-		9:  "CONFIG_NOT_FOUND",
+		9:  "BIZ_CONFIG_NOT_FOUND",
 		10: "QUOTA_CONFIG_NOT_FOUND",
 		11: "QUOTA_RECORD_NOT_FOUND",
 		12: "NOTIFICATION_NOT_FOUND",
@@ -73,7 +73,7 @@ var (
 		"PROVIDER_NOT_FOUND":         6,
 		"TEMPLATE_NOT_FOUND":         7,
 		"BIZ_ID_NOT_FOUND":           8,
-		"CONFIG_NOT_FOUND":           9,
+		"BIZ_CONFIG_NOT_FOUND":       9,
 		"QUOTA_CONFIG_NOT_FOUND":     10,
 		"QUOTA_RECORD_NOT_FOUND":     11,
 		"NOTIFICATION_NOT_FOUND":     12,
@@ -167,7 +167,7 @@ var File_common_v1_types_proto protoreflect.FileDescriptor
 
 const file_common_v1_types_proto_rawDesc = "" +
 	"\n" +
-	"\x15common/v1/types.proto\x12\tcommon.v1*\x93\x03\n" +
+	"\x15common/v1/types.proto\x12\tcommon.v1*\x97\x03\n" +
 	"\aErrCode\x12\x13\n" +
 	"\x0fERR_UNSPECIFIED\x10\x00\x12\x11\n" +
 	"\rINVALID_PARAM\x10\x01\x12\x10\n" +
@@ -177,8 +177,8 @@ const file_common_v1_types_proto_rawDesc = "" +
 	"\x11CHANNEL_NOT_FOUND\x10\x05\x12\x16\n" +
 	"\x12PROVIDER_NOT_FOUND\x10\x06\x12\x16\n" +
 	"\x12TEMPLATE_NOT_FOUND\x10\a\x12\x14\n" +
-	"\x10BIZ_ID_NOT_FOUND\x10\b\x12\x14\n" +
-	"\x10CONFIG_NOT_FOUND\x10\t\x12\x1a\n" +
+	"\x10BIZ_ID_NOT_FOUND\x10\b\x12\x18\n" +
+	"\x14BIZ_CONFIG_NOT_FOUND\x10\t\x12\x1a\n" +
 	"\x16QUOTA_CONFIG_NOT_FOUND\x10\n" +
 	"\x12\x1a\n" +
 	"\x16QUOTA_RECORD_NOT_FOUND\x10\v\x12\x1a\n" +

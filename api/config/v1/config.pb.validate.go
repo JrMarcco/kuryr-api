@@ -1587,6 +1587,8 @@ func (m *FindByIdResponse) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for ErrCode
+
 	if len(errors) > 0 {
 		return FindByIdResponseMultiError(errors)
 	}
