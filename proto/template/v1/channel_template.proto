@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package template.v1;
+
+import "common/v1/types.proto";
+
+option go_package = "github.com/JrMarcco/kuryr-api/api/template/v1";
+
+message ChannelTemplate {
+  uint64 id = 1;
+  uint64 owner_id = 2;
+  string owner_type = 3;
+
+  string tpl_name = 4;
+  string tpl_desc = 5;
+
+  common.v1.Channel channel = 6;
+
+  int32 notification_type = 7;
+  uint64 activated_version_id = 8;
+
+  int64 created_at = 9;
+  int64 updated_at = 10;
+}
+
+message TemplateVersion {
+  uint64 id = 1;
+  uint64 tpl_id = 2;
+
+  string version_name = 3;
+  string signature = 4;
+  string content = 5;
+
+  string apply_remark = 6;
+
+  uint64 audit_id = 7;
+  uint64 auditor_id = 8;
+  int64 audit_time = 9;
+  string audit_status = 10;
+  string rejection_reason = 11;
+  int64 last_review_at = 12;
+
+  int64 created_at = 13;
+  int64 updated_at = 14;
+}
+
+message TemplateProvider {
+  uint64 id = 1;
+  uint64 tpl_id = 2;
+  uint64 tpl_version_id = 3;
+
+  uint64 provider_id = 4;
+  string provider_name = 5;
+  string provider_tpl_id = 6;
+  common.v1.Channel provider_channel = 7;
+
+  string audit_request_id = 8;
+  string audit_status = 9;
+  string rejection_reason = 10;
+  int64 last_review_at = 11;
+
+  int64 created_at = 12;
+  int64 updated_at = 13;
+}
+
+message SaveTemplateRequest {
+  ChannelTemplate template = 1;
+}
+
+message SaveTemplateResponse {
+  bool success = 1;
+  string err_msg = 2;
+}
+
+message SaveVersionRequest {
+  TemplateVersion version = 1;
+}
+
+message SaveVersionResponse {
+  bool success = 1;
+  string err_msg = 2;
+}
+
+service TemplateService {
+  rpc SaveTemplate(SaveTemplateRequest) returns (SaveTemplateResponse);
+  rpc SaveVersion(SaveVersionRequest) returns (SaveVersionResponse);
+}
