@@ -450,30 +450,26 @@ func (x *UpdateResponse) GetErrMsg() string {
 	return ""
 }
 
-type SearchRequest struct {
+type ListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Offset        int32                  `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	ProviderName  string                 `protobuf:"bytes,3,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
-	Channel       v1.Channel             `protobuf:"varint,4,opt,name=channel,proto3,enum=common.v1.Channel" json:"channel,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SearchRequest) Reset() {
-	*x = SearchRequest{}
+func (x *ListRequest) Reset() {
+	*x = ListRequest{}
 	mi := &file_provider_v1_provider_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SearchRequest) String() string {
+func (x *ListRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SearchRequest) ProtoMessage() {}
+func (*ListRequest) ProtoMessage() {}
 
-func (x *SearchRequest) ProtoReflect() protoreflect.Message {
+func (x *ListRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_provider_v1_provider_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -485,61 +481,32 @@ func (x *SearchRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SearchRequest.ProtoReflect.Descriptor instead.
-func (*SearchRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListRequest.ProtoReflect.Descriptor instead.
+func (*ListRequest) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *SearchRequest) GetOffset() int32 {
-	if x != nil {
-		return x.Offset
-	}
-	return 0
-}
-
-func (x *SearchRequest) GetLimit() int32 {
-	if x != nil {
-		return x.Limit
-	}
-	return 0
-}
-
-func (x *SearchRequest) GetProviderName() string {
-	if x != nil {
-		return x.ProviderName
-	}
-	return ""
-}
-
-func (x *SearchRequest) GetChannel() v1.Channel {
-	if x != nil {
-		return x.Channel
-	}
-	return v1.Channel(0)
-}
-
-type SearchResponse struct {
+type ListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Total         int64                  `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
-	Providers     []*Provider            `protobuf:"bytes,2,rep,name=providers,proto3" json:"providers,omitempty"`
+	Providers     []*Provider            `protobuf:"bytes,1,rep,name=providers,proto3" json:"providers,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SearchResponse) Reset() {
-	*x = SearchResponse{}
+func (x *ListResponse) Reset() {
+	*x = ListResponse{}
 	mi := &file_provider_v1_provider_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SearchResponse) String() string {
+func (x *ListResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SearchResponse) ProtoMessage() {}
+func (*ListResponse) ProtoMessage() {}
 
-func (x *SearchResponse) ProtoReflect() protoreflect.Message {
+func (x *ListResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_provider_v1_provider_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -551,19 +518,12 @@ func (x *SearchResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SearchResponse.ProtoReflect.Descriptor instead.
-func (*SearchResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListResponse.ProtoReflect.Descriptor instead.
+func (*ListResponse) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *SearchResponse) GetTotal() int64 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
-func (x *SearchResponse) GetProviders() []*Provider {
+func (x *ListResponse) GetProviders() []*Provider {
 	if x != nil {
 		return x.Providers
 	}
@@ -658,6 +618,94 @@ func (x *FindByIdResponse) GetProvider() *Provider {
 	return nil
 }
 
+type FindByChannelRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Channel       v1.Channel             `protobuf:"varint,1,opt,name=channel,proto3,enum=common.v1.Channel" json:"channel,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FindByChannelRequest) Reset() {
+	*x = FindByChannelRequest{}
+	mi := &file_provider_v1_provider_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FindByChannelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FindByChannelRequest) ProtoMessage() {}
+
+func (x *FindByChannelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_provider_v1_provider_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FindByChannelRequest.ProtoReflect.Descriptor instead.
+func (*FindByChannelRequest) Descriptor() ([]byte, []int) {
+	return file_provider_v1_provider_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *FindByChannelRequest) GetChannel() v1.Channel {
+	if x != nil {
+		return x.Channel
+	}
+	return v1.Channel(0)
+}
+
+type FindByChannelResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Providers     []*Provider            `protobuf:"bytes,1,rep,name=providers,proto3" json:"providers,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FindByChannelResponse) Reset() {
+	*x = FindByChannelResponse{}
+	mi := &file_provider_v1_provider_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FindByChannelResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FindByChannelResponse) ProtoMessage() {}
+
+func (x *FindByChannelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_provider_v1_provider_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FindByChannelResponse.ProtoReflect.Descriptor instead.
+func (*FindByChannelResponse) Descriptor() ([]byte, []int) {
+	return file_provider_v1_provider_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *FindByChannelResponse) GetProviders() []*Provider {
+	if x != nil {
+		return x.Providers
+	}
+	return nil
+}
+
 var File_provider_v1_provider_proto protoreflect.FileDescriptor
 
 const file_provider_v1_provider_proto_rawDesc = "" +
@@ -694,25 +742,25 @@ const file_provider_v1_provider_proto_rawDesc = "" +
 	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"C\n" +
 	"\x0eUpdateResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"\x90\x01\n" +
-	"\rSearchRequest\x12\x16\n" +
-	"\x06offset\x18\x01 \x01(\x05R\x06offset\x12\x14\n" +
-	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12#\n" +
-	"\rprovider_name\x18\x03 \x01(\tR\fproviderName\x12,\n" +
-	"\achannel\x18\x04 \x01(\x0e2\x12.common.v1.ChannelR\achannel\"[\n" +
-	"\x0eSearchResponse\x12\x14\n" +
-	"\x05total\x18\x01 \x01(\x03R\x05total\x123\n" +
-	"\tproviders\x18\x02 \x03(\v2\x15.provider.v1.ProviderR\tproviders\"!\n" +
+	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"\r\n" +
+	"\vListRequest\"C\n" +
+	"\fListResponse\x123\n" +
+	"\tproviders\x18\x01 \x03(\v2\x15.provider.v1.ProviderR\tproviders\"!\n" +
 	"\x0fFindByIdRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"E\n" +
 	"\x10FindByIdResponse\x121\n" +
-	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider2\xe0\x02\n" +
+	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"D\n" +
+	"\x14FindByChannelRequest\x12,\n" +
+	"\achannel\x18\x01 \x01(\x0e2\x12.common.v1.ChannelR\achannel\"L\n" +
+	"\x15FindByChannelResponse\x123\n" +
+	"\tproviders\x18\x01 \x03(\v2\x15.provider.v1.ProviderR\tproviders2\xb2\x03\n" +
 	"\x0fProviderService\x12;\n" +
 	"\x04Save\x12\x18.provider.v1.SaveRequest\x1a\x19.provider.v1.SaveResponse\x12A\n" +
 	"\x06Delete\x12\x1a.provider.v1.DeleteRequest\x1a\x1b.provider.v1.DeleteResponse\x12A\n" +
-	"\x06Update\x12\x1a.provider.v1.UpdateRequest\x1a\x1b.provider.v1.UpdateResponse\x12A\n" +
-	"\x06Search\x12\x1a.provider.v1.SearchRequest\x1a\x1b.provider.v1.SearchResponse\x12G\n" +
-	"\bFindById\x12\x1c.provider.v1.FindByIdRequest\x1a\x1d.provider.v1.FindByIdResponseB\xa7\x01\n" +
+	"\x06Update\x12\x1a.provider.v1.UpdateRequest\x1a\x1b.provider.v1.UpdateResponse\x12;\n" +
+	"\x04List\x12\x18.provider.v1.ListRequest\x1a\x19.provider.v1.ListResponse\x12G\n" +
+	"\bFindById\x12\x1c.provider.v1.FindByIdRequest\x1a\x1d.provider.v1.FindByIdResponse\x12V\n" +
+	"\rFindByChannel\x12!.provider.v1.FindByChannelRequest\x1a\".provider.v1.FindByChannelResponseB\xa7\x01\n" +
 	"\x0fcom.provider.v1B\rProviderProtoP\x01Z8github.com/JrMarcco/kuryr-api/api/provider/v1;providerv1\xa2\x02\x03PXX\xaa\x02\vProvider.V1\xca\x02\vProvider\\V1\xe2\x02\x17Provider\\V1\\GPBMetadata\xea\x02\fProvider::V1b\x06proto3"
 
 var (
@@ -727,43 +775,48 @@ func file_provider_v1_provider_proto_rawDescGZIP() []byte {
 	return file_provider_v1_provider_proto_rawDescData
 }
 
-var file_provider_v1_provider_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_provider_v1_provider_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_provider_v1_provider_proto_goTypes = []any{
-	(*Provider)(nil),         // 0: provider.v1.Provider
-	(*SaveRequest)(nil),      // 1: provider.v1.SaveRequest
-	(*SaveResponse)(nil),     // 2: provider.v1.SaveResponse
-	(*DeleteRequest)(nil),    // 3: provider.v1.DeleteRequest
-	(*DeleteResponse)(nil),   // 4: provider.v1.DeleteResponse
-	(*UpdateRequest)(nil),    // 5: provider.v1.UpdateRequest
-	(*UpdateResponse)(nil),   // 6: provider.v1.UpdateResponse
-	(*SearchRequest)(nil),    // 7: provider.v1.SearchRequest
-	(*SearchResponse)(nil),   // 8: provider.v1.SearchResponse
-	(*FindByIdRequest)(nil),  // 9: provider.v1.FindByIdRequest
-	(*FindByIdResponse)(nil), // 10: provider.v1.FindByIdResponse
-	(v1.Channel)(0),          // 11: common.v1.Channel
+	(*Provider)(nil),              // 0: provider.v1.Provider
+	(*SaveRequest)(nil),           // 1: provider.v1.SaveRequest
+	(*SaveResponse)(nil),          // 2: provider.v1.SaveResponse
+	(*DeleteRequest)(nil),         // 3: provider.v1.DeleteRequest
+	(*DeleteResponse)(nil),        // 4: provider.v1.DeleteResponse
+	(*UpdateRequest)(nil),         // 5: provider.v1.UpdateRequest
+	(*UpdateResponse)(nil),        // 6: provider.v1.UpdateResponse
+	(*ListRequest)(nil),           // 7: provider.v1.ListRequest
+	(*ListResponse)(nil),          // 8: provider.v1.ListResponse
+	(*FindByIdRequest)(nil),       // 9: provider.v1.FindByIdRequest
+	(*FindByIdResponse)(nil),      // 10: provider.v1.FindByIdResponse
+	(*FindByChannelRequest)(nil),  // 11: provider.v1.FindByChannelRequest
+	(*FindByChannelResponse)(nil), // 12: provider.v1.FindByChannelResponse
+	(v1.Channel)(0),               // 13: common.v1.Channel
 }
 var file_provider_v1_provider_proto_depIdxs = []int32{
-	11, // 0: provider.v1.Provider.channel:type_name -> common.v1.Channel
+	13, // 0: provider.v1.Provider.channel:type_name -> common.v1.Channel
 	0,  // 1: provider.v1.SaveRequest.provider:type_name -> provider.v1.Provider
 	0,  // 2: provider.v1.UpdateRequest.provider:type_name -> provider.v1.Provider
-	11, // 3: provider.v1.SearchRequest.channel:type_name -> common.v1.Channel
-	0,  // 4: provider.v1.SearchResponse.providers:type_name -> provider.v1.Provider
-	0,  // 5: provider.v1.FindByIdResponse.provider:type_name -> provider.v1.Provider
-	1,  // 6: provider.v1.ProviderService.Save:input_type -> provider.v1.SaveRequest
-	3,  // 7: provider.v1.ProviderService.Delete:input_type -> provider.v1.DeleteRequest
-	5,  // 8: provider.v1.ProviderService.Update:input_type -> provider.v1.UpdateRequest
-	7,  // 9: provider.v1.ProviderService.Search:input_type -> provider.v1.SearchRequest
-	9,  // 10: provider.v1.ProviderService.FindById:input_type -> provider.v1.FindByIdRequest
-	2,  // 11: provider.v1.ProviderService.Save:output_type -> provider.v1.SaveResponse
-	4,  // 12: provider.v1.ProviderService.Delete:output_type -> provider.v1.DeleteResponse
-	6,  // 13: provider.v1.ProviderService.Update:output_type -> provider.v1.UpdateResponse
-	8,  // 14: provider.v1.ProviderService.Search:output_type -> provider.v1.SearchResponse
-	10, // 15: provider.v1.ProviderService.FindById:output_type -> provider.v1.FindByIdResponse
-	11, // [11:16] is the sub-list for method output_type
-	6,  // [6:11] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	0,  // 3: provider.v1.ListResponse.providers:type_name -> provider.v1.Provider
+	0,  // 4: provider.v1.FindByIdResponse.provider:type_name -> provider.v1.Provider
+	13, // 5: provider.v1.FindByChannelRequest.channel:type_name -> common.v1.Channel
+	0,  // 6: provider.v1.FindByChannelResponse.providers:type_name -> provider.v1.Provider
+	1,  // 7: provider.v1.ProviderService.Save:input_type -> provider.v1.SaveRequest
+	3,  // 8: provider.v1.ProviderService.Delete:input_type -> provider.v1.DeleteRequest
+	5,  // 9: provider.v1.ProviderService.Update:input_type -> provider.v1.UpdateRequest
+	7,  // 10: provider.v1.ProviderService.List:input_type -> provider.v1.ListRequest
+	9,  // 11: provider.v1.ProviderService.FindById:input_type -> provider.v1.FindByIdRequest
+	11, // 12: provider.v1.ProviderService.FindByChannel:input_type -> provider.v1.FindByChannelRequest
+	2,  // 13: provider.v1.ProviderService.Save:output_type -> provider.v1.SaveResponse
+	4,  // 14: provider.v1.ProviderService.Delete:output_type -> provider.v1.DeleteResponse
+	6,  // 15: provider.v1.ProviderService.Update:output_type -> provider.v1.UpdateResponse
+	8,  // 16: provider.v1.ProviderService.List:output_type -> provider.v1.ListResponse
+	10, // 17: provider.v1.ProviderService.FindById:output_type -> provider.v1.FindByIdResponse
+	12, // 18: provider.v1.ProviderService.FindByChannel:output_type -> provider.v1.FindByChannelResponse
+	13, // [13:19] is the sub-list for method output_type
+	7,  // [7:13] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_provider_v1_provider_proto_init() }
@@ -777,7 +830,7 @@ func file_provider_v1_provider_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_provider_v1_provider_proto_rawDesc), len(file_provider_v1_provider_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

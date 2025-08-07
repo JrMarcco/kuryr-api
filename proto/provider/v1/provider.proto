@@ -54,16 +54,10 @@ message UpdateResponse {
   string err_msg = 2;
 }
 
-message SearchRequest {
-  int32 offset = 1;
-  int32 limit = 2;
-  string provider_name = 3;
-  common.v1.Channel channel = 4;
-}
+message ListRequest {}
 
-message SearchResponse {
-  int64 total = 1;
-  repeated Provider providers = 2;
+message ListResponse {
+  repeated Provider providers = 1;
 }
 
 message FindByIdRequest {
@@ -74,11 +68,20 @@ message FindByIdResponse {
   Provider provider = 1;
 }
 
+message FindByChannelRequest {
+  common.v1.Channel channel = 1;
+}
+
+message FindByChannelResponse {
+  repeated Provider providers = 1;
+}
+
 service ProviderService {
   rpc Save(SaveRequest) returns (SaveResponse);
   rpc Delete(DeleteRequest) returns (DeleteResponse);
   rpc Update(UpdateRequest) returns (UpdateResponse);
 
-  rpc Search(SearchRequest) returns (SearchResponse);
+  rpc List(ListRequest) returns (ListResponse);
   rpc FindById(FindByIdRequest) returns (FindByIdResponse);
+  rpc FindByChannel(FindByChannelRequest) returns (FindByChannelResponse);
 }
