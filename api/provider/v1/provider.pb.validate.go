@@ -834,50 +834,41 @@ var _ interface {
 	ErrorName() string
 } = UpdateResponseValidationError{}
 
-// Validate checks the field values on SearchRequest with the rules defined in
+// Validate checks the field values on ListRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *SearchRequest) Validate() error {
+func (m *ListRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SearchRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in SearchRequestMultiError, or
+// ValidateAll checks the field values on ListRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ListRequestMultiError, or
 // nil if none found.
-func (m *SearchRequest) ValidateAll() error {
+func (m *ListRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SearchRequest) validate(all bool) error {
+func (m *ListRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Offset
-
-	// no validation rules for Limit
-
-	// no validation rules for ProviderName
-
-	// no validation rules for Channel
-
 	if len(errors) > 0 {
-		return SearchRequestMultiError(errors)
+		return ListRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// SearchRequestMultiError is an error wrapping multiple validation errors
-// returned by SearchRequest.ValidateAll() if the designated constraints
-// aren't met.
-type SearchRequestMultiError []error
+// ListRequestMultiError is an error wrapping multiple validation errors
+// returned by ListRequest.ValidateAll() if the designated constraints aren't met.
+type ListRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SearchRequestMultiError) Error() string {
+func (m ListRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -886,11 +877,11 @@ func (m SearchRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SearchRequestMultiError) AllErrors() []error { return m }
+func (m ListRequestMultiError) AllErrors() []error { return m }
 
-// SearchRequestValidationError is the validation error returned by
-// SearchRequest.Validate if the designated constraints aren't met.
-type SearchRequestValidationError struct {
+// ListRequestValidationError is the validation error returned by
+// ListRequest.Validate if the designated constraints aren't met.
+type ListRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -898,22 +889,22 @@ type SearchRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e SearchRequestValidationError) Field() string { return e.field }
+func (e ListRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SearchRequestValidationError) Reason() string { return e.reason }
+func (e ListRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SearchRequestValidationError) Cause() error { return e.cause }
+func (e ListRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SearchRequestValidationError) Key() bool { return e.key }
+func (e ListRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SearchRequestValidationError) ErrorName() string { return "SearchRequestValidationError" }
+func (e ListRequestValidationError) ErrorName() string { return "ListRequestValidationError" }
 
 // Error satisfies the builtin error interface
-func (e SearchRequestValidationError) Error() string {
+func (e ListRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -925,14 +916,14 @@ func (e SearchRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSearchRequest.%s: %s%s",
+		"invalid %sListRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SearchRequestValidationError{}
+var _ error = ListRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -940,31 +931,29 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SearchRequestValidationError{}
+} = ListRequestValidationError{}
 
-// Validate checks the field values on SearchResponse with the rules defined in
+// Validate checks the field values on ListResponse with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *SearchResponse) Validate() error {
+func (m *ListResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SearchResponse with the rules defined
+// ValidateAll checks the field values on ListResponse with the rules defined
 // in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in SearchResponseMultiError,
-// or nil if none found.
-func (m *SearchResponse) ValidateAll() error {
+// result is a list of violation errors wrapped in ListResponseMultiError, or
+// nil if none found.
+func (m *ListResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SearchResponse) validate(all bool) error {
+func (m *ListResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
-
-	// no validation rules for Total
 
 	for idx, item := range m.GetProviders() {
 		_, _ = idx, item
@@ -973,7 +962,7 @@ func (m *SearchResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, SearchResponseValidationError{
+					errors = append(errors, ListResponseValidationError{
 						field:  fmt.Sprintf("Providers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -981,7 +970,7 @@ func (m *SearchResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, SearchResponseValidationError{
+					errors = append(errors, ListResponseValidationError{
 						field:  fmt.Sprintf("Providers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -990,7 +979,7 @@ func (m *SearchResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return SearchResponseValidationError{
+				return ListResponseValidationError{
 					field:  fmt.Sprintf("Providers[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1001,19 +990,18 @@ func (m *SearchResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return SearchResponseMultiError(errors)
+		return ListResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// SearchResponseMultiError is an error wrapping multiple validation errors
-// returned by SearchResponse.ValidateAll() if the designated constraints
-// aren't met.
-type SearchResponseMultiError []error
+// ListResponseMultiError is an error wrapping multiple validation errors
+// returned by ListResponse.ValidateAll() if the designated constraints aren't met.
+type ListResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SearchResponseMultiError) Error() string {
+func (m ListResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1022,11 +1010,11 @@ func (m SearchResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SearchResponseMultiError) AllErrors() []error { return m }
+func (m ListResponseMultiError) AllErrors() []error { return m }
 
-// SearchResponseValidationError is the validation error returned by
-// SearchResponse.Validate if the designated constraints aren't met.
-type SearchResponseValidationError struct {
+// ListResponseValidationError is the validation error returned by
+// ListResponse.Validate if the designated constraints aren't met.
+type ListResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1034,22 +1022,22 @@ type SearchResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e SearchResponseValidationError) Field() string { return e.field }
+func (e ListResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SearchResponseValidationError) Reason() string { return e.reason }
+func (e ListResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SearchResponseValidationError) Cause() error { return e.cause }
+func (e ListResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SearchResponseValidationError) Key() bool { return e.key }
+func (e ListResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SearchResponseValidationError) ErrorName() string { return "SearchResponseValidationError" }
+func (e ListResponseValidationError) ErrorName() string { return "ListResponseValidationError" }
 
 // Error satisfies the builtin error interface
-func (e SearchResponseValidationError) Error() string {
+func (e ListResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1061,14 +1049,14 @@ func (e SearchResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSearchResponse.%s: %s%s",
+		"invalid %sListResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SearchResponseValidationError{}
+var _ error = ListResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1076,7 +1064,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SearchResponseValidationError{}
+} = ListResponseValidationError{}
 
 // Validate checks the field values on FindByIdRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
@@ -1308,3 +1296,243 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = FindByIdResponseValidationError{}
+
+// Validate checks the field values on FindByChannelRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *FindByChannelRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on FindByChannelRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// FindByChannelRequestMultiError, or nil if none found.
+func (m *FindByChannelRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *FindByChannelRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Channel
+
+	if len(errors) > 0 {
+		return FindByChannelRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// FindByChannelRequestMultiError is an error wrapping multiple validation
+// errors returned by FindByChannelRequest.ValidateAll() if the designated
+// constraints aren't met.
+type FindByChannelRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m FindByChannelRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m FindByChannelRequestMultiError) AllErrors() []error { return m }
+
+// FindByChannelRequestValidationError is the validation error returned by
+// FindByChannelRequest.Validate if the designated constraints aren't met.
+type FindByChannelRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FindByChannelRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FindByChannelRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FindByChannelRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FindByChannelRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FindByChannelRequestValidationError) ErrorName() string {
+	return "FindByChannelRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e FindByChannelRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFindByChannelRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FindByChannelRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FindByChannelRequestValidationError{}
+
+// Validate checks the field values on FindByChannelResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *FindByChannelResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on FindByChannelResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// FindByChannelResponseMultiError, or nil if none found.
+func (m *FindByChannelResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *FindByChannelResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetProviders() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, FindByChannelResponseValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, FindByChannelResponseValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return FindByChannelResponseValidationError{
+					field:  fmt.Sprintf("Providers[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return FindByChannelResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// FindByChannelResponseMultiError is an error wrapping multiple validation
+// errors returned by FindByChannelResponse.ValidateAll() if the designated
+// constraints aren't met.
+type FindByChannelResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m FindByChannelResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m FindByChannelResponseMultiError) AllErrors() []error { return m }
+
+// FindByChannelResponseValidationError is the validation error returned by
+// FindByChannelResponse.Validate if the designated constraints aren't met.
+type FindByChannelResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FindByChannelResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FindByChannelResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FindByChannelResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FindByChannelResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FindByChannelResponseValidationError) ErrorName() string {
+	return "FindByChannelResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e FindByChannelResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFindByChannelResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FindByChannelResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FindByChannelResponseValidationError{}
