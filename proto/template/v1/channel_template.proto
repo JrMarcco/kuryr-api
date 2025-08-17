@@ -63,25 +63,25 @@ message TemplateProvider {
   int64 updated_at = 13;
 }
 
-message SaveTemplateRequest {
+message SaveRequest {
   ChannelTemplate template = 1;
 }
 
-message SaveTemplateResponse {
+message SaveResponse {
   bool success = 1;
   string err_msg = 2;
 }
 
-message SaveVersionRequest {
+message SubmitVersionRequest {
   TemplateVersion version = 1;
 }
 
-message SaveVersionResponse {
+message SubmitVersionResponse {
   bool success = 1;
   string err_msg = 2;
 }
 
 service TemplateService {
-  rpc SaveTemplate(SaveTemplateRequest) returns (SaveTemplateResponse);
-  rpc SaveVersion(SaveVersionRequest) returns (SaveVersionResponse);
+  rpc Save(SaveRequest) returns (SaveResponse);
+  rpc SaveVersion(SubmitVersionRequest) returns (SubmitVersionResponse);
 }
