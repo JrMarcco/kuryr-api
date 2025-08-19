@@ -504,9 +504,7 @@ func (x *SaveRequest) GetNotificationType() int32 {
 
 type SaveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
-	Template      *ChannelTemplate       `protobuf:"bytes,3,opt,name=template,proto3" json:"template,omitempty"`
+	Template      *ChannelTemplate       `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -539,20 +537,6 @@ func (x *SaveResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SaveResponse.ProtoReflect.Descriptor instead.
 func (*SaveResponse) Descriptor() ([]byte, []int) {
 	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *SaveResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
-func (x *SaveResponse) GetErrMsg() string {
-	if x != nil {
-		return x.ErrMsg
-	}
-	return ""
 }
 
 func (x *SaveResponse) GetTemplate() *ChannelTemplate {
@@ -640,9 +624,7 @@ func (x *SaveVersionRequest) GetApplyRemark() string {
 
 type SaveVersionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
-	Version       *TemplateVersion       `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
+	Version       *TemplateVersion       `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -675,20 +657,6 @@ func (x *SaveVersionResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SaveVersionResponse.ProtoReflect.Descriptor instead.
 func (*SaveVersionResponse) Descriptor() ([]byte, []int) {
 	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *SaveVersionResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
-func (x *SaveVersionResponse) GetErrMsg() string {
-	if x != nil {
-		return x.ErrMsg
-	}
-	return ""
 }
 
 func (x *SaveVersionResponse) GetVersion() *TemplateVersion {
@@ -812,9 +780,7 @@ func (x *SaveProvidersRequest) GetRelatedProviders() []*RelatedProvider {
 
 type SaveProvidersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
-	Providers     []*TemplateProvider    `protobuf:"bytes,3,rep,name=providers,proto3" json:"providers,omitempty"`
+	Providers     []*TemplateProvider    `protobuf:"bytes,1,rep,name=providers,proto3" json:"providers,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -847,20 +813,6 @@ func (x *SaveProvidersResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SaveProvidersResponse.ProtoReflect.Descriptor instead.
 func (*SaveProvidersResponse) Descriptor() ([]byte, []int) {
 	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *SaveProvidersResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
-func (x *SaveProvidersResponse) GetErrMsg() string {
-	if x != nil {
-		return x.ErrMsg
-	}
-	return ""
 }
 
 func (x *SaveProvidersResponse) GetProviders() []*TemplateProvider {
@@ -933,21 +885,17 @@ const file_template_v1_channel_template_proto_rawDesc = "" +
 	"\btpl_name\x18\x02 \x01(\tR\atplName\x12\x19\n" +
 	"\btpl_desc\x18\x03 \x01(\tR\atplDesc\x12,\n" +
 	"\achannel\x18\x04 \x01(\x0e2\x12.common.v1.ChannelR\achannel\x12+\n" +
-	"\x11notification_type\x18\x05 \x01(\x05R\x10notificationType\"{\n" +
-	"\fSaveResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\x128\n" +
-	"\btemplate\x18\x03 \x01(\v2\x1c.template.v1.ChannelTemplateR\btemplate\"\xa9\x01\n" +
+	"\x11notification_type\x18\x05 \x01(\x05R\x10notificationType\"H\n" +
+	"\fSaveResponse\x128\n" +
+	"\btemplate\x18\x01 \x01(\v2\x1c.template.v1.ChannelTemplateR\btemplate\"\xa9\x01\n" +
 	"\x12SaveVersionRequest\x12\x15\n" +
 	"\x06tpl_id\x18\x01 \x01(\x04R\x05tplId\x12!\n" +
 	"\fversion_name\x18\x02 \x01(\tR\vversionName\x12\x1c\n" +
 	"\tsignature\x18\x03 \x01(\tR\tsignature\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12!\n" +
-	"\fapply_remark\x18\x05 \x01(\tR\vapplyRemark\"\x80\x01\n" +
-	"\x13SaveVersionResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\x126\n" +
-	"\aversion\x18\x03 \x01(\v2\x1c.template.v1.TemplateVersionR\aversion\"W\n" +
+	"\fapply_remark\x18\x05 \x01(\tR\vapplyRemark\"M\n" +
+	"\x13SaveVersionResponse\x126\n" +
+	"\aversion\x18\x01 \x01(\v2\x1c.template.v1.TemplateVersionR\aversion\"W\n" +
 	"\x0fRelatedProvider\x12\x1f\n" +
 	"\vprovider_id\x18\x01 \x01(\x04R\n" +
 	"providerId\x12#\n" +
@@ -955,11 +903,9 @@ const file_template_v1_channel_template_proto_rawDesc = "" +
 	"\x14SaveProvidersRequest\x12\x15\n" +
 	"\x06tpl_id\x18\x01 \x01(\x04R\x05tplId\x12$\n" +
 	"\x0etpl_version_id\x18\x02 \x01(\x04R\ftplVersionId\x12I\n" +
-	"\x11related_providers\x18\x03 \x03(\v2\x1c.template.v1.RelatedProviderR\x10relatedProviders\"\x87\x01\n" +
-	"\x15SaveProvidersResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\x12;\n" +
-	"\tproviders\x18\x03 \x03(\v2\x1d.template.v1.TemplateProviderR\tproviders2\xf8\x01\n" +
+	"\x11related_providers\x18\x03 \x03(\v2\x1c.template.v1.RelatedProviderR\x10relatedProviders\"T\n" +
+	"\x15SaveProvidersResponse\x12;\n" +
+	"\tproviders\x18\x01 \x03(\v2\x1d.template.v1.TemplateProviderR\tproviders2\xf8\x01\n" +
 	"\x0fTemplateService\x12;\n" +
 	"\x04Save\x12\x18.template.v1.SaveRequest\x1a\x19.template.v1.SaveResponse\x12P\n" +
 	"\vSaveVersion\x12\x1f.template.v1.SaveVersionRequest\x1a .template.v1.SaveVersionResponse\x12V\n" +

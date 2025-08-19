@@ -60,19 +60,14 @@ message SaveRequest {
 }
 
 message SaveResponse {
-  bool success = 1;
-  string err_msg = 2;
-  BizConfig biz_config = 3;
+  BizConfig biz_config = 1;
 }
 
 message DeleteRequest {
   uint64 id = 1;
 }
 
-message DeleteResponse {
-  bool success = 1;
-  string err_msg = 2;
-}
+message DeleteResponse {}
 
 message FindByIdRequest {
   uint64 id = 1;
@@ -80,7 +75,6 @@ message FindByIdRequest {
 
 message FindByIdResponse {
   BizConfig config = 1;
-  string err_msg = 2;
 }
 
 service BizConfigService {

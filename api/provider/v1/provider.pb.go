@@ -163,10 +163,20 @@ func (x *Provider) GetActiveStatus() string {
 }
 
 type SaveRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Provider      *Provider              `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ProviderName     string                 `protobuf:"bytes,1,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
+	Channel          v1.Channel             `protobuf:"varint,2,opt,name=channel,proto3,enum=common.v1.Channel" json:"channel,omitempty"`
+	Endpoint         string                 `protobuf:"bytes,3,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
+	RegionId         string                 `protobuf:"bytes,4,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
+	AppId            string                 `protobuf:"bytes,5,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
+	ApiKey           string                 `protobuf:"bytes,6,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	ApiSecret        string                 `protobuf:"bytes,7,opt,name=api_secret,json=apiSecret,proto3" json:"api_secret,omitempty"`
+	Weight           int32                  `protobuf:"varint,8,opt,name=weight,proto3" json:"weight,omitempty"`
+	QpsLimit         int32                  `protobuf:"varint,9,opt,name=qps_limit,json=qpsLimit,proto3" json:"qps_limit,omitempty"`
+	DailyLimit       int32                  `protobuf:"varint,10,opt,name=daily_limit,json=dailyLimit,proto3" json:"daily_limit,omitempty"`
+	AuditCallbackUrl string                 `protobuf:"bytes,11,opt,name=audit_callback_url,json=auditCallbackUrl,proto3" json:"audit_callback_url,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *SaveRequest) Reset() {
@@ -199,17 +209,85 @@ func (*SaveRequest) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SaveRequest) GetProvider() *Provider {
+func (x *SaveRequest) GetProviderName() string {
 	if x != nil {
-		return x.Provider
+		return x.ProviderName
 	}
-	return nil
+	return ""
+}
+
+func (x *SaveRequest) GetChannel() v1.Channel {
+	if x != nil {
+		return x.Channel
+	}
+	return v1.Channel(0)
+}
+
+func (x *SaveRequest) GetEndpoint() string {
+	if x != nil {
+		return x.Endpoint
+	}
+	return ""
+}
+
+func (x *SaveRequest) GetRegionId() string {
+	if x != nil {
+		return x.RegionId
+	}
+	return ""
+}
+
+func (x *SaveRequest) GetAppId() string {
+	if x != nil {
+		return x.AppId
+	}
+	return ""
+}
+
+func (x *SaveRequest) GetApiKey() string {
+	if x != nil {
+		return x.ApiKey
+	}
+	return ""
+}
+
+func (x *SaveRequest) GetApiSecret() string {
+	if x != nil {
+		return x.ApiSecret
+	}
+	return ""
+}
+
+func (x *SaveRequest) GetWeight() int32 {
+	if x != nil {
+		return x.Weight
+	}
+	return 0
+}
+
+func (x *SaveRequest) GetQpsLimit() int32 {
+	if x != nil {
+		return x.QpsLimit
+	}
+	return 0
+}
+
+func (x *SaveRequest) GetDailyLimit() int32 {
+	if x != nil {
+		return x.DailyLimit
+	}
+	return 0
+}
+
+func (x *SaveRequest) GetAuditCallbackUrl() string {
+	if x != nil {
+		return x.AuditCallbackUrl
+	}
+	return ""
 }
 
 type SaveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -242,20 +320,6 @@ func (x *SaveResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SaveResponse.ProtoReflect.Descriptor instead.
 func (*SaveResponse) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *SaveResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
-func (x *SaveResponse) GetErrMsg() string {
-	if x != nil {
-		return x.ErrMsg
-	}
-	return ""
 }
 
 type DeleteRequest struct {
@@ -304,8 +368,6 @@ func (x *DeleteRequest) GetId() uint64 {
 
 type DeleteResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -338,20 +400,6 @@ func (x *DeleteResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use DeleteResponse.ProtoReflect.Descriptor instead.
 func (*DeleteResponse) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *DeleteResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
-func (x *DeleteResponse) GetErrMsg() string {
-	if x != nil {
-		return x.ErrMsg
-	}
-	return ""
 }
 
 type UpdateRequest struct {
@@ -400,8 +448,6 @@ func (x *UpdateRequest) GetProvider() *Provider {
 
 type UpdateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -434,20 +480,6 @@ func (x *UpdateResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use UpdateResponse.ProtoReflect.Descriptor instead.
 func (*UpdateResponse) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *UpdateResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
-func (x *UpdateResponse) GetErrMsg() string {
-	if x != nil {
-		return x.ErrMsg
-	}
-	return ""
 }
 
 type ListRequest struct {
@@ -727,22 +759,29 @@ const file_provider_v1_provider_proto_rawDesc = "" +
 	"\vdaily_limit\x18\v \x01(\x05R\n" +
 	"dailyLimit\x12,\n" +
 	"\x12audit_callback_url\x18\f \x01(\tR\x10auditCallbackUrl\x12#\n" +
-	"\ractive_status\x18\r \x01(\tR\factiveStatus\"@\n" +
-	"\vSaveRequest\x121\n" +
-	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"A\n" +
-	"\fSaveResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"\x1f\n" +
+	"\ractive_status\x18\r \x01(\tR\factiveStatus\"\xec\x02\n" +
+	"\vSaveRequest\x12#\n" +
+	"\rprovider_name\x18\x01 \x01(\tR\fproviderName\x12,\n" +
+	"\achannel\x18\x02 \x01(\x0e2\x12.common.v1.ChannelR\achannel\x12\x1a\n" +
+	"\bendpoint\x18\x03 \x01(\tR\bendpoint\x12\x1b\n" +
+	"\tregion_id\x18\x04 \x01(\tR\bregionId\x12\x15\n" +
+	"\x06app_id\x18\x05 \x01(\tR\x05appId\x12\x17\n" +
+	"\aapi_key\x18\x06 \x01(\tR\x06apiKey\x12\x1d\n" +
+	"\n" +
+	"api_secret\x18\a \x01(\tR\tapiSecret\x12\x16\n" +
+	"\x06weight\x18\b \x01(\x05R\x06weight\x12\x1b\n" +
+	"\tqps_limit\x18\t \x01(\x05R\bqpsLimit\x12\x1f\n" +
+	"\vdaily_limit\x18\n" +
+	" \x01(\x05R\n" +
+	"dailyLimit\x12,\n" +
+	"\x12audit_callback_url\x18\v \x01(\tR\x10auditCallbackUrl\"\x0e\n" +
+	"\fSaveResponse\"\x1f\n" +
 	"\rDeleteRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"C\n" +
-	"\x0eDeleteResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"B\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"\x10\n" +
+	"\x0eDeleteResponse\"B\n" +
 	"\rUpdateRequest\x121\n" +
-	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"C\n" +
-	"\x0eUpdateResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"\r\n" +
+	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"\x10\n" +
+	"\x0eUpdateResponse\"\r\n" +
 	"\vListRequest\"C\n" +
 	"\fListResponse\x123\n" +
 	"\tproviders\x18\x01 \x03(\v2\x15.provider.v1.ProviderR\tproviders\"!\n" +
@@ -794,7 +833,7 @@ var file_provider_v1_provider_proto_goTypes = []any{
 }
 var file_provider_v1_provider_proto_depIdxs = []int32{
 	13, // 0: provider.v1.Provider.channel:type_name -> common.v1.Channel
-	0,  // 1: provider.v1.SaveRequest.provider:type_name -> provider.v1.Provider
+	13, // 1: provider.v1.SaveRequest.channel:type_name -> common.v1.Channel
 	0,  // 2: provider.v1.UpdateRequest.provider:type_name -> provider.v1.Provider
 	0,  // 3: provider.v1.ListResponse.providers:type_name -> provider.v1.Provider
 	0,  // 4: provider.v1.FindByIdResponse.provider:type_name -> provider.v1.Provider

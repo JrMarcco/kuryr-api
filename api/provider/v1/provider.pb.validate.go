@@ -186,34 +186,27 @@ func (m *SaveRequest) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetProvider()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SaveRequestValidationError{
-					field:  "Provider",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, SaveRequestValidationError{
-					field:  "Provider",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetProvider()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SaveRequestValidationError{
-				field:  "Provider",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for ProviderName
+
+	// no validation rules for Channel
+
+	// no validation rules for Endpoint
+
+	// no validation rules for RegionId
+
+	// no validation rules for AppId
+
+	// no validation rules for ApiKey
+
+	// no validation rules for ApiSecret
+
+	// no validation rules for Weight
+
+	// no validation rules for QpsLimit
+
+	// no validation rules for DailyLimit
+
+	// no validation rules for AuditCallbackUrl
 
 	if len(errors) > 0 {
 		return SaveRequestMultiError(errors)
@@ -313,10 +306,6 @@ func (m *SaveResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for Success
-
-	// no validation rules for ErrMsg
 
 	if len(errors) > 0 {
 		return SaveResponseMultiError(errors)
@@ -518,10 +507,6 @@ func (m *DeleteResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for Success
-
-	// no validation rules for ErrMsg
 
 	if len(errors) > 0 {
 		return DeleteResponseMultiError(errors)
@@ -751,10 +736,6 @@ func (m *UpdateResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for Success
-
-	// no validation rules for ErrMsg
 
 	if len(errors) > 0 {
 		return UpdateResponseMultiError(errors)

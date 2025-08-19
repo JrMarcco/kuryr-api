@@ -72,9 +72,7 @@ message SaveRequest {
 }
 
 message SaveResponse {
-  bool success = 1;
-  string err_msg = 2;
-  ChannelTemplate template = 3;
+  ChannelTemplate template = 1;
 }
 
 message SaveVersionRequest {
@@ -86,9 +84,7 @@ message SaveVersionRequest {
 }
 
 message SaveVersionResponse {
-  bool success = 1;
-  string err_msg = 2;
-  TemplateVersion version = 3;
+  TemplateVersion version = 1;
 }
 
 message RelatedProvider {
@@ -103,9 +99,7 @@ message SaveProvidersRequest {
 }
 
 message SaveProvidersResponse {
-  bool success = 1;
-  string err_msg = 2;
-  repeated TemplateProvider providers = 3;
+  repeated TemplateProvider providers = 1;
 }
 
 service TemplateService {

@@ -544,10 +544,6 @@ func (m *SaveResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Success
-
-	// no validation rules for ErrMsg
-
 	if all {
 		switch v := interface{}(m.GetTemplate()).(type) {
 		case interface{ ValidateAll() error }:
@@ -787,10 +783,6 @@ func (m *SaveVersionResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for Success
-
-	// no validation rules for ErrMsg
 
 	if all {
 		switch v := interface{}(m.GetVersion()).(type) {
@@ -1166,10 +1158,6 @@ func (m *SaveProvidersResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for Success
-
-	// no validation rules for ErrMsg
 
 	for idx, item := range m.GetProviders() {
 		_, _ = idx, item

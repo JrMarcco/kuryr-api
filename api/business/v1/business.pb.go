@@ -231,9 +231,7 @@ func (x *SaveRequest) GetCreatorId() uint64 {
 
 type SaveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
-	BusinessInfo  *BusinessInfo          `protobuf:"bytes,3,opt,name=business_info,json=businessInfo,proto3" json:"business_info,omitempty"`
+	BusinessInfo  *BusinessInfo          `protobuf:"bytes,1,opt,name=business_info,json=businessInfo,proto3" json:"business_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -266,20 +264,6 @@ func (x *SaveResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SaveResponse.ProtoReflect.Descriptor instead.
 func (*SaveResponse) Descriptor() ([]byte, []int) {
 	return file_business_v1_business_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *SaveResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
-func (x *SaveResponse) GetErrMsg() string {
-	if x != nil {
-		return x.ErrMsg
-	}
-	return ""
 }
 
 func (x *SaveResponse) GetBusinessInfo() *BusinessInfo {
@@ -335,8 +319,6 @@ func (x *DeleteRequest) GetBizId() uint64 {
 
 type DeleteResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -369,20 +351,6 @@ func (x *DeleteResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use DeleteResponse.ProtoReflect.Descriptor instead.
 func (*DeleteResponse) Descriptor() ([]byte, []int) {
 	return file_business_v1_business_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *DeleteResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
-func (x *DeleteResponse) GetErrMsg() string {
-	if x != nil {
-		return x.ErrMsg
-	}
-	return ""
 }
 
 type SearchRequest struct {
@@ -526,16 +494,12 @@ const file_business_v1_business_proto_rawDesc = "" +
 	"\acontact\x18\x05 \x01(\tR\acontact\x12#\n" +
 	"\rcontact_email\x18\x06 \x01(\tR\fcontactEmail\x12\x1d\n" +
 	"\n" +
-	"creator_id\x18\a \x01(\x04R\tcreatorId\"\x81\x01\n" +
-	"\fSaveResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\x12>\n" +
-	"\rbusiness_info\x18\x03 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"&\n" +
+	"creator_id\x18\a \x01(\x04R\tcreatorId\"N\n" +
+	"\fSaveResponse\x12>\n" +
+	"\rbusiness_info\x18\x01 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"&\n" +
 	"\rDeleteRequest\x12\x15\n" +
-	"\x06biz_id\x18\x01 \x01(\x04R\x05bizId\"C\n" +
-	"\x0eDeleteResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"X\n" +
+	"\x06biz_id\x18\x01 \x01(\x04R\x05bizId\"\x10\n" +
+	"\x0eDeleteResponse\"X\n" +
 	"\rSearchRequest\x12\x16\n" +
 	"\x06offset\x18\x01 \x01(\x05R\x06offset\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x19\n" +

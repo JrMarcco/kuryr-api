@@ -38,19 +38,14 @@ message SaveRequest {
 }
 
 message SaveResponse {
-  bool success = 1;
-  string err_msg = 2;
-  BusinessInfo business_info = 3;
+  BusinessInfo business_info = 1;
 }
 
 message DeleteRequest {
   uint64 biz_id = 1;
 }
 
-message DeleteResponse {
-  bool success = 1;
-  string err_msg = 2;
-}
+message DeleteResponse {}
 
 message SearchRequest {
   int32 offset = 1;

@@ -289,10 +289,6 @@ func (m *SaveResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Success
-
-	// no validation rules for ErrMsg
-
 	if all {
 		switch v := interface{}(m.GetBusinessInfo()).(type) {
 		case interface{ ValidateAll() error }:
@@ -522,10 +518,6 @@ func (m *DeleteResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for Success
-
-	// no validation rules for ErrMsg
 
 	if len(errors) > 0 {
 		return DeleteResponseMultiError(errors)

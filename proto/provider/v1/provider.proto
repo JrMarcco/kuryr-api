@@ -28,31 +28,36 @@ message Provider {
 }
 
 message SaveRequest {
-  Provider provider = 1;
+  string provider_name = 1;
+  common.v1.Channel channel = 2;
+
+  string endpoint = 3;
+  string region_id = 4;
+
+  string app_id = 5;
+  string api_key = 6;
+  string api_secret = 7;
+
+  int32 weight = 8;
+  int32 qps_limit = 9;
+  int32 daily_limit = 10;
+
+  string audit_callback_url = 11;
 }
 
-message SaveResponse {
-  bool success = 1;
-  string err_msg = 2;
-}
+message SaveResponse {}
 
 message DeleteRequest {
   uint64 id = 1;
 }
 
-message DeleteResponse {
-  bool success = 1;
-  string err_msg = 2;
-}
+message DeleteResponse {}
 
 message UpdateRequest {
   Provider provider = 1;
 }
 
-message UpdateResponse {
-  bool success = 1;
-  string err_msg = 2;
-}
+message UpdateResponse {}
 
 message ListRequest {}
 

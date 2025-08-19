@@ -18,6 +18,4 @@ message SendResultNotifyRequest {
   notification.v1.SendResult result = 3;
 }
 
-message SendResultNotifyResponse {
-  bool success = 1;
-}
+message SendResultNotifyResponse {}
