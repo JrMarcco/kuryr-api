@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package business.v1;
+
+option go_package = "github.com/JrMarcco/kuryr-api/api/business/v1";
+
+message BusinessInfo {
+  uint64 id = 1;
+  string biz_key = 2;
+
+  string biz_name = 3;
+  string biz_type = 4;
+  string biz_secret = 5;
+
+  string contact = 6;
+  string contact_email = 7;
+
+  uint64 creator_id = 8;
+
+  int64 created_at = 9;
+  int64 updated_at = 10;
+}
+
+service BusinessService {
+  rpc Save(SaveRequest) returns (SaveResponse);
+  rpc Search(SearchRequest) returns (SearchResponse);
+}
+
+message SaveRequest {
+  BusinessInfo business_info = 1;
+}
+
+message SaveResponse {
+  bool success = 1;
+  string err_msg = 2;
+}
+
+message SearchRequest {
+  int32 offset = 1;
+  int32 limit = 2;
+  string biz_name = 3;
+}
+
+message SearchResponse {
+  repeated BusinessInfo records = 1;
+  int64 total = 2;
+}

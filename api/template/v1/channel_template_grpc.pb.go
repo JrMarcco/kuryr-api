@@ -19,16 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TemplateService_SaveTemplate_FullMethodName = "/template.v1.TemplateService/SaveTemplate"
-	TemplateService_SaveVersion_FullMethodName  = "/template.v1.TemplateService/SaveVersion"
+	TemplateService_Save_FullMethodName          = "/template.v1.TemplateService/Save"
+	TemplateService_SaveVersion_FullMethodName   = "/template.v1.TemplateService/SaveVersion"
+	TemplateService_SaveProviders_FullMethodName = "/template.v1.TemplateService/SaveProviders"
 )
 
 // TemplateServiceClient is the client API for TemplateService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TemplateServiceClient interface {
-	SaveTemplate(ctx context.Context, in *SaveTemplateRequest, opts ...grpc.CallOption) (*SaveTemplateResponse, error)
+	Save(ctx context.Context, in *SaveRequest, opts ...grpc.CallOption) (*SaveResponse, error)
 	SaveVersion(ctx context.Context, in *SaveVersionRequest, opts ...grpc.CallOption) (*SaveVersionResponse, error)
+	SaveProviders(ctx context.Context, in *SaveProvidersRequest, opts ...grpc.CallOption) (*SaveProvidersResponse, error)
 }
 
 type templateServiceClient struct {
@@ -39,10 +41,10 @@ func NewTemplateServiceClient(cc grpc.ClientConnInterface) TemplateServiceClient
 	return &templateServiceClient{cc}
 }
 
-func (c *templateServiceClient) SaveTemplate(ctx context.Context, in *SaveTemplateRequest, opts ...grpc.CallOption) (*SaveTemplateResponse, error) {
+func (c *templateServiceClient) Save(ctx context.Context, in *SaveRequest, opts ...grpc.CallOption) (*SaveResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SaveTemplateResponse)
-	err := c.cc.Invoke(ctx, TemplateService_SaveTemplate_FullMethodName, in, out, cOpts...)
+	out := new(SaveResponse)
+	err := c.cc.Invoke(ctx, TemplateService_Save_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -59,12 +61,23 @@ func (c *templateServiceClient) SaveVersion(ctx context.Context, in *SaveVersion
 	return out, nil
 }
 
+func (c *templateServiceClient) SaveProviders(ctx context.Context, in *SaveProvidersRequest, opts ...grpc.CallOption) (*SaveProvidersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SaveProvidersResponse)
+	err := c.cc.Invoke(ctx, TemplateService_SaveProviders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TemplateServiceServer is the server API for TemplateService service.
 // All implementations should embed UnimplementedTemplateServiceServer
 // for forward compatibility.
 type TemplateServiceServer interface {
-	SaveTemplate(context.Context, *SaveTemplateRequest) (*SaveTemplateResponse, error)
+	Save(context.Context, *SaveRequest) (*SaveResponse, error)
 	SaveVersion(context.Context, *SaveVersionRequest) (*SaveVersionResponse, error)
+	SaveProviders(context.Context, *SaveProvidersRequest) (*SaveProvidersResponse, error)
 }
 
 // UnimplementedTemplateServiceServer should be embedded to have
@@ -74,11 +87,14 @@ type TemplateServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedTemplateServiceServer struct{}
 
-func (UnimplementedTemplateServiceServer) SaveTemplate(context.Context, *SaveTemplateRequest) (*SaveTemplateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SaveTemplate not implemented")
+func (UnimplementedTemplateServiceServer) Save(context.Context, *SaveRequest) (*SaveResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Save not implemented")
 }
 func (UnimplementedTemplateServiceServer) SaveVersion(context.Context, *SaveVersionRequest) (*SaveVersionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveVersion not implemented")
+}
+func (UnimplementedTemplateServiceServer) SaveProviders(context.Context, *SaveProvidersRequest) (*SaveProvidersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveProviders not implemented")
 }
 func (UnimplementedTemplateServiceServer) testEmbeddedByValue() {}
 
@@ -100,20 +116,20 @@ func RegisterTemplateServiceServer(s grpc.ServiceRegistrar, srv TemplateServiceS
 	s.RegisterService(&TemplateService_ServiceDesc, srv)
 }
 
-func _TemplateService_SaveTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SaveTemplateRequest)
+func _TemplateService_Save_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TemplateServiceServer).SaveTemplate(ctx, in)
+		return srv.(TemplateServiceServer).Save(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TemplateService_SaveTemplate_FullMethodName,
+		FullMethod: TemplateService_Save_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TemplateServiceServer).SaveTemplate(ctx, req.(*SaveTemplateRequest))
+		return srv.(TemplateServiceServer).Save(ctx, req.(*SaveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -136,6 +152,24 @@ func _TemplateService_SaveVersion_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TemplateService_SaveProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveProvidersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateServiceServer).SaveProviders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TemplateService_SaveProviders_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateServiceServer).SaveProviders(ctx, req.(*SaveProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TemplateService_ServiceDesc is the grpc.ServiceDesc for TemplateService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -144,12 +178,16 @@ var TemplateService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*TemplateServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SaveTemplate",
-			Handler:    _TemplateService_SaveTemplate_Handler,
+			MethodName: "Save",
+			Handler:    _TemplateService_Save_Handler,
 		},
 		{
 			MethodName: "SaveVersion",
 			Handler:    _TemplateService_SaveVersion_Handler,
+		},
+		{
+			MethodName: "SaveProviders",
+			Handler:    _TemplateService_SaveProviders_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

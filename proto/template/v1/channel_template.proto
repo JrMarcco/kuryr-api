@@ -72,16 +72,26 @@ message SaveResponse {
   string err_msg = 2;
 }
 
-message SubmitVersionRequest {
+message SaveVersionRequest {
   TemplateVersion version = 1;
 }
 
-message SubmitVersionResponse {
+message SaveVersionResponse {
+  bool success = 1;
+  string err_msg = 2;
+}
+
+message SaveProvidersRequest {
+  repeated TemplateProvider providers = 1;
+}
+
+message SaveProvidersResponse {
   bool success = 1;
   string err_msg = 2;
 }
 
 service TemplateService {
   rpc Save(SaveRequest) returns (SaveResponse);
-  rpc SaveVersion(SubmitVersionRequest) returns (SubmitVersionResponse);
+  rpc SaveVersion(SaveVersionRequest) returns (SaveVersionResponse);
+  rpc SaveProviders(SaveProvidersRequest) returns (SaveProvidersResponse);
 }

@@ -413,22 +413,22 @@ var _ interface {
 	ErrorName() string
 } = TemplateProviderValidationError{}
 
-// Validate checks the field values on SaveTemplateRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SaveTemplateRequest) Validate() error {
+// Validate checks the field values on SaveRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *SaveRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SaveTemplateRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SaveTemplateRequestMultiError, or nil if none found.
-func (m *SaveTemplateRequest) ValidateAll() error {
+// ValidateAll checks the field values on SaveRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in SaveRequestMultiError, or
+// nil if none found.
+func (m *SaveRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SaveTemplateRequest) validate(all bool) error {
+func (m *SaveRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -439,7 +439,7 @@ func (m *SaveTemplateRequest) validate(all bool) error {
 		switch v := interface{}(m.GetTemplate()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SaveTemplateRequestValidationError{
+				errors = append(errors, SaveRequestValidationError{
 					field:  "Template",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -447,7 +447,7 @@ func (m *SaveTemplateRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SaveTemplateRequestValidationError{
+				errors = append(errors, SaveRequestValidationError{
 					field:  "Template",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -456,7 +456,7 @@ func (m *SaveTemplateRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetTemplate()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SaveTemplateRequestValidationError{
+			return SaveRequestValidationError{
 				field:  "Template",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -465,19 +465,18 @@ func (m *SaveTemplateRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return SaveTemplateRequestMultiError(errors)
+		return SaveRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// SaveTemplateRequestMultiError is an error wrapping multiple validation
-// errors returned by SaveTemplateRequest.ValidateAll() if the designated
-// constraints aren't met.
-type SaveTemplateRequestMultiError []error
+// SaveRequestMultiError is an error wrapping multiple validation errors
+// returned by SaveRequest.ValidateAll() if the designated constraints aren't met.
+type SaveRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SaveTemplateRequestMultiError) Error() string {
+func (m SaveRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -486,11 +485,11 @@ func (m SaveTemplateRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SaveTemplateRequestMultiError) AllErrors() []error { return m }
+func (m SaveRequestMultiError) AllErrors() []error { return m }
 
-// SaveTemplateRequestValidationError is the validation error returned by
-// SaveTemplateRequest.Validate if the designated constraints aren't met.
-type SaveTemplateRequestValidationError struct {
+// SaveRequestValidationError is the validation error returned by
+// SaveRequest.Validate if the designated constraints aren't met.
+type SaveRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -498,24 +497,22 @@ type SaveTemplateRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e SaveTemplateRequestValidationError) Field() string { return e.field }
+func (e SaveRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SaveTemplateRequestValidationError) Reason() string { return e.reason }
+func (e SaveRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SaveTemplateRequestValidationError) Cause() error { return e.cause }
+func (e SaveRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SaveTemplateRequestValidationError) Key() bool { return e.key }
+func (e SaveRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SaveTemplateRequestValidationError) ErrorName() string {
-	return "SaveTemplateRequestValidationError"
-}
+func (e SaveRequestValidationError) ErrorName() string { return "SaveRequestValidationError" }
 
 // Error satisfies the builtin error interface
-func (e SaveTemplateRequestValidationError) Error() string {
+func (e SaveRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -527,14 +524,14 @@ func (e SaveTemplateRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSaveTemplateRequest.%s: %s%s",
+		"invalid %sSaveRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SaveTemplateRequestValidationError{}
+var _ error = SaveRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -542,24 +539,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SaveTemplateRequestValidationError{}
+} = SaveRequestValidationError{}
 
-// Validate checks the field values on SaveTemplateResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SaveTemplateResponse) Validate() error {
+// Validate checks the field values on SaveResponse with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *SaveResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SaveTemplateResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SaveTemplateResponseMultiError, or nil if none found.
-func (m *SaveTemplateResponse) ValidateAll() error {
+// ValidateAll checks the field values on SaveResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in SaveResponseMultiError, or
+// nil if none found.
+func (m *SaveResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SaveTemplateResponse) validate(all bool) error {
+func (m *SaveResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -571,19 +568,18 @@ func (m *SaveTemplateResponse) validate(all bool) error {
 	// no validation rules for ErrMsg
 
 	if len(errors) > 0 {
-		return SaveTemplateResponseMultiError(errors)
+		return SaveResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// SaveTemplateResponseMultiError is an error wrapping multiple validation
-// errors returned by SaveTemplateResponse.ValidateAll() if the designated
-// constraints aren't met.
-type SaveTemplateResponseMultiError []error
+// SaveResponseMultiError is an error wrapping multiple validation errors
+// returned by SaveResponse.ValidateAll() if the designated constraints aren't met.
+type SaveResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SaveTemplateResponseMultiError) Error() string {
+func (m SaveResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -592,11 +588,11 @@ func (m SaveTemplateResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SaveTemplateResponseMultiError) AllErrors() []error { return m }
+func (m SaveResponseMultiError) AllErrors() []error { return m }
 
-// SaveTemplateResponseValidationError is the validation error returned by
-// SaveTemplateResponse.Validate if the designated constraints aren't met.
-type SaveTemplateResponseValidationError struct {
+// SaveResponseValidationError is the validation error returned by
+// SaveResponse.Validate if the designated constraints aren't met.
+type SaveResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -604,24 +600,22 @@ type SaveTemplateResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e SaveTemplateResponseValidationError) Field() string { return e.field }
+func (e SaveResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SaveTemplateResponseValidationError) Reason() string { return e.reason }
+func (e SaveResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SaveTemplateResponseValidationError) Cause() error { return e.cause }
+func (e SaveResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SaveTemplateResponseValidationError) Key() bool { return e.key }
+func (e SaveResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SaveTemplateResponseValidationError) ErrorName() string {
-	return "SaveTemplateResponseValidationError"
-}
+func (e SaveResponseValidationError) ErrorName() string { return "SaveResponseValidationError" }
 
 // Error satisfies the builtin error interface
-func (e SaveTemplateResponseValidationError) Error() string {
+func (e SaveResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -633,14 +627,14 @@ func (e SaveTemplateResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSaveTemplateResponse.%s: %s%s",
+		"invalid %sSaveResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SaveTemplateResponseValidationError{}
+var _ error = SaveResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -648,7 +642,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SaveTemplateResponseValidationError{}
+} = SaveResponseValidationError{}
 
 // Validate checks the field values on SaveVersionRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -886,3 +880,245 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SaveVersionResponseValidationError{}
+
+// Validate checks the field values on SaveProvidersRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SaveProvidersRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SaveProvidersRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SaveProvidersRequestMultiError, or nil if none found.
+func (m *SaveProvidersRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SaveProvidersRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetProviders() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, SaveProvidersRequestValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, SaveProvidersRequestValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SaveProvidersRequestValidationError{
+					field:  fmt.Sprintf("Providers[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return SaveProvidersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SaveProvidersRequestMultiError is an error wrapping multiple validation
+// errors returned by SaveProvidersRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SaveProvidersRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SaveProvidersRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SaveProvidersRequestMultiError) AllErrors() []error { return m }
+
+// SaveProvidersRequestValidationError is the validation error returned by
+// SaveProvidersRequest.Validate if the designated constraints aren't met.
+type SaveProvidersRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SaveProvidersRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SaveProvidersRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SaveProvidersRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SaveProvidersRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SaveProvidersRequestValidationError) ErrorName() string {
+	return "SaveProvidersRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SaveProvidersRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSaveProvidersRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SaveProvidersRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SaveProvidersRequestValidationError{}
+
+// Validate checks the field values on SaveProvidersResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SaveProvidersResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SaveProvidersResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SaveProvidersResponseMultiError, or nil if none found.
+func (m *SaveProvidersResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SaveProvidersResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	// no validation rules for ErrMsg
+
+	if len(errors) > 0 {
+		return SaveProvidersResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SaveProvidersResponseMultiError is an error wrapping multiple validation
+// errors returned by SaveProvidersResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SaveProvidersResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SaveProvidersResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SaveProvidersResponseMultiError) AllErrors() []error { return m }
+
+// SaveProvidersResponseValidationError is the validation error returned by
+// SaveProvidersResponse.Validate if the designated constraints aren't met.
+type SaveProvidersResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SaveProvidersResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SaveProvidersResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SaveProvidersResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SaveProvidersResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SaveProvidersResponseValidationError) ErrorName() string {
+	return "SaveProvidersResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SaveProvidersResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSaveProvidersResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SaveProvidersResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SaveProvidersResponseValidationError{}
