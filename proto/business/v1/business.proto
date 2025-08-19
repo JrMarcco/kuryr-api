@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package business.v1;
 
+import "google/protobuf/field_mask.proto";
+
 option go_package = "github.com/JrMarcco/kuryr-api/api/business/v1";
 
 message BusinessInfo {
@@ -24,17 +26,13 @@ message BusinessInfo {
 service BusinessService {
   rpc Save(SaveRequest) returns (SaveResponse);
   rpc Delete(DeleteRequest) returns (DeleteResponse);
+  rpc Update(UpdateRequest) returns (UpdateResponse);
   rpc Search(SearchRequest) returns (SearchResponse);
 }
 
 message SaveRequest {
-  uint64 biz_id = 1;
-  string biz_key = 2;
-  string biz_name = 3;
-  string biz_type = 4;
-  string contact = 5;
-  string contact_email = 6;
-  uint64 creator_id = 7;
+  google.protobuf.FieldMask field_mask = 1;
+  BusinessInfo business_info = 2;
 }
 
 message SaveResponse {
@@ -47,10 +45,22 @@ message DeleteRequest {
 
 message DeleteResponse {}
 
+message UpdateRequest {
+  google.protobuf.FieldMask field_mask = 1;
+
+  BusinessInfo business_info = 2;
+}
+
+message UpdateResponse {
+  BusinessInfo business_info = 1;
+}
+
 message SearchRequest {
-  int32 offset = 1;
-  int32 limit = 2;
-  string biz_name = 3;
+  google.protobuf.FieldMask field_mask = 1;
+
+  int32 offset = 2;
+  int32 limit = 3;
+  string biz_name = 4;
 }
 
 message SearchResponse {

@@ -7,7 +7,7 @@
 package templatev1
 
 import (
-	v1 "github.com/JrMarcco/kuryr-api/api/common/v1"
+	v1 "github.com/JrMarcco/kuryr-api/api/go/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -909,8 +909,8 @@ const file_template_v1_channel_template_proto_rawDesc = "" +
 	"\x0fTemplateService\x12;\n" +
 	"\x04Save\x12\x18.template.v1.SaveRequest\x1a\x19.template.v1.SaveResponse\x12P\n" +
 	"\vSaveVersion\x12\x1f.template.v1.SaveVersionRequest\x1a .template.v1.SaveVersionResponse\x12V\n" +
-	"\rSaveProviders\x12!.template.v1.SaveProvidersRequest\x1a\".template.v1.SaveProvidersResponseB\xae\x01\n" +
-	"\x0fcom.template.v1B\x14ChannelTemplateProtoP\x01Z8github.com/JrMarcco/kuryr-api/api/template/v1;templatev1\xa2\x02\x03TXX\xaa\x02\vTemplate.V1\xca\x02\vTemplate\\V1\xe2\x02\x17Template\\V1\\GPBMetadata\xea\x02\fTemplate::V1b\x06proto3"
+	"\rSaveProviders\x12!.template.v1.SaveProvidersRequest\x1a\".template.v1.SaveProvidersResponseB\xb1\x01\n" +
+	"\x0fcom.template.v1B\x14ChannelTemplateProtoP\x01Z;github.com/JrMarcco/kuryr-api/api/go/template/v1;templatev1\xa2\x02\x03TXX\xaa\x02\vTemplate.V1\xca\x02\vTemplate\\V1\xe2\x02\x17Template\\V1\\GPBMetadata\xea\x02\fTemplate::V1b\x06proto3"
 
 var (
 	file_template_v1_channel_template_proto_rawDescOnce sync.Once

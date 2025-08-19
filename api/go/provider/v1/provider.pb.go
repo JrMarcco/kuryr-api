@@ -7,9 +7,10 @@
 package providerv1
 
 import (
-	v1 "github.com/JrMarcco/kuryr-api/api/common/v1"
+	v1 "github.com/JrMarcco/kuryr-api/api/go/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -163,20 +164,11 @@ func (x *Provider) GetActiveStatus() string {
 }
 
 type SaveRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	ProviderName     string                 `protobuf:"bytes,1,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
-	Channel          v1.Channel             `protobuf:"varint,2,opt,name=channel,proto3,enum=common.v1.Channel" json:"channel,omitempty"`
-	Endpoint         string                 `protobuf:"bytes,3,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	RegionId         string                 `protobuf:"bytes,4,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
-	AppId            string                 `protobuf:"bytes,5,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
-	ApiKey           string                 `protobuf:"bytes,6,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
-	ApiSecret        string                 `protobuf:"bytes,7,opt,name=api_secret,json=apiSecret,proto3" json:"api_secret,omitempty"`
-	Weight           int32                  `protobuf:"varint,8,opt,name=weight,proto3" json:"weight,omitempty"`
-	QpsLimit         int32                  `protobuf:"varint,9,opt,name=qps_limit,json=qpsLimit,proto3" json:"qps_limit,omitempty"`
-	DailyLimit       int32                  `protobuf:"varint,10,opt,name=daily_limit,json=dailyLimit,proto3" json:"daily_limit,omitempty"`
-	AuditCallbackUrl string                 `protobuf:"bytes,11,opt,name=audit_callback_url,json=auditCallbackUrl,proto3" json:"audit_callback_url,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	Provider      *Provider              `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SaveRequest) Reset() {
@@ -209,85 +201,23 @@ func (*SaveRequest) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SaveRequest) GetProviderName() string {
+func (x *SaveRequest) GetFieldMask() *fieldmaskpb.FieldMask {
 	if x != nil {
-		return x.ProviderName
+		return x.FieldMask
 	}
-	return ""
+	return nil
 }
 
-func (x *SaveRequest) GetChannel() v1.Channel {
+func (x *SaveRequest) GetProvider() *Provider {
 	if x != nil {
-		return x.Channel
+		return x.Provider
 	}
-	return v1.Channel(0)
-}
-
-func (x *SaveRequest) GetEndpoint() string {
-	if x != nil {
-		return x.Endpoint
-	}
-	return ""
-}
-
-func (x *SaveRequest) GetRegionId() string {
-	if x != nil {
-		return x.RegionId
-	}
-	return ""
-}
-
-func (x *SaveRequest) GetAppId() string {
-	if x != nil {
-		return x.AppId
-	}
-	return ""
-}
-
-func (x *SaveRequest) GetApiKey() string {
-	if x != nil {
-		return x.ApiKey
-	}
-	return ""
-}
-
-func (x *SaveRequest) GetApiSecret() string {
-	if x != nil {
-		return x.ApiSecret
-	}
-	return ""
-}
-
-func (x *SaveRequest) GetWeight() int32 {
-	if x != nil {
-		return x.Weight
-	}
-	return 0
-}
-
-func (x *SaveRequest) GetQpsLimit() int32 {
-	if x != nil {
-		return x.QpsLimit
-	}
-	return 0
-}
-
-func (x *SaveRequest) GetDailyLimit() int32 {
-	if x != nil {
-		return x.DailyLimit
-	}
-	return 0
-}
-
-func (x *SaveRequest) GetAuditCallbackUrl() string {
-	if x != nil {
-		return x.AuditCallbackUrl
-	}
-	return ""
+	return nil
 }
 
 type SaveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Provider      *Provider              `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -320,6 +250,13 @@ func (x *SaveResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SaveResponse.ProtoReflect.Descriptor instead.
 func (*SaveResponse) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SaveResponse) GetProvider() *Provider {
+	if x != nil {
+		return x.Provider
+	}
+	return nil
 }
 
 type DeleteRequest struct {
@@ -404,7 +341,8 @@ func (*DeleteResponse) Descriptor() ([]byte, []int) {
 
 type UpdateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Provider      *Provider              `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	Provider      *Provider              `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -437,6 +375,13 @@ func (x *UpdateRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use UpdateRequest.ProtoReflect.Descriptor instead.
 func (*UpdateRequest) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdateRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
 }
 
 func (x *UpdateRequest) GetProvider() *Provider {
@@ -484,6 +429,7 @@ func (*UpdateResponse) Descriptor() ([]byte, []int) {
 
 type ListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -516,6 +462,13 @@ func (x *ListRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListRequest.ProtoReflect.Descriptor instead.
 func (*ListRequest) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
 }
 
 type ListResponse struct {
@@ -564,7 +517,8 @@ func (x *ListResponse) GetProviders() []*Provider {
 
 type FindByIdRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	Id            uint64                 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -597,6 +551,13 @@ func (x *FindByIdRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use FindByIdRequest.ProtoReflect.Descriptor instead.
 func (*FindByIdRequest) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *FindByIdRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
 }
 
 func (x *FindByIdRequest) GetId() uint64 {
@@ -652,7 +613,8 @@ func (x *FindByIdResponse) GetProvider() *Provider {
 
 type FindByChannelRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Channel       v1.Channel             `protobuf:"varint,1,opt,name=channel,proto3,enum=common.v1.Channel" json:"channel,omitempty"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	Channel       v1.Channel             `protobuf:"varint,2,opt,name=channel,proto3,enum=common.v1.Channel" json:"channel,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -685,6 +647,13 @@ func (x *FindByChannelRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use FindByChannelRequest.ProtoReflect.Descriptor instead.
 func (*FindByChannelRequest) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *FindByChannelRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
 }
 
 func (x *FindByChannelRequest) GetChannel() v1.Channel {
@@ -742,7 +711,7 @@ var File_provider_v1_provider_proto protoreflect.FileDescriptor
 
 const file_provider_v1_provider_proto_rawDesc = "" +
 	"\n" +
-	"\x1aprovider/v1/provider.proto\x12\vprovider.v1\x1a\x15common/v1/types.proto\"\x9e\x03\n" +
+	"\x1aprovider/v1/provider.proto\x12\vprovider.v1\x1a\x15common/v1/types.proto\x1a google/protobuf/field_mask.proto\"\x9e\x03\n" +
 	"\bProvider\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12#\n" +
 	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\x12,\n" +
@@ -759,38 +728,36 @@ const file_provider_v1_provider_proto_rawDesc = "" +
 	"\vdaily_limit\x18\v \x01(\x05R\n" +
 	"dailyLimit\x12,\n" +
 	"\x12audit_callback_url\x18\f \x01(\tR\x10auditCallbackUrl\x12#\n" +
-	"\ractive_status\x18\r \x01(\tR\factiveStatus\"\xec\x02\n" +
-	"\vSaveRequest\x12#\n" +
-	"\rprovider_name\x18\x01 \x01(\tR\fproviderName\x12,\n" +
-	"\achannel\x18\x02 \x01(\x0e2\x12.common.v1.ChannelR\achannel\x12\x1a\n" +
-	"\bendpoint\x18\x03 \x01(\tR\bendpoint\x12\x1b\n" +
-	"\tregion_id\x18\x04 \x01(\tR\bregionId\x12\x15\n" +
-	"\x06app_id\x18\x05 \x01(\tR\x05appId\x12\x17\n" +
-	"\aapi_key\x18\x06 \x01(\tR\x06apiKey\x12\x1d\n" +
+	"\ractive_status\x18\r \x01(\tR\factiveStatus\"{\n" +
+	"\vSaveRequest\x129\n" +
 	"\n" +
-	"api_secret\x18\a \x01(\tR\tapiSecret\x12\x16\n" +
-	"\x06weight\x18\b \x01(\x05R\x06weight\x12\x1b\n" +
-	"\tqps_limit\x18\t \x01(\x05R\bqpsLimit\x12\x1f\n" +
-	"\vdaily_limit\x18\n" +
-	" \x01(\x05R\n" +
-	"dailyLimit\x12,\n" +
-	"\x12audit_callback_url\x18\v \x01(\tR\x10auditCallbackUrl\"\x0e\n" +
-	"\fSaveResponse\"\x1f\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x121\n" +
+	"\bprovider\x18\x02 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"A\n" +
+	"\fSaveResponse\x121\n" +
+	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"\x1f\n" +
 	"\rDeleteRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"\x10\n" +
-	"\x0eDeleteResponse\"B\n" +
-	"\rUpdateRequest\x121\n" +
-	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"\x10\n" +
-	"\x0eUpdateResponse\"\r\n" +
-	"\vListRequest\"C\n" +
+	"\x0eDeleteResponse\"}\n" +
+	"\rUpdateRequest\x129\n" +
+	"\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x121\n" +
+	"\bprovider\x18\x02 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"\x10\n" +
+	"\x0eUpdateResponse\"H\n" +
+	"\vListRequest\x129\n" +
+	"\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\"C\n" +
 	"\fListResponse\x123\n" +
-	"\tproviders\x18\x01 \x03(\v2\x15.provider.v1.ProviderR\tproviders\"!\n" +
-	"\x0fFindByIdRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"E\n" +
+	"\tproviders\x18\x01 \x03(\v2\x15.provider.v1.ProviderR\tproviders\"\\\n" +
+	"\x0fFindByIdRequest\x129\n" +
+	"\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x04R\x02id\"E\n" +
 	"\x10FindByIdResponse\x121\n" +
-	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"D\n" +
-	"\x14FindByChannelRequest\x12,\n" +
-	"\achannel\x18\x01 \x01(\x0e2\x12.common.v1.ChannelR\achannel\"L\n" +
+	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"\x7f\n" +
+	"\x14FindByChannelRequest\x129\n" +
+	"\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12,\n" +
+	"\achannel\x18\x02 \x01(\x0e2\x12.common.v1.ChannelR\achannel\"L\n" +
 	"\x15FindByChannelResponse\x123\n" +
 	"\tproviders\x18\x01 \x03(\v2\x15.provider.v1.ProviderR\tproviders2\xb2\x03\n" +
 	"\x0fProviderService\x12;\n" +
@@ -799,8 +766,8 @@ const file_provider_v1_provider_proto_rawDesc = "" +
 	"\x06Update\x12\x1a.provider.v1.UpdateRequest\x1a\x1b.provider.v1.UpdateResponse\x12;\n" +
 	"\x04List\x12\x18.provider.v1.ListRequest\x1a\x19.provider.v1.ListResponse\x12G\n" +
 	"\bFindById\x12\x1c.provider.v1.FindByIdRequest\x1a\x1d.provider.v1.FindByIdResponse\x12V\n" +
-	"\rFindByChannel\x12!.provider.v1.FindByChannelRequest\x1a\".provider.v1.FindByChannelResponseB\xa7\x01\n" +
-	"\x0fcom.provider.v1B\rProviderProtoP\x01Z8github.com/JrMarcco/kuryr-api/api/provider/v1;providerv1\xa2\x02\x03PXX\xaa\x02\vProvider.V1\xca\x02\vProvider\\V1\xe2\x02\x17Provider\\V1\\GPBMetadata\xea\x02\fProvider::V1b\x06proto3"
+	"\rFindByChannel\x12!.provider.v1.FindByChannelRequest\x1a\".provider.v1.FindByChannelResponseB\xaa\x01\n" +
+	"\x0fcom.provider.v1B\rProviderProtoP\x01Z;github.com/JrMarcco/kuryr-api/api/go/provider/v1;providerv1\xa2\x02\x03PXX\xaa\x02\vProvider.V1\xca\x02\vProvider\\V1\xe2\x02\x17Provider\\V1\\GPBMetadata\xea\x02\fProvider::V1b\x06proto3"
 
 var (
 	file_provider_v1_provider_proto_rawDescOnce sync.Once
@@ -830,32 +797,39 @@ var file_provider_v1_provider_proto_goTypes = []any{
 	(*FindByChannelRequest)(nil),  // 11: provider.v1.FindByChannelRequest
 	(*FindByChannelResponse)(nil), // 12: provider.v1.FindByChannelResponse
 	(v1.Channel)(0),               // 13: common.v1.Channel
+	(*fieldmaskpb.FieldMask)(nil), // 14: google.protobuf.FieldMask
 }
 var file_provider_v1_provider_proto_depIdxs = []int32{
 	13, // 0: provider.v1.Provider.channel:type_name -> common.v1.Channel
-	13, // 1: provider.v1.SaveRequest.channel:type_name -> common.v1.Channel
-	0,  // 2: provider.v1.UpdateRequest.provider:type_name -> provider.v1.Provider
-	0,  // 3: provider.v1.ListResponse.providers:type_name -> provider.v1.Provider
-	0,  // 4: provider.v1.FindByIdResponse.provider:type_name -> provider.v1.Provider
-	13, // 5: provider.v1.FindByChannelRequest.channel:type_name -> common.v1.Channel
-	0,  // 6: provider.v1.FindByChannelResponse.providers:type_name -> provider.v1.Provider
-	1,  // 7: provider.v1.ProviderService.Save:input_type -> provider.v1.SaveRequest
-	3,  // 8: provider.v1.ProviderService.Delete:input_type -> provider.v1.DeleteRequest
-	5,  // 9: provider.v1.ProviderService.Update:input_type -> provider.v1.UpdateRequest
-	7,  // 10: provider.v1.ProviderService.List:input_type -> provider.v1.ListRequest
-	9,  // 11: provider.v1.ProviderService.FindById:input_type -> provider.v1.FindByIdRequest
-	11, // 12: provider.v1.ProviderService.FindByChannel:input_type -> provider.v1.FindByChannelRequest
-	2,  // 13: provider.v1.ProviderService.Save:output_type -> provider.v1.SaveResponse
-	4,  // 14: provider.v1.ProviderService.Delete:output_type -> provider.v1.DeleteResponse
-	6,  // 15: provider.v1.ProviderService.Update:output_type -> provider.v1.UpdateResponse
-	8,  // 16: provider.v1.ProviderService.List:output_type -> provider.v1.ListResponse
-	10, // 17: provider.v1.ProviderService.FindById:output_type -> provider.v1.FindByIdResponse
-	12, // 18: provider.v1.ProviderService.FindByChannel:output_type -> provider.v1.FindByChannelResponse
-	13, // [13:19] is the sub-list for method output_type
-	7,  // [7:13] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	14, // 1: provider.v1.SaveRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 2: provider.v1.SaveRequest.provider:type_name -> provider.v1.Provider
+	0,  // 3: provider.v1.SaveResponse.provider:type_name -> provider.v1.Provider
+	14, // 4: provider.v1.UpdateRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 5: provider.v1.UpdateRequest.provider:type_name -> provider.v1.Provider
+	14, // 6: provider.v1.ListRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 7: provider.v1.ListResponse.providers:type_name -> provider.v1.Provider
+	14, // 8: provider.v1.FindByIdRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 9: provider.v1.FindByIdResponse.provider:type_name -> provider.v1.Provider
+	14, // 10: provider.v1.FindByChannelRequest.field_mask:type_name -> google.protobuf.FieldMask
+	13, // 11: provider.v1.FindByChannelRequest.channel:type_name -> common.v1.Channel
+	0,  // 12: provider.v1.FindByChannelResponse.providers:type_name -> provider.v1.Provider
+	1,  // 13: provider.v1.ProviderService.Save:input_type -> provider.v1.SaveRequest
+	3,  // 14: provider.v1.ProviderService.Delete:input_type -> provider.v1.DeleteRequest
+	5,  // 15: provider.v1.ProviderService.Update:input_type -> provider.v1.UpdateRequest
+	7,  // 16: provider.v1.ProviderService.List:input_type -> provider.v1.ListRequest
+	9,  // 17: provider.v1.ProviderService.FindById:input_type -> provider.v1.FindByIdRequest
+	11, // 18: provider.v1.ProviderService.FindByChannel:input_type -> provider.v1.FindByChannelRequest
+	2,  // 19: provider.v1.ProviderService.Save:output_type -> provider.v1.SaveResponse
+	4,  // 20: provider.v1.ProviderService.Delete:output_type -> provider.v1.DeleteResponse
+	6,  // 21: provider.v1.ProviderService.Update:output_type -> provider.v1.UpdateResponse
+	8,  // 22: provider.v1.ProviderService.List:output_type -> provider.v1.ListResponse
+	10, // 23: provider.v1.ProviderService.FindById:output_type -> provider.v1.FindByIdResponse
+	12, // 24: provider.v1.ProviderService.FindByChannel:output_type -> provider.v1.FindByChannelResponse
+	19, // [19:25] is the sub-list for method output_type
+	13, // [13:19] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_provider_v1_provider_proto_init() }

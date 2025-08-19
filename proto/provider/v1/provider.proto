@@ -3,6 +3,7 @@ syntax = "proto3";
 package provider.v1;
 
 import "common/v1/types.proto";
+import "google/protobuf/field_mask.proto";
 
 option go_package = "github.com/JrMarcco/kuryr-api/api/provider/v1";
 
@@ -27,60 +28,6 @@ message Provider {
   string active_status = 13;
 }
 
-message SaveRequest {
-  string provider_name = 1;
-  common.v1.Channel channel = 2;
-
-  string endpoint = 3;
-  string region_id = 4;
-
-  string app_id = 5;
-  string api_key = 6;
-  string api_secret = 7;
-
-  int32 weight = 8;
-  int32 qps_limit = 9;
-  int32 daily_limit = 10;
-
-  string audit_callback_url = 11;
-}
-
-message SaveResponse {}
-
-message DeleteRequest {
-  uint64 id = 1;
-}
-
-message DeleteResponse {}
-
-message UpdateRequest {
-  Provider provider = 1;
-}
-
-message UpdateResponse {}
-
-message ListRequest {}
-
-message ListResponse {
-  repeated Provider providers = 1;
-}
-
-message FindByIdRequest {
-  uint64 id = 1;
-}
-
-message FindByIdResponse {
-  Provider provider = 1;
-}
-
-message FindByChannelRequest {
-  common.v1.Channel channel = 1;
-}
-
-message FindByChannelResponse {
-  repeated Provider providers = 1;
-}
-
 service ProviderService {
   rpc Save(SaveRequest) returns (SaveResponse);
   rpc Delete(DeleteRequest) returns (DeleteResponse);
@@ -89,4 +36,56 @@ service ProviderService {
   rpc List(ListRequest) returns (ListResponse);
   rpc FindById(FindByIdRequest) returns (FindByIdResponse);
   rpc FindByChannel(FindByChannelRequest) returns (FindByChannelResponse);
+}
+
+message SaveRequest {
+  google.protobuf.FieldMask field_mask = 1;
+
+  Provider provider = 2;
+}
+
+message SaveResponse {
+  Provider provider = 1;
+}
+
+message DeleteRequest {
+  uint64 id = 1;
+}
+
+message DeleteResponse {}
+
+message UpdateRequest {
+  google.protobuf.FieldMask field_mask = 1;
+
+  Provider provider = 2;
+}
+
+message UpdateResponse {}
+
+message ListRequest {
+  google.protobuf.FieldMask field_mask = 1;
+}
+
+message ListResponse {
+  repeated Provider providers = 1;
+}
+
+message FindByIdRequest {
+  google.protobuf.FieldMask field_mask = 1;
+
+  uint64 id = 2;
+}
+
+message FindByIdResponse {
+  Provider provider = 1;
+}
+
+message FindByChannelRequest {
+  google.protobuf.FieldMask field_mask = 1;
+
+  common.v1.Channel channel = 2;
+}
+
+message FindByChannelResponse {
+  repeated Provider providers = 1;
 }

@@ -18,7 +18,7 @@ import (
 
 	"google.golang.org/protobuf/types/known/anypb"
 
-	commonv1 "github.com/JrMarcco/kuryr-api/api/common/v1"
+	commonv1 "github.com/JrMarcco/kuryr-api/api/go/common/v1"
 )
 
 // ensure the imports are used

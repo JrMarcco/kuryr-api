@@ -9,6 +9,7 @@ package businessv1
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -139,13 +140,8 @@ func (x *BusinessInfo) GetUpdatedAt() int64 {
 
 type SaveRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BizId         uint64                 `protobuf:"varint,1,opt,name=biz_id,json=bizId,proto3" json:"biz_id,omitempty"`
-	BizKey        string                 `protobuf:"bytes,2,opt,name=biz_key,json=bizKey,proto3" json:"biz_key,omitempty"`
-	BizName       string                 `protobuf:"bytes,3,opt,name=biz_name,json=bizName,proto3" json:"biz_name,omitempty"`
-	BizType       string                 `protobuf:"bytes,4,opt,name=biz_type,json=bizType,proto3" json:"biz_type,omitempty"`
-	Contact       string                 `protobuf:"bytes,5,opt,name=contact,proto3" json:"contact,omitempty"`
-	ContactEmail  string                 `protobuf:"bytes,6,opt,name=contact_email,json=contactEmail,proto3" json:"contact_email,omitempty"`
-	CreatorId     uint64                 `protobuf:"varint,7,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	BusinessInfo  *BusinessInfo          `protobuf:"bytes,2,opt,name=business_info,json=businessInfo,proto3" json:"business_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -180,53 +176,18 @@ func (*SaveRequest) Descriptor() ([]byte, []int) {
 	return file_business_v1_business_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SaveRequest) GetBizId() uint64 {
+func (x *SaveRequest) GetFieldMask() *fieldmaskpb.FieldMask {
 	if x != nil {
-		return x.BizId
+		return x.FieldMask
 	}
-	return 0
+	return nil
 }
 
-func (x *SaveRequest) GetBizKey() string {
+func (x *SaveRequest) GetBusinessInfo() *BusinessInfo {
 	if x != nil {
-		return x.BizKey
+		return x.BusinessInfo
 	}
-	return ""
-}
-
-func (x *SaveRequest) GetBizName() string {
-	if x != nil {
-		return x.BizName
-	}
-	return ""
-}
-
-func (x *SaveRequest) GetBizType() string {
-	if x != nil {
-		return x.BizType
-	}
-	return ""
-}
-
-func (x *SaveRequest) GetContact() string {
-	if x != nil {
-		return x.Contact
-	}
-	return ""
-}
-
-func (x *SaveRequest) GetContactEmail() string {
-	if x != nil {
-		return x.ContactEmail
-	}
-	return ""
-}
-
-func (x *SaveRequest) GetCreatorId() uint64 {
-	if x != nil {
-		return x.CreatorId
-	}
-	return 0
+	return nil
 }
 
 type SaveResponse struct {
@@ -353,18 +314,115 @@ func (*DeleteResponse) Descriptor() ([]byte, []int) {
 	return file_business_v1_business_proto_rawDescGZIP(), []int{4}
 }
 
+type UpdateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	BusinessInfo  *BusinessInfo          `protobuf:"bytes,2,opt,name=business_info,json=businessInfo,proto3" json:"business_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateRequest) Reset() {
+	*x = UpdateRequest{}
+	mi := &file_business_v1_business_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateRequest) ProtoMessage() {}
+
+func (x *UpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_business_v1_business_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateRequest.ProtoReflect.Descriptor instead.
+func (*UpdateRequest) Descriptor() ([]byte, []int) {
+	return file_business_v1_business_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdateRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
+}
+
+func (x *UpdateRequest) GetBusinessInfo() *BusinessInfo {
+	if x != nil {
+		return x.BusinessInfo
+	}
+	return nil
+}
+
+type UpdateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BusinessInfo  *BusinessInfo          `protobuf:"bytes,1,opt,name=business_info,json=businessInfo,proto3" json:"business_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateResponse) Reset() {
+	*x = UpdateResponse{}
+	mi := &file_business_v1_business_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateResponse) ProtoMessage() {}
+
+func (x *UpdateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_business_v1_business_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateResponse.ProtoReflect.Descriptor instead.
+func (*UpdateResponse) Descriptor() ([]byte, []int) {
+	return file_business_v1_business_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UpdateResponse) GetBusinessInfo() *BusinessInfo {
+	if x != nil {
+		return x.BusinessInfo
+	}
+	return nil
+}
+
 type SearchRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Offset        int32                  `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	BizName       string                 `protobuf:"bytes,3,opt,name=biz_name,json=bizName,proto3" json:"biz_name,omitempty"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	Offset        int32                  `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit         int32                  `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
+	BizName       string                 `protobuf:"bytes,4,opt,name=biz_name,json=bizName,proto3" json:"biz_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SearchRequest) Reset() {
 	*x = SearchRequest{}
-	mi := &file_business_v1_business_proto_msgTypes[5]
+	mi := &file_business_v1_business_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -376,7 +434,7 @@ func (x *SearchRequest) String() string {
 func (*SearchRequest) ProtoMessage() {}
 
 func (x *SearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_business_v1_business_proto_msgTypes[5]
+	mi := &file_business_v1_business_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -389,7 +447,14 @@ func (x *SearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchRequest.ProtoReflect.Descriptor instead.
 func (*SearchRequest) Descriptor() ([]byte, []int) {
-	return file_business_v1_business_proto_rawDescGZIP(), []int{5}
+	return file_business_v1_business_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *SearchRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
 }
 
 func (x *SearchRequest) GetOffset() int32 {
@@ -423,7 +488,7 @@ type SearchResponse struct {
 
 func (x *SearchResponse) Reset() {
 	*x = SearchResponse{}
-	mi := &file_business_v1_business_proto_msgTypes[6]
+	mi := &file_business_v1_business_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -435,7 +500,7 @@ func (x *SearchResponse) String() string {
 func (*SearchResponse) ProtoMessage() {}
 
 func (x *SearchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_business_v1_business_proto_msgTypes[6]
+	mi := &file_business_v1_business_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -448,7 +513,7 @@ func (x *SearchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchResponse.ProtoReflect.Descriptor instead.
 func (*SearchResponse) Descriptor() ([]byte, []int) {
-	return file_business_v1_business_proto_rawDescGZIP(), []int{6}
+	return file_business_v1_business_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *SearchResponse) GetRecords() []*BusinessInfo {
@@ -469,7 +534,7 @@ var File_business_v1_business_proto protoreflect.FileDescriptor
 
 const file_business_v1_business_proto_rawDesc = "" +
 	"\n" +
-	"\x1abusiness/v1/business.proto\x12\vbusiness.v1\"\xa8\x02\n" +
+	"\x1abusiness/v1/business.proto\x12\vbusiness.v1\x1a google/protobuf/field_mask.proto\"\xa8\x02\n" +
 	"\fBusinessInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\abiz_key\x18\x02 \x01(\tR\x06bizKey\x12\x19\n" +
@@ -485,33 +550,37 @@ const file_business_v1_business_proto_rawDesc = "" +
 	"created_at\x18\t \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18\n" +
-	" \x01(\x03R\tupdatedAt\"\xd1\x01\n" +
-	"\vSaveRequest\x12\x15\n" +
-	"\x06biz_id\x18\x01 \x01(\x04R\x05bizId\x12\x17\n" +
-	"\abiz_key\x18\x02 \x01(\tR\x06bizKey\x12\x19\n" +
-	"\bbiz_name\x18\x03 \x01(\tR\abizName\x12\x19\n" +
-	"\bbiz_type\x18\x04 \x01(\tR\abizType\x12\x18\n" +
-	"\acontact\x18\x05 \x01(\tR\acontact\x12#\n" +
-	"\rcontact_email\x18\x06 \x01(\tR\fcontactEmail\x12\x1d\n" +
+	" \x01(\x03R\tupdatedAt\"\x88\x01\n" +
+	"\vSaveRequest\x129\n" +
 	"\n" +
-	"creator_id\x18\a \x01(\x04R\tcreatorId\"N\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12>\n" +
+	"\rbusiness_info\x18\x02 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"N\n" +
 	"\fSaveResponse\x12>\n" +
 	"\rbusiness_info\x18\x01 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"&\n" +
 	"\rDeleteRequest\x12\x15\n" +
 	"\x06biz_id\x18\x01 \x01(\x04R\x05bizId\"\x10\n" +
-	"\x0eDeleteResponse\"X\n" +
-	"\rSearchRequest\x12\x16\n" +
-	"\x06offset\x18\x01 \x01(\x05R\x06offset\x12\x14\n" +
-	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x19\n" +
-	"\bbiz_name\x18\x03 \x01(\tR\abizName\"[\n" +
+	"\x0eDeleteResponse\"\x8a\x01\n" +
+	"\rUpdateRequest\x129\n" +
+	"\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12>\n" +
+	"\rbusiness_info\x18\x02 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"P\n" +
+	"\x0eUpdateResponse\x12>\n" +
+	"\rbusiness_info\x18\x01 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"\x93\x01\n" +
+	"\rSearchRequest\x129\n" +
+	"\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12\x16\n" +
+	"\x06offset\x18\x02 \x01(\x05R\x06offset\x12\x14\n" +
+	"\x05limit\x18\x03 \x01(\x05R\x05limit\x12\x19\n" +
+	"\bbiz_name\x18\x04 \x01(\tR\abizName\"[\n" +
 	"\x0eSearchResponse\x123\n" +
 	"\arecords\x18\x01 \x03(\v2\x19.business.v1.BusinessInfoR\arecords\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x03R\x05total2\xd4\x01\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total2\x97\x02\n" +
 	"\x0fBusinessService\x12;\n" +
 	"\x04Save\x12\x18.business.v1.SaveRequest\x1a\x19.business.v1.SaveResponse\x12A\n" +
 	"\x06Delete\x12\x1a.business.v1.DeleteRequest\x1a\x1b.business.v1.DeleteResponse\x12A\n" +
-	"\x06Search\x12\x1a.business.v1.SearchRequest\x1a\x1b.business.v1.SearchResponseB\xa7\x01\n" +
-	"\x0fcom.business.v1B\rBusinessProtoP\x01Z8github.com/JrMarcco/kuryr-api/api/business/v1;businessv1\xa2\x02\x03BXX\xaa\x02\vBusiness.V1\xca\x02\vBusiness\\V1\xe2\x02\x17Business\\V1\\GPBMetadata\xea\x02\fBusiness::V1b\x06proto3"
+	"\x06Update\x12\x1a.business.v1.UpdateRequest\x1a\x1b.business.v1.UpdateResponse\x12A\n" +
+	"\x06Search\x12\x1a.business.v1.SearchRequest\x1a\x1b.business.v1.SearchResponseB\xaa\x01\n" +
+	"\x0fcom.business.v1B\rBusinessProtoP\x01Z;github.com/JrMarcco/kuryr-api/api/go/business/v1;businessv1\xa2\x02\x03BXX\xaa\x02\vBusiness.V1\xca\x02\vBusiness\\V1\xe2\x02\x17Business\\V1\\GPBMetadata\xea\x02\fBusiness::V1b\x06proto3"
 
 var (
 	file_business_v1_business_proto_rawDescOnce sync.Once
@@ -525,30 +594,41 @@ func file_business_v1_business_proto_rawDescGZIP() []byte {
 	return file_business_v1_business_proto_rawDescData
 }
 
-var file_business_v1_business_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_business_v1_business_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_business_v1_business_proto_goTypes = []any{
-	(*BusinessInfo)(nil),   // 0: business.v1.BusinessInfo
-	(*SaveRequest)(nil),    // 1: business.v1.SaveRequest
-	(*SaveResponse)(nil),   // 2: business.v1.SaveResponse
-	(*DeleteRequest)(nil),  // 3: business.v1.DeleteRequest
-	(*DeleteResponse)(nil), // 4: business.v1.DeleteResponse
-	(*SearchRequest)(nil),  // 5: business.v1.SearchRequest
-	(*SearchResponse)(nil), // 6: business.v1.SearchResponse
+	(*BusinessInfo)(nil),          // 0: business.v1.BusinessInfo
+	(*SaveRequest)(nil),           // 1: business.v1.SaveRequest
+	(*SaveResponse)(nil),          // 2: business.v1.SaveResponse
+	(*DeleteRequest)(nil),         // 3: business.v1.DeleteRequest
+	(*DeleteResponse)(nil),        // 4: business.v1.DeleteResponse
+	(*UpdateRequest)(nil),         // 5: business.v1.UpdateRequest
+	(*UpdateResponse)(nil),        // 6: business.v1.UpdateResponse
+	(*SearchRequest)(nil),         // 7: business.v1.SearchRequest
+	(*SearchResponse)(nil),        // 8: business.v1.SearchResponse
+	(*fieldmaskpb.FieldMask)(nil), // 9: google.protobuf.FieldMask
 }
 var file_business_v1_business_proto_depIdxs = []int32{
-	0, // 0: business.v1.SaveResponse.business_info:type_name -> business.v1.BusinessInfo
-	0, // 1: business.v1.SearchResponse.records:type_name -> business.v1.BusinessInfo
-	1, // 2: business.v1.BusinessService.Save:input_type -> business.v1.SaveRequest
-	3, // 3: business.v1.BusinessService.Delete:input_type -> business.v1.DeleteRequest
-	5, // 4: business.v1.BusinessService.Search:input_type -> business.v1.SearchRequest
-	2, // 5: business.v1.BusinessService.Save:output_type -> business.v1.SaveResponse
-	4, // 6: business.v1.BusinessService.Delete:output_type -> business.v1.DeleteResponse
-	6, // 7: business.v1.BusinessService.Search:output_type -> business.v1.SearchResponse
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: business.v1.SaveRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 1: business.v1.SaveRequest.business_info:type_name -> business.v1.BusinessInfo
+	0,  // 2: business.v1.SaveResponse.business_info:type_name -> business.v1.BusinessInfo
+	9,  // 3: business.v1.UpdateRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 4: business.v1.UpdateRequest.business_info:type_name -> business.v1.BusinessInfo
+	0,  // 5: business.v1.UpdateResponse.business_info:type_name -> business.v1.BusinessInfo
+	9,  // 6: business.v1.SearchRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 7: business.v1.SearchResponse.records:type_name -> business.v1.BusinessInfo
+	1,  // 8: business.v1.BusinessService.Save:input_type -> business.v1.SaveRequest
+	3,  // 9: business.v1.BusinessService.Delete:input_type -> business.v1.DeleteRequest
+	5,  // 10: business.v1.BusinessService.Update:input_type -> business.v1.UpdateRequest
+	7,  // 11: business.v1.BusinessService.Search:input_type -> business.v1.SearchRequest
+	2,  // 12: business.v1.BusinessService.Save:output_type -> business.v1.SaveResponse
+	4,  // 13: business.v1.BusinessService.Delete:output_type -> business.v1.DeleteResponse
+	6,  // 14: business.v1.BusinessService.Update:output_type -> business.v1.UpdateResponse
+	8,  // 15: business.v1.BusinessService.Search:output_type -> business.v1.SearchResponse
+	12, // [12:16] is the sub-list for method output_type
+	8,  // [8:12] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_business_v1_business_proto_init() }
@@ -562,7 +642,7 @@ func file_business_v1_business_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_business_v1_business_proto_rawDesc), len(file_business_v1_business_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

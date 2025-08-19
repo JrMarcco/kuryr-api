@@ -7,7 +7,7 @@
 package notificationv1
 
 import (
-	v1 "github.com/JrMarcco/kuryr-api/api/common/v1"
+	v1 "github.com/JrMarcco/kuryr-api/api/go/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -1046,8 +1046,8 @@ const file_notification_v1_notification_proto_rawDesc = "" +
 	"\x04Send\x12\x1c.notification.v1.SendRequest\x1a\x1d.notification.v1.SendResponse\x12R\n" +
 	"\tAsyncSend\x12!.notification.v1.AsyncSendRequest\x1a\".notification.v1.AsyncSendResponse\x12R\n" +
 	"\tBatchSend\x12!.notification.v1.BatchSendRequest\x1a\".notification.v1.BatchSendResponse\x12a\n" +
-	"\x0eAsyncBatchSend\x12&.notification.v1.AsyncBatchSendRequest\x1a'.notification.v1.AsyncBatchSendResponseB\xc7\x01\n" +
-	"\x13com.notification.v1B\x11NotificationProtoP\x01Z@github.com/JrMarcco/kuryr-api/api/notification/v1;notificationv1\xa2\x02\x03NXX\xaa\x02\x0fNotification.V1\xca\x02\x0fNotification\\V1\xe2\x02\x1bNotification\\V1\\GPBMetadata\xea\x02\x10Notification::V1b\x06proto3"
+	"\x0eAsyncBatchSend\x12&.notification.v1.AsyncBatchSendRequest\x1a'.notification.v1.AsyncBatchSendResponseB\xca\x01\n" +
+	"\x13com.notification.v1B\x11NotificationProtoP\x01ZCgithub.com/JrMarcco/kuryr-api/api/go/notification/v1;notificationv1\xa2\x02\x03NXX\xaa\x02\x0fNotification.V1\xca\x02\x0fNotification\\V1\xe2\x02\x1bNotification\\V1\\GPBMetadata\xea\x02\x10Notification::V1b\x06proto3"
 
 var (
 	file_notification_v1_notification_proto_rawDescOnce sync.Once

@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	BusinessService_Save_FullMethodName   = "/business.v1.BusinessService/Save"
 	BusinessService_Delete_FullMethodName = "/business.v1.BusinessService/Delete"
+	BusinessService_Update_FullMethodName = "/business.v1.BusinessService/Update"
 	BusinessService_Search_FullMethodName = "/business.v1.BusinessService/Search"
 )
 
@@ -30,6 +31,7 @@ const (
 type BusinessServiceClient interface {
 	Save(ctx context.Context, in *SaveRequest, opts ...grpc.CallOption) (*SaveResponse, error)
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
+	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
 	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
 }
 
@@ -61,6 +63,16 @@ func (c *businessServiceClient) Delete(ctx context.Context, in *DeleteRequest, o
 	return out, nil
 }
 
+func (c *businessServiceClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateResponse)
+	err := c.cc.Invoke(ctx, BusinessService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *businessServiceClient) Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SearchResponse)
@@ -77,6 +89,7 @@ func (c *businessServiceClient) Search(ctx context.Context, in *SearchRequest, o
 type BusinessServiceServer interface {
 	Save(context.Context, *SaveRequest) (*SaveResponse, error)
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
+	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
 	Search(context.Context, *SearchRequest) (*SearchResponse, error)
 }
 
@@ -92,6 +105,9 @@ func (UnimplementedBusinessServiceServer) Save(context.Context, *SaveRequest) (*
 }
 func (UnimplementedBusinessServiceServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedBusinessServiceServer) Update(context.Context, *UpdateRequest) (*UpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedBusinessServiceServer) Search(context.Context, *SearchRequest) (*SearchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
@@ -152,6 +168,24 @@ func _BusinessService_Delete_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BusinessService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BusinessServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BusinessService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BusinessServiceServer).Update(ctx, req.(*UpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BusinessService_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SearchRequest)
 	if err := dec(in); err != nil {
@@ -184,6 +218,10 @@ var BusinessService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _BusinessService_Delete_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _BusinessService_Update_Handler,
 		},
 		{
 			MethodName: "Search",

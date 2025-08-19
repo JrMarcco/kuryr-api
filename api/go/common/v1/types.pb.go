@@ -189,9 +189,9 @@ const file_common_v1_types_proto_rawDesc = "" +
 	"\aChannel\x12\x17\n" +
 	"\x13CHANNEL_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03SMS\x10\x01\x12\t\n" +
-	"\x05EMAIL\x10\x02B\x96\x01\n" +
+	"\x05EMAIL\x10\x02B\x99\x01\n" +
 	"\rcom.common.v1B\n" +
-	"TypesProtoP\x01Z4github.com/JrMarcco/kuryr-api/api/common/v1;commonv1\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
+	"TypesProtoP\x01Z7github.com/JrMarcco/kuryr-api/api/go/common/v1;commonv1\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
 	"Common::V1b\x06proto3"
 
 var (

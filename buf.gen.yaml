@@ -3,21 +3,21 @@ managed:
   enabled: true
   override:
     - file_option: go_package_prefix
-      value: github.com/JrMarcco/kuryr-api/api
+      value: github.com/JrMarcco/kuryr-api/api/go
 plugins:
   # 用于生成 Go 语言的基础 Protocol Buffers 代码（即 `.proto` 文件对应的 `.pb.go` 文件）
   - remote: buf.build/protocolbuffers/go
-    out: api
+    out: api/go
     opt:
       - paths=source_relative
   # 用于生成与 Protobuf 验证相关的代码（https://github.com/bufbuild/protoc-gen-validate）
   - remote: buf.build/bufbuild/validate-go
-    out: api
+    out: api/go
     opt:
       - paths=source_relative
   # 用于生成与 gRPC 相关的 Go 代码（即服务接口和客户端代码）
   - remote: buf.build/grpc/go
-    out: api
+    out: api/go
     opt:
       - paths=source_relative
       - require_unimplemented_servers=false
