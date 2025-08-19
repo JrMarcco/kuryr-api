@@ -176,34 +176,19 @@ func (m *SaveRequest) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetBusinessInfo()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SaveRequestValidationError{
-					field:  "BusinessInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, SaveRequestValidationError{
-					field:  "BusinessInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetBusinessInfo()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SaveRequestValidationError{
-				field:  "BusinessInfo",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for BizId
+
+	// no validation rules for BizKey
+
+	// no validation rules for BizName
+
+	// no validation rules for BizType
+
+	// no validation rules for Contact
+
+	// no validation rules for ContactEmail
+
+	// no validation rules for CreatorId
 
 	if len(errors) > 0 {
 		return SaveRequestMultiError(errors)
@@ -308,6 +293,35 @@ func (m *SaveResponse) validate(all bool) error {
 
 	// no validation rules for ErrMsg
 
+	if all {
+		switch v := interface{}(m.GetBusinessInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SaveResponseValidationError{
+					field:  "BusinessInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SaveResponseValidationError{
+					field:  "BusinessInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetBusinessInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SaveResponseValidationError{
+				field:  "BusinessInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return SaveResponseMultiError(errors)
 	}
@@ -384,6 +398,212 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SaveResponseValidationError{}
+
+// Validate checks the field values on DeleteRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *DeleteRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in DeleteRequestMultiError, or
+// nil if none found.
+func (m *DeleteRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for BizId
+
+	if len(errors) > 0 {
+		return DeleteRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteRequestMultiError is an error wrapping multiple validation errors
+// returned by DeleteRequest.ValidateAll() if the designated constraints
+// aren't met.
+type DeleteRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteRequestMultiError) AllErrors() []error { return m }
+
+// DeleteRequestValidationError is the validation error returned by
+// DeleteRequest.Validate if the designated constraints aren't met.
+type DeleteRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteRequestValidationError) ErrorName() string { return "DeleteRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e DeleteRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteRequestValidationError{}
+
+// Validate checks the field values on DeleteResponse with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *DeleteResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in DeleteResponseMultiError,
+// or nil if none found.
+func (m *DeleteResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	// no validation rules for ErrMsg
+
+	if len(errors) > 0 {
+		return DeleteResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteResponseMultiError is an error wrapping multiple validation errors
+// returned by DeleteResponse.ValidateAll() if the designated constraints
+// aren't met.
+type DeleteResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteResponseMultiError) AllErrors() []error { return m }
+
+// DeleteResponseValidationError is the validation error returned by
+// DeleteResponse.Validate if the designated constraints aren't met.
+type DeleteResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteResponseValidationError) ErrorName() string { return "DeleteResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e DeleteResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteResponseValidationError{}
 
 // Validate checks the field values on SearchRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, the first

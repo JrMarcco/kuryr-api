@@ -435,34 +435,15 @@ func (m *SaveRequest) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetTemplate()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SaveRequestValidationError{
-					field:  "Template",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, SaveRequestValidationError{
-					field:  "Template",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTemplate()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SaveRequestValidationError{
-				field:  "Template",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for BizId
+
+	// no validation rules for TplName
+
+	// no validation rules for TplDesc
+
+	// no validation rules for Channel
+
+	// no validation rules for NotificationType
 
 	if len(errors) > 0 {
 		return SaveRequestMultiError(errors)
@@ -567,6 +548,35 @@ func (m *SaveResponse) validate(all bool) error {
 
 	// no validation rules for ErrMsg
 
+	if all {
+		switch v := interface{}(m.GetTemplate()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SaveResponseValidationError{
+					field:  "Template",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SaveResponseValidationError{
+					field:  "Template",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTemplate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SaveResponseValidationError{
+				field:  "Template",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return SaveResponseMultiError(errors)
 	}
@@ -666,34 +676,15 @@ func (m *SaveVersionRequest) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetVersion()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SaveVersionRequestValidationError{
-					field:  "Version",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, SaveVersionRequestValidationError{
-					field:  "Version",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetVersion()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SaveVersionRequestValidationError{
-				field:  "Version",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for TplId
+
+	// no validation rules for VersionName
+
+	// no validation rules for Signature
+
+	// no validation rules for Content
+
+	// no validation rules for ApplyRemark
 
 	if len(errors) > 0 {
 		return SaveVersionRequestMultiError(errors)
@@ -801,6 +792,35 @@ func (m *SaveVersionResponse) validate(all bool) error {
 
 	// no validation rules for ErrMsg
 
+	if all {
+		switch v := interface{}(m.GetVersion()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SaveVersionResponseValidationError{
+					field:  "Version",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SaveVersionResponseValidationError{
+					field:  "Version",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetVersion()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SaveVersionResponseValidationError{
+				field:  "Version",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return SaveVersionResponseMultiError(errors)
 	}
@@ -881,6 +901,110 @@ var _ interface {
 	ErrorName() string
 } = SaveVersionResponseValidationError{}
 
+// Validate checks the field values on RelatedProvider with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *RelatedProvider) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RelatedProvider with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RelatedProviderMultiError, or nil if none found.
+func (m *RelatedProvider) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RelatedProvider) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ProviderId
+
+	// no validation rules for ProviderName
+
+	if len(errors) > 0 {
+		return RelatedProviderMultiError(errors)
+	}
+
+	return nil
+}
+
+// RelatedProviderMultiError is an error wrapping multiple validation errors
+// returned by RelatedProvider.ValidateAll() if the designated constraints
+// aren't met.
+type RelatedProviderMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RelatedProviderMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RelatedProviderMultiError) AllErrors() []error { return m }
+
+// RelatedProviderValidationError is the validation error returned by
+// RelatedProvider.Validate if the designated constraints aren't met.
+type RelatedProviderValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RelatedProviderValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RelatedProviderValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RelatedProviderValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RelatedProviderValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RelatedProviderValidationError) ErrorName() string { return "RelatedProviderValidationError" }
+
+// Error satisfies the builtin error interface
+func (e RelatedProviderValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRelatedProvider.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RelatedProviderValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RelatedProviderValidationError{}
+
 // Validate checks the field values on SaveProvidersRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -903,7 +1027,11 @@ func (m *SaveProvidersRequest) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetProviders() {
+	// no validation rules for TplId
+
+	// no validation rules for TplVersionId
+
+	for idx, item := range m.GetRelatedProviders() {
 		_, _ = idx, item
 
 		if all {
@@ -911,7 +1039,7 @@ func (m *SaveProvidersRequest) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, SaveProvidersRequestValidationError{
-						field:  fmt.Sprintf("Providers[%v]", idx),
+						field:  fmt.Sprintf("RelatedProviders[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -919,7 +1047,7 @@ func (m *SaveProvidersRequest) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, SaveProvidersRequestValidationError{
-						field:  fmt.Sprintf("Providers[%v]", idx),
+						field:  fmt.Sprintf("RelatedProviders[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -928,7 +1056,7 @@ func (m *SaveProvidersRequest) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return SaveProvidersRequestValidationError{
-					field:  fmt.Sprintf("Providers[%v]", idx),
+					field:  fmt.Sprintf("RelatedProviders[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1042,6 +1170,40 @@ func (m *SaveProvidersResponse) validate(all bool) error {
 	// no validation rules for Success
 
 	// no validation rules for ErrMsg
+
+	for idx, item := range m.GetProviders() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, SaveProvidersResponseValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, SaveProvidersResponseValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SaveProvidersResponseValidationError{
+					field:  fmt.Sprintf("Providers[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return SaveProvidersResponseMultiError(errors)

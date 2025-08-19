@@ -23,14 +23,31 @@ message BusinessInfo {
 
 service BusinessService {
   rpc Save(SaveRequest) returns (SaveResponse);
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
   rpc Search(SearchRequest) returns (SearchResponse);
 }
 
 message SaveRequest {
-  BusinessInfo business_info = 1;
+  uint64 biz_id = 1;
+  string biz_key = 2;
+  string biz_name = 3;
+  string biz_type = 4;
+  string contact = 5;
+  string contact_email = 6;
+  uint64 creator_id = 7;
 }
 
 message SaveResponse {
+  bool success = 1;
+  string err_msg = 2;
+  BusinessInfo business_info = 3;
+}
+
+message DeleteRequest {
+  uint64 biz_id = 1;
+}
+
+message DeleteResponse {
   bool success = 1;
   string err_msg = 2;
 }

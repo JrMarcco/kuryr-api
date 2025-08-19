@@ -1019,12 +1019,14 @@ func (m *SaveRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for BizId
+
 	if all {
-		switch v := interface{}(m.GetConfig()).(type) {
+		switch v := interface{}(m.GetChannelConfig()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, SaveRequestValidationError{
-					field:  "Config",
+					field:  "ChannelConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1032,21 +1034,81 @@ func (m *SaveRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, SaveRequestValidationError{
-					field:  "Config",
+					field:  "ChannelConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetConfig()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetChannelConfig()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return SaveRequestValidationError{
-				field:  "Config",
+				field:  "ChannelConfig",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
 		}
 	}
+
+	if all {
+		switch v := interface{}(m.GetQuotaConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SaveRequestValidationError{
+					field:  "QuotaConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SaveRequestValidationError{
+					field:  "QuotaConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetQuotaConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SaveRequestValidationError{
+				field:  "QuotaConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetCallbackConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SaveRequestValidationError{
+					field:  "CallbackConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SaveRequestValidationError{
+					field:  "CallbackConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCallbackConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SaveRequestValidationError{
+				field:  "CallbackConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for RateLimit
 
 	if len(errors) > 0 {
 		return SaveRequestMultiError(errors)
@@ -1150,6 +1212,35 @@ func (m *SaveResponse) validate(all bool) error {
 	// no validation rules for Success
 
 	// no validation rules for ErrMsg
+
+	if all {
+		switch v := interface{}(m.GetBizConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SaveResponseValidationError{
+					field:  "BizConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SaveResponseValidationError{
+					field:  "BizConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetBizConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SaveResponseValidationError{
+				field:  "BizConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return SaveResponseMultiError(errors)

@@ -139,7 +139,13 @@ func (x *BusinessInfo) GetUpdatedAt() int64 {
 
 type SaveRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BusinessInfo  *BusinessInfo          `protobuf:"bytes,1,opt,name=business_info,json=businessInfo,proto3" json:"business_info,omitempty"`
+	BizId         uint64                 `protobuf:"varint,1,opt,name=biz_id,json=bizId,proto3" json:"biz_id,omitempty"`
+	BizKey        string                 `protobuf:"bytes,2,opt,name=biz_key,json=bizKey,proto3" json:"biz_key,omitempty"`
+	BizName       string                 `protobuf:"bytes,3,opt,name=biz_name,json=bizName,proto3" json:"biz_name,omitempty"`
+	BizType       string                 `protobuf:"bytes,4,opt,name=biz_type,json=bizType,proto3" json:"biz_type,omitempty"`
+	Contact       string                 `protobuf:"bytes,5,opt,name=contact,proto3" json:"contact,omitempty"`
+	ContactEmail  string                 `protobuf:"bytes,6,opt,name=contact_email,json=contactEmail,proto3" json:"contact_email,omitempty"`
+	CreatorId     uint64                 `protobuf:"varint,7,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -174,17 +180,60 @@ func (*SaveRequest) Descriptor() ([]byte, []int) {
 	return file_business_v1_business_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SaveRequest) GetBusinessInfo() *BusinessInfo {
+func (x *SaveRequest) GetBizId() uint64 {
 	if x != nil {
-		return x.BusinessInfo
+		return x.BizId
 	}
-	return nil
+	return 0
+}
+
+func (x *SaveRequest) GetBizKey() string {
+	if x != nil {
+		return x.BizKey
+	}
+	return ""
+}
+
+func (x *SaveRequest) GetBizName() string {
+	if x != nil {
+		return x.BizName
+	}
+	return ""
+}
+
+func (x *SaveRequest) GetBizType() string {
+	if x != nil {
+		return x.BizType
+	}
+	return ""
+}
+
+func (x *SaveRequest) GetContact() string {
+	if x != nil {
+		return x.Contact
+	}
+	return ""
+}
+
+func (x *SaveRequest) GetContactEmail() string {
+	if x != nil {
+		return x.ContactEmail
+	}
+	return ""
+}
+
+func (x *SaveRequest) GetCreatorId() uint64 {
+	if x != nil {
+		return x.CreatorId
+	}
+	return 0
 }
 
 type SaveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
+	BusinessInfo  *BusinessInfo          `protobuf:"bytes,3,opt,name=business_info,json=businessInfo,proto3" json:"business_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -233,6 +282,109 @@ func (x *SaveResponse) GetErrMsg() string {
 	return ""
 }
 
+func (x *SaveResponse) GetBusinessInfo() *BusinessInfo {
+	if x != nil {
+		return x.BusinessInfo
+	}
+	return nil
+}
+
+type DeleteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BizId         uint64                 `protobuf:"varint,1,opt,name=biz_id,json=bizId,proto3" json:"biz_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteRequest) Reset() {
+	*x = DeleteRequest{}
+	mi := &file_business_v1_business_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteRequest) ProtoMessage() {}
+
+func (x *DeleteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_business_v1_business_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteRequest.ProtoReflect.Descriptor instead.
+func (*DeleteRequest) Descriptor() ([]byte, []int) {
+	return file_business_v1_business_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *DeleteRequest) GetBizId() uint64 {
+	if x != nil {
+		return x.BizId
+	}
+	return 0
+}
+
+type DeleteResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteResponse) Reset() {
+	*x = DeleteResponse{}
+	mi := &file_business_v1_business_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteResponse) ProtoMessage() {}
+
+func (x *DeleteResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_business_v1_business_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteResponse.ProtoReflect.Descriptor instead.
+func (*DeleteResponse) Descriptor() ([]byte, []int) {
+	return file_business_v1_business_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *DeleteResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *DeleteResponse) GetErrMsg() string {
+	if x != nil {
+		return x.ErrMsg
+	}
+	return ""
+}
+
 type SearchRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Offset        int32                  `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
@@ -244,7 +396,7 @@ type SearchRequest struct {
 
 func (x *SearchRequest) Reset() {
 	*x = SearchRequest{}
-	mi := &file_business_v1_business_proto_msgTypes[3]
+	mi := &file_business_v1_business_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -256,7 +408,7 @@ func (x *SearchRequest) String() string {
 func (*SearchRequest) ProtoMessage() {}
 
 func (x *SearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_business_v1_business_proto_msgTypes[3]
+	mi := &file_business_v1_business_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -269,7 +421,7 @@ func (x *SearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchRequest.ProtoReflect.Descriptor instead.
 func (*SearchRequest) Descriptor() ([]byte, []int) {
-	return file_business_v1_business_proto_rawDescGZIP(), []int{3}
+	return file_business_v1_business_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SearchRequest) GetOffset() int32 {
@@ -303,7 +455,7 @@ type SearchResponse struct {
 
 func (x *SearchResponse) Reset() {
 	*x = SearchResponse{}
-	mi := &file_business_v1_business_proto_msgTypes[4]
+	mi := &file_business_v1_business_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -315,7 +467,7 @@ func (x *SearchResponse) String() string {
 func (*SearchResponse) ProtoMessage() {}
 
 func (x *SearchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_business_v1_business_proto_msgTypes[4]
+	mi := &file_business_v1_business_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -328,7 +480,7 @@ func (x *SearchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchResponse.ProtoReflect.Descriptor instead.
 func (*SearchResponse) Descriptor() ([]byte, []int) {
-	return file_business_v1_business_proto_rawDescGZIP(), []int{4}
+	return file_business_v1_business_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *SearchResponse) GetRecords() []*BusinessInfo {
@@ -365,10 +517,23 @@ const file_business_v1_business_proto_rawDesc = "" +
 	"created_at\x18\t \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18\n" +
-	" \x01(\x03R\tupdatedAt\"M\n" +
-	"\vSaveRequest\x12>\n" +
-	"\rbusiness_info\x18\x01 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"A\n" +
+	" \x01(\x03R\tupdatedAt\"\xd1\x01\n" +
+	"\vSaveRequest\x12\x15\n" +
+	"\x06biz_id\x18\x01 \x01(\x04R\x05bizId\x12\x17\n" +
+	"\abiz_key\x18\x02 \x01(\tR\x06bizKey\x12\x19\n" +
+	"\bbiz_name\x18\x03 \x01(\tR\abizName\x12\x19\n" +
+	"\bbiz_type\x18\x04 \x01(\tR\abizType\x12\x18\n" +
+	"\acontact\x18\x05 \x01(\tR\acontact\x12#\n" +
+	"\rcontact_email\x18\x06 \x01(\tR\fcontactEmail\x12\x1d\n" +
+	"\n" +
+	"creator_id\x18\a \x01(\x04R\tcreatorId\"\x81\x01\n" +
 	"\fSaveResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
+	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\x12>\n" +
+	"\rbusiness_info\x18\x03 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"&\n" +
+	"\rDeleteRequest\x12\x15\n" +
+	"\x06biz_id\x18\x01 \x01(\x04R\x05bizId\"C\n" +
+	"\x0eDeleteResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
 	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"X\n" +
 	"\rSearchRequest\x12\x16\n" +
@@ -377,9 +542,10 @@ const file_business_v1_business_proto_rawDesc = "" +
 	"\bbiz_name\x18\x03 \x01(\tR\abizName\"[\n" +
 	"\x0eSearchResponse\x123\n" +
 	"\arecords\x18\x01 \x03(\v2\x19.business.v1.BusinessInfoR\arecords\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x03R\x05total2\x91\x01\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total2\xd4\x01\n" +
 	"\x0fBusinessService\x12;\n" +
 	"\x04Save\x12\x18.business.v1.SaveRequest\x1a\x19.business.v1.SaveResponse\x12A\n" +
+	"\x06Delete\x12\x1a.business.v1.DeleteRequest\x1a\x1b.business.v1.DeleteResponse\x12A\n" +
 	"\x06Search\x12\x1a.business.v1.SearchRequest\x1a\x1b.business.v1.SearchResponseB\xa7\x01\n" +
 	"\x0fcom.business.v1B\rBusinessProtoP\x01Z8github.com/JrMarcco/kuryr-api/api/business/v1;businessv1\xa2\x02\x03BXX\xaa\x02\vBusiness.V1\xca\x02\vBusiness\\V1\xe2\x02\x17Business\\V1\\GPBMetadata\xea\x02\fBusiness::V1b\x06proto3"
 
@@ -395,23 +561,27 @@ func file_business_v1_business_proto_rawDescGZIP() []byte {
 	return file_business_v1_business_proto_rawDescData
 }
 
-var file_business_v1_business_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_business_v1_business_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_business_v1_business_proto_goTypes = []any{
 	(*BusinessInfo)(nil),   // 0: business.v1.BusinessInfo
 	(*SaveRequest)(nil),    // 1: business.v1.SaveRequest
 	(*SaveResponse)(nil),   // 2: business.v1.SaveResponse
-	(*SearchRequest)(nil),  // 3: business.v1.SearchRequest
-	(*SearchResponse)(nil), // 4: business.v1.SearchResponse
+	(*DeleteRequest)(nil),  // 3: business.v1.DeleteRequest
+	(*DeleteResponse)(nil), // 4: business.v1.DeleteResponse
+	(*SearchRequest)(nil),  // 5: business.v1.SearchRequest
+	(*SearchResponse)(nil), // 6: business.v1.SearchResponse
 }
 var file_business_v1_business_proto_depIdxs = []int32{
-	0, // 0: business.v1.SaveRequest.business_info:type_name -> business.v1.BusinessInfo
+	0, // 0: business.v1.SaveResponse.business_info:type_name -> business.v1.BusinessInfo
 	0, // 1: business.v1.SearchResponse.records:type_name -> business.v1.BusinessInfo
 	1, // 2: business.v1.BusinessService.Save:input_type -> business.v1.SaveRequest
-	3, // 3: business.v1.BusinessService.Search:input_type -> business.v1.SearchRequest
-	2, // 4: business.v1.BusinessService.Save:output_type -> business.v1.SaveResponse
-	4, // 5: business.v1.BusinessService.Search:output_type -> business.v1.SearchResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
+	3, // 3: business.v1.BusinessService.Delete:input_type -> business.v1.DeleteRequest
+	5, // 4: business.v1.BusinessService.Search:input_type -> business.v1.SearchRequest
+	2, // 5: business.v1.BusinessService.Save:output_type -> business.v1.SaveResponse
+	4, // 6: business.v1.BusinessService.Delete:output_type -> business.v1.DeleteResponse
+	6, // 7: business.v1.BusinessService.Search:output_type -> business.v1.SearchResponse
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
 	2, // [2:2] is the sub-list for extension extendee
 	0, // [0:2] is the sub-list for field type_name
@@ -428,7 +598,7 @@ func file_business_v1_business_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_business_v1_business_proto_rawDesc), len(file_business_v1_business_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

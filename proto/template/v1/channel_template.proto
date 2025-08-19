@@ -64,30 +64,48 @@ message TemplateProvider {
 }
 
 message SaveRequest {
-  ChannelTemplate template = 1;
+  uint64 biz_id = 1;
+  string tpl_name = 2;
+  string tpl_desc = 3;
+  common.v1.Channel channel = 4;
+  int32 notification_type = 5;
 }
 
 message SaveResponse {
   bool success = 1;
   string err_msg = 2;
+  ChannelTemplate template = 3;
 }
 
 message SaveVersionRequest {
-  TemplateVersion version = 1;
+  uint64 tpl_id = 1;
+  string version_name = 2;
+  string signature = 3;
+  string content = 4;
+  string apply_remark = 5;
 }
 
 message SaveVersionResponse {
   bool success = 1;
   string err_msg = 2;
+  TemplateVersion version = 3;
+}
+
+message RelatedProvider {
+  uint64 provider_id = 1;
+  string provider_name = 2;
 }
 
 message SaveProvidersRequest {
-  repeated TemplateProvider providers = 1;
+  uint64 tpl_id = 1;
+  uint64 tpl_version_id = 2;
+  repeated RelatedProvider related_providers = 3;
 }
 
 message SaveProvidersResponse {
   bool success = 1;
   string err_msg = 2;
+  repeated TemplateProvider providers = 3;
 }
 
 service TemplateService {

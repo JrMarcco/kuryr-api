@@ -356,7 +356,7 @@ func (x *QuotaConfig) GetDaily() *Quota {
 // BizConfig 业务方配置
 type BizConfig struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	BizId          uint64                 `protobuf:"varint,1,opt,name=biz_id,json=bizId,proto3" json:"biz_id,omitempty"` // 对应 biz_info 表的 id
+	BizId          uint64                 `protobuf:"varint,1,opt,name=biz_id,json=bizId,proto3" json:"biz_id,omitempty"`
 	OwnerType      string                 `protobuf:"bytes,2,opt,name=owner_type,json=ownerType,proto3" json:"owner_type,omitempty"`
 	ChannelConfig  *ChannelConfig         `protobuf:"bytes,3,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
 	QuotaConfig    *QuotaConfig           `protobuf:"bytes,4,opt,name=quota_config,json=quotaConfig,proto3" json:"quota_config,omitempty"`
@@ -439,10 +439,14 @@ func (x *BizConfig) GetRateLimit() int32 {
 }
 
 type SaveRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Config        *BizConfig             `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	BizId          uint64                 `protobuf:"varint,1,opt,name=biz_id,json=bizId,proto3" json:"biz_id,omitempty"`
+	ChannelConfig  *ChannelConfig         `protobuf:"bytes,2,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
+	QuotaConfig    *QuotaConfig           `protobuf:"bytes,3,opt,name=quota_config,json=quotaConfig,proto3" json:"quota_config,omitempty"`
+	CallbackConfig *CallbackConfig        `protobuf:"bytes,4,opt,name=callback_config,json=callbackConfig,proto3" json:"callback_config,omitempty"`
+	RateLimit      int32                  `protobuf:"varint,5,opt,name=rate_limit,json=rateLimit,proto3" json:"rate_limit,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *SaveRequest) Reset() {
@@ -475,17 +479,46 @@ func (*SaveRequest) Descriptor() ([]byte, []int) {
 	return file_config_v1_config_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *SaveRequest) GetConfig() *BizConfig {
+func (x *SaveRequest) GetBizId() uint64 {
 	if x != nil {
-		return x.Config
+		return x.BizId
+	}
+	return 0
+}
+
+func (x *SaveRequest) GetChannelConfig() *ChannelConfig {
+	if x != nil {
+		return x.ChannelConfig
 	}
 	return nil
+}
+
+func (x *SaveRequest) GetQuotaConfig() *QuotaConfig {
+	if x != nil {
+		return x.QuotaConfig
+	}
+	return nil
+}
+
+func (x *SaveRequest) GetCallbackConfig() *CallbackConfig {
+	if x != nil {
+		return x.CallbackConfig
+	}
+	return nil
+}
+
+func (x *SaveRequest) GetRateLimit() int32 {
+	if x != nil {
+		return x.RateLimit
+	}
+	return 0
 }
 
 type SaveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
+	BizConfig     *BizConfig             `protobuf:"bytes,3,opt,name=biz_config,json=bizConfig,proto3" json:"biz_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -532,6 +565,13 @@ func (x *SaveResponse) GetErrMsg() string {
 		return x.ErrMsg
 	}
 	return ""
+}
+
+func (x *SaveResponse) GetBizConfig() *BizConfig {
+	if x != nil {
+		return x.BizConfig
+	}
+	return nil
 }
 
 type DeleteRequest struct {
@@ -759,12 +799,19 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"\fquota_config\x18\x04 \x01(\v2\x16.config.v1.QuotaConfigR\vquotaConfig\x12B\n" +
 	"\x0fcallback_config\x18\x05 \x01(\v2\x19.config.v1.CallbackConfigR\x0ecallbackConfig\x12\x1d\n" +
 	"\n" +
-	"rate_limit\x18\x06 \x01(\x05R\trateLimit\";\n" +
-	"\vSaveRequest\x12,\n" +
-	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config\"A\n" +
+	"rate_limit\x18\x06 \x01(\x05R\trateLimit\"\x83\x02\n" +
+	"\vSaveRequest\x12\x15\n" +
+	"\x06biz_id\x18\x01 \x01(\x04R\x05bizId\x12?\n" +
+	"\x0echannel_config\x18\x02 \x01(\v2\x18.config.v1.ChannelConfigR\rchannelConfig\x129\n" +
+	"\fquota_config\x18\x03 \x01(\v2\x16.config.v1.QuotaConfigR\vquotaConfig\x12B\n" +
+	"\x0fcallback_config\x18\x04 \x01(\v2\x19.config.v1.CallbackConfigR\x0ecallbackConfig\x12\x1d\n" +
+	"\n" +
+	"rate_limit\x18\x05 \x01(\x05R\trateLimit\"v\n" +
 	"\fSaveResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"\x1f\n" +
+	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\x123\n" +
+	"\n" +
+	"biz_config\x18\x03 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig\"\x1f\n" +
 	"\rDeleteRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"C\n" +
 	"\x0eDeleteResponse\x12\x18\n" +
@@ -822,20 +869,23 @@ var file_config_v1_config_proto_depIdxs = []int32{
 	3,  // 6: config.v1.BizConfig.channel_config:type_name -> config.v1.ChannelConfig
 	5,  // 7: config.v1.BizConfig.quota_config:type_name -> config.v1.QuotaConfig
 	1,  // 8: config.v1.BizConfig.callback_config:type_name -> config.v1.CallbackConfig
-	6,  // 9: config.v1.SaveRequest.config:type_name -> config.v1.BizConfig
-	6,  // 10: config.v1.FindByIdResponse.config:type_name -> config.v1.BizConfig
-	14, // 11: config.v1.FindByIdResponse.err_code:type_name -> common.v1.ErrCode
-	7,  // 12: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
-	9,  // 13: config.v1.BizConfigService.Delete:input_type -> config.v1.DeleteRequest
-	11, // 14: config.v1.BizConfigService.FindById:input_type -> config.v1.FindByIdRequest
-	8,  // 15: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
-	10, // 16: config.v1.BizConfigService.Delete:output_type -> config.v1.DeleteResponse
-	12, // 17: config.v1.BizConfigService.FindById:output_type -> config.v1.FindByIdResponse
-	15, // [15:18] is the sub-list for method output_type
-	12, // [12:15] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	3,  // 9: config.v1.SaveRequest.channel_config:type_name -> config.v1.ChannelConfig
+	5,  // 10: config.v1.SaveRequest.quota_config:type_name -> config.v1.QuotaConfig
+	1,  // 11: config.v1.SaveRequest.callback_config:type_name -> config.v1.CallbackConfig
+	6,  // 12: config.v1.SaveResponse.biz_config:type_name -> config.v1.BizConfig
+	6,  // 13: config.v1.FindByIdResponse.config:type_name -> config.v1.BizConfig
+	14, // 14: config.v1.FindByIdResponse.err_code:type_name -> common.v1.ErrCode
+	7,  // 15: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
+	9,  // 16: config.v1.BizConfigService.Delete:input_type -> config.v1.DeleteRequest
+	11, // 17: config.v1.BizConfigService.FindById:input_type -> config.v1.FindByIdRequest
+	8,  // 18: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
+	10, // 19: config.v1.BizConfigService.Delete:output_type -> config.v1.DeleteResponse
+	12, // 20: config.v1.BizConfigService.FindById:output_type -> config.v1.FindByIdResponse
+	18, // [18:21] is the sub-list for method output_type
+	15, // [15:18] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_config_v1_config_proto_init() }

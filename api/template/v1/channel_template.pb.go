@@ -427,10 +427,14 @@ func (x *TemplateProvider) GetUpdatedAt() int64 {
 }
 
 type SaveRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Template      *ChannelTemplate       `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	BizId            uint64                 `protobuf:"varint,1,opt,name=biz_id,json=bizId,proto3" json:"biz_id,omitempty"`
+	TplName          string                 `protobuf:"bytes,2,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
+	TplDesc          string                 `protobuf:"bytes,3,opt,name=tpl_desc,json=tplDesc,proto3" json:"tpl_desc,omitempty"`
+	Channel          v1.Channel             `protobuf:"varint,4,opt,name=channel,proto3,enum=common.v1.Channel" json:"channel,omitempty"`
+	NotificationType int32                  `protobuf:"varint,5,opt,name=notification_type,json=notificationType,proto3" json:"notification_type,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *SaveRequest) Reset() {
@@ -463,17 +467,46 @@ func (*SaveRequest) Descriptor() ([]byte, []int) {
 	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *SaveRequest) GetTemplate() *ChannelTemplate {
+func (x *SaveRequest) GetBizId() uint64 {
 	if x != nil {
-		return x.Template
+		return x.BizId
 	}
-	return nil
+	return 0
+}
+
+func (x *SaveRequest) GetTplName() string {
+	if x != nil {
+		return x.TplName
+	}
+	return ""
+}
+
+func (x *SaveRequest) GetTplDesc() string {
+	if x != nil {
+		return x.TplDesc
+	}
+	return ""
+}
+
+func (x *SaveRequest) GetChannel() v1.Channel {
+	if x != nil {
+		return x.Channel
+	}
+	return v1.Channel(0)
+}
+
+func (x *SaveRequest) GetNotificationType() int32 {
+	if x != nil {
+		return x.NotificationType
+	}
+	return 0
 }
 
 type SaveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
+	Template      *ChannelTemplate       `protobuf:"bytes,3,opt,name=template,proto3" json:"template,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -522,9 +555,20 @@ func (x *SaveResponse) GetErrMsg() string {
 	return ""
 }
 
+func (x *SaveResponse) GetTemplate() *ChannelTemplate {
+	if x != nil {
+		return x.Template
+	}
+	return nil
+}
+
 type SaveVersionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Version       *TemplateVersion       `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
+	TplId         uint64                 `protobuf:"varint,1,opt,name=tpl_id,json=tplId,proto3" json:"tpl_id,omitempty"`
+	VersionName   string                 `protobuf:"bytes,2,opt,name=version_name,json=versionName,proto3" json:"version_name,omitempty"`
+	Signature     string                 `protobuf:"bytes,3,opt,name=signature,proto3" json:"signature,omitempty"`
+	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	ApplyRemark   string                 `protobuf:"bytes,5,opt,name=apply_remark,json=applyRemark,proto3" json:"apply_remark,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -559,17 +603,46 @@ func (*SaveVersionRequest) Descriptor() ([]byte, []int) {
 	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *SaveVersionRequest) GetVersion() *TemplateVersion {
+func (x *SaveVersionRequest) GetTplId() uint64 {
 	if x != nil {
-		return x.Version
+		return x.TplId
 	}
-	return nil
+	return 0
+}
+
+func (x *SaveVersionRequest) GetVersionName() string {
+	if x != nil {
+		return x.VersionName
+	}
+	return ""
+}
+
+func (x *SaveVersionRequest) GetSignature() string {
+	if x != nil {
+		return x.Signature
+	}
+	return ""
+}
+
+func (x *SaveVersionRequest) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *SaveVersionRequest) GetApplyRemark() string {
+	if x != nil {
+		return x.ApplyRemark
+	}
+	return ""
 }
 
 type SaveVersionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
+	Version       *TemplateVersion       `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -618,16 +691,77 @@ func (x *SaveVersionResponse) GetErrMsg() string {
 	return ""
 }
 
-type SaveProvidersRequest struct {
+func (x *SaveVersionResponse) GetVersion() *TemplateVersion {
+	if x != nil {
+		return x.Version
+	}
+	return nil
+}
+
+type RelatedProvider struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Providers     []*TemplateProvider    `protobuf:"bytes,1,rep,name=providers,proto3" json:"providers,omitempty"`
+	ProviderId    uint64                 `protobuf:"varint,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	ProviderName  string                 `protobuf:"bytes,2,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
+func (x *RelatedProvider) Reset() {
+	*x = RelatedProvider{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RelatedProvider) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RelatedProvider) ProtoMessage() {}
+
+func (x *RelatedProvider) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RelatedProvider.ProtoReflect.Descriptor instead.
+func (*RelatedProvider) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *RelatedProvider) GetProviderId() uint64 {
+	if x != nil {
+		return x.ProviderId
+	}
+	return 0
+}
+
+func (x *RelatedProvider) GetProviderName() string {
+	if x != nil {
+		return x.ProviderName
+	}
+	return ""
+}
+
+type SaveProvidersRequest struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	TplId            uint64                 `protobuf:"varint,1,opt,name=tpl_id,json=tplId,proto3" json:"tpl_id,omitempty"`
+	TplVersionId     uint64                 `protobuf:"varint,2,opt,name=tpl_version_id,json=tplVersionId,proto3" json:"tpl_version_id,omitempty"`
+	RelatedProviders []*RelatedProvider     `protobuf:"bytes,3,rep,name=related_providers,json=relatedProviders,proto3" json:"related_providers,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
 func (x *SaveProvidersRequest) Reset() {
 	*x = SaveProvidersRequest{}
-	mi := &file_template_v1_channel_template_proto_msgTypes[7]
+	mi := &file_template_v1_channel_template_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -639,7 +773,7 @@ func (x *SaveProvidersRequest) String() string {
 func (*SaveProvidersRequest) ProtoMessage() {}
 
 func (x *SaveProvidersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_template_v1_channel_template_proto_msgTypes[7]
+	mi := &file_template_v1_channel_template_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -652,12 +786,26 @@ func (x *SaveProvidersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveProvidersRequest.ProtoReflect.Descriptor instead.
 func (*SaveProvidersRequest) Descriptor() ([]byte, []int) {
-	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{7}
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *SaveProvidersRequest) GetProviders() []*TemplateProvider {
+func (x *SaveProvidersRequest) GetTplId() uint64 {
 	if x != nil {
-		return x.Providers
+		return x.TplId
+	}
+	return 0
+}
+
+func (x *SaveProvidersRequest) GetTplVersionId() uint64 {
+	if x != nil {
+		return x.TplVersionId
+	}
+	return 0
+}
+
+func (x *SaveProvidersRequest) GetRelatedProviders() []*RelatedProvider {
+	if x != nil {
+		return x.RelatedProviders
 	}
 	return nil
 }
@@ -666,13 +814,14 @@ type SaveProvidersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	ErrMsg        string                 `protobuf:"bytes,2,opt,name=err_msg,json=errMsg,proto3" json:"err_msg,omitempty"`
+	Providers     []*TemplateProvider    `protobuf:"bytes,3,rep,name=providers,proto3" json:"providers,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SaveProvidersResponse) Reset() {
 	*x = SaveProvidersResponse{}
-	mi := &file_template_v1_channel_template_proto_msgTypes[8]
+	mi := &file_template_v1_channel_template_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -684,7 +833,7 @@ func (x *SaveProvidersResponse) String() string {
 func (*SaveProvidersResponse) ProtoMessage() {}
 
 func (x *SaveProvidersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_template_v1_channel_template_proto_msgTypes[8]
+	mi := &file_template_v1_channel_template_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -697,7 +846,7 @@ func (x *SaveProvidersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveProvidersResponse.ProtoReflect.Descriptor instead.
 func (*SaveProvidersResponse) Descriptor() ([]byte, []int) {
-	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{8}
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *SaveProvidersResponse) GetSuccess() bool {
@@ -712,6 +861,13 @@ func (x *SaveProvidersResponse) GetErrMsg() string {
 		return x.ErrMsg
 	}
 	return ""
+}
+
+func (x *SaveProvidersResponse) GetProviders() []*TemplateProvider {
+	if x != nil {
+		return x.Providers
+	}
+	return nil
 }
 
 var File_template_v1_channel_template_proto protoreflect.FileDescriptor
@@ -771,22 +927,39 @@ const file_template_v1_channel_template_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\f \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\x03R\tupdatedAt\"G\n" +
-	"\vSaveRequest\x128\n" +
-	"\btemplate\x18\x01 \x01(\v2\x1c.template.v1.ChannelTemplateR\btemplate\"A\n" +
+	"updated_at\x18\r \x01(\x03R\tupdatedAt\"\xb5\x01\n" +
+	"\vSaveRequest\x12\x15\n" +
+	"\x06biz_id\x18\x01 \x01(\x04R\x05bizId\x12\x19\n" +
+	"\btpl_name\x18\x02 \x01(\tR\atplName\x12\x19\n" +
+	"\btpl_desc\x18\x03 \x01(\tR\atplDesc\x12,\n" +
+	"\achannel\x18\x04 \x01(\x0e2\x12.common.v1.ChannelR\achannel\x12+\n" +
+	"\x11notification_type\x18\x05 \x01(\x05R\x10notificationType\"{\n" +
 	"\fSaveResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"L\n" +
-	"\x12SaveVersionRequest\x126\n" +
-	"\aversion\x18\x01 \x01(\v2\x1c.template.v1.TemplateVersionR\aversion\"H\n" +
+	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\x128\n" +
+	"\btemplate\x18\x03 \x01(\v2\x1c.template.v1.ChannelTemplateR\btemplate\"\xa9\x01\n" +
+	"\x12SaveVersionRequest\x12\x15\n" +
+	"\x06tpl_id\x18\x01 \x01(\x04R\x05tplId\x12!\n" +
+	"\fversion_name\x18\x02 \x01(\tR\vversionName\x12\x1c\n" +
+	"\tsignature\x18\x03 \x01(\tR\tsignature\x12\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x12!\n" +
+	"\fapply_remark\x18\x05 \x01(\tR\vapplyRemark\"\x80\x01\n" +
 	"\x13SaveVersionResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\"S\n" +
-	"\x14SaveProvidersRequest\x12;\n" +
-	"\tproviders\x18\x01 \x03(\v2\x1d.template.v1.TemplateProviderR\tproviders\"J\n" +
+	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\x126\n" +
+	"\aversion\x18\x03 \x01(\v2\x1c.template.v1.TemplateVersionR\aversion\"W\n" +
+	"\x0fRelatedProvider\x12\x1f\n" +
+	"\vprovider_id\x18\x01 \x01(\x04R\n" +
+	"providerId\x12#\n" +
+	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\"\x9e\x01\n" +
+	"\x14SaveProvidersRequest\x12\x15\n" +
+	"\x06tpl_id\x18\x01 \x01(\x04R\x05tplId\x12$\n" +
+	"\x0etpl_version_id\x18\x02 \x01(\x04R\ftplVersionId\x12I\n" +
+	"\x11related_providers\x18\x03 \x03(\v2\x1c.template.v1.RelatedProviderR\x10relatedProviders\"\x87\x01\n" +
 	"\x15SaveProvidersResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x17\n" +
-	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg2\xf8\x01\n" +
+	"\aerr_msg\x18\x02 \x01(\tR\x06errMsg\x12;\n" +
+	"\tproviders\x18\x03 \x03(\v2\x1d.template.v1.TemplateProviderR\tproviders2\xf8\x01\n" +
 	"\x0fTemplateService\x12;\n" +
 	"\x04Save\x12\x18.template.v1.SaveRequest\x1a\x19.template.v1.SaveResponse\x12P\n" +
 	"\vSaveVersion\x12\x1f.template.v1.SaveVersionRequest\x1a .template.v1.SaveVersionResponse\x12V\n" +
@@ -805,7 +978,7 @@ func file_template_v1_channel_template_proto_rawDescGZIP() []byte {
 	return file_template_v1_channel_template_proto_rawDescData
 }
 
-var file_template_v1_channel_template_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_template_v1_channel_template_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_template_v1_channel_template_proto_goTypes = []any{
 	(*ChannelTemplate)(nil),       // 0: template.v1.ChannelTemplate
 	(*TemplateVersion)(nil),       // 1: template.v1.TemplateVersion
@@ -814,27 +987,30 @@ var file_template_v1_channel_template_proto_goTypes = []any{
 	(*SaveResponse)(nil),          // 4: template.v1.SaveResponse
 	(*SaveVersionRequest)(nil),    // 5: template.v1.SaveVersionRequest
 	(*SaveVersionResponse)(nil),   // 6: template.v1.SaveVersionResponse
-	(*SaveProvidersRequest)(nil),  // 7: template.v1.SaveProvidersRequest
-	(*SaveProvidersResponse)(nil), // 8: template.v1.SaveProvidersResponse
-	(v1.Channel)(0),               // 9: common.v1.Channel
+	(*RelatedProvider)(nil),       // 7: template.v1.RelatedProvider
+	(*SaveProvidersRequest)(nil),  // 8: template.v1.SaveProvidersRequest
+	(*SaveProvidersResponse)(nil), // 9: template.v1.SaveProvidersResponse
+	(v1.Channel)(0),               // 10: common.v1.Channel
 }
 var file_template_v1_channel_template_proto_depIdxs = []int32{
-	9, // 0: template.v1.ChannelTemplate.channel:type_name -> common.v1.Channel
-	9, // 1: template.v1.TemplateProvider.provider_channel:type_name -> common.v1.Channel
-	0, // 2: template.v1.SaveRequest.template:type_name -> template.v1.ChannelTemplate
-	1, // 3: template.v1.SaveVersionRequest.version:type_name -> template.v1.TemplateVersion
-	2, // 4: template.v1.SaveProvidersRequest.providers:type_name -> template.v1.TemplateProvider
-	3, // 5: template.v1.TemplateService.Save:input_type -> template.v1.SaveRequest
-	5, // 6: template.v1.TemplateService.SaveVersion:input_type -> template.v1.SaveVersionRequest
-	7, // 7: template.v1.TemplateService.SaveProviders:input_type -> template.v1.SaveProvidersRequest
-	4, // 8: template.v1.TemplateService.Save:output_type -> template.v1.SaveResponse
-	6, // 9: template.v1.TemplateService.SaveVersion:output_type -> template.v1.SaveVersionResponse
-	8, // 10: template.v1.TemplateService.SaveProviders:output_type -> template.v1.SaveProvidersResponse
-	8, // [8:11] is the sub-list for method output_type
-	5, // [5:8] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	10, // 0: template.v1.ChannelTemplate.channel:type_name -> common.v1.Channel
+	10, // 1: template.v1.TemplateProvider.provider_channel:type_name -> common.v1.Channel
+	10, // 2: template.v1.SaveRequest.channel:type_name -> common.v1.Channel
+	0,  // 3: template.v1.SaveResponse.template:type_name -> template.v1.ChannelTemplate
+	1,  // 4: template.v1.SaveVersionResponse.version:type_name -> template.v1.TemplateVersion
+	7,  // 5: template.v1.SaveProvidersRequest.related_providers:type_name -> template.v1.RelatedProvider
+	2,  // 6: template.v1.SaveProvidersResponse.providers:type_name -> template.v1.TemplateProvider
+	3,  // 7: template.v1.TemplateService.Save:input_type -> template.v1.SaveRequest
+	5,  // 8: template.v1.TemplateService.SaveVersion:input_type -> template.v1.SaveVersionRequest
+	8,  // 9: template.v1.TemplateService.SaveProviders:input_type -> template.v1.SaveProvidersRequest
+	4,  // 10: template.v1.TemplateService.Save:output_type -> template.v1.SaveResponse
+	6,  // 11: template.v1.TemplateService.SaveVersion:output_type -> template.v1.SaveVersionResponse
+	9,  // 12: template.v1.TemplateService.SaveProviders:output_type -> template.v1.SaveProvidersResponse
+	10, // [10:13] is the sub-list for method output_type
+	7,  // [7:10] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_template_v1_channel_template_proto_init() }
@@ -848,7 +1024,7 @@ func file_template_v1_channel_template_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_template_v1_channel_template_proto_rawDesc), len(file_template_v1_channel_template_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
