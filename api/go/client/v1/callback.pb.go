@@ -84,6 +84,7 @@ func (x *SendResultNotifyRequest) GetResult() *v1.SendResult {
 
 type SendResultNotifyResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -118,6 +119,13 @@ func (*SendResultNotifyResponse) Descriptor() ([]byte, []int) {
 	return file_client_v1_callback_proto_rawDescGZIP(), []int{1}
 }
 
+func (x *SendResultNotifyResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 var File_client_v1_callback_proto protoreflect.FileDescriptor
 
 const file_client_v1_callback_proto_rawDesc = "" +
@@ -127,8 +135,9 @@ const file_client_v1_callback_proto_rawDesc = "" +
 	"\x0fnotification_id\x18\x01 \x01(\x04R\x0enotificationId\x12=\n" +
 	"\vraw_request\x18\x02 \x01(\v2\x1c.notification.v1.SendRequestR\n" +
 	"rawRequest\x123\n" +
-	"\x06result\x18\x03 \x01(\v2\x1b.notification.v1.SendResultR\x06result\"\x1a\n" +
-	"\x18SendResultNotifyResponse2n\n" +
+	"\x06result\x18\x03 \x01(\v2\x1b.notification.v1.SendResultR\x06result\"4\n" +
+	"\x18SendResultNotifyResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2n\n" +
 	"\x0fCallbackService\x12[\n" +
 	"\x10SendResultNotify\x12\".client.v1.SendResultNotifyRequest\x1a#.client.v1.SendResultNotifyResponseB\x9c\x01\n" +
 	"\rcom.client.v1B\rCallbackProtoP\x01Z7github.com/JrMarcco/kuryr-api/api/go/client/v1;clientv1\xa2\x02\x03CXX\xaa\x02\tClient.V1\xca\x02\tClient\\V1\xe2\x02\x15Client\\V1\\GPBMetadata\xea\x02\n" +
