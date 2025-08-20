@@ -525,8 +525,7 @@ func (x *SaveRequest) GetRateLimit() int32 {
 
 type SaveResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
-	BizConfig     *BizConfig             `protobuf:"bytes,2,opt,name=biz_config,json=bizConfig,proto3" json:"biz_config,omitempty"`
+	BizConfig     *BizConfig             `protobuf:"bytes,1,opt,name=biz_config,json=bizConfig,proto3" json:"biz_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -559,13 +558,6 @@ func (x *SaveResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SaveResponse.ProtoReflect.Descriptor instead.
 func (*SaveResponse) Descriptor() ([]byte, []int) {
 	return file_config_v1_config_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *SaveResponse) GetFieldMask() *fieldmaskpb.FieldMask {
-	if x != nil {
-		return x.FieldMask
-	}
-	return nil
 }
 
 func (x *SaveResponse) GetBizConfig() *BizConfig {
@@ -792,12 +784,10 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"\fquota_config\x18\x03 \x01(\v2\x16.config.v1.QuotaConfigR\vquotaConfig\x12B\n" +
 	"\x0fcallback_config\x18\x04 \x01(\v2\x19.config.v1.CallbackConfigR\x0ecallbackConfig\x12\x1d\n" +
 	"\n" +
-	"rate_limit\x18\x05 \x01(\x05R\trateLimit\"~\n" +
-	"\fSaveResponse\x129\n" +
+	"rate_limit\x18\x05 \x01(\x05R\trateLimit\"C\n" +
+	"\fSaveResponse\x123\n" +
 	"\n" +
-	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x123\n" +
-	"\n" +
-	"biz_config\x18\x02 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig\"\x1f\n" +
+	"biz_config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig\"\x1f\n" +
 	"\rDeleteRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"\x10\n" +
 	"\x0eDeleteResponse\"\\\n" +
@@ -857,21 +847,20 @@ var file_config_v1_config_proto_depIdxs = []int32{
 	3,  // 9: config.v1.SaveRequest.channel_config:type_name -> config.v1.ChannelConfig
 	5,  // 10: config.v1.SaveRequest.quota_config:type_name -> config.v1.QuotaConfig
 	1,  // 11: config.v1.SaveRequest.callback_config:type_name -> config.v1.CallbackConfig
-	14, // 12: config.v1.SaveResponse.field_mask:type_name -> google.protobuf.FieldMask
-	6,  // 13: config.v1.SaveResponse.biz_config:type_name -> config.v1.BizConfig
-	14, // 14: config.v1.FindByIdRequest.field_mask:type_name -> google.protobuf.FieldMask
-	6,  // 15: config.v1.FindByIdResponse.config:type_name -> config.v1.BizConfig
-	7,  // 16: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
-	9,  // 17: config.v1.BizConfigService.Delete:input_type -> config.v1.DeleteRequest
-	11, // 18: config.v1.BizConfigService.FindById:input_type -> config.v1.FindByIdRequest
-	8,  // 19: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
-	10, // 20: config.v1.BizConfigService.Delete:output_type -> config.v1.DeleteResponse
-	12, // 21: config.v1.BizConfigService.FindById:output_type -> config.v1.FindByIdResponse
-	19, // [19:22] is the sub-list for method output_type
-	16, // [16:19] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	6,  // 12: config.v1.SaveResponse.biz_config:type_name -> config.v1.BizConfig
+	14, // 13: config.v1.FindByIdRequest.field_mask:type_name -> google.protobuf.FieldMask
+	6,  // 14: config.v1.FindByIdResponse.config:type_name -> config.v1.BizConfig
+	7,  // 15: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
+	9,  // 16: config.v1.BizConfigService.Delete:input_type -> config.v1.DeleteRequest
+	11, // 17: config.v1.BizConfigService.FindById:input_type -> config.v1.FindByIdRequest
+	8,  // 18: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
+	10, // 19: config.v1.BizConfigService.Delete:output_type -> config.v1.DeleteResponse
+	12, // 20: config.v1.BizConfigService.FindById:output_type -> config.v1.FindByIdResponse
+	18, // [18:21] is the sub-list for method output_type
+	15, // [15:18] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_config_v1_config_proto_init() }

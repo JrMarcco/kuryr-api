@@ -13,15 +13,6 @@ const (
 	FieldUpdatedAt    = "updated_at"
 )
 
-var InsertableFields = map[string]struct{}{
-	FieldBizKey:       {},
-	FieldBizName:      {},
-	FieldBizType:      {},
-	FieldContact:      {},
-	FieldContactEmail: {},
-	FieldCreatorId:    {},
-}
-
 var UpdatableFields = map[string]struct{}{
 	FieldBizName:      {},
 	FieldContact:      {},

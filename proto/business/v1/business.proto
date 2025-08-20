@@ -31,8 +31,7 @@ service BusinessService {
 }
 
 message SaveRequest {
-  google.protobuf.FieldMask field_mask = 1;
-  BusinessInfo business_info = 2;
+  BusinessInfo business_info = 1;
 }
 
 message SaveResponse {
@@ -47,7 +46,6 @@ message DeleteResponse {}
 
 message UpdateRequest {
   google.protobuf.FieldMask field_mask = 1;
-
   BusinessInfo business_info = 2;
 }
 

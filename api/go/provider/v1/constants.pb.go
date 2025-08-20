@@ -16,20 +16,6 @@ const (
 	FieldActiveStatus     = "active_status"
 )
 
-var InsertableFields = map[string]struct{}{
-	FieldProviderName:     {},
-	FieldChannel:          {},
-	FieldEndpoint:         {},
-	FieldRegionId:         {},
-	FieldAppId:            {},
-	FieldApiKey:           {},
-	FieldApiSecret:        {},
-	FieldWeight:           {},
-	FieldQpsLimit:         {},
-	FieldDailyLimit:       {},
-	FieldAuditCallbackUrl: {},
-}
-
 var UpdatableFields = map[string]struct{}{
 	FieldProviderName:     {},
 	FieldChannel:          {},

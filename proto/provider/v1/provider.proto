@@ -39,9 +39,7 @@ service ProviderService {
 }
 
 message SaveRequest {
-  google.protobuf.FieldMask field_mask = 1;
-
-  Provider provider = 2;
+  Provider provider = 1;
 }
 
 message SaveResponse {

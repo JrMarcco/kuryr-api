@@ -34,21 +34,6 @@ const (
 	FieldCallbackConfigRetryPolicy = "callback_config.retry_policy"
 )
 
-var InsertableFields = map[string]struct{}{
-	FieldBizId:                     {},
-	FieldRateLimit:                 {},
-	FieldChanneConfigItems:         {},
-	FieldChanneConfigRetryPolicy:   {},
-	FieldQuotaConfigMonthly:        {},
-	FieldQuotaConfigDaily:          {},
-	FieldQuotaConfigMonthlySms:     {},
-	FieldQuotaConfigMonthlyEmail:   {},
-	FieldQuotaConfigDailySms:       {},
-	FieldQuotaConfigDailyEmail:     {},
-	FieldCallbackConfigServiceName: {},
-	FieldCallbackConfigRetryPolicy: {},
-}
-
 var UpdatableFields = map[string]struct{}{
 	FieldRateLimit:                 {},
 	FieldChanneConfigItems:         {},

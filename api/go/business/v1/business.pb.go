@@ -140,8 +140,7 @@ func (x *BusinessInfo) GetUpdatedAt() int64 {
 
 type SaveRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
-	BusinessInfo  *BusinessInfo          `protobuf:"bytes,2,opt,name=business_info,json=businessInfo,proto3" json:"business_info,omitempty"`
+	BusinessInfo  *BusinessInfo          `protobuf:"bytes,1,opt,name=business_info,json=businessInfo,proto3" json:"business_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -174,13 +173,6 @@ func (x *SaveRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SaveRequest.ProtoReflect.Descriptor instead.
 func (*SaveRequest) Descriptor() ([]byte, []int) {
 	return file_business_v1_business_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *SaveRequest) GetFieldMask() *fieldmaskpb.FieldMask {
-	if x != nil {
-		return x.FieldMask
-	}
-	return nil
 }
 
 func (x *SaveRequest) GetBusinessInfo() *BusinessInfo {
@@ -550,11 +542,9 @@ const file_business_v1_business_proto_rawDesc = "" +
 	"created_at\x18\t \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18\n" +
-	" \x01(\x03R\tupdatedAt\"\x88\x01\n" +
-	"\vSaveRequest\x129\n" +
-	"\n" +
-	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12>\n" +
-	"\rbusiness_info\x18\x02 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"N\n" +
+	" \x01(\x03R\tupdatedAt\"M\n" +
+	"\vSaveRequest\x12>\n" +
+	"\rbusiness_info\x18\x01 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"N\n" +
 	"\fSaveResponse\x12>\n" +
 	"\rbusiness_info\x18\x01 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"&\n" +
 	"\rDeleteRequest\x12\x15\n" +
@@ -608,27 +598,26 @@ var file_business_v1_business_proto_goTypes = []any{
 	(*fieldmaskpb.FieldMask)(nil), // 9: google.protobuf.FieldMask
 }
 var file_business_v1_business_proto_depIdxs = []int32{
-	9,  // 0: business.v1.SaveRequest.field_mask:type_name -> google.protobuf.FieldMask
-	0,  // 1: business.v1.SaveRequest.business_info:type_name -> business.v1.BusinessInfo
-	0,  // 2: business.v1.SaveResponse.business_info:type_name -> business.v1.BusinessInfo
-	9,  // 3: business.v1.UpdateRequest.field_mask:type_name -> google.protobuf.FieldMask
-	0,  // 4: business.v1.UpdateRequest.business_info:type_name -> business.v1.BusinessInfo
-	0,  // 5: business.v1.UpdateResponse.business_info:type_name -> business.v1.BusinessInfo
-	9,  // 6: business.v1.SearchRequest.field_mask:type_name -> google.protobuf.FieldMask
-	0,  // 7: business.v1.SearchResponse.records:type_name -> business.v1.BusinessInfo
-	1,  // 8: business.v1.BusinessService.Save:input_type -> business.v1.SaveRequest
-	3,  // 9: business.v1.BusinessService.Delete:input_type -> business.v1.DeleteRequest
-	5,  // 10: business.v1.BusinessService.Update:input_type -> business.v1.UpdateRequest
-	7,  // 11: business.v1.BusinessService.Search:input_type -> business.v1.SearchRequest
-	2,  // 12: business.v1.BusinessService.Save:output_type -> business.v1.SaveResponse
-	4,  // 13: business.v1.BusinessService.Delete:output_type -> business.v1.DeleteResponse
-	6,  // 14: business.v1.BusinessService.Update:output_type -> business.v1.UpdateResponse
-	8,  // 15: business.v1.BusinessService.Search:output_type -> business.v1.SearchResponse
-	12, // [12:16] is the sub-list for method output_type
-	8,  // [8:12] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	0,  // 0: business.v1.SaveRequest.business_info:type_name -> business.v1.BusinessInfo
+	0,  // 1: business.v1.SaveResponse.business_info:type_name -> business.v1.BusinessInfo
+	9,  // 2: business.v1.UpdateRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 3: business.v1.UpdateRequest.business_info:type_name -> business.v1.BusinessInfo
+	0,  // 4: business.v1.UpdateResponse.business_info:type_name -> business.v1.BusinessInfo
+	9,  // 5: business.v1.SearchRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 6: business.v1.SearchResponse.records:type_name -> business.v1.BusinessInfo
+	1,  // 7: business.v1.BusinessService.Save:input_type -> business.v1.SaveRequest
+	3,  // 8: business.v1.BusinessService.Delete:input_type -> business.v1.DeleteRequest
+	5,  // 9: business.v1.BusinessService.Update:input_type -> business.v1.UpdateRequest
+	7,  // 10: business.v1.BusinessService.Search:input_type -> business.v1.SearchRequest
+	2,  // 11: business.v1.BusinessService.Save:output_type -> business.v1.SaveResponse
+	4,  // 12: business.v1.BusinessService.Delete:output_type -> business.v1.DeleteResponse
+	6,  // 13: business.v1.BusinessService.Update:output_type -> business.v1.UpdateResponse
+	8,  // 14: business.v1.BusinessService.Search:output_type -> business.v1.SearchResponse
+	11, // [11:15] is the sub-list for method output_type
+	7,  // [7:11] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_business_v1_business_proto_init() }

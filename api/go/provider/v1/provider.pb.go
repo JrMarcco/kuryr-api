@@ -165,8 +165,7 @@ func (x *Provider) GetActiveStatus() string {
 
 type SaveRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
-	Provider      *Provider              `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
+	Provider      *Provider              `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -199,13 +198,6 @@ func (x *SaveRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SaveRequest.ProtoReflect.Descriptor instead.
 func (*SaveRequest) Descriptor() ([]byte, []int) {
 	return file_provider_v1_provider_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *SaveRequest) GetFieldMask() *fieldmaskpb.FieldMask {
-	if x != nil {
-		return x.FieldMask
-	}
-	return nil
 }
 
 func (x *SaveRequest) GetProvider() *Provider {
@@ -728,11 +720,9 @@ const file_provider_v1_provider_proto_rawDesc = "" +
 	"\vdaily_limit\x18\v \x01(\x05R\n" +
 	"dailyLimit\x12,\n" +
 	"\x12audit_callback_url\x18\f \x01(\tR\x10auditCallbackUrl\x12#\n" +
-	"\ractive_status\x18\r \x01(\tR\factiveStatus\"{\n" +
-	"\vSaveRequest\x129\n" +
-	"\n" +
-	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x121\n" +
-	"\bprovider\x18\x02 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"A\n" +
+	"\ractive_status\x18\r \x01(\tR\factiveStatus\"@\n" +
+	"\vSaveRequest\x121\n" +
+	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"A\n" +
 	"\fSaveResponse\x121\n" +
 	"\bprovider\x18\x01 \x01(\v2\x15.provider.v1.ProviderR\bprovider\"\x1f\n" +
 	"\rDeleteRequest\x12\x0e\n" +
@@ -801,35 +791,34 @@ var file_provider_v1_provider_proto_goTypes = []any{
 }
 var file_provider_v1_provider_proto_depIdxs = []int32{
 	13, // 0: provider.v1.Provider.channel:type_name -> common.v1.Channel
-	14, // 1: provider.v1.SaveRequest.field_mask:type_name -> google.protobuf.FieldMask
-	0,  // 2: provider.v1.SaveRequest.provider:type_name -> provider.v1.Provider
-	0,  // 3: provider.v1.SaveResponse.provider:type_name -> provider.v1.Provider
-	14, // 4: provider.v1.UpdateRequest.field_mask:type_name -> google.protobuf.FieldMask
-	0,  // 5: provider.v1.UpdateRequest.provider:type_name -> provider.v1.Provider
-	14, // 6: provider.v1.ListRequest.field_mask:type_name -> google.protobuf.FieldMask
-	0,  // 7: provider.v1.ListResponse.providers:type_name -> provider.v1.Provider
-	14, // 8: provider.v1.FindByIdRequest.field_mask:type_name -> google.protobuf.FieldMask
-	0,  // 9: provider.v1.FindByIdResponse.provider:type_name -> provider.v1.Provider
-	14, // 10: provider.v1.FindByChannelRequest.field_mask:type_name -> google.protobuf.FieldMask
-	13, // 11: provider.v1.FindByChannelRequest.channel:type_name -> common.v1.Channel
-	0,  // 12: provider.v1.FindByChannelResponse.providers:type_name -> provider.v1.Provider
-	1,  // 13: provider.v1.ProviderService.Save:input_type -> provider.v1.SaveRequest
-	3,  // 14: provider.v1.ProviderService.Delete:input_type -> provider.v1.DeleteRequest
-	5,  // 15: provider.v1.ProviderService.Update:input_type -> provider.v1.UpdateRequest
-	7,  // 16: provider.v1.ProviderService.List:input_type -> provider.v1.ListRequest
-	9,  // 17: provider.v1.ProviderService.FindById:input_type -> provider.v1.FindByIdRequest
-	11, // 18: provider.v1.ProviderService.FindByChannel:input_type -> provider.v1.FindByChannelRequest
-	2,  // 19: provider.v1.ProviderService.Save:output_type -> provider.v1.SaveResponse
-	4,  // 20: provider.v1.ProviderService.Delete:output_type -> provider.v1.DeleteResponse
-	6,  // 21: provider.v1.ProviderService.Update:output_type -> provider.v1.UpdateResponse
-	8,  // 22: provider.v1.ProviderService.List:output_type -> provider.v1.ListResponse
-	10, // 23: provider.v1.ProviderService.FindById:output_type -> provider.v1.FindByIdResponse
-	12, // 24: provider.v1.ProviderService.FindByChannel:output_type -> provider.v1.FindByChannelResponse
-	19, // [19:25] is the sub-list for method output_type
-	13, // [13:19] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	0,  // 1: provider.v1.SaveRequest.provider:type_name -> provider.v1.Provider
+	0,  // 2: provider.v1.SaveResponse.provider:type_name -> provider.v1.Provider
+	14, // 3: provider.v1.UpdateRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 4: provider.v1.UpdateRequest.provider:type_name -> provider.v1.Provider
+	14, // 5: provider.v1.ListRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 6: provider.v1.ListResponse.providers:type_name -> provider.v1.Provider
+	14, // 7: provider.v1.FindByIdRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 8: provider.v1.FindByIdResponse.provider:type_name -> provider.v1.Provider
+	14, // 9: provider.v1.FindByChannelRequest.field_mask:type_name -> google.protobuf.FieldMask
+	13, // 10: provider.v1.FindByChannelRequest.channel:type_name -> common.v1.Channel
+	0,  // 11: provider.v1.FindByChannelResponse.providers:type_name -> provider.v1.Provider
+	1,  // 12: provider.v1.ProviderService.Save:input_type -> provider.v1.SaveRequest
+	3,  // 13: provider.v1.ProviderService.Delete:input_type -> provider.v1.DeleteRequest
+	5,  // 14: provider.v1.ProviderService.Update:input_type -> provider.v1.UpdateRequest
+	7,  // 15: provider.v1.ProviderService.List:input_type -> provider.v1.ListRequest
+	9,  // 16: provider.v1.ProviderService.FindById:input_type -> provider.v1.FindByIdRequest
+	11, // 17: provider.v1.ProviderService.FindByChannel:input_type -> provider.v1.FindByChannelRequest
+	2,  // 18: provider.v1.ProviderService.Save:output_type -> provider.v1.SaveResponse
+	4,  // 19: provider.v1.ProviderService.Delete:output_type -> provider.v1.DeleteResponse
+	6,  // 20: provider.v1.ProviderService.Update:output_type -> provider.v1.UpdateResponse
+	8,  // 21: provider.v1.ProviderService.List:output_type -> provider.v1.ListResponse
+	10, // 22: provider.v1.ProviderService.FindById:output_type -> provider.v1.FindByIdResponse
+	12, // 23: provider.v1.ProviderService.FindByChannel:output_type -> provider.v1.FindByChannelResponse
+	18, // [18:24] is the sub-list for method output_type
+	12, // [12:18] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_provider_v1_provider_proto_init() }
