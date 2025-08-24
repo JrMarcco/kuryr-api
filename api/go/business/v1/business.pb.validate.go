@@ -956,6 +956,8 @@ func (m *SearchRequest) validate(all bool) error {
 
 	// no validation rules for BizName
 
+	// no validation rules for BizId
+
 	if len(errors) > 0 {
 		return SearchRequestMultiError(errors)
 	}
