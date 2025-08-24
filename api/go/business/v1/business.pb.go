@@ -402,20 +402,115 @@ func (x *UpdateResponse) GetBusinessInfo() *BusinessInfo {
 	return nil
 }
 
+type FindByIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	BusinessInfo  *BusinessInfo          `protobuf:"bytes,2,opt,name=business_info,json=businessInfo,proto3" json:"business_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FindByIdRequest) Reset() {
+	*x = FindByIdRequest{}
+	mi := &file_business_v1_business_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FindByIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FindByIdRequest) ProtoMessage() {}
+
+func (x *FindByIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_business_v1_business_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FindByIdRequest.ProtoReflect.Descriptor instead.
+func (*FindByIdRequest) Descriptor() ([]byte, []int) {
+	return file_business_v1_business_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *FindByIdRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
+}
+
+func (x *FindByIdRequest) GetBusinessInfo() *BusinessInfo {
+	if x != nil {
+		return x.BusinessInfo
+	}
+	return nil
+}
+
+type FindByIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BusinessInfo  *BusinessInfo          `protobuf:"bytes,1,opt,name=business_info,json=businessInfo,proto3" json:"business_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FindByIdResponse) Reset() {
+	*x = FindByIdResponse{}
+	mi := &file_business_v1_business_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FindByIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FindByIdResponse) ProtoMessage() {}
+
+func (x *FindByIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_business_v1_business_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FindByIdResponse.ProtoReflect.Descriptor instead.
+func (*FindByIdResponse) Descriptor() ([]byte, []int) {
+	return file_business_v1_business_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *FindByIdResponse) GetBusinessInfo() *BusinessInfo {
+	if x != nil {
+		return x.BusinessInfo
+	}
+	return nil
+}
+
 type SearchRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
 	Offset        int32                  `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
 	Limit         int32                  `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
 	BizName       string                 `protobuf:"bytes,4,opt,name=biz_name,json=bizName,proto3" json:"biz_name,omitempty"`
-	BizId         uint64                 `protobuf:"varint,5,opt,name=biz_id,json=bizId,proto3" json:"biz_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SearchRequest) Reset() {
 	*x = SearchRequest{}
-	mi := &file_business_v1_business_proto_msgTypes[7]
+	mi := &file_business_v1_business_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -427,7 +522,7 @@ func (x *SearchRequest) String() string {
 func (*SearchRequest) ProtoMessage() {}
 
 func (x *SearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_business_v1_business_proto_msgTypes[7]
+	mi := &file_business_v1_business_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -440,7 +535,7 @@ func (x *SearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchRequest.ProtoReflect.Descriptor instead.
 func (*SearchRequest) Descriptor() ([]byte, []int) {
-	return file_business_v1_business_proto_rawDescGZIP(), []int{7}
+	return file_business_v1_business_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *SearchRequest) GetFieldMask() *fieldmaskpb.FieldMask {
@@ -471,13 +566,6 @@ func (x *SearchRequest) GetBizName() string {
 	return ""
 }
 
-func (x *SearchRequest) GetBizId() uint64 {
-	if x != nil {
-		return x.BizId
-	}
-	return 0
-}
-
 type SearchResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Records       []*BusinessInfo        `protobuf:"bytes,1,rep,name=records,proto3" json:"records,omitempty"`
@@ -488,7 +576,7 @@ type SearchResponse struct {
 
 func (x *SearchResponse) Reset() {
 	*x = SearchResponse{}
-	mi := &file_business_v1_business_proto_msgTypes[8]
+	mi := &file_business_v1_business_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -500,7 +588,7 @@ func (x *SearchResponse) String() string {
 func (*SearchResponse) ProtoMessage() {}
 
 func (x *SearchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_business_v1_business_proto_msgTypes[8]
+	mi := &file_business_v1_business_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -513,7 +601,7 @@ func (x *SearchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchResponse.ProtoReflect.Descriptor instead.
 func (*SearchResponse) Descriptor() ([]byte, []int) {
-	return file_business_v1_business_proto_rawDescGZIP(), []int{8}
+	return file_business_v1_business_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SearchResponse) GetRecords() []*BusinessInfo {
@@ -563,21 +651,27 @@ const file_business_v1_business_proto_rawDesc = "" +
 	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12>\n" +
 	"\rbusiness_info\x18\x02 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"P\n" +
 	"\x0eUpdateResponse\x12>\n" +
-	"\rbusiness_info\x18\x01 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"\xaa\x01\n" +
+	"\rbusiness_info\x18\x01 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"\x8c\x01\n" +
+	"\x0fFindByIdRequest\x129\n" +
+	"\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12>\n" +
+	"\rbusiness_info\x18\x02 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"R\n" +
+	"\x10FindByIdResponse\x12>\n" +
+	"\rbusiness_info\x18\x01 \x01(\v2\x19.business.v1.BusinessInfoR\fbusinessInfo\"\x93\x01\n" +
 	"\rSearchRequest\x129\n" +
 	"\n" +
 	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x05R\x06offset\x12\x14\n" +
 	"\x05limit\x18\x03 \x01(\x05R\x05limit\x12\x19\n" +
-	"\bbiz_name\x18\x04 \x01(\tR\abizName\x12\x15\n" +
-	"\x06biz_id\x18\x05 \x01(\x04R\x05bizId\"[\n" +
+	"\bbiz_name\x18\x04 \x01(\tR\abizName\"[\n" +
 	"\x0eSearchResponse\x123\n" +
 	"\arecords\x18\x01 \x03(\v2\x19.business.v1.BusinessInfoR\arecords\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x03R\x05total2\x97\x02\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total2\xe0\x02\n" +
 	"\x0fBusinessService\x12;\n" +
 	"\x04Save\x12\x18.business.v1.SaveRequest\x1a\x19.business.v1.SaveResponse\x12A\n" +
 	"\x06Delete\x12\x1a.business.v1.DeleteRequest\x1a\x1b.business.v1.DeleteResponse\x12A\n" +
-	"\x06Update\x12\x1a.business.v1.UpdateRequest\x1a\x1b.business.v1.UpdateResponse\x12A\n" +
+	"\x06Update\x12\x1a.business.v1.UpdateRequest\x1a\x1b.business.v1.UpdateResponse\x12G\n" +
+	"\bFindById\x12\x1c.business.v1.FindByIdRequest\x1a\x1d.business.v1.FindByIdResponse\x12A\n" +
 	"\x06Search\x12\x1a.business.v1.SearchRequest\x1a\x1b.business.v1.SearchResponseB\xaa\x01\n" +
 	"\x0fcom.business.v1B\rBusinessProtoP\x01Z;github.com/JrMarcco/kuryr-api/api/go/business/v1;businessv1\xa2\x02\x03BXX\xaa\x02\vBusiness.V1\xca\x02\vBusiness\\V1\xe2\x02\x17Business\\V1\\GPBMetadata\xea\x02\fBusiness::V1b\x06proto3"
 
@@ -593,7 +687,7 @@ func file_business_v1_business_proto_rawDescGZIP() []byte {
 	return file_business_v1_business_proto_rawDescData
 }
 
-var file_business_v1_business_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_business_v1_business_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_business_v1_business_proto_goTypes = []any{
 	(*BusinessInfo)(nil),          // 0: business.v1.BusinessInfo
 	(*SaveRequest)(nil),           // 1: business.v1.SaveRequest
@@ -602,31 +696,38 @@ var file_business_v1_business_proto_goTypes = []any{
 	(*DeleteResponse)(nil),        // 4: business.v1.DeleteResponse
 	(*UpdateRequest)(nil),         // 5: business.v1.UpdateRequest
 	(*UpdateResponse)(nil),        // 6: business.v1.UpdateResponse
-	(*SearchRequest)(nil),         // 7: business.v1.SearchRequest
-	(*SearchResponse)(nil),        // 8: business.v1.SearchResponse
-	(*fieldmaskpb.FieldMask)(nil), // 9: google.protobuf.FieldMask
+	(*FindByIdRequest)(nil),       // 7: business.v1.FindByIdRequest
+	(*FindByIdResponse)(nil),      // 8: business.v1.FindByIdResponse
+	(*SearchRequest)(nil),         // 9: business.v1.SearchRequest
+	(*SearchResponse)(nil),        // 10: business.v1.SearchResponse
+	(*fieldmaskpb.FieldMask)(nil), // 11: google.protobuf.FieldMask
 }
 var file_business_v1_business_proto_depIdxs = []int32{
 	0,  // 0: business.v1.SaveRequest.business_info:type_name -> business.v1.BusinessInfo
 	0,  // 1: business.v1.SaveResponse.business_info:type_name -> business.v1.BusinessInfo
-	9,  // 2: business.v1.UpdateRequest.field_mask:type_name -> google.protobuf.FieldMask
+	11, // 2: business.v1.UpdateRequest.field_mask:type_name -> google.protobuf.FieldMask
 	0,  // 3: business.v1.UpdateRequest.business_info:type_name -> business.v1.BusinessInfo
 	0,  // 4: business.v1.UpdateResponse.business_info:type_name -> business.v1.BusinessInfo
-	9,  // 5: business.v1.SearchRequest.field_mask:type_name -> google.protobuf.FieldMask
-	0,  // 6: business.v1.SearchResponse.records:type_name -> business.v1.BusinessInfo
-	1,  // 7: business.v1.BusinessService.Save:input_type -> business.v1.SaveRequest
-	3,  // 8: business.v1.BusinessService.Delete:input_type -> business.v1.DeleteRequest
-	5,  // 9: business.v1.BusinessService.Update:input_type -> business.v1.UpdateRequest
-	7,  // 10: business.v1.BusinessService.Search:input_type -> business.v1.SearchRequest
-	2,  // 11: business.v1.BusinessService.Save:output_type -> business.v1.SaveResponse
-	4,  // 12: business.v1.BusinessService.Delete:output_type -> business.v1.DeleteResponse
-	6,  // 13: business.v1.BusinessService.Update:output_type -> business.v1.UpdateResponse
-	8,  // 14: business.v1.BusinessService.Search:output_type -> business.v1.SearchResponse
-	11, // [11:15] is the sub-list for method output_type
-	7,  // [7:11] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	11, // 5: business.v1.FindByIdRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 6: business.v1.FindByIdRequest.business_info:type_name -> business.v1.BusinessInfo
+	0,  // 7: business.v1.FindByIdResponse.business_info:type_name -> business.v1.BusinessInfo
+	11, // 8: business.v1.SearchRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 9: business.v1.SearchResponse.records:type_name -> business.v1.BusinessInfo
+	1,  // 10: business.v1.BusinessService.Save:input_type -> business.v1.SaveRequest
+	3,  // 11: business.v1.BusinessService.Delete:input_type -> business.v1.DeleteRequest
+	5,  // 12: business.v1.BusinessService.Update:input_type -> business.v1.UpdateRequest
+	7,  // 13: business.v1.BusinessService.FindById:input_type -> business.v1.FindByIdRequest
+	9,  // 14: business.v1.BusinessService.Search:input_type -> business.v1.SearchRequest
+	2,  // 15: business.v1.BusinessService.Save:output_type -> business.v1.SaveResponse
+	4,  // 16: business.v1.BusinessService.Delete:output_type -> business.v1.DeleteResponse
+	6,  // 17: business.v1.BusinessService.Update:output_type -> business.v1.UpdateResponse
+	8,  // 18: business.v1.BusinessService.FindById:output_type -> business.v1.FindByIdResponse
+	10, // 19: business.v1.BusinessService.Search:output_type -> business.v1.SearchResponse
+	15, // [15:20] is the sub-list for method output_type
+	10, // [10:15] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_business_v1_business_proto_init() }
@@ -640,7 +741,7 @@ func file_business_v1_business_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_business_v1_business_proto_rawDesc), len(file_business_v1_business_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

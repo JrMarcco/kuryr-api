@@ -27,6 +27,7 @@ service BusinessService {
   rpc Save(SaveRequest) returns (SaveResponse);
   rpc Delete(DeleteRequest) returns (DeleteResponse);
   rpc Update(UpdateRequest) returns (UpdateResponse);
+  rpc FindById(FindByIdRequest) returns (FindByIdResponse);
   rpc Search(SearchRequest) returns (SearchResponse);
 }
 
@@ -53,13 +54,21 @@ message UpdateResponse {
   BusinessInfo business_info = 1;
 }
 
+message FindByIdRequest {
+  google.protobuf.FieldMask field_mask = 1;
+  BusinessInfo business_info = 2;
+}
+
+message FindByIdResponse {
+  BusinessInfo business_info = 1;
+}
+
 message SearchRequest {
   google.protobuf.FieldMask field_mask = 1;
 
   int32 offset = 2;
   int32 limit = 3;
   string biz_name = 4;
-  uint64 biz_id = 5;
 }
 
 message SearchResponse {
