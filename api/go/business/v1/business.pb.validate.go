@@ -950,34 +950,7 @@ func (m *FindByIdRequest) validate(all bool) error {
 		}
 	}
 
-	if all {
-		switch v := interface{}(m.GetBusinessInfo()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, FindByIdRequestValidationError{
-					field:  "BusinessInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, FindByIdRequestValidationError{
-					field:  "BusinessInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetBusinessInfo()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return FindByIdRequestValidationError{
-				field:  "BusinessInfo",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for BizId
 
 	if len(errors) > 0 {
 		return FindByIdRequestMultiError(errors)
