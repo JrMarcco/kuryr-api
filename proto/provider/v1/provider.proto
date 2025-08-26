@@ -58,7 +58,9 @@ message UpdateRequest {
   Provider provider = 2;
 }
 
-message UpdateResponse {}
+message UpdateResponse {
+  Provider provider = 1;
+}
 
 message ListRequest {
   google.protobuf.FieldMask field_mask = 1;
