@@ -10,6 +10,7 @@ import (
 	v1 "github.com/JrMarcco/kuryr-api/api/go/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -25,8 +26,8 @@ const (
 type ChannelTemplate struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	Id                 uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	OwnerId            uint64                 `protobuf:"varint,2,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
-	OwnerType          string                 `protobuf:"bytes,3,opt,name=owner_type,json=ownerType,proto3" json:"owner_type,omitempty"`
+	BizId              uint64                 `protobuf:"varint,2,opt,name=biz_id,json=bizId,proto3" json:"biz_id,omitempty"`
+	BizType            string                 `protobuf:"bytes,3,opt,name=biz_type,json=bizType,proto3" json:"biz_type,omitempty"`
 	TplName            string                 `protobuf:"bytes,4,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
 	TplDesc            string                 `protobuf:"bytes,5,opt,name=tpl_desc,json=tplDesc,proto3" json:"tpl_desc,omitempty"`
 	Channel            v1.Channel             `protobuf:"varint,6,opt,name=channel,proto3,enum=common.v1.Channel" json:"channel,omitempty"`
@@ -75,16 +76,16 @@ func (x *ChannelTemplate) GetId() uint64 {
 	return 0
 }
 
-func (x *ChannelTemplate) GetOwnerId() uint64 {
+func (x *ChannelTemplate) GetBizId() uint64 {
 	if x != nil {
-		return x.OwnerId
+		return x.BizId
 	}
 	return 0
 }
 
-func (x *ChannelTemplate) GetOwnerType() string {
+func (x *ChannelTemplate) GetBizType() string {
 	if x != nil {
-		return x.OwnerType
+		return x.BizType
 	}
 	return ""
 }
@@ -426,104 +427,28 @@ func (x *TemplateProvider) GetUpdatedAt() int64 {
 	return 0
 }
 
-type SaveRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	BizId            uint64                 `protobuf:"varint,1,opt,name=biz_id,json=bizId,proto3" json:"biz_id,omitempty"`
-	TplName          string                 `protobuf:"bytes,2,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
-	TplDesc          string                 `protobuf:"bytes,3,opt,name=tpl_desc,json=tplDesc,proto3" json:"tpl_desc,omitempty"`
-	Channel          v1.Channel             `protobuf:"varint,4,opt,name=channel,proto3,enum=common.v1.Channel" json:"channel,omitempty"`
-	NotificationType int32                  `protobuf:"varint,5,opt,name=notification_type,json=notificationType,proto3" json:"notification_type,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *SaveRequest) Reset() {
-	*x = SaveRequest{}
-	mi := &file_template_v1_channel_template_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SaveRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SaveRequest) ProtoMessage() {}
-
-func (x *SaveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_template_v1_channel_template_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SaveRequest.ProtoReflect.Descriptor instead.
-func (*SaveRequest) Descriptor() ([]byte, []int) {
-	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *SaveRequest) GetBizId() uint64 {
-	if x != nil {
-		return x.BizId
-	}
-	return 0
-}
-
-func (x *SaveRequest) GetTplName() string {
-	if x != nil {
-		return x.TplName
-	}
-	return ""
-}
-
-func (x *SaveRequest) GetTplDesc() string {
-	if x != nil {
-		return x.TplDesc
-	}
-	return ""
-}
-
-func (x *SaveRequest) GetChannel() v1.Channel {
-	if x != nil {
-		return x.Channel
-	}
-	return v1.Channel(0)
-}
-
-func (x *SaveRequest) GetNotificationType() int32 {
-	if x != nil {
-		return x.NotificationType
-	}
-	return 0
-}
-
-type SaveResponse struct {
+type SaveTemplateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Template      *ChannelTemplate       `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SaveResponse) Reset() {
-	*x = SaveResponse{}
-	mi := &file_template_v1_channel_template_proto_msgTypes[4]
+func (x *SaveTemplateRequest) Reset() {
+	*x = SaveTemplateRequest{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SaveResponse) String() string {
+func (x *SaveTemplateRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SaveResponse) ProtoMessage() {}
+func (*SaveTemplateRequest) ProtoMessage() {}
 
-func (x *SaveResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_template_v1_channel_template_proto_msgTypes[4]
+func (x *SaveTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -534,44 +459,40 @@ func (x *SaveResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SaveResponse.ProtoReflect.Descriptor instead.
-func (*SaveResponse) Descriptor() ([]byte, []int) {
-	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{4}
+// Deprecated: Use SaveTemplateRequest.ProtoReflect.Descriptor instead.
+func (*SaveTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *SaveResponse) GetTemplate() *ChannelTemplate {
+func (x *SaveTemplateRequest) GetTemplate() *ChannelTemplate {
 	if x != nil {
 		return x.Template
 	}
 	return nil
 }
 
-type SaveVersionRequest struct {
+type SaveTemplateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TplId         uint64                 `protobuf:"varint,1,opt,name=tpl_id,json=tplId,proto3" json:"tpl_id,omitempty"`
-	VersionName   string                 `protobuf:"bytes,2,opt,name=version_name,json=versionName,proto3" json:"version_name,omitempty"`
-	Signature     string                 `protobuf:"bytes,3,opt,name=signature,proto3" json:"signature,omitempty"`
-	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
-	ApplyRemark   string                 `protobuf:"bytes,5,opt,name=apply_remark,json=applyRemark,proto3" json:"apply_remark,omitempty"`
+	Template      *ChannelTemplate       `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SaveVersionRequest) Reset() {
-	*x = SaveVersionRequest{}
-	mi := &file_template_v1_channel_template_proto_msgTypes[5]
+func (x *SaveTemplateResponse) Reset() {
+	*x = SaveTemplateResponse{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SaveVersionRequest) String() string {
+func (x *SaveTemplateResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SaveVersionRequest) ProtoMessage() {}
+func (*SaveTemplateResponse) ProtoMessage() {}
 
-func (x *SaveVersionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_template_v1_channel_template_proto_msgTypes[5]
+func (x *SaveTemplateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -582,67 +503,83 @@ func (x *SaveVersionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SaveVersionRequest.ProtoReflect.Descriptor instead.
-func (*SaveVersionRequest) Descriptor() ([]byte, []int) {
-	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{5}
+// Deprecated: Use SaveTemplateResponse.ProtoReflect.Descriptor instead.
+func (*SaveTemplateResponse) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *SaveVersionRequest) GetTplId() uint64 {
+func (x *SaveTemplateResponse) GetTemplate() *ChannelTemplate {
 	if x != nil {
-		return x.TplId
+		return x.Template
 	}
-	return 0
+	return nil
 }
 
-func (x *SaveVersionRequest) GetVersionName() string {
-	if x != nil {
-		return x.VersionName
-	}
-	return ""
-}
-
-func (x *SaveVersionRequest) GetSignature() string {
-	if x != nil {
-		return x.Signature
-	}
-	return ""
-}
-
-func (x *SaveVersionRequest) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-func (x *SaveVersionRequest) GetApplyRemark() string {
-	if x != nil {
-		return x.ApplyRemark
-	}
-	return ""
-}
-
-type SaveVersionResponse struct {
+type SaveTemplateVersionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Version       *TemplateVersion       `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SaveVersionResponse) Reset() {
-	*x = SaveVersionResponse{}
+func (x *SaveTemplateVersionRequest) Reset() {
+	*x = SaveTemplateVersionRequest{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SaveTemplateVersionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SaveTemplateVersionRequest) ProtoMessage() {}
+
+func (x *SaveTemplateVersionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SaveTemplateVersionRequest.ProtoReflect.Descriptor instead.
+func (*SaveTemplateVersionRequest) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *SaveTemplateVersionRequest) GetVersion() *TemplateVersion {
+	if x != nil {
+		return x.Version
+	}
+	return nil
+}
+
+type SaveTemplateVersionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Version       *TemplateVersion       `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SaveTemplateVersionResponse) Reset() {
+	*x = SaveTemplateVersionResponse{}
 	mi := &file_template_v1_channel_template_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SaveVersionResponse) String() string {
+func (x *SaveTemplateVersionResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SaveVersionResponse) ProtoMessage() {}
+func (*SaveTemplateVersionResponse) ProtoMessage() {}
 
-func (x *SaveVersionResponse) ProtoReflect() protoreflect.Message {
+func (x *SaveTemplateVersionResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_template_v1_channel_template_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -654,12 +591,12 @@ func (x *SaveVersionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SaveVersionResponse.ProtoReflect.Descriptor instead.
-func (*SaveVersionResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SaveTemplateVersionResponse.ProtoReflect.Descriptor instead.
+func (*SaveTemplateVersionResponse) Descriptor() ([]byte, []int) {
 	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *SaveVersionResponse) GetVersion() *TemplateVersion {
+func (x *SaveTemplateVersionResponse) GetVersion() *TemplateVersion {
 	if x != nil {
 		return x.Version
 	}
@@ -718,7 +655,7 @@ func (x *RelatedProvider) GetProviderName() string {
 	return ""
 }
 
-type SaveProvidersRequest struct {
+type SaveTemplateProvidersRequest struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	TplId            uint64                 `protobuf:"varint,1,opt,name=tpl_id,json=tplId,proto3" json:"tpl_id,omitempty"`
 	TplVersionId     uint64                 `protobuf:"varint,2,opt,name=tpl_version_id,json=tplVersionId,proto3" json:"tpl_version_id,omitempty"`
@@ -727,20 +664,20 @@ type SaveProvidersRequest struct {
 	sizeCache        protoimpl.SizeCache
 }
 
-func (x *SaveProvidersRequest) Reset() {
-	*x = SaveProvidersRequest{}
+func (x *SaveTemplateProvidersRequest) Reset() {
+	*x = SaveTemplateProvidersRequest{}
 	mi := &file_template_v1_channel_template_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SaveProvidersRequest) String() string {
+func (x *SaveTemplateProvidersRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SaveProvidersRequest) ProtoMessage() {}
+func (*SaveTemplateProvidersRequest) ProtoMessage() {}
 
-func (x *SaveProvidersRequest) ProtoReflect() protoreflect.Message {
+func (x *SaveTemplateProvidersRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_template_v1_channel_template_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -752,53 +689,53 @@ func (x *SaveProvidersRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SaveProvidersRequest.ProtoReflect.Descriptor instead.
-func (*SaveProvidersRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SaveTemplateProvidersRequest.ProtoReflect.Descriptor instead.
+func (*SaveTemplateProvidersRequest) Descriptor() ([]byte, []int) {
 	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *SaveProvidersRequest) GetTplId() uint64 {
+func (x *SaveTemplateProvidersRequest) GetTplId() uint64 {
 	if x != nil {
 		return x.TplId
 	}
 	return 0
 }
 
-func (x *SaveProvidersRequest) GetTplVersionId() uint64 {
+func (x *SaveTemplateProvidersRequest) GetTplVersionId() uint64 {
 	if x != nil {
 		return x.TplVersionId
 	}
 	return 0
 }
 
-func (x *SaveProvidersRequest) GetRelatedProviders() []*RelatedProvider {
+func (x *SaveTemplateProvidersRequest) GetRelatedProviders() []*RelatedProvider {
 	if x != nil {
 		return x.RelatedProviders
 	}
 	return nil
 }
 
-type SaveProvidersResponse struct {
+type SaveTemplateProvidersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Providers     []*TemplateProvider    `protobuf:"bytes,1,rep,name=providers,proto3" json:"providers,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SaveProvidersResponse) Reset() {
-	*x = SaveProvidersResponse{}
+func (x *SaveTemplateProvidersResponse) Reset() {
+	*x = SaveTemplateProvidersResponse{}
 	mi := &file_template_v1_channel_template_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SaveProvidersResponse) String() string {
+func (x *SaveTemplateProvidersResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SaveProvidersResponse) ProtoMessage() {}
+func (*SaveTemplateProvidersResponse) ProtoMessage() {}
 
-func (x *SaveProvidersResponse) ProtoReflect() protoreflect.Message {
+func (x *SaveTemplateProvidersResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_template_v1_channel_template_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -810,12 +747,564 @@ func (x *SaveProvidersResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SaveProvidersResponse.ProtoReflect.Descriptor instead.
-func (*SaveProvidersResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SaveTemplateProvidersResponse.ProtoReflect.Descriptor instead.
+func (*SaveTemplateProvidersResponse) Descriptor() ([]byte, []int) {
 	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *SaveProvidersResponse) GetProviders() []*TemplateProvider {
+func (x *SaveTemplateProvidersResponse) GetProviders() []*TemplateProvider {
+	if x != nil {
+		return x.Providers
+	}
+	return nil
+}
+
+type DeleteTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteTemplateRequest) Reset() {
+	*x = DeleteTemplateRequest{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTemplateRequest) ProtoMessage() {}
+
+func (x *DeleteTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTemplateRequest.ProtoReflect.Descriptor instead.
+func (*DeleteTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DeleteTemplateRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteTemplateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteTemplateResponse) Reset() {
+	*x = DeleteTemplateResponse{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteTemplateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTemplateResponse) ProtoMessage() {}
+
+func (x *DeleteTemplateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTemplateResponse.ProtoReflect.Descriptor instead.
+func (*DeleteTemplateResponse) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{11}
+}
+
+type DeleteTemplateVersionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteTemplateVersionRequest) Reset() {
+	*x = DeleteTemplateVersionRequest{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteTemplateVersionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTemplateVersionRequest) ProtoMessage() {}
+
+func (x *DeleteTemplateVersionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTemplateVersionRequest.ProtoReflect.Descriptor instead.
+func (*DeleteTemplateVersionRequest) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *DeleteTemplateVersionRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteTemplateVersionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteTemplateVersionResponse) Reset() {
+	*x = DeleteTemplateVersionResponse{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteTemplateVersionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTemplateVersionResponse) ProtoMessage() {}
+
+func (x *DeleteTemplateVersionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTemplateVersionResponse.ProtoReflect.Descriptor instead.
+func (*DeleteTemplateVersionResponse) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{13}
+}
+
+type DeleteTemplateProviderRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteTemplateProviderRequest) Reset() {
+	*x = DeleteTemplateProviderRequest{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteTemplateProviderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTemplateProviderRequest) ProtoMessage() {}
+
+func (x *DeleteTemplateProviderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTemplateProviderRequest.ProtoReflect.Descriptor instead.
+func (*DeleteTemplateProviderRequest) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *DeleteTemplateProviderRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteTemplateProviderResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteTemplateProviderResponse) Reset() {
+	*x = DeleteTemplateProviderResponse{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteTemplateProviderResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTemplateProviderResponse) ProtoMessage() {}
+
+func (x *DeleteTemplateProviderResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTemplateProviderResponse.ProtoReflect.Descriptor instead.
+func (*DeleteTemplateProviderResponse) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{15}
+}
+
+type ListTemplateByBizIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	Offset        int32                  `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit         int32                  `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
+	BizId         uint64                 `protobuf:"varint,4,opt,name=biz_id,json=bizId,proto3" json:"biz_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTemplateByBizIdRequest) Reset() {
+	*x = ListTemplateByBizIdRequest{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTemplateByBizIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTemplateByBizIdRequest) ProtoMessage() {}
+
+func (x *ListTemplateByBizIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTemplateByBizIdRequest.ProtoReflect.Descriptor instead.
+func (*ListTemplateByBizIdRequest) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ListTemplateByBizIdRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
+}
+
+func (x *ListTemplateByBizIdRequest) GetOffset() int32 {
+	if x != nil {
+		return x.Offset
+	}
+	return 0
+}
+
+func (x *ListTemplateByBizIdRequest) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *ListTemplateByBizIdRequest) GetBizId() uint64 {
+	if x != nil {
+		return x.BizId
+	}
+	return 0
+}
+
+type ListTemplateByBizIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Templates     []*ChannelTemplate     `protobuf:"bytes,1,rep,name=templates,proto3" json:"templates,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTemplateByBizIdResponse) Reset() {
+	*x = ListTemplateByBizIdResponse{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTemplateByBizIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTemplateByBizIdResponse) ProtoMessage() {}
+
+func (x *ListTemplateByBizIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTemplateByBizIdResponse.ProtoReflect.Descriptor instead.
+func (*ListTemplateByBizIdResponse) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ListTemplateByBizIdResponse) GetTemplates() []*ChannelTemplate {
+	if x != nil {
+		return x.Templates
+	}
+	return nil
+}
+
+func (x *ListTemplateByBizIdResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type ListTemplateVersionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	TplId         uint64                 `protobuf:"varint,2,opt,name=tpl_id,json=tplId,proto3" json:"tpl_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTemplateVersionRequest) Reset() {
+	*x = ListTemplateVersionRequest{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTemplateVersionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTemplateVersionRequest) ProtoMessage() {}
+
+func (x *ListTemplateVersionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTemplateVersionRequest.ProtoReflect.Descriptor instead.
+func (*ListTemplateVersionRequest) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ListTemplateVersionRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
+}
+
+func (x *ListTemplateVersionRequest) GetTplId() uint64 {
+	if x != nil {
+		return x.TplId
+	}
+	return 0
+}
+
+type ListTemplateVersionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Versions      []*TemplateVersion     `protobuf:"bytes,1,rep,name=versions,proto3" json:"versions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTemplateVersionResponse) Reset() {
+	*x = ListTemplateVersionResponse{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTemplateVersionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTemplateVersionResponse) ProtoMessage() {}
+
+func (x *ListTemplateVersionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTemplateVersionResponse.ProtoReflect.Descriptor instead.
+func (*ListTemplateVersionResponse) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ListTemplateVersionResponse) GetVersions() []*TemplateVersion {
+	if x != nil {
+		return x.Versions
+	}
+	return nil
+}
+
+type ListTemplateProviderRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	VersionId     uint64                 `protobuf:"varint,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTemplateProviderRequest) Reset() {
+	*x = ListTemplateProviderRequest{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTemplateProviderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTemplateProviderRequest) ProtoMessage() {}
+
+func (x *ListTemplateProviderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTemplateProviderRequest.ProtoReflect.Descriptor instead.
+func (*ListTemplateProviderRequest) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *ListTemplateProviderRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
+}
+
+func (x *ListTemplateProviderRequest) GetVersionId() uint64 {
+	if x != nil {
+		return x.VersionId
+	}
+	return 0
+}
+
+type ListTemplateProviderResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Providers     []*TemplateProvider    `protobuf:"bytes,1,rep,name=providers,proto3" json:"providers,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTemplateProviderResponse) Reset() {
+	*x = ListTemplateProviderResponse{}
+	mi := &file_template_v1_channel_template_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTemplateProviderResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTemplateProviderResponse) ProtoMessage() {}
+
+func (x *ListTemplateProviderResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_template_v1_channel_template_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTemplateProviderResponse.ProtoReflect.Descriptor instead.
+func (*ListTemplateProviderResponse) Descriptor() ([]byte, []int) {
+	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *ListTemplateProviderResponse) GetProviders() []*TemplateProvider {
 	if x != nil {
 		return x.Providers
 	}
@@ -826,12 +1315,11 @@ var File_template_v1_channel_template_proto protoreflect.FileDescriptor
 
 const file_template_v1_channel_template_proto_rawDesc = "" +
 	"\n" +
-	"\"template/v1/channel_template.proto\x12\vtemplate.v1\x1a\x15common/v1/types.proto\"\xdc\x02\n" +
+	"\"template/v1/channel_template.proto\x12\vtemplate.v1\x1a\x15common/v1/types.proto\x1a google/protobuf/field_mask.proto\"\xd4\x02\n" +
 	"\x0fChannelTemplate\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x19\n" +
-	"\bowner_id\x18\x02 \x01(\x04R\aownerId\x12\x1d\n" +
-	"\n" +
-	"owner_type\x18\x03 \x01(\tR\townerType\x12\x19\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x15\n" +
+	"\x06biz_id\x18\x02 \x01(\x04R\x05bizId\x12\x19\n" +
+	"\bbiz_type\x18\x03 \x01(\tR\abizType\x12\x19\n" +
 	"\btpl_name\x18\x04 \x01(\tR\atplName\x12\x19\n" +
 	"\btpl_desc\x18\x05 \x01(\tR\atplDesc\x12,\n" +
 	"\achannel\x18\x06 \x01(\x0e2\x12.common.v1.ChannelR\achannel\x12+\n" +
@@ -879,37 +1367,66 @@ const file_template_v1_channel_template_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\f \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\x03R\tupdatedAt\"\xb5\x01\n" +
-	"\vSaveRequest\x12\x15\n" +
-	"\x06biz_id\x18\x01 \x01(\x04R\x05bizId\x12\x19\n" +
-	"\btpl_name\x18\x02 \x01(\tR\atplName\x12\x19\n" +
-	"\btpl_desc\x18\x03 \x01(\tR\atplDesc\x12,\n" +
-	"\achannel\x18\x04 \x01(\x0e2\x12.common.v1.ChannelR\achannel\x12+\n" +
-	"\x11notification_type\x18\x05 \x01(\x05R\x10notificationType\"H\n" +
-	"\fSaveResponse\x128\n" +
-	"\btemplate\x18\x01 \x01(\v2\x1c.template.v1.ChannelTemplateR\btemplate\"\xa9\x01\n" +
-	"\x12SaveVersionRequest\x12\x15\n" +
-	"\x06tpl_id\x18\x01 \x01(\x04R\x05tplId\x12!\n" +
-	"\fversion_name\x18\x02 \x01(\tR\vversionName\x12\x1c\n" +
-	"\tsignature\x18\x03 \x01(\tR\tsignature\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\x12!\n" +
-	"\fapply_remark\x18\x05 \x01(\tR\vapplyRemark\"M\n" +
-	"\x13SaveVersionResponse\x126\n" +
+	"updated_at\x18\r \x01(\x03R\tupdatedAt\"O\n" +
+	"\x13SaveTemplateRequest\x128\n" +
+	"\btemplate\x18\x01 \x01(\v2\x1c.template.v1.ChannelTemplateR\btemplate\"P\n" +
+	"\x14SaveTemplateResponse\x128\n" +
+	"\btemplate\x18\x01 \x01(\v2\x1c.template.v1.ChannelTemplateR\btemplate\"T\n" +
+	"\x1aSaveTemplateVersionRequest\x126\n" +
+	"\aversion\x18\x01 \x01(\v2\x1c.template.v1.TemplateVersionR\aversion\"U\n" +
+	"\x1bSaveTemplateVersionResponse\x126\n" +
 	"\aversion\x18\x01 \x01(\v2\x1c.template.v1.TemplateVersionR\aversion\"W\n" +
 	"\x0fRelatedProvider\x12\x1f\n" +
 	"\vprovider_id\x18\x01 \x01(\x04R\n" +
 	"providerId\x12#\n" +
-	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\"\x9e\x01\n" +
-	"\x14SaveProvidersRequest\x12\x15\n" +
+	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\"\xa6\x01\n" +
+	"\x1cSaveTemplateProvidersRequest\x12\x15\n" +
 	"\x06tpl_id\x18\x01 \x01(\x04R\x05tplId\x12$\n" +
 	"\x0etpl_version_id\x18\x02 \x01(\x04R\ftplVersionId\x12I\n" +
-	"\x11related_providers\x18\x03 \x03(\v2\x1c.template.v1.RelatedProviderR\x10relatedProviders\"T\n" +
-	"\x15SaveProvidersResponse\x12;\n" +
-	"\tproviders\x18\x01 \x03(\v2\x1d.template.v1.TemplateProviderR\tproviders2\xf8\x01\n" +
-	"\x0fTemplateService\x12;\n" +
-	"\x04Save\x12\x18.template.v1.SaveRequest\x1a\x19.template.v1.SaveResponse\x12P\n" +
-	"\vSaveVersion\x12\x1f.template.v1.SaveVersionRequest\x1a .template.v1.SaveVersionResponse\x12V\n" +
-	"\rSaveProviders\x12!.template.v1.SaveProvidersRequest\x1a\".template.v1.SaveProvidersResponseB\xb1\x01\n" +
+	"\x11related_providers\x18\x03 \x03(\v2\x1c.template.v1.RelatedProviderR\x10relatedProviders\"\\\n" +
+	"\x1dSaveTemplateProvidersResponse\x12;\n" +
+	"\tproviders\x18\x01 \x03(\v2\x1d.template.v1.TemplateProviderR\tproviders\"'\n" +
+	"\x15DeleteTemplateRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"\x18\n" +
+	"\x16DeleteTemplateResponse\".\n" +
+	"\x1cDeleteTemplateVersionRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"\x1f\n" +
+	"\x1dDeleteTemplateVersionResponse\"/\n" +
+	"\x1dDeleteTemplateProviderRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\" \n" +
+	"\x1eDeleteTemplateProviderResponse\"\x9c\x01\n" +
+	"\x1aListTemplateByBizIdRequest\x129\n" +
+	"\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12\x16\n" +
+	"\x06offset\x18\x02 \x01(\x05R\x06offset\x12\x14\n" +
+	"\x05limit\x18\x03 \x01(\x05R\x05limit\x12\x15\n" +
+	"\x06biz_id\x18\x04 \x01(\x04R\x05bizId\"o\n" +
+	"\x1bListTemplateByBizIdResponse\x12:\n" +
+	"\ttemplates\x18\x01 \x03(\v2\x1c.template.v1.ChannelTemplateR\ttemplates\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\"n\n" +
+	"\x1aListTemplateVersionRequest\x129\n" +
+	"\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12\x15\n" +
+	"\x06tpl_id\x18\x02 \x01(\x04R\x05tplId\"W\n" +
+	"\x1bListTemplateVersionResponse\x128\n" +
+	"\bversions\x18\x01 \x03(\v2\x1c.template.v1.TemplateVersionR\bversions\"w\n" +
+	"\x1bListTemplateProviderRequest\x129\n" +
+	"\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12\x1d\n" +
+	"\n" +
+	"version_id\x18\x02 \x01(\x04R\tversionId\"[\n" +
+	"\x1cListTemplateProviderResponse\x12;\n" +
+	"\tproviders\x18\x01 \x03(\v2\x1d.template.v1.TemplateProviderR\tproviders2\xbf\a\n" +
+	"\x0fTemplateService\x12S\n" +
+	"\fSaveTemplate\x12 .template.v1.SaveTemplateRequest\x1a!.template.v1.SaveTemplateResponse\x12h\n" +
+	"\x13SaveTemplateVersion\x12'.template.v1.SaveTemplateVersionRequest\x1a(.template.v1.SaveTemplateVersionResponse\x12n\n" +
+	"\x15SaveTemplateProviders\x12).template.v1.SaveTemplateProvidersRequest\x1a*.template.v1.SaveTemplateProvidersResponse\x12Y\n" +
+	"\x0eDeleteTemplate\x12\".template.v1.DeleteTemplateRequest\x1a#.template.v1.DeleteTemplateResponse\x12n\n" +
+	"\x15DeleteTemplateVersion\x12).template.v1.DeleteTemplateVersionRequest\x1a*.template.v1.DeleteTemplateVersionResponse\x12q\n" +
+	"\x16DeleteTemplateProvider\x12*.template.v1.DeleteTemplateProviderRequest\x1a+.template.v1.DeleteTemplateProviderResponse\x12h\n" +
+	"\x13ListTemplateByBizId\x12'.template.v1.ListTemplateByBizIdRequest\x1a(.template.v1.ListTemplateByBizIdResponse\x12h\n" +
+	"\x13ListTemplateVersion\x12'.template.v1.ListTemplateVersionRequest\x1a(.template.v1.ListTemplateVersionResponse\x12k\n" +
+	"\x14ListTemplateProvider\x12(.template.v1.ListTemplateProviderRequest\x1a).template.v1.ListTemplateProviderResponseB\xb1\x01\n" +
 	"\x0fcom.template.v1B\x14ChannelTemplateProtoP\x01Z;github.com/JrMarcco/kuryr-api/api/go/template/v1;templatev1\xa2\x02\x03TXX\xaa\x02\vTemplate.V1\xca\x02\vTemplate\\V1\xe2\x02\x17Template\\V1\\GPBMetadata\xea\x02\fTemplate::V1b\x06proto3"
 
 var (
@@ -924,39 +1441,71 @@ func file_template_v1_channel_template_proto_rawDescGZIP() []byte {
 	return file_template_v1_channel_template_proto_rawDescData
 }
 
-var file_template_v1_channel_template_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_template_v1_channel_template_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_template_v1_channel_template_proto_goTypes = []any{
-	(*ChannelTemplate)(nil),       // 0: template.v1.ChannelTemplate
-	(*TemplateVersion)(nil),       // 1: template.v1.TemplateVersion
-	(*TemplateProvider)(nil),      // 2: template.v1.TemplateProvider
-	(*SaveRequest)(nil),           // 3: template.v1.SaveRequest
-	(*SaveResponse)(nil),          // 4: template.v1.SaveResponse
-	(*SaveVersionRequest)(nil),    // 5: template.v1.SaveVersionRequest
-	(*SaveVersionResponse)(nil),   // 6: template.v1.SaveVersionResponse
-	(*RelatedProvider)(nil),       // 7: template.v1.RelatedProvider
-	(*SaveProvidersRequest)(nil),  // 8: template.v1.SaveProvidersRequest
-	(*SaveProvidersResponse)(nil), // 9: template.v1.SaveProvidersResponse
-	(v1.Channel)(0),               // 10: common.v1.Channel
+	(*ChannelTemplate)(nil),                // 0: template.v1.ChannelTemplate
+	(*TemplateVersion)(nil),                // 1: template.v1.TemplateVersion
+	(*TemplateProvider)(nil),               // 2: template.v1.TemplateProvider
+	(*SaveTemplateRequest)(nil),            // 3: template.v1.SaveTemplateRequest
+	(*SaveTemplateResponse)(nil),           // 4: template.v1.SaveTemplateResponse
+	(*SaveTemplateVersionRequest)(nil),     // 5: template.v1.SaveTemplateVersionRequest
+	(*SaveTemplateVersionResponse)(nil),    // 6: template.v1.SaveTemplateVersionResponse
+	(*RelatedProvider)(nil),                // 7: template.v1.RelatedProvider
+	(*SaveTemplateProvidersRequest)(nil),   // 8: template.v1.SaveTemplateProvidersRequest
+	(*SaveTemplateProvidersResponse)(nil),  // 9: template.v1.SaveTemplateProvidersResponse
+	(*DeleteTemplateRequest)(nil),          // 10: template.v1.DeleteTemplateRequest
+	(*DeleteTemplateResponse)(nil),         // 11: template.v1.DeleteTemplateResponse
+	(*DeleteTemplateVersionRequest)(nil),   // 12: template.v1.DeleteTemplateVersionRequest
+	(*DeleteTemplateVersionResponse)(nil),  // 13: template.v1.DeleteTemplateVersionResponse
+	(*DeleteTemplateProviderRequest)(nil),  // 14: template.v1.DeleteTemplateProviderRequest
+	(*DeleteTemplateProviderResponse)(nil), // 15: template.v1.DeleteTemplateProviderResponse
+	(*ListTemplateByBizIdRequest)(nil),     // 16: template.v1.ListTemplateByBizIdRequest
+	(*ListTemplateByBizIdResponse)(nil),    // 17: template.v1.ListTemplateByBizIdResponse
+	(*ListTemplateVersionRequest)(nil),     // 18: template.v1.ListTemplateVersionRequest
+	(*ListTemplateVersionResponse)(nil),    // 19: template.v1.ListTemplateVersionResponse
+	(*ListTemplateProviderRequest)(nil),    // 20: template.v1.ListTemplateProviderRequest
+	(*ListTemplateProviderResponse)(nil),   // 21: template.v1.ListTemplateProviderResponse
+	(v1.Channel)(0),                        // 22: common.v1.Channel
+	(*fieldmaskpb.FieldMask)(nil),          // 23: google.protobuf.FieldMask
 }
 var file_template_v1_channel_template_proto_depIdxs = []int32{
-	10, // 0: template.v1.ChannelTemplate.channel:type_name -> common.v1.Channel
-	10, // 1: template.v1.TemplateProvider.provider_channel:type_name -> common.v1.Channel
-	10, // 2: template.v1.SaveRequest.channel:type_name -> common.v1.Channel
-	0,  // 3: template.v1.SaveResponse.template:type_name -> template.v1.ChannelTemplate
-	1,  // 4: template.v1.SaveVersionResponse.version:type_name -> template.v1.TemplateVersion
-	7,  // 5: template.v1.SaveProvidersRequest.related_providers:type_name -> template.v1.RelatedProvider
-	2,  // 6: template.v1.SaveProvidersResponse.providers:type_name -> template.v1.TemplateProvider
-	3,  // 7: template.v1.TemplateService.Save:input_type -> template.v1.SaveRequest
-	5,  // 8: template.v1.TemplateService.SaveVersion:input_type -> template.v1.SaveVersionRequest
-	8,  // 9: template.v1.TemplateService.SaveProviders:input_type -> template.v1.SaveProvidersRequest
-	4,  // 10: template.v1.TemplateService.Save:output_type -> template.v1.SaveResponse
-	6,  // 11: template.v1.TemplateService.SaveVersion:output_type -> template.v1.SaveVersionResponse
-	9,  // 12: template.v1.TemplateService.SaveProviders:output_type -> template.v1.SaveProvidersResponse
-	10, // [10:13] is the sub-list for method output_type
-	7,  // [7:10] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	22, // 0: template.v1.ChannelTemplate.channel:type_name -> common.v1.Channel
+	22, // 1: template.v1.TemplateProvider.provider_channel:type_name -> common.v1.Channel
+	0,  // 2: template.v1.SaveTemplateRequest.template:type_name -> template.v1.ChannelTemplate
+	0,  // 3: template.v1.SaveTemplateResponse.template:type_name -> template.v1.ChannelTemplate
+	1,  // 4: template.v1.SaveTemplateVersionRequest.version:type_name -> template.v1.TemplateVersion
+	1,  // 5: template.v1.SaveTemplateVersionResponse.version:type_name -> template.v1.TemplateVersion
+	7,  // 6: template.v1.SaveTemplateProvidersRequest.related_providers:type_name -> template.v1.RelatedProvider
+	2,  // 7: template.v1.SaveTemplateProvidersResponse.providers:type_name -> template.v1.TemplateProvider
+	23, // 8: template.v1.ListTemplateByBizIdRequest.field_mask:type_name -> google.protobuf.FieldMask
+	0,  // 9: template.v1.ListTemplateByBizIdResponse.templates:type_name -> template.v1.ChannelTemplate
+	23, // 10: template.v1.ListTemplateVersionRequest.field_mask:type_name -> google.protobuf.FieldMask
+	1,  // 11: template.v1.ListTemplateVersionResponse.versions:type_name -> template.v1.TemplateVersion
+	23, // 12: template.v1.ListTemplateProviderRequest.field_mask:type_name -> google.protobuf.FieldMask
+	2,  // 13: template.v1.ListTemplateProviderResponse.providers:type_name -> template.v1.TemplateProvider
+	3,  // 14: template.v1.TemplateService.SaveTemplate:input_type -> template.v1.SaveTemplateRequest
+	5,  // 15: template.v1.TemplateService.SaveTemplateVersion:input_type -> template.v1.SaveTemplateVersionRequest
+	8,  // 16: template.v1.TemplateService.SaveTemplateProviders:input_type -> template.v1.SaveTemplateProvidersRequest
+	10, // 17: template.v1.TemplateService.DeleteTemplate:input_type -> template.v1.DeleteTemplateRequest
+	12, // 18: template.v1.TemplateService.DeleteTemplateVersion:input_type -> template.v1.DeleteTemplateVersionRequest
+	14, // 19: template.v1.TemplateService.DeleteTemplateProvider:input_type -> template.v1.DeleteTemplateProviderRequest
+	16, // 20: template.v1.TemplateService.ListTemplateByBizId:input_type -> template.v1.ListTemplateByBizIdRequest
+	18, // 21: template.v1.TemplateService.ListTemplateVersion:input_type -> template.v1.ListTemplateVersionRequest
+	20, // 22: template.v1.TemplateService.ListTemplateProvider:input_type -> template.v1.ListTemplateProviderRequest
+	4,  // 23: template.v1.TemplateService.SaveTemplate:output_type -> template.v1.SaveTemplateResponse
+	6,  // 24: template.v1.TemplateService.SaveTemplateVersion:output_type -> template.v1.SaveTemplateVersionResponse
+	9,  // 25: template.v1.TemplateService.SaveTemplateProviders:output_type -> template.v1.SaveTemplateProvidersResponse
+	11, // 26: template.v1.TemplateService.DeleteTemplate:output_type -> template.v1.DeleteTemplateResponse
+	13, // 27: template.v1.TemplateService.DeleteTemplateVersion:output_type -> template.v1.DeleteTemplateVersionResponse
+	15, // 28: template.v1.TemplateService.DeleteTemplateProvider:output_type -> template.v1.DeleteTemplateProviderResponse
+	17, // 29: template.v1.TemplateService.ListTemplateByBizId:output_type -> template.v1.ListTemplateByBizIdResponse
+	19, // 30: template.v1.TemplateService.ListTemplateVersion:output_type -> template.v1.ListTemplateVersionResponse
+	21, // 31: template.v1.TemplateService.ListTemplateProvider:output_type -> template.v1.ListTemplateProviderResponse
+	23, // [23:32] is the sub-list for method output_type
+	14, // [14:23] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_template_v1_channel_template_proto_init() }
@@ -970,7 +1519,7 @@ func file_template_v1_channel_template_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_template_v1_channel_template_proto_rawDesc), len(file_template_v1_channel_template_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
