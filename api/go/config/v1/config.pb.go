@@ -10,6 +10,7 @@ import (
 	v1 "github.com/JrMarcco/kuryr-api/api/go/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -363,6 +364,8 @@ type BizConfig struct {
 	QuotaConfig    *QuotaConfig           `protobuf:"bytes,5,opt,name=quota_config,json=quotaConfig,proto3" json:"quota_config,omitempty"`
 	CallbackConfig *CallbackConfig        `protobuf:"bytes,6,opt,name=callback_config,json=callbackConfig,proto3" json:"callback_config,omitempty"`
 	RateLimit      int32                  `protobuf:"varint,7,opt,name=rate_limit,json=rateLimit,proto3" json:"rate_limit,omitempty"`
+	CreatedAt      int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt      int64                  `protobuf:"varint,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -442,6 +445,20 @@ func (x *BizConfig) GetCallbackConfig() *CallbackConfig {
 func (x *BizConfig) GetRateLimit() int32 {
 	if x != nil {
 		return x.RateLimit
+	}
+	return 0
+}
+
+func (x *BizConfig) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *BizConfig) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
 	}
 	return 0
 }
@@ -534,16 +551,113 @@ func (x *SaveResponse) GetBizConfig() *BizConfig {
 	return nil
 }
 
+type UpdateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	BizConfig     *BizConfig             `protobuf:"bytes,2,opt,name=biz_config,json=bizConfig,proto3" json:"biz_config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateRequest) Reset() {
+	*x = UpdateRequest{}
+	mi := &file_config_v1_config_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateRequest) ProtoMessage() {}
+
+func (x *UpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_config_v1_config_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateRequest.ProtoReflect.Descriptor instead.
+func (*UpdateRequest) Descriptor() ([]byte, []int) {
+	return file_config_v1_config_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *UpdateRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
+}
+
+func (x *UpdateRequest) GetBizConfig() *BizConfig {
+	if x != nil {
+		return x.BizConfig
+	}
+	return nil
+}
+
+type UpdateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BizConfig     *BizConfig             `protobuf:"bytes,1,opt,name=biz_config,json=bizConfig,proto3" json:"biz_config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateResponse) Reset() {
+	*x = UpdateResponse{}
+	mi := &file_config_v1_config_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateResponse) ProtoMessage() {}
+
+func (x *UpdateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_config_v1_config_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateResponse.ProtoReflect.Descriptor instead.
+func (*UpdateResponse) Descriptor() ([]byte, []int) {
+	return file_config_v1_config_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *UpdateResponse) GetBizConfig() *BizConfig {
+	if x != nil {
+		return x.BizConfig
+	}
+	return nil
+}
+
 type FindByIdRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
+	Id            uint64                 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FindByIdRequest) Reset() {
 	*x = FindByIdRequest{}
-	mi := &file_config_v1_config_proto_msgTypes[9]
+	mi := &file_config_v1_config_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -555,7 +669,7 @@ func (x *FindByIdRequest) String() string {
 func (*FindByIdRequest) ProtoMessage() {}
 
 func (x *FindByIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[9]
+	mi := &file_config_v1_config_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -568,7 +682,14 @@ func (x *FindByIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FindByIdRequest.ProtoReflect.Descriptor instead.
 func (*FindByIdRequest) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{9}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *FindByIdRequest) GetFieldMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.FieldMask
+	}
+	return nil
 }
 
 func (x *FindByIdRequest) GetId() uint64 {
@@ -587,7 +708,7 @@ type FindByIdResponse struct {
 
 func (x *FindByIdResponse) Reset() {
 	*x = FindByIdResponse{}
-	mi := &file_config_v1_config_proto_msgTypes[10]
+	mi := &file_config_v1_config_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -599,7 +720,7 @@ func (x *FindByIdResponse) String() string {
 func (*FindByIdResponse) ProtoMessage() {}
 
 func (x *FindByIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[10]
+	mi := &file_config_v1_config_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -612,7 +733,7 @@ func (x *FindByIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FindByIdResponse.ProtoReflect.Descriptor instead.
 func (*FindByIdResponse) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{10}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *FindByIdResponse) GetConfig() *BizConfig {
@@ -626,7 +747,7 @@ var File_config_v1_config_proto protoreflect.FileDescriptor
 
 const file_config_v1_config_proto_rawDesc = "" +
 	"\n" +
-	"\x16config/v1/config.proto\x12\tconfig.v1\x1a\x15common/v1/types.proto\"\x8d\x01\n" +
+	"\x16config/v1/config.proto\x12\tconfig.v1\x1a\x15common/v1/types.proto\x1a google/protobuf/field_mask.proto\"\x8d\x01\n" +
 	"\x11RetryPolicyConfig\x12&\n" +
 	"\x0fmax_retry_times\x18\x01 \x01(\x05R\rmaxRetryTimes\x12(\n" +
 	"\x10init_interval_ms\x18\x02 \x01(\x05R\x0einitIntervalMs\x12&\n" +
@@ -646,7 +767,7 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"\x05email\x18\x02 \x01(\x05R\x05email\"a\n" +
 	"\vQuotaConfig\x12*\n" +
 	"\amonthly\x18\x01 \x01(\v2\x10.config.v1.QuotaR\amonthly\x12&\n" +
-	"\x05daily\x18\x02 \x01(\v2\x10.config.v1.QuotaR\x05daily\"\xb0\x02\n" +
+	"\x05daily\x18\x02 \x01(\v2\x10.config.v1.QuotaR\x05daily\"\xee\x02\n" +
 	"\tBizConfig\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x15\n" +
 	"\x06biz_id\x18\x02 \x01(\x04R\x05bizId\x12\x1d\n" +
@@ -656,19 +777,34 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"\fquota_config\x18\x05 \x01(\v2\x16.config.v1.QuotaConfigR\vquotaConfig\x12B\n" +
 	"\x0fcallback_config\x18\x06 \x01(\v2\x19.config.v1.CallbackConfigR\x0ecallbackConfig\x12\x1d\n" +
 	"\n" +
-	"rate_limit\x18\a \x01(\x05R\trateLimit\"B\n" +
+	"rate_limit\x18\a \x01(\x05R\trateLimit\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\b \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\t \x01(\x03R\tupdatedAt\"B\n" +
 	"\vSaveRequest\x123\n" +
 	"\n" +
 	"biz_config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig\"C\n" +
 	"\fSaveResponse\x123\n" +
 	"\n" +
-	"biz_config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig\"!\n" +
-	"\x0fFindByIdRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"@\n" +
+	"biz_config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig\"\x7f\n" +
+	"\rUpdateRequest\x129\n" +
+	"\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x123\n" +
+	"\n" +
+	"biz_config\x18\x02 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig\"E\n" +
+	"\x0eUpdateResponse\x123\n" +
+	"\n" +
+	"biz_config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig\"\\\n" +
+	"\x0fFindByIdRequest\x129\n" +
+	"\n" +
+	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x04R\x02id\"@\n" +
 	"\x10FindByIdResponse\x12,\n" +
-	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config2\x90\x01\n" +
+	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config2\xcf\x01\n" +
 	"\x10BizConfigService\x127\n" +
-	"\x04Save\x12\x16.config.v1.SaveRequest\x1a\x17.config.v1.SaveResponse\x12C\n" +
+	"\x04Save\x12\x16.config.v1.SaveRequest\x1a\x17.config.v1.SaveResponse\x12=\n" +
+	"\x06Update\x12\x18.config.v1.UpdateRequest\x1a\x19.config.v1.UpdateResponse\x12C\n" +
 	"\bFindById\x12\x1a.config.v1.FindByIdRequest\x1a\x1b.config.v1.FindByIdResponseB\x9a\x01\n" +
 	"\rcom.config.v1B\vConfigProtoP\x01Z7github.com/JrMarcco/kuryr-api/api/go/config/v1;configv1\xa2\x02\x03CXX\xaa\x02\tConfig.V1\xca\x02\tConfig\\V1\xe2\x02\x15Config\\V1\\GPBMetadata\xea\x02\n" +
 	"Config::V1b\x06proto3"
@@ -685,24 +821,27 @@ func file_config_v1_config_proto_rawDescGZIP() []byte {
 	return file_config_v1_config_proto_rawDescData
 }
 
-var file_config_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_config_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_config_v1_config_proto_goTypes = []any{
-	(*RetryPolicyConfig)(nil), // 0: config.v1.RetryPolicyConfig
-	(*CallbackConfig)(nil),    // 1: config.v1.CallbackConfig
-	(*ChannelItem)(nil),       // 2: config.v1.ChannelItem
-	(*ChannelConfig)(nil),     // 3: config.v1.ChannelConfig
-	(*Quota)(nil),             // 4: config.v1.Quota
-	(*QuotaConfig)(nil),       // 5: config.v1.QuotaConfig
-	(*BizConfig)(nil),         // 6: config.v1.BizConfig
-	(*SaveRequest)(nil),       // 7: config.v1.SaveRequest
-	(*SaveResponse)(nil),      // 8: config.v1.SaveResponse
-	(*FindByIdRequest)(nil),   // 9: config.v1.FindByIdRequest
-	(*FindByIdResponse)(nil),  // 10: config.v1.FindByIdResponse
-	(v1.Channel)(0),           // 11: common.v1.Channel
+	(*RetryPolicyConfig)(nil),     // 0: config.v1.RetryPolicyConfig
+	(*CallbackConfig)(nil),        // 1: config.v1.CallbackConfig
+	(*ChannelItem)(nil),           // 2: config.v1.ChannelItem
+	(*ChannelConfig)(nil),         // 3: config.v1.ChannelConfig
+	(*Quota)(nil),                 // 4: config.v1.Quota
+	(*QuotaConfig)(nil),           // 5: config.v1.QuotaConfig
+	(*BizConfig)(nil),             // 6: config.v1.BizConfig
+	(*SaveRequest)(nil),           // 7: config.v1.SaveRequest
+	(*SaveResponse)(nil),          // 8: config.v1.SaveResponse
+	(*UpdateRequest)(nil),         // 9: config.v1.UpdateRequest
+	(*UpdateResponse)(nil),        // 10: config.v1.UpdateResponse
+	(*FindByIdRequest)(nil),       // 11: config.v1.FindByIdRequest
+	(*FindByIdResponse)(nil),      // 12: config.v1.FindByIdResponse
+	(v1.Channel)(0),               // 13: common.v1.Channel
+	(*fieldmaskpb.FieldMask)(nil), // 14: google.protobuf.FieldMask
 }
 var file_config_v1_config_proto_depIdxs = []int32{
 	0,  // 0: config.v1.CallbackConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
-	11, // 1: config.v1.ChannelItem.channel:type_name -> common.v1.Channel
+	13, // 1: config.v1.ChannelItem.channel:type_name -> common.v1.Channel
 	2,  // 2: config.v1.ChannelConfig.items:type_name -> config.v1.ChannelItem
 	0,  // 3: config.v1.ChannelConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
 	4,  // 4: config.v1.QuotaConfig.monthly:type_name -> config.v1.Quota
@@ -712,16 +851,22 @@ var file_config_v1_config_proto_depIdxs = []int32{
 	1,  // 8: config.v1.BizConfig.callback_config:type_name -> config.v1.CallbackConfig
 	6,  // 9: config.v1.SaveRequest.biz_config:type_name -> config.v1.BizConfig
 	6,  // 10: config.v1.SaveResponse.biz_config:type_name -> config.v1.BizConfig
-	6,  // 11: config.v1.FindByIdResponse.config:type_name -> config.v1.BizConfig
-	7,  // 12: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
-	9,  // 13: config.v1.BizConfigService.FindById:input_type -> config.v1.FindByIdRequest
-	8,  // 14: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
-	10, // 15: config.v1.BizConfigService.FindById:output_type -> config.v1.FindByIdResponse
-	14, // [14:16] is the sub-list for method output_type
-	12, // [12:14] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	14, // 11: config.v1.UpdateRequest.field_mask:type_name -> google.protobuf.FieldMask
+	6,  // 12: config.v1.UpdateRequest.biz_config:type_name -> config.v1.BizConfig
+	6,  // 13: config.v1.UpdateResponse.biz_config:type_name -> config.v1.BizConfig
+	14, // 14: config.v1.FindByIdRequest.field_mask:type_name -> google.protobuf.FieldMask
+	6,  // 15: config.v1.FindByIdResponse.config:type_name -> config.v1.BizConfig
+	7,  // 16: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
+	9,  // 17: config.v1.BizConfigService.Update:input_type -> config.v1.UpdateRequest
+	11, // 18: config.v1.BizConfigService.FindById:input_type -> config.v1.FindByIdRequest
+	8,  // 19: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
+	10, // 20: config.v1.BizConfigService.Update:output_type -> config.v1.UpdateResponse
+	12, // 21: config.v1.BizConfigService.FindById:output_type -> config.v1.FindByIdResponse
+	19, // [19:22] is the sub-list for method output_type
+	16, // [16:19] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_config_v1_config_proto_init() }
@@ -735,7 +880,7 @@ func file_config_v1_config_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_config_v1_config_proto_rawDesc), len(file_config_v1_config_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
