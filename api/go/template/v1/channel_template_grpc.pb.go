@@ -20,13 +20,13 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	TemplateService_SaveTemplate_FullMethodName           = "/template.v1.TemplateService/SaveTemplate"
-	TemplateService_SaveTemplateVersion_FullMethodName    = "/template.v1.TemplateService/SaveTemplateVersion"
-	TemplateService_SaveTemplateProviders_FullMethodName  = "/template.v1.TemplateService/SaveTemplateProviders"
 	TemplateService_DeleteTemplate_FullMethodName         = "/template.v1.TemplateService/DeleteTemplate"
-	TemplateService_DeleteTemplateVersion_FullMethodName  = "/template.v1.TemplateService/DeleteTemplateVersion"
-	TemplateService_DeleteTemplateProvider_FullMethodName = "/template.v1.TemplateService/DeleteTemplateProvider"
 	TemplateService_ListTemplateByBizId_FullMethodName    = "/template.v1.TemplateService/ListTemplateByBizId"
+	TemplateService_SaveTemplateVersion_FullMethodName    = "/template.v1.TemplateService/SaveTemplateVersion"
+	TemplateService_DeleteTemplateVersion_FullMethodName  = "/template.v1.TemplateService/DeleteTemplateVersion"
 	TemplateService_ListTemplateVersion_FullMethodName    = "/template.v1.TemplateService/ListTemplateVersion"
+	TemplateService_SaveTemplateProviders_FullMethodName  = "/template.v1.TemplateService/SaveTemplateProviders"
+	TemplateService_DeleteTemplateProvider_FullMethodName = "/template.v1.TemplateService/DeleteTemplateProvider"
 	TemplateService_ListTemplateProvider_FullMethodName   = "/template.v1.TemplateService/ListTemplateProvider"
 )
 
@@ -35,13 +35,13 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TemplateServiceClient interface {
 	SaveTemplate(ctx context.Context, in *SaveTemplateRequest, opts ...grpc.CallOption) (*SaveTemplateResponse, error)
-	SaveTemplateVersion(ctx context.Context, in *SaveTemplateVersionRequest, opts ...grpc.CallOption) (*SaveTemplateVersionResponse, error)
-	SaveTemplateProviders(ctx context.Context, in *SaveTemplateProvidersRequest, opts ...grpc.CallOption) (*SaveTemplateProvidersResponse, error)
 	DeleteTemplate(ctx context.Context, in *DeleteTemplateRequest, opts ...grpc.CallOption) (*DeleteTemplateResponse, error)
-	DeleteTemplateVersion(ctx context.Context, in *DeleteTemplateVersionRequest, opts ...grpc.CallOption) (*DeleteTemplateVersionResponse, error)
-	DeleteTemplateProvider(ctx context.Context, in *DeleteTemplateProviderRequest, opts ...grpc.CallOption) (*DeleteTemplateProviderResponse, error)
 	ListTemplateByBizId(ctx context.Context, in *ListTemplateByBizIdRequest, opts ...grpc.CallOption) (*ListTemplateByBizIdResponse, error)
+	SaveTemplateVersion(ctx context.Context, in *SaveTemplateVersionRequest, opts ...grpc.CallOption) (*SaveTemplateVersionResponse, error)
+	DeleteTemplateVersion(ctx context.Context, in *DeleteTemplateVersionRequest, opts ...grpc.CallOption) (*DeleteTemplateVersionResponse, error)
 	ListTemplateVersion(ctx context.Context, in *ListTemplateVersionRequest, opts ...grpc.CallOption) (*ListTemplateVersionResponse, error)
+	SaveTemplateProviders(ctx context.Context, in *SaveTemplateProvidersRequest, opts ...grpc.CallOption) (*SaveTemplateProvidersResponse, error)
+	DeleteTemplateProvider(ctx context.Context, in *DeleteTemplateProviderRequest, opts ...grpc.CallOption) (*DeleteTemplateProviderResponse, error)
 	ListTemplateProvider(ctx context.Context, in *ListTemplateProviderRequest, opts ...grpc.CallOption) (*ListTemplateProviderResponse, error)
 }
 
@@ -63,50 +63,10 @@ func (c *templateServiceClient) SaveTemplate(ctx context.Context, in *SaveTempla
 	return out, nil
 }
 
-func (c *templateServiceClient) SaveTemplateVersion(ctx context.Context, in *SaveTemplateVersionRequest, opts ...grpc.CallOption) (*SaveTemplateVersionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SaveTemplateVersionResponse)
-	err := c.cc.Invoke(ctx, TemplateService_SaveTemplateVersion_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *templateServiceClient) SaveTemplateProviders(ctx context.Context, in *SaveTemplateProvidersRequest, opts ...grpc.CallOption) (*SaveTemplateProvidersResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SaveTemplateProvidersResponse)
-	err := c.cc.Invoke(ctx, TemplateService_SaveTemplateProviders_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *templateServiceClient) DeleteTemplate(ctx context.Context, in *DeleteTemplateRequest, opts ...grpc.CallOption) (*DeleteTemplateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteTemplateResponse)
 	err := c.cc.Invoke(ctx, TemplateService_DeleteTemplate_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *templateServiceClient) DeleteTemplateVersion(ctx context.Context, in *DeleteTemplateVersionRequest, opts ...grpc.CallOption) (*DeleteTemplateVersionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteTemplateVersionResponse)
-	err := c.cc.Invoke(ctx, TemplateService_DeleteTemplateVersion_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *templateServiceClient) DeleteTemplateProvider(ctx context.Context, in *DeleteTemplateProviderRequest, opts ...grpc.CallOption) (*DeleteTemplateProviderResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteTemplateProviderResponse)
-	err := c.cc.Invoke(ctx, TemplateService_DeleteTemplateProvider_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -123,10 +83,50 @@ func (c *templateServiceClient) ListTemplateByBizId(ctx context.Context, in *Lis
 	return out, nil
 }
 
+func (c *templateServiceClient) SaveTemplateVersion(ctx context.Context, in *SaveTemplateVersionRequest, opts ...grpc.CallOption) (*SaveTemplateVersionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SaveTemplateVersionResponse)
+	err := c.cc.Invoke(ctx, TemplateService_SaveTemplateVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *templateServiceClient) DeleteTemplateVersion(ctx context.Context, in *DeleteTemplateVersionRequest, opts ...grpc.CallOption) (*DeleteTemplateVersionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTemplateVersionResponse)
+	err := c.cc.Invoke(ctx, TemplateService_DeleteTemplateVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *templateServiceClient) ListTemplateVersion(ctx context.Context, in *ListTemplateVersionRequest, opts ...grpc.CallOption) (*ListTemplateVersionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListTemplateVersionResponse)
 	err := c.cc.Invoke(ctx, TemplateService_ListTemplateVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *templateServiceClient) SaveTemplateProviders(ctx context.Context, in *SaveTemplateProvidersRequest, opts ...grpc.CallOption) (*SaveTemplateProvidersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SaveTemplateProvidersResponse)
+	err := c.cc.Invoke(ctx, TemplateService_SaveTemplateProviders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *templateServiceClient) DeleteTemplateProvider(ctx context.Context, in *DeleteTemplateProviderRequest, opts ...grpc.CallOption) (*DeleteTemplateProviderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTemplateProviderResponse)
+	err := c.cc.Invoke(ctx, TemplateService_DeleteTemplateProvider_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -148,13 +148,13 @@ func (c *templateServiceClient) ListTemplateProvider(ctx context.Context, in *Li
 // for forward compatibility.
 type TemplateServiceServer interface {
 	SaveTemplate(context.Context, *SaveTemplateRequest) (*SaveTemplateResponse, error)
-	SaveTemplateVersion(context.Context, *SaveTemplateVersionRequest) (*SaveTemplateVersionResponse, error)
-	SaveTemplateProviders(context.Context, *SaveTemplateProvidersRequest) (*SaveTemplateProvidersResponse, error)
 	DeleteTemplate(context.Context, *DeleteTemplateRequest) (*DeleteTemplateResponse, error)
-	DeleteTemplateVersion(context.Context, *DeleteTemplateVersionRequest) (*DeleteTemplateVersionResponse, error)
-	DeleteTemplateProvider(context.Context, *DeleteTemplateProviderRequest) (*DeleteTemplateProviderResponse, error)
 	ListTemplateByBizId(context.Context, *ListTemplateByBizIdRequest) (*ListTemplateByBizIdResponse, error)
+	SaveTemplateVersion(context.Context, *SaveTemplateVersionRequest) (*SaveTemplateVersionResponse, error)
+	DeleteTemplateVersion(context.Context, *DeleteTemplateVersionRequest) (*DeleteTemplateVersionResponse, error)
 	ListTemplateVersion(context.Context, *ListTemplateVersionRequest) (*ListTemplateVersionResponse, error)
+	SaveTemplateProviders(context.Context, *SaveTemplateProvidersRequest) (*SaveTemplateProvidersResponse, error)
+	DeleteTemplateProvider(context.Context, *DeleteTemplateProviderRequest) (*DeleteTemplateProviderResponse, error)
 	ListTemplateProvider(context.Context, *ListTemplateProviderRequest) (*ListTemplateProviderResponse, error)
 }
 
@@ -168,26 +168,26 @@ type UnimplementedTemplateServiceServer struct{}
 func (UnimplementedTemplateServiceServer) SaveTemplate(context.Context, *SaveTemplateRequest) (*SaveTemplateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveTemplate not implemented")
 }
-func (UnimplementedTemplateServiceServer) SaveTemplateVersion(context.Context, *SaveTemplateVersionRequest) (*SaveTemplateVersionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SaveTemplateVersion not implemented")
-}
-func (UnimplementedTemplateServiceServer) SaveTemplateProviders(context.Context, *SaveTemplateProvidersRequest) (*SaveTemplateProvidersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SaveTemplateProviders not implemented")
-}
 func (UnimplementedTemplateServiceServer) DeleteTemplate(context.Context, *DeleteTemplateRequest) (*DeleteTemplateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTemplate not implemented")
-}
-func (UnimplementedTemplateServiceServer) DeleteTemplateVersion(context.Context, *DeleteTemplateVersionRequest) (*DeleteTemplateVersionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteTemplateVersion not implemented")
-}
-func (UnimplementedTemplateServiceServer) DeleteTemplateProvider(context.Context, *DeleteTemplateProviderRequest) (*DeleteTemplateProviderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteTemplateProvider not implemented")
 }
 func (UnimplementedTemplateServiceServer) ListTemplateByBizId(context.Context, *ListTemplateByBizIdRequest) (*ListTemplateByBizIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTemplateByBizId not implemented")
 }
+func (UnimplementedTemplateServiceServer) SaveTemplateVersion(context.Context, *SaveTemplateVersionRequest) (*SaveTemplateVersionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveTemplateVersion not implemented")
+}
+func (UnimplementedTemplateServiceServer) DeleteTemplateVersion(context.Context, *DeleteTemplateVersionRequest) (*DeleteTemplateVersionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTemplateVersion not implemented")
+}
 func (UnimplementedTemplateServiceServer) ListTemplateVersion(context.Context, *ListTemplateVersionRequest) (*ListTemplateVersionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTemplateVersion not implemented")
+}
+func (UnimplementedTemplateServiceServer) SaveTemplateProviders(context.Context, *SaveTemplateProvidersRequest) (*SaveTemplateProvidersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveTemplateProviders not implemented")
+}
+func (UnimplementedTemplateServiceServer) DeleteTemplateProvider(context.Context, *DeleteTemplateProviderRequest) (*DeleteTemplateProviderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTemplateProvider not implemented")
 }
 func (UnimplementedTemplateServiceServer) ListTemplateProvider(context.Context, *ListTemplateProviderRequest) (*ListTemplateProviderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTemplateProvider not implemented")
@@ -230,42 +230,6 @@ func _TemplateService_SaveTemplate_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TemplateService_SaveTemplateVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SaveTemplateVersionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TemplateServiceServer).SaveTemplateVersion(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: TemplateService_SaveTemplateVersion_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TemplateServiceServer).SaveTemplateVersion(ctx, req.(*SaveTemplateVersionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TemplateService_SaveTemplateProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SaveTemplateProvidersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TemplateServiceServer).SaveTemplateProviders(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: TemplateService_SaveTemplateProviders_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TemplateServiceServer).SaveTemplateProviders(ctx, req.(*SaveTemplateProvidersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _TemplateService_DeleteTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteTemplateRequest)
 	if err := dec(in); err != nil {
@@ -280,42 +244,6 @@ func _TemplateService_DeleteTemplate_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TemplateServiceServer).DeleteTemplate(ctx, req.(*DeleteTemplateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TemplateService_DeleteTemplateVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteTemplateVersionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TemplateServiceServer).DeleteTemplateVersion(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: TemplateService_DeleteTemplateVersion_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TemplateServiceServer).DeleteTemplateVersion(ctx, req.(*DeleteTemplateVersionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TemplateService_DeleteTemplateProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteTemplateProviderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TemplateServiceServer).DeleteTemplateProvider(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: TemplateService_DeleteTemplateProvider_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TemplateServiceServer).DeleteTemplateProvider(ctx, req.(*DeleteTemplateProviderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -338,6 +266,42 @@ func _TemplateService_ListTemplateByBizId_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TemplateService_SaveTemplateVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveTemplateVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateServiceServer).SaveTemplateVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TemplateService_SaveTemplateVersion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateServiceServer).SaveTemplateVersion(ctx, req.(*SaveTemplateVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TemplateService_DeleteTemplateVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTemplateVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateServiceServer).DeleteTemplateVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TemplateService_DeleteTemplateVersion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateServiceServer).DeleteTemplateVersion(ctx, req.(*DeleteTemplateVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TemplateService_ListTemplateVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListTemplateVersionRequest)
 	if err := dec(in); err != nil {
@@ -352,6 +316,42 @@ func _TemplateService_ListTemplateVersion_Handler(srv interface{}, ctx context.C
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TemplateServiceServer).ListTemplateVersion(ctx, req.(*ListTemplateVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TemplateService_SaveTemplateProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveTemplateProvidersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateServiceServer).SaveTemplateProviders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TemplateService_SaveTemplateProviders_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateServiceServer).SaveTemplateProviders(ctx, req.(*SaveTemplateProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TemplateService_DeleteTemplateProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTemplateProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateServiceServer).DeleteTemplateProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TemplateService_DeleteTemplateProvider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateServiceServer).DeleteTemplateProvider(ctx, req.(*DeleteTemplateProviderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -386,32 +386,32 @@ var TemplateService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TemplateService_SaveTemplate_Handler,
 		},
 		{
-			MethodName: "SaveTemplateVersion",
-			Handler:    _TemplateService_SaveTemplateVersion_Handler,
-		},
-		{
-			MethodName: "SaveTemplateProviders",
-			Handler:    _TemplateService_SaveTemplateProviders_Handler,
-		},
-		{
 			MethodName: "DeleteTemplate",
 			Handler:    _TemplateService_DeleteTemplate_Handler,
-		},
-		{
-			MethodName: "DeleteTemplateVersion",
-			Handler:    _TemplateService_DeleteTemplateVersion_Handler,
-		},
-		{
-			MethodName: "DeleteTemplateProvider",
-			Handler:    _TemplateService_DeleteTemplateProvider_Handler,
 		},
 		{
 			MethodName: "ListTemplateByBizId",
 			Handler:    _TemplateService_ListTemplateByBizId_Handler,
 		},
 		{
+			MethodName: "SaveTemplateVersion",
+			Handler:    _TemplateService_SaveTemplateVersion_Handler,
+		},
+		{
+			MethodName: "DeleteTemplateVersion",
+			Handler:    _TemplateService_DeleteTemplateVersion_Handler,
+		},
+		{
 			MethodName: "ListTemplateVersion",
 			Handler:    _TemplateService_ListTemplateVersion_Handler,
+		},
+		{
+			MethodName: "SaveTemplateProviders",
+			Handler:    _TemplateService_SaveTemplateProviders_Handler,
+		},
+		{
+			MethodName: "DeleteTemplateProvider",
+			Handler:    _TemplateService_DeleteTemplateProvider_Handler,
 		},
 		{
 			MethodName: "ListTemplateProvider",
