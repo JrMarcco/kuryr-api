@@ -20,7 +20,6 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	BizConfigService_Save_FullMethodName     = "/config.v1.BizConfigService/Save"
-	BizConfigService_Delete_FullMethodName   = "/config.v1.BizConfigService/Delete"
 	BizConfigService_FindById_FullMethodName = "/config.v1.BizConfigService/FindById"
 )
 
@@ -29,7 +28,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BizConfigServiceClient interface {
 	Save(ctx context.Context, in *SaveRequest, opts ...grpc.CallOption) (*SaveResponse, error)
-	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 	FindById(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error)
 }
 
@@ -51,16 +49,6 @@ func (c *bizConfigServiceClient) Save(ctx context.Context, in *SaveRequest, opts
 	return out, nil
 }
 
-func (c *bizConfigServiceClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteResponse)
-	err := c.cc.Invoke(ctx, BizConfigService_Delete_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *bizConfigServiceClient) FindById(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(FindByIdResponse)
@@ -76,7 +64,6 @@ func (c *bizConfigServiceClient) FindById(ctx context.Context, in *FindByIdReque
 // for forward compatibility.
 type BizConfigServiceServer interface {
 	Save(context.Context, *SaveRequest) (*SaveResponse, error)
-	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	FindById(context.Context, *FindByIdRequest) (*FindByIdResponse, error)
 }
 
@@ -89,9 +76,6 @@ type UnimplementedBizConfigServiceServer struct{}
 
 func (UnimplementedBizConfigServiceServer) Save(context.Context, *SaveRequest) (*SaveResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Save not implemented")
-}
-func (UnimplementedBizConfigServiceServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedBizConfigServiceServer) FindById(context.Context, *FindByIdRequest) (*FindByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindById not implemented")
@@ -134,24 +118,6 @@ func _BizConfigService_Save_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BizConfigService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BizConfigServiceServer).Delete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BizConfigService_Delete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BizConfigServiceServer).Delete(ctx, req.(*DeleteRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _BizConfigService_FindById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FindByIdRequest)
 	if err := dec(in); err != nil {
@@ -180,10 +146,6 @@ var BizConfigService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Save",
 			Handler:    _BizConfigService_Save_Handler,
-		},
-		{
-			MethodName: "Delete",
-			Handler:    _BizConfigService_Delete_Handler,
 		},
 		{
 			MethodName: "FindById",

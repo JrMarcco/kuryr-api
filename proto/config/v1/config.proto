@@ -3,7 +3,6 @@ syntax = "proto3";
 package config.v1;
 
 import "common/v1/types.proto";
-import "google/protobuf/field_mask.proto";
 
 option go_package = "github.com/JrMarcco/kuryr-api/api/config/v1";
 
@@ -54,27 +53,15 @@ message BizConfig {
 }
 
 message SaveRequest {
-  uint64 biz_id = 1;
-  ChannelConfig channel_config = 2;
-  QuotaConfig quota_config = 3;
-  CallbackConfig callback_config = 4;
-  int32 rate_limit = 5;
+  BizConfig biz_config = 1;
 }
 
 message SaveResponse {
   BizConfig biz_config = 1;
 }
 
-message DeleteRequest {
-  uint64 id = 1;
-}
-
-message DeleteResponse {}
-
 message FindByIdRequest {
-  google.protobuf.FieldMask field_mask = 1;
-
-  uint64 id = 2;
+  uint64 id = 1;
 }
 
 message FindByIdResponse {
@@ -83,6 +70,5 @@ message FindByIdResponse {
 
 service BizConfigService {
   rpc Save(SaveRequest) returns (SaveResponse);
-  rpc Delete(DeleteRequest) returns (DeleteResponse);
   rpc FindById(FindByIdRequest) returns (FindByIdResponse);
 }
