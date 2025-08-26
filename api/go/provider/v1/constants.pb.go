@@ -23,6 +23,7 @@ var UpdatableFields = map[string]struct{}{
 	FieldRegionId:         {},
 	FieldApiKey:           {},
 	FieldApiSecret:        {},
+	FieldWeight:           {},
 	FieldQpsLimit:         {},
 	FieldDailyLimit:       {},
 	FieldAuditCallbackUrl: {},
