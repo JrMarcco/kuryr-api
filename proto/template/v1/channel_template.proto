@@ -71,6 +71,7 @@ service TemplateService {
 
   rpc SaveTemplateVersion(SaveTemplateVersionRequest) returns (SaveTemplateVersionResponse);
   rpc DeleteTemplateVersion(DeleteTemplateVersionRequest) returns (DeleteTemplateVersionResponse);
+  rpc ActivateTemplateVersion(ActivateTemplateVersionRequest) returns (ActivateTemplateVersionResponse);
   rpc ListTemplateVersion(ListTemplateVersionRequest) returns (ListTemplateVersionResponse);
 
   rpc SaveTemplateProviders(SaveTemplateProvidersRequest) returns (SaveTemplateProvidersResponse);
@@ -118,6 +119,13 @@ message DeleteTemplateVersionRequest {
 }
 
 message DeleteTemplateVersionResponse {}
+
+message ActivateTemplateVersionRequest {
+  uint64 tpl_id = 1;
+  uint64 version_id = 2;
+}
+
+message ActivateTemplateVersionResponse {}
 
 message ListTemplateVersionRequest {
   google.protobuf.FieldMask field_mask = 1;

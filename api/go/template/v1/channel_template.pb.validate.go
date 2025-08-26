@@ -1628,6 +1628,216 @@ var _ interface {
 	ErrorName() string
 } = DeleteTemplateVersionResponseValidationError{}
 
+// Validate checks the field values on ActivateTemplateVersionRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ActivateTemplateVersionRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ActivateTemplateVersionRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ActivateTemplateVersionRequestMultiError, or nil if none found.
+func (m *ActivateTemplateVersionRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ActivateTemplateVersionRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TplId
+
+	// no validation rules for VersionId
+
+	if len(errors) > 0 {
+		return ActivateTemplateVersionRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ActivateTemplateVersionRequestMultiError is an error wrapping multiple
+// validation errors returned by ActivateTemplateVersionRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ActivateTemplateVersionRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ActivateTemplateVersionRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ActivateTemplateVersionRequestMultiError) AllErrors() []error { return m }
+
+// ActivateTemplateVersionRequestValidationError is the validation error
+// returned by ActivateTemplateVersionRequest.Validate if the designated
+// constraints aren't met.
+type ActivateTemplateVersionRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ActivateTemplateVersionRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ActivateTemplateVersionRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ActivateTemplateVersionRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ActivateTemplateVersionRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ActivateTemplateVersionRequestValidationError) ErrorName() string {
+	return "ActivateTemplateVersionRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ActivateTemplateVersionRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sActivateTemplateVersionRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ActivateTemplateVersionRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ActivateTemplateVersionRequestValidationError{}
+
+// Validate checks the field values on ActivateTemplateVersionResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ActivateTemplateVersionResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ActivateTemplateVersionResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ActivateTemplateVersionResponseMultiError, or nil if none found.
+func (m *ActivateTemplateVersionResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ActivateTemplateVersionResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ActivateTemplateVersionResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ActivateTemplateVersionResponseMultiError is an error wrapping multiple
+// validation errors returned by ActivateTemplateVersionResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ActivateTemplateVersionResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ActivateTemplateVersionResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ActivateTemplateVersionResponseMultiError) AllErrors() []error { return m }
+
+// ActivateTemplateVersionResponseValidationError is the validation error
+// returned by ActivateTemplateVersionResponse.Validate if the designated
+// constraints aren't met.
+type ActivateTemplateVersionResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ActivateTemplateVersionResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ActivateTemplateVersionResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ActivateTemplateVersionResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ActivateTemplateVersionResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ActivateTemplateVersionResponseValidationError) ErrorName() string {
+	return "ActivateTemplateVersionResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ActivateTemplateVersionResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sActivateTemplateVersionResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ActivateTemplateVersionResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ActivateTemplateVersionResponseValidationError{}
+
 // Validate checks the field values on ListTemplateVersionRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
