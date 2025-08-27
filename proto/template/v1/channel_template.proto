@@ -147,9 +147,7 @@ message SaveTemplateProvidersRequest {
   repeated RelatedProvider related_providers = 3;
 }
 
-message SaveTemplateProvidersResponse {
-  repeated TemplateProvider providers = 1;
-}
+message SaveTemplateProvidersResponse {}
 
 message DeleteTemplateProviderRequest {
   uint64 id = 1;

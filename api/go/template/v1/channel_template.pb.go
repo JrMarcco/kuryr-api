@@ -1181,7 +1181,6 @@ func (x *SaveTemplateProvidersRequest) GetRelatedProviders() []*RelatedProvider 
 
 type SaveTemplateProvidersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Providers     []*TemplateProvider    `protobuf:"bytes,1,rep,name=providers,proto3" json:"providers,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1214,13 +1213,6 @@ func (x *SaveTemplateProvidersResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SaveTemplateProvidersResponse.ProtoReflect.Descriptor instead.
 func (*SaveTemplateProvidersResponse) Descriptor() ([]byte, []int) {
 	return file_template_v1_channel_template_proto_rawDescGZIP(), []int{19}
-}
-
-func (x *SaveTemplateProvidersResponse) GetProviders() []*TemplateProvider {
-	if x != nil {
-		return x.Providers
-	}
-	return nil
 }
 
 type DeleteTemplateProviderRequest struct {
@@ -1497,9 +1489,8 @@ const file_template_v1_channel_template_proto_rawDesc = "" +
 	"\x1cSaveTemplateProvidersRequest\x12\x15\n" +
 	"\x06tpl_id\x18\x01 \x01(\x04R\x05tplId\x12$\n" +
 	"\x0etpl_version_id\x18\x02 \x01(\x04R\ftplVersionId\x12I\n" +
-	"\x11related_providers\x18\x03 \x03(\v2\x1c.template.v1.RelatedProviderR\x10relatedProviders\"\\\n" +
-	"\x1dSaveTemplateProvidersResponse\x12;\n" +
-	"\tproviders\x18\x01 \x03(\v2\x1d.template.v1.TemplateProviderR\tproviders\"/\n" +
+	"\x11related_providers\x18\x03 \x03(\v2\x1c.template.v1.RelatedProviderR\x10relatedProviders\"\x1f\n" +
+	"\x1dSaveTemplateProvidersResponse\"/\n" +
 	"\x1dDeleteTemplateProviderRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\" \n" +
 	"\x1eDeleteTemplateProviderResponse\"w\n" +
@@ -1576,34 +1567,33 @@ var file_template_v1_channel_template_proto_depIdxs = []int32{
 	25, // 8: template.v1.ListTemplateVersionRequest.field_mask:type_name -> google.protobuf.FieldMask
 	1,  // 9: template.v1.ListTemplateVersionResponse.versions:type_name -> template.v1.TemplateVersion
 	17, // 10: template.v1.SaveTemplateProvidersRequest.related_providers:type_name -> template.v1.RelatedProvider
-	2,  // 11: template.v1.SaveTemplateProvidersResponse.providers:type_name -> template.v1.TemplateProvider
-	25, // 12: template.v1.ListTemplateProviderRequest.field_mask:type_name -> google.protobuf.FieldMask
-	2,  // 13: template.v1.ListTemplateProviderResponse.providers:type_name -> template.v1.TemplateProvider
-	3,  // 14: template.v1.TemplateService.SaveTemplate:input_type -> template.v1.SaveTemplateRequest
-	5,  // 15: template.v1.TemplateService.DeleteTemplate:input_type -> template.v1.DeleteTemplateRequest
-	7,  // 16: template.v1.TemplateService.ListTemplateByBizId:input_type -> template.v1.ListTemplateByBizIdRequest
-	9,  // 17: template.v1.TemplateService.SaveTemplateVersion:input_type -> template.v1.SaveTemplateVersionRequest
-	11, // 18: template.v1.TemplateService.DeleteTemplateVersion:input_type -> template.v1.DeleteTemplateVersionRequest
-	13, // 19: template.v1.TemplateService.ActivateTemplateVersion:input_type -> template.v1.ActivateTemplateVersionRequest
-	15, // 20: template.v1.TemplateService.ListTemplateVersion:input_type -> template.v1.ListTemplateVersionRequest
-	18, // 21: template.v1.TemplateService.SaveTemplateProviders:input_type -> template.v1.SaveTemplateProvidersRequest
-	20, // 22: template.v1.TemplateService.DeleteTemplateProvider:input_type -> template.v1.DeleteTemplateProviderRequest
-	22, // 23: template.v1.TemplateService.ListTemplateProvider:input_type -> template.v1.ListTemplateProviderRequest
-	4,  // 24: template.v1.TemplateService.SaveTemplate:output_type -> template.v1.SaveTemplateResponse
-	6,  // 25: template.v1.TemplateService.DeleteTemplate:output_type -> template.v1.DeleteTemplateResponse
-	8,  // 26: template.v1.TemplateService.ListTemplateByBizId:output_type -> template.v1.ListTemplateByBizIdResponse
-	10, // 27: template.v1.TemplateService.SaveTemplateVersion:output_type -> template.v1.SaveTemplateVersionResponse
-	12, // 28: template.v1.TemplateService.DeleteTemplateVersion:output_type -> template.v1.DeleteTemplateVersionResponse
-	14, // 29: template.v1.TemplateService.ActivateTemplateVersion:output_type -> template.v1.ActivateTemplateVersionResponse
-	16, // 30: template.v1.TemplateService.ListTemplateVersion:output_type -> template.v1.ListTemplateVersionResponse
-	19, // 31: template.v1.TemplateService.SaveTemplateProviders:output_type -> template.v1.SaveTemplateProvidersResponse
-	21, // 32: template.v1.TemplateService.DeleteTemplateProvider:output_type -> template.v1.DeleteTemplateProviderResponse
-	23, // 33: template.v1.TemplateService.ListTemplateProvider:output_type -> template.v1.ListTemplateProviderResponse
-	24, // [24:34] is the sub-list for method output_type
-	14, // [14:24] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	25, // 11: template.v1.ListTemplateProviderRequest.field_mask:type_name -> google.protobuf.FieldMask
+	2,  // 12: template.v1.ListTemplateProviderResponse.providers:type_name -> template.v1.TemplateProvider
+	3,  // 13: template.v1.TemplateService.SaveTemplate:input_type -> template.v1.SaveTemplateRequest
+	5,  // 14: template.v1.TemplateService.DeleteTemplate:input_type -> template.v1.DeleteTemplateRequest
+	7,  // 15: template.v1.TemplateService.ListTemplateByBizId:input_type -> template.v1.ListTemplateByBizIdRequest
+	9,  // 16: template.v1.TemplateService.SaveTemplateVersion:input_type -> template.v1.SaveTemplateVersionRequest
+	11, // 17: template.v1.TemplateService.DeleteTemplateVersion:input_type -> template.v1.DeleteTemplateVersionRequest
+	13, // 18: template.v1.TemplateService.ActivateTemplateVersion:input_type -> template.v1.ActivateTemplateVersionRequest
+	15, // 19: template.v1.TemplateService.ListTemplateVersion:input_type -> template.v1.ListTemplateVersionRequest
+	18, // 20: template.v1.TemplateService.SaveTemplateProviders:input_type -> template.v1.SaveTemplateProvidersRequest
+	20, // 21: template.v1.TemplateService.DeleteTemplateProvider:input_type -> template.v1.DeleteTemplateProviderRequest
+	22, // 22: template.v1.TemplateService.ListTemplateProvider:input_type -> template.v1.ListTemplateProviderRequest
+	4,  // 23: template.v1.TemplateService.SaveTemplate:output_type -> template.v1.SaveTemplateResponse
+	6,  // 24: template.v1.TemplateService.DeleteTemplate:output_type -> template.v1.DeleteTemplateResponse
+	8,  // 25: template.v1.TemplateService.ListTemplateByBizId:output_type -> template.v1.ListTemplateByBizIdResponse
+	10, // 26: template.v1.TemplateService.SaveTemplateVersion:output_type -> template.v1.SaveTemplateVersionResponse
+	12, // 27: template.v1.TemplateService.DeleteTemplateVersion:output_type -> template.v1.DeleteTemplateVersionResponse
+	14, // 28: template.v1.TemplateService.ActivateTemplateVersion:output_type -> template.v1.ActivateTemplateVersionResponse
+	16, // 29: template.v1.TemplateService.ListTemplateVersion:output_type -> template.v1.ListTemplateVersionResponse
+	19, // 30: template.v1.TemplateService.SaveTemplateProviders:output_type -> template.v1.SaveTemplateProvidersResponse
+	21, // 31: template.v1.TemplateService.DeleteTemplateProvider:output_type -> template.v1.DeleteTemplateProviderResponse
+	23, // 32: template.v1.TemplateService.ListTemplateProvider:output_type -> template.v1.ListTemplateProviderResponse
+	23, // [23:33] is the sub-list for method output_type
+	13, // [13:23] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_template_v1_channel_template_proto_init() }
