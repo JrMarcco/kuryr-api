@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BizConfigService_Save_FullMethodName     = "/config.v1.BizConfigService/Save"
-	BizConfigService_Update_FullMethodName   = "/config.v1.BizConfigService/Update"
-	BizConfigService_FindById_FullMethodName = "/config.v1.BizConfigService/FindById"
+	BizConfigService_Save_FullMethodName        = "/config.v1.BizConfigService/Save"
+	BizConfigService_Update_FullMethodName      = "/config.v1.BizConfigService/Update"
+	BizConfigService_FindById_FullMethodName    = "/config.v1.BizConfigService/FindById"
+	BizConfigService_FindByBizId_FullMethodName = "/config.v1.BizConfigService/FindByBizId"
 )
 
 // BizConfigServiceClient is the client API for BizConfigService service.
@@ -31,6 +32,7 @@ type BizConfigServiceClient interface {
 	Save(ctx context.Context, in *SaveRequest, opts ...grpc.CallOption) (*SaveResponse, error)
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
 	FindById(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error)
+	FindByBizId(ctx context.Context, in *FindByBizIdRequest, opts ...grpc.CallOption) (*FindByBizIdResponse, error)
 }
 
 type bizConfigServiceClient struct {
@@ -71,6 +73,16 @@ func (c *bizConfigServiceClient) FindById(ctx context.Context, in *FindByIdReque
 	return out, nil
 }
 
+func (c *bizConfigServiceClient) FindByBizId(ctx context.Context, in *FindByBizIdRequest, opts ...grpc.CallOption) (*FindByBizIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FindByBizIdResponse)
+	err := c.cc.Invoke(ctx, BizConfigService_FindByBizId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BizConfigServiceServer is the server API for BizConfigService service.
 // All implementations should embed UnimplementedBizConfigServiceServer
 // for forward compatibility.
@@ -78,6 +90,7 @@ type BizConfigServiceServer interface {
 	Save(context.Context, *SaveRequest) (*SaveResponse, error)
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
 	FindById(context.Context, *FindByIdRequest) (*FindByIdResponse, error)
+	FindByBizId(context.Context, *FindByBizIdRequest) (*FindByBizIdResponse, error)
 }
 
 // UnimplementedBizConfigServiceServer should be embedded to have
@@ -95,6 +108,9 @@ func (UnimplementedBizConfigServiceServer) Update(context.Context, *UpdateReques
 }
 func (UnimplementedBizConfigServiceServer) FindById(context.Context, *FindByIdRequest) (*FindByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindById not implemented")
+}
+func (UnimplementedBizConfigServiceServer) FindByBizId(context.Context, *FindByBizIdRequest) (*FindByBizIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindByBizId not implemented")
 }
 func (UnimplementedBizConfigServiceServer) testEmbeddedByValue() {}
 
@@ -170,6 +186,24 @@ func _BizConfigService_FindById_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BizConfigService_FindByBizId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindByBizIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BizConfigServiceServer).FindByBizId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BizConfigService_FindByBizId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BizConfigServiceServer).FindByBizId(ctx, req.(*FindByBizIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BizConfigService_ServiceDesc is the grpc.ServiceDesc for BizConfigService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -188,6 +222,10 @@ var BizConfigService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FindById",
 			Handler:    _BizConfigService_FindById_Handler,
+		},
+		{
+			MethodName: "FindByBizId",
+			Handler:    _BizConfigService_FindByBizId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

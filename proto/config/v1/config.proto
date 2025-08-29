@@ -55,6 +55,13 @@ message BizConfig {
   int64 updated_at = 9;
 }
 
+service BizConfigService {
+  rpc Save(SaveRequest) returns (SaveResponse);
+  rpc Update(UpdateRequest) returns (UpdateResponse);
+  rpc FindById(FindByIdRequest) returns (FindByIdResponse);
+  rpc FindByBizId(FindByBizIdRequest) returns (FindByBizIdResponse);
+}
+
 message SaveRequest {
   BizConfig biz_config = 1;
 }
@@ -81,8 +88,11 @@ message FindByIdResponse {
   BizConfig config = 1;
 }
 
-service BizConfigService {
-  rpc Save(SaveRequest) returns (SaveResponse);
-  rpc Update(UpdateRequest) returns (UpdateResponse);
-  rpc FindById(FindByIdRequest) returns (FindByIdResponse);
+message FindByBizIdRequest {
+  google.protobuf.FieldMask field_mask = 1;
+  uint64 biz_id = 2;
+}
+
+message FindByBizIdResponse {
+  BizConfig biz_config = 1;
 }

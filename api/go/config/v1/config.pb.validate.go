@@ -1805,3 +1805,267 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = FindByIdResponseValidationError{}
+
+// Validate checks the field values on FindByBizIdRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *FindByBizIdRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on FindByBizIdRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// FindByBizIdRequestMultiError, or nil if none found.
+func (m *FindByBizIdRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *FindByBizIdRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetFieldMask()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, FindByBizIdRequestValidationError{
+					field:  "FieldMask",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, FindByBizIdRequestValidationError{
+					field:  "FieldMask",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFieldMask()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return FindByBizIdRequestValidationError{
+				field:  "FieldMask",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for BizId
+
+	if len(errors) > 0 {
+		return FindByBizIdRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// FindByBizIdRequestMultiError is an error wrapping multiple validation errors
+// returned by FindByBizIdRequest.ValidateAll() if the designated constraints
+// aren't met.
+type FindByBizIdRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m FindByBizIdRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m FindByBizIdRequestMultiError) AllErrors() []error { return m }
+
+// FindByBizIdRequestValidationError is the validation error returned by
+// FindByBizIdRequest.Validate if the designated constraints aren't met.
+type FindByBizIdRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FindByBizIdRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FindByBizIdRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FindByBizIdRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FindByBizIdRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FindByBizIdRequestValidationError) ErrorName() string {
+	return "FindByBizIdRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e FindByBizIdRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFindByBizIdRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FindByBizIdRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FindByBizIdRequestValidationError{}
+
+// Validate checks the field values on FindByBizIdResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *FindByBizIdResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on FindByBizIdResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// FindByBizIdResponseMultiError, or nil if none found.
+func (m *FindByBizIdResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *FindByBizIdResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetBizConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, FindByBizIdResponseValidationError{
+					field:  "BizConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, FindByBizIdResponseValidationError{
+					field:  "BizConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetBizConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return FindByBizIdResponseValidationError{
+				field:  "BizConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return FindByBizIdResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// FindByBizIdResponseMultiError is an error wrapping multiple validation
+// errors returned by FindByBizIdResponse.ValidateAll() if the designated
+// constraints aren't met.
+type FindByBizIdResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m FindByBizIdResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m FindByBizIdResponseMultiError) AllErrors() []error { return m }
+
+// FindByBizIdResponseValidationError is the validation error returned by
+// FindByBizIdResponse.Validate if the designated constraints aren't met.
+type FindByBizIdResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FindByBizIdResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FindByBizIdResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FindByBizIdResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FindByBizIdResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FindByBizIdResponseValidationError) ErrorName() string {
+	return "FindByBizIdResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e FindByBizIdResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFindByBizIdResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FindByBizIdResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FindByBizIdResponseValidationError{}
