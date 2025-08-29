@@ -647,102 +647,6 @@ func (x *UpdateResponse) GetBizConfig() *BizConfig {
 	return nil
 }
 
-type FindByIdRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
-	Id            uint64                 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *FindByIdRequest) Reset() {
-	*x = FindByIdRequest{}
-	mi := &file_config_v1_config_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FindByIdRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FindByIdRequest) ProtoMessage() {}
-
-func (x *FindByIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FindByIdRequest.ProtoReflect.Descriptor instead.
-func (*FindByIdRequest) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *FindByIdRequest) GetFieldMask() *fieldmaskpb.FieldMask {
-	if x != nil {
-		return x.FieldMask
-	}
-	return nil
-}
-
-func (x *FindByIdRequest) GetId() uint64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-type FindByIdResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Config        *BizConfig             `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *FindByIdResponse) Reset() {
-	*x = FindByIdResponse{}
-	mi := &file_config_v1_config_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FindByIdResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FindByIdResponse) ProtoMessage() {}
-
-func (x *FindByIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FindByIdResponse.ProtoReflect.Descriptor instead.
-func (*FindByIdResponse) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *FindByIdResponse) GetConfig() *BizConfig {
-	if x != nil {
-		return x.Config
-	}
-	return nil
-}
-
 type FindByBizIdRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FieldMask     *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
@@ -753,7 +657,7 @@ type FindByBizIdRequest struct {
 
 func (x *FindByBizIdRequest) Reset() {
 	*x = FindByBizIdRequest{}
-	mi := &file_config_v1_config_proto_msgTypes[13]
+	mi := &file_config_v1_config_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -765,7 +669,7 @@ func (x *FindByBizIdRequest) String() string {
 func (*FindByBizIdRequest) ProtoMessage() {}
 
 func (x *FindByBizIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[13]
+	mi := &file_config_v1_config_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -778,7 +682,7 @@ func (x *FindByBizIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FindByBizIdRequest.ProtoReflect.Descriptor instead.
 func (*FindByBizIdRequest) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{13}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *FindByBizIdRequest) GetFieldMask() *fieldmaskpb.FieldMask {
@@ -804,7 +708,7 @@ type FindByBizIdResponse struct {
 
 func (x *FindByBizIdResponse) Reset() {
 	*x = FindByBizIdResponse{}
-	mi := &file_config_v1_config_proto_msgTypes[14]
+	mi := &file_config_v1_config_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -816,7 +720,7 @@ func (x *FindByBizIdResponse) String() string {
 func (*FindByBizIdResponse) ProtoMessage() {}
 
 func (x *FindByBizIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_config_v1_config_proto_msgTypes[14]
+	mi := &file_config_v1_config_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -829,7 +733,7 @@ func (x *FindByBizIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FindByBizIdResponse.ProtoReflect.Descriptor instead.
 func (*FindByBizIdResponse) Descriptor() ([]byte, []int) {
-	return file_config_v1_config_proto_rawDescGZIP(), []int{14}
+	return file_config_v1_config_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *FindByBizIdResponse) GetBizConfig() *BizConfig {
@@ -891,24 +795,17 @@ const file_config_v1_config_proto_rawDesc = "" +
 	"biz_config\x18\x02 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig\"E\n" +
 	"\x0eUpdateResponse\x123\n" +
 	"\n" +
-	"biz_config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig\"\\\n" +
-	"\x0fFindByIdRequest\x129\n" +
-	"\n" +
-	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12\x0e\n" +
-	"\x02id\x18\x02 \x01(\x04R\x02id\"@\n" +
-	"\x10FindByIdResponse\x12,\n" +
-	"\x06config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\x06config\"f\n" +
+	"biz_config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig\"f\n" +
 	"\x12FindByBizIdRequest\x129\n" +
 	"\n" +
 	"field_mask\x18\x01 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12\x15\n" +
 	"\x06biz_id\x18\x02 \x01(\x04R\x05bizId\"J\n" +
 	"\x13FindByBizIdResponse\x123\n" +
 	"\n" +
-	"biz_config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig2\x9d\x02\n" +
+	"biz_config\x18\x01 \x01(\v2\x14.config.v1.BizConfigR\tbizConfig2\xd8\x01\n" +
 	"\x10BizConfigService\x127\n" +
 	"\x04Save\x12\x16.config.v1.SaveRequest\x1a\x17.config.v1.SaveResponse\x12=\n" +
-	"\x06Update\x12\x18.config.v1.UpdateRequest\x1a\x19.config.v1.UpdateResponse\x12C\n" +
-	"\bFindById\x12\x1a.config.v1.FindByIdRequest\x1a\x1b.config.v1.FindByIdResponse\x12L\n" +
+	"\x06Update\x12\x18.config.v1.UpdateRequest\x1a\x19.config.v1.UpdateResponse\x12L\n" +
 	"\vFindByBizId\x12\x1d.config.v1.FindByBizIdRequest\x1a\x1e.config.v1.FindByBizIdResponseB\x9a\x01\n" +
 	"\rcom.config.v1B\vConfigProtoP\x01Z7github.com/JrMarcco/kuryr-api/api/go/config/v1;configv1\xa2\x02\x03CXX\xaa\x02\tConfig.V1\xca\x02\tConfig\\V1\xe2\x02\x15Config\\V1\\GPBMetadata\xea\x02\n" +
 	"Config::V1b\x06proto3"
@@ -925,7 +822,7 @@ func file_config_v1_config_proto_rawDescGZIP() []byte {
 	return file_config_v1_config_proto_rawDescData
 }
 
-var file_config_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_config_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_config_v1_config_proto_goTypes = []any{
 	(*RetryPolicyConfig)(nil),     // 0: config.v1.RetryPolicyConfig
 	(*CallbackConfig)(nil),        // 1: config.v1.CallbackConfig
@@ -938,16 +835,14 @@ var file_config_v1_config_proto_goTypes = []any{
 	(*SaveResponse)(nil),          // 8: config.v1.SaveResponse
 	(*UpdateRequest)(nil),         // 9: config.v1.UpdateRequest
 	(*UpdateResponse)(nil),        // 10: config.v1.UpdateResponse
-	(*FindByIdRequest)(nil),       // 11: config.v1.FindByIdRequest
-	(*FindByIdResponse)(nil),      // 12: config.v1.FindByIdResponse
-	(*FindByBizIdRequest)(nil),    // 13: config.v1.FindByBizIdRequest
-	(*FindByBizIdResponse)(nil),   // 14: config.v1.FindByBizIdResponse
-	(v1.Channel)(0),               // 15: common.v1.Channel
-	(*fieldmaskpb.FieldMask)(nil), // 16: google.protobuf.FieldMask
+	(*FindByBizIdRequest)(nil),    // 11: config.v1.FindByBizIdRequest
+	(*FindByBizIdResponse)(nil),   // 12: config.v1.FindByBizIdResponse
+	(v1.Channel)(0),               // 13: common.v1.Channel
+	(*fieldmaskpb.FieldMask)(nil), // 14: google.protobuf.FieldMask
 }
 var file_config_v1_config_proto_depIdxs = []int32{
 	0,  // 0: config.v1.CallbackConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
-	15, // 1: config.v1.ChannelItem.channel:type_name -> common.v1.Channel
+	13, // 1: config.v1.ChannelItem.channel:type_name -> common.v1.Channel
 	2,  // 2: config.v1.ChannelConfig.items:type_name -> config.v1.ChannelItem
 	0,  // 3: config.v1.ChannelConfig.retry_policy:type_name -> config.v1.RetryPolicyConfig
 	4,  // 4: config.v1.QuotaConfig.monthly:type_name -> config.v1.Quota
@@ -957,26 +852,22 @@ var file_config_v1_config_proto_depIdxs = []int32{
 	1,  // 8: config.v1.BizConfig.callback_config:type_name -> config.v1.CallbackConfig
 	6,  // 9: config.v1.SaveRequest.biz_config:type_name -> config.v1.BizConfig
 	6,  // 10: config.v1.SaveResponse.biz_config:type_name -> config.v1.BizConfig
-	16, // 11: config.v1.UpdateRequest.field_mask:type_name -> google.protobuf.FieldMask
+	14, // 11: config.v1.UpdateRequest.field_mask:type_name -> google.protobuf.FieldMask
 	6,  // 12: config.v1.UpdateRequest.biz_config:type_name -> config.v1.BizConfig
 	6,  // 13: config.v1.UpdateResponse.biz_config:type_name -> config.v1.BizConfig
-	16, // 14: config.v1.FindByIdRequest.field_mask:type_name -> google.protobuf.FieldMask
-	6,  // 15: config.v1.FindByIdResponse.config:type_name -> config.v1.BizConfig
-	16, // 16: config.v1.FindByBizIdRequest.field_mask:type_name -> google.protobuf.FieldMask
-	6,  // 17: config.v1.FindByBizIdResponse.biz_config:type_name -> config.v1.BizConfig
-	7,  // 18: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
-	9,  // 19: config.v1.BizConfigService.Update:input_type -> config.v1.UpdateRequest
-	11, // 20: config.v1.BizConfigService.FindById:input_type -> config.v1.FindByIdRequest
-	13, // 21: config.v1.BizConfigService.FindByBizId:input_type -> config.v1.FindByBizIdRequest
-	8,  // 22: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
-	10, // 23: config.v1.BizConfigService.Update:output_type -> config.v1.UpdateResponse
-	12, // 24: config.v1.BizConfigService.FindById:output_type -> config.v1.FindByIdResponse
-	14, // 25: config.v1.BizConfigService.FindByBizId:output_type -> config.v1.FindByBizIdResponse
-	22, // [22:26] is the sub-list for method output_type
-	18, // [18:22] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	14, // 14: config.v1.FindByBizIdRequest.field_mask:type_name -> google.protobuf.FieldMask
+	6,  // 15: config.v1.FindByBizIdResponse.biz_config:type_name -> config.v1.BizConfig
+	7,  // 16: config.v1.BizConfigService.Save:input_type -> config.v1.SaveRequest
+	9,  // 17: config.v1.BizConfigService.Update:input_type -> config.v1.UpdateRequest
+	11, // 18: config.v1.BizConfigService.FindByBizId:input_type -> config.v1.FindByBizIdRequest
+	8,  // 19: config.v1.BizConfigService.Save:output_type -> config.v1.SaveResponse
+	10, // 20: config.v1.BizConfigService.Update:output_type -> config.v1.UpdateResponse
+	12, // 21: config.v1.BizConfigService.FindByBizId:output_type -> config.v1.FindByBizIdResponse
+	19, // [19:22] is the sub-list for method output_type
+	16, // [16:19] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_config_v1_config_proto_init() }
@@ -990,7 +881,7 @@ func file_config_v1_config_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_config_v1_config_proto_rawDesc), len(file_config_v1_config_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
