@@ -9,8 +9,8 @@ option go_package = "github.com/JrMarcco/kuryr-api/api/template/v1";
 
 message ChannelTemplate {
   uint64 id = 1;
-  uint64 owner_id = 2;
-  string owner_type = 3;
+  uint64 biz_id = 2;
+  string biz_type = 3;
 
   string tpl_name = 4;
   string tpl_desc = 5;
@@ -65,61 +65,101 @@ message TemplateProvider {
 }
 
 service TemplateService {
-  rpc Save(SaveRequest) returns (SaveResponse);
-  rpc SaveVersion(SaveVersionRequest) returns (SaveVersionResponse);
-  rpc SaveProviders(SaveProvidersRequest) returns (SaveProvidersResponse);
+  rpc SaveTemplate(SaveTemplateRequest) returns (SaveTemplateResponse);
+  rpc DeleteTemplate(DeleteTemplateRequest) returns (DeleteTemplateResponse);
+  rpc ListTemplateByBizId(ListTemplateByBizIdRequest) returns (ListTemplateByBizIdResponse);
 
-  rpc FindById(FindByIdRequest) returns (FindByIdResponse);
+  rpc SaveTemplateVersion(SaveTemplateVersionRequest) returns (SaveTemplateVersionResponse);
+  rpc DeleteTemplateVersion(DeleteTemplateVersionRequest) returns (DeleteTemplateVersionResponse);
+  rpc ActivateTemplateVersion(ActivateTemplateVersionRequest) returns (ActivateTemplateVersionResponse);
+  rpc ListTemplateVersion(ListTemplateVersionRequest) returns (ListTemplateVersionResponse);
+
+  rpc SaveTemplateProviders(SaveTemplateProvidersRequest) returns (SaveTemplateProvidersResponse);
+  rpc DeleteTemplateProvider(DeleteTemplateProviderRequest) returns (DeleteTemplateProviderResponse);
+  rpc ListTemplateProvider(ListTemplateProviderRequest) returns (ListTemplateProviderResponse);
 }
 
-message SaveRequest {
-  uint64 biz_id = 1;
-  string tpl_name = 2;
-  string tpl_desc = 3;
-  common.v1.Channel channel = 4;
-  int32 notification_type = 5;
-}
-
-message SaveResponse {
+message SaveTemplateRequest {
   ChannelTemplate template = 1;
 }
 
-message SaveVersionRequest {
-  uint64 tpl_id = 1;
-  string version_name = 2;
-  string signature = 3;
-  string content = 4;
-  string apply_remark = 5;
-
-  // 可选：创建版本时预选供应商，但不强制关联
-  repeated uint64 preferred_provider_ids = 6;
+message SaveTemplateResponse {
+  ChannelTemplate template = 1;
 }
 
-message SaveVersionResponse {
+message DeleteTemplateRequest {
+  uint64 id = 1;
+}
+
+message DeleteTemplateResponse {}
+
+message ListTemplateByBizIdRequest {
+  google.protobuf.FieldMask field_mask = 1;
+
+  int32 offset = 2;
+  int32 limit = 3;
+  uint64 biz_id = 4;
+}
+
+message ListTemplateByBizIdResponse {
+  repeated ChannelTemplate templates = 1;
+  int64 total = 2;
+}
+
+message SaveTemplateVersionRequest {
   TemplateVersion version = 1;
 }
 
-message PreferredProvider {
+message SaveTemplateVersionResponse {
+  TemplateVersion version = 1;
+}
+
+message DeleteTemplateVersionRequest {
+  uint64 id = 1;
+}
+
+message DeleteTemplateVersionResponse {}
+
+message ActivateTemplateVersionRequest {
+  uint64 tpl_id = 1;
+  uint64 version_id = 2;
+}
+
+message ActivateTemplateVersionResponse {}
+
+message ListTemplateVersionRequest {
+  google.protobuf.FieldMask field_mask = 1;
+  uint64 tpl_id = 2;
+}
+
+message ListTemplateVersionResponse {
+  repeated TemplateVersion versions = 1;
+}
+
+message RelatedProvider {
   uint64 provider_id = 1;
   string provider_name = 2;
 }
 
-message SaveProvidersRequest {
+message SaveTemplateProvidersRequest {
   uint64 tpl_id = 1;
   uint64 tpl_version_id = 2;
-  repeated PreferredProvider preferred_providers = 3;
+  repeated RelatedProvider related_providers = 3;
 }
 
-message SaveProvidersResponse {
-  repeated TemplateProvider providers = 1;
+message SaveTemplateProvidersResponse {}
+
+message DeleteTemplateProviderRequest {
+  uint64 id = 1;
 }
 
-message FindByIdRequest {
+message DeleteTemplateProviderResponse {}
+
+message ListTemplateProviderRequest {
   google.protobuf.FieldMask field_mask = 1;
-
-  uint64 id = 2;
+  uint64 version_id = 2;
 }
 
-message FindByIdResponse {
-  ChannelTemplate tpl = 1;
+message ListTemplateProviderResponse {
+  repeated TemplateProvider providers = 1;
 }

@@ -63,9 +63,9 @@ func (m *ChannelTemplate) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for OwnerId
+	// no validation rules for BizId
 
-	// no validation rules for OwnerType
+	// no validation rules for BizType
 
 	// no validation rules for TplName
 
@@ -413,131 +413,22 @@ var _ interface {
 	ErrorName() string
 } = TemplateProviderValidationError{}
 
-// Validate checks the field values on SaveRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *SaveRequest) Validate() error {
+// Validate checks the field values on SaveTemplateRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SaveTemplateRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SaveRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in SaveRequestMultiError, or
-// nil if none found.
-func (m *SaveRequest) ValidateAll() error {
+// ValidateAll checks the field values on SaveTemplateRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SaveTemplateRequestMultiError, or nil if none found.
+func (m *SaveTemplateRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SaveRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for BizId
-
-	// no validation rules for TplName
-
-	// no validation rules for TplDesc
-
-	// no validation rules for Channel
-
-	// no validation rules for NotificationType
-
-	if len(errors) > 0 {
-		return SaveRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// SaveRequestMultiError is an error wrapping multiple validation errors
-// returned by SaveRequest.ValidateAll() if the designated constraints aren't met.
-type SaveRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SaveRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SaveRequestMultiError) AllErrors() []error { return m }
-
-// SaveRequestValidationError is the validation error returned by
-// SaveRequest.Validate if the designated constraints aren't met.
-type SaveRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SaveRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SaveRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SaveRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SaveRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SaveRequestValidationError) ErrorName() string { return "SaveRequestValidationError" }
-
-// Error satisfies the builtin error interface
-func (e SaveRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSaveRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SaveRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SaveRequestValidationError{}
-
-// Validate checks the field values on SaveResponse with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *SaveResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SaveResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in SaveResponseMultiError, or
-// nil if none found.
-func (m *SaveResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SaveResponse) validate(all bool) error {
+func (m *SaveTemplateRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -548,7 +439,7 @@ func (m *SaveResponse) validate(all bool) error {
 		switch v := interface{}(m.GetTemplate()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SaveResponseValidationError{
+				errors = append(errors, SaveTemplateRequestValidationError{
 					field:  "Template",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -556,7 +447,7 @@ func (m *SaveResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SaveResponseValidationError{
+				errors = append(errors, SaveTemplateRequestValidationError{
 					field:  "Template",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -565,7 +456,7 @@ func (m *SaveResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetTemplate()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SaveResponseValidationError{
+			return SaveTemplateRequestValidationError{
 				field:  "Template",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -574,18 +465,19 @@ func (m *SaveResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return SaveResponseMultiError(errors)
+		return SaveTemplateRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// SaveResponseMultiError is an error wrapping multiple validation errors
-// returned by SaveResponse.ValidateAll() if the designated constraints aren't met.
-type SaveResponseMultiError []error
+// SaveTemplateRequestMultiError is an error wrapping multiple validation
+// errors returned by SaveTemplateRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SaveTemplateRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SaveResponseMultiError) Error() string {
+func (m SaveTemplateRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -594,11 +486,11 @@ func (m SaveResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SaveResponseMultiError) AllErrors() []error { return m }
+func (m SaveTemplateRequestMultiError) AllErrors() []error { return m }
 
-// SaveResponseValidationError is the validation error returned by
-// SaveResponse.Validate if the designated constraints aren't met.
-type SaveResponseValidationError struct {
+// SaveTemplateRequestValidationError is the validation error returned by
+// SaveTemplateRequest.Validate if the designated constraints aren't met.
+type SaveTemplateRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -606,22 +498,24 @@ type SaveResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e SaveResponseValidationError) Field() string { return e.field }
+func (e SaveTemplateRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SaveResponseValidationError) Reason() string { return e.reason }
+func (e SaveTemplateRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SaveResponseValidationError) Cause() error { return e.cause }
+func (e SaveTemplateRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SaveResponseValidationError) Key() bool { return e.key }
+func (e SaveTemplateRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SaveResponseValidationError) ErrorName() string { return "SaveResponseValidationError" }
+func (e SaveTemplateRequestValidationError) ErrorName() string {
+	return "SaveTemplateRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e SaveResponseValidationError) Error() string {
+func (e SaveTemplateRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -633,14 +527,14 @@ func (e SaveResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSaveResponse.%s: %s%s",
+		"invalid %sSaveTemplateRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SaveResponseValidationError{}
+var _ error = SaveTemplateRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -648,54 +542,73 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SaveResponseValidationError{}
+} = SaveTemplateRequestValidationError{}
 
-// Validate checks the field values on SaveVersionRequest with the rules
+// Validate checks the field values on SaveTemplateResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SaveVersionRequest) Validate() error {
+func (m *SaveTemplateResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SaveVersionRequest with the rules
+// ValidateAll checks the field values on SaveTemplateResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// SaveVersionRequestMultiError, or nil if none found.
-func (m *SaveVersionRequest) ValidateAll() error {
+// SaveTemplateResponseMultiError, or nil if none found.
+func (m *SaveTemplateResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SaveVersionRequest) validate(all bool) error {
+func (m *SaveTemplateResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for TplId
-
-	// no validation rules for VersionName
-
-	// no validation rules for Signature
-
-	// no validation rules for Content
-
-	// no validation rules for ApplyRemark
+	if all {
+		switch v := interface{}(m.GetTemplate()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SaveTemplateResponseValidationError{
+					field:  "Template",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SaveTemplateResponseValidationError{
+					field:  "Template",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTemplate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SaveTemplateResponseValidationError{
+				field:  "Template",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
-		return SaveVersionRequestMultiError(errors)
+		return SaveTemplateResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// SaveVersionRequestMultiError is an error wrapping multiple validation errors
-// returned by SaveVersionRequest.ValidateAll() if the designated constraints
-// aren't met.
-type SaveVersionRequestMultiError []error
+// SaveTemplateResponseMultiError is an error wrapping multiple validation
+// errors returned by SaveTemplateResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SaveTemplateResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SaveVersionRequestMultiError) Error() string {
+func (m SaveTemplateResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -704,11 +617,11 @@ func (m SaveVersionRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SaveVersionRequestMultiError) AllErrors() []error { return m }
+func (m SaveTemplateResponseMultiError) AllErrors() []error { return m }
 
-// SaveVersionRequestValidationError is the validation error returned by
-// SaveVersionRequest.Validate if the designated constraints aren't met.
-type SaveVersionRequestValidationError struct {
+// SaveTemplateResponseValidationError is the validation error returned by
+// SaveTemplateResponse.Validate if the designated constraints aren't met.
+type SaveTemplateResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -716,24 +629,24 @@ type SaveVersionRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e SaveVersionRequestValidationError) Field() string { return e.field }
+func (e SaveTemplateResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SaveVersionRequestValidationError) Reason() string { return e.reason }
+func (e SaveTemplateResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SaveVersionRequestValidationError) Cause() error { return e.cause }
+func (e SaveTemplateResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SaveVersionRequestValidationError) Key() bool { return e.key }
+func (e SaveTemplateResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SaveVersionRequestValidationError) ErrorName() string {
-	return "SaveVersionRequestValidationError"
+func (e SaveTemplateResponseValidationError) ErrorName() string {
+	return "SaveTemplateResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SaveVersionRequestValidationError) Error() string {
+func (e SaveTemplateResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -745,14 +658,14 @@ func (e SaveVersionRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSaveVersionRequest.%s: %s%s",
+		"invalid %sSaveTemplateResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SaveVersionRequestValidationError{}
+var _ error = SaveTemplateResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -760,24 +673,506 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SaveVersionRequestValidationError{}
+} = SaveTemplateResponseValidationError{}
 
-// Validate checks the field values on SaveVersionResponse with the rules
+// Validate checks the field values on DeleteTemplateRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SaveVersionResponse) Validate() error {
+func (m *DeleteTemplateRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SaveVersionResponse with the rules
+// ValidateAll checks the field values on DeleteTemplateRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// SaveVersionResponseMultiError, or nil if none found.
-func (m *SaveVersionResponse) ValidateAll() error {
+// DeleteTemplateRequestMultiError, or nil if none found.
+func (m *DeleteTemplateRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SaveVersionResponse) validate(all bool) error {
+func (m *DeleteTemplateRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteTemplateRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteTemplateRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteTemplateRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteTemplateRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteTemplateRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteTemplateRequestMultiError) AllErrors() []error { return m }
+
+// DeleteTemplateRequestValidationError is the validation error returned by
+// DeleteTemplateRequest.Validate if the designated constraints aren't met.
+type DeleteTemplateRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteTemplateRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteTemplateRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteTemplateRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteTemplateRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteTemplateRequestValidationError) ErrorName() string {
+	return "DeleteTemplateRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteTemplateRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteTemplateRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteTemplateRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteTemplateRequestValidationError{}
+
+// Validate checks the field values on DeleteTemplateResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteTemplateResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteTemplateResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteTemplateResponseMultiError, or nil if none found.
+func (m *DeleteTemplateResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteTemplateResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteTemplateResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteTemplateResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteTemplateResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteTemplateResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteTemplateResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteTemplateResponseMultiError) AllErrors() []error { return m }
+
+// DeleteTemplateResponseValidationError is the validation error returned by
+// DeleteTemplateResponse.Validate if the designated constraints aren't met.
+type DeleteTemplateResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteTemplateResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteTemplateResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteTemplateResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteTemplateResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteTemplateResponseValidationError) ErrorName() string {
+	return "DeleteTemplateResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteTemplateResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteTemplateResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteTemplateResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteTemplateResponseValidationError{}
+
+// Validate checks the field values on ListTemplateByBizIdRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListTemplateByBizIdRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTemplateByBizIdRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTemplateByBizIdRequestMultiError, or nil if none found.
+func (m *ListTemplateByBizIdRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTemplateByBizIdRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetFieldMask()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListTemplateByBizIdRequestValidationError{
+					field:  "FieldMask",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListTemplateByBizIdRequestValidationError{
+					field:  "FieldMask",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFieldMask()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListTemplateByBizIdRequestValidationError{
+				field:  "FieldMask",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Offset
+
+	// no validation rules for Limit
+
+	// no validation rules for BizId
+
+	if len(errors) > 0 {
+		return ListTemplateByBizIdRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTemplateByBizIdRequestMultiError is an error wrapping multiple
+// validation errors returned by ListTemplateByBizIdRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListTemplateByBizIdRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTemplateByBizIdRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTemplateByBizIdRequestMultiError) AllErrors() []error { return m }
+
+// ListTemplateByBizIdRequestValidationError is the validation error returned
+// by ListTemplateByBizIdRequest.Validate if the designated constraints aren't met.
+type ListTemplateByBizIdRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTemplateByBizIdRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTemplateByBizIdRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTemplateByBizIdRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTemplateByBizIdRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTemplateByBizIdRequestValidationError) ErrorName() string {
+	return "ListTemplateByBizIdRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTemplateByBizIdRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTemplateByBizIdRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTemplateByBizIdRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTemplateByBizIdRequestValidationError{}
+
+// Validate checks the field values on ListTemplateByBizIdResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListTemplateByBizIdResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTemplateByBizIdResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTemplateByBizIdResponseMultiError, or nil if none found.
+func (m *ListTemplateByBizIdResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTemplateByBizIdResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetTemplates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListTemplateByBizIdResponseValidationError{
+						field:  fmt.Sprintf("Templates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListTemplateByBizIdResponseValidationError{
+						field:  fmt.Sprintf("Templates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListTemplateByBizIdResponseValidationError{
+					field:  fmt.Sprintf("Templates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	if len(errors) > 0 {
+		return ListTemplateByBizIdResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTemplateByBizIdResponseMultiError is an error wrapping multiple
+// validation errors returned by ListTemplateByBizIdResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListTemplateByBizIdResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTemplateByBizIdResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTemplateByBizIdResponseMultiError) AllErrors() []error { return m }
+
+// ListTemplateByBizIdResponseValidationError is the validation error returned
+// by ListTemplateByBizIdResponse.Validate if the designated constraints
+// aren't met.
+type ListTemplateByBizIdResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTemplateByBizIdResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTemplateByBizIdResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTemplateByBizIdResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTemplateByBizIdResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTemplateByBizIdResponseValidationError) ErrorName() string {
+	return "ListTemplateByBizIdResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTemplateByBizIdResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTemplateByBizIdResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTemplateByBizIdResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTemplateByBizIdResponseValidationError{}
+
+// Validate checks the field values on SaveTemplateVersionRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SaveTemplateVersionRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SaveTemplateVersionRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SaveTemplateVersionRequestMultiError, or nil if none found.
+func (m *SaveTemplateVersionRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SaveTemplateVersionRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -788,7 +1183,7 @@ func (m *SaveVersionResponse) validate(all bool) error {
 		switch v := interface{}(m.GetVersion()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SaveVersionResponseValidationError{
+				errors = append(errors, SaveTemplateVersionRequestValidationError{
 					field:  "Version",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -796,7 +1191,7 @@ func (m *SaveVersionResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SaveVersionResponseValidationError{
+				errors = append(errors, SaveTemplateVersionRequestValidationError{
 					field:  "Version",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -805,7 +1200,7 @@ func (m *SaveVersionResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetVersion()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SaveVersionResponseValidationError{
+			return SaveTemplateVersionRequestValidationError{
 				field:  "Version",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -814,19 +1209,19 @@ func (m *SaveVersionResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return SaveVersionResponseMultiError(errors)
+		return SaveTemplateVersionRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// SaveVersionResponseMultiError is an error wrapping multiple validation
-// errors returned by SaveVersionResponse.ValidateAll() if the designated
-// constraints aren't met.
-type SaveVersionResponseMultiError []error
+// SaveTemplateVersionRequestMultiError is an error wrapping multiple
+// validation errors returned by SaveTemplateVersionRequest.ValidateAll() if
+// the designated constraints aren't met.
+type SaveTemplateVersionRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SaveVersionResponseMultiError) Error() string {
+func (m SaveTemplateVersionRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -835,11 +1230,11 @@ func (m SaveVersionResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SaveVersionResponseMultiError) AllErrors() []error { return m }
+func (m SaveTemplateVersionRequestMultiError) AllErrors() []error { return m }
 
-// SaveVersionResponseValidationError is the validation error returned by
-// SaveVersionResponse.Validate if the designated constraints aren't met.
-type SaveVersionResponseValidationError struct {
+// SaveTemplateVersionRequestValidationError is the validation error returned
+// by SaveTemplateVersionRequest.Validate if the designated constraints aren't met.
+type SaveTemplateVersionRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -847,24 +1242,24 @@ type SaveVersionResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e SaveVersionResponseValidationError) Field() string { return e.field }
+func (e SaveTemplateVersionRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SaveVersionResponseValidationError) Reason() string { return e.reason }
+func (e SaveTemplateVersionRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SaveVersionResponseValidationError) Cause() error { return e.cause }
+func (e SaveTemplateVersionRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SaveVersionResponseValidationError) Key() bool { return e.key }
+func (e SaveTemplateVersionRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SaveVersionResponseValidationError) ErrorName() string {
-	return "SaveVersionResponseValidationError"
+func (e SaveTemplateVersionRequestValidationError) ErrorName() string {
+	return "SaveTemplateVersionRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SaveVersionResponseValidationError) Error() string {
+func (e SaveTemplateVersionRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -876,14 +1271,14 @@ func (e SaveVersionResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSaveVersionResponse.%s: %s%s",
+		"invalid %sSaveTemplateVersionRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SaveVersionResponseValidationError{}
+var _ error = SaveTemplateVersionRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -891,24 +1286,844 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SaveVersionResponseValidationError{}
+} = SaveTemplateVersionRequestValidationError{}
 
-// Validate checks the field values on PreferredProvider with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *PreferredProvider) Validate() error {
+// Validate checks the field values on SaveTemplateVersionResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SaveTemplateVersionResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on PreferredProvider with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on SaveTemplateVersionResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// PreferredProviderMultiError, or nil if none found.
-func (m *PreferredProvider) ValidateAll() error {
+// SaveTemplateVersionResponseMultiError, or nil if none found.
+func (m *SaveTemplateVersionResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *PreferredProvider) validate(all bool) error {
+func (m *SaveTemplateVersionResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetVersion()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SaveTemplateVersionResponseValidationError{
+					field:  "Version",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SaveTemplateVersionResponseValidationError{
+					field:  "Version",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetVersion()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SaveTemplateVersionResponseValidationError{
+				field:  "Version",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return SaveTemplateVersionResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SaveTemplateVersionResponseMultiError is an error wrapping multiple
+// validation errors returned by SaveTemplateVersionResponse.ValidateAll() if
+// the designated constraints aren't met.
+type SaveTemplateVersionResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SaveTemplateVersionResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SaveTemplateVersionResponseMultiError) AllErrors() []error { return m }
+
+// SaveTemplateVersionResponseValidationError is the validation error returned
+// by SaveTemplateVersionResponse.Validate if the designated constraints
+// aren't met.
+type SaveTemplateVersionResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SaveTemplateVersionResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SaveTemplateVersionResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SaveTemplateVersionResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SaveTemplateVersionResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SaveTemplateVersionResponseValidationError) ErrorName() string {
+	return "SaveTemplateVersionResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SaveTemplateVersionResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSaveTemplateVersionResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SaveTemplateVersionResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SaveTemplateVersionResponseValidationError{}
+
+// Validate checks the field values on DeleteTemplateVersionRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteTemplateVersionRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteTemplateVersionRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteTemplateVersionRequestMultiError, or nil if none found.
+func (m *DeleteTemplateVersionRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteTemplateVersionRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteTemplateVersionRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteTemplateVersionRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteTemplateVersionRequest.ValidateAll() if
+// the designated constraints aren't met.
+type DeleteTemplateVersionRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteTemplateVersionRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteTemplateVersionRequestMultiError) AllErrors() []error { return m }
+
+// DeleteTemplateVersionRequestValidationError is the validation error returned
+// by DeleteTemplateVersionRequest.Validate if the designated constraints
+// aren't met.
+type DeleteTemplateVersionRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteTemplateVersionRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteTemplateVersionRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteTemplateVersionRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteTemplateVersionRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteTemplateVersionRequestValidationError) ErrorName() string {
+	return "DeleteTemplateVersionRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteTemplateVersionRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteTemplateVersionRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteTemplateVersionRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteTemplateVersionRequestValidationError{}
+
+// Validate checks the field values on DeleteTemplateVersionResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteTemplateVersionResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteTemplateVersionResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// DeleteTemplateVersionResponseMultiError, or nil if none found.
+func (m *DeleteTemplateVersionResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteTemplateVersionResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteTemplateVersionResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteTemplateVersionResponseMultiError is an error wrapping multiple
+// validation errors returned by DeleteTemplateVersionResponse.ValidateAll()
+// if the designated constraints aren't met.
+type DeleteTemplateVersionResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteTemplateVersionResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteTemplateVersionResponseMultiError) AllErrors() []error { return m }
+
+// DeleteTemplateVersionResponseValidationError is the validation error
+// returned by DeleteTemplateVersionResponse.Validate if the designated
+// constraints aren't met.
+type DeleteTemplateVersionResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteTemplateVersionResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteTemplateVersionResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteTemplateVersionResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteTemplateVersionResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteTemplateVersionResponseValidationError) ErrorName() string {
+	return "DeleteTemplateVersionResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteTemplateVersionResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteTemplateVersionResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteTemplateVersionResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteTemplateVersionResponseValidationError{}
+
+// Validate checks the field values on ActivateTemplateVersionRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ActivateTemplateVersionRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ActivateTemplateVersionRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ActivateTemplateVersionRequestMultiError, or nil if none found.
+func (m *ActivateTemplateVersionRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ActivateTemplateVersionRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TplId
+
+	// no validation rules for VersionId
+
+	if len(errors) > 0 {
+		return ActivateTemplateVersionRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ActivateTemplateVersionRequestMultiError is an error wrapping multiple
+// validation errors returned by ActivateTemplateVersionRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ActivateTemplateVersionRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ActivateTemplateVersionRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ActivateTemplateVersionRequestMultiError) AllErrors() []error { return m }
+
+// ActivateTemplateVersionRequestValidationError is the validation error
+// returned by ActivateTemplateVersionRequest.Validate if the designated
+// constraints aren't met.
+type ActivateTemplateVersionRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ActivateTemplateVersionRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ActivateTemplateVersionRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ActivateTemplateVersionRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ActivateTemplateVersionRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ActivateTemplateVersionRequestValidationError) ErrorName() string {
+	return "ActivateTemplateVersionRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ActivateTemplateVersionRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sActivateTemplateVersionRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ActivateTemplateVersionRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ActivateTemplateVersionRequestValidationError{}
+
+// Validate checks the field values on ActivateTemplateVersionResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ActivateTemplateVersionResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ActivateTemplateVersionResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ActivateTemplateVersionResponseMultiError, or nil if none found.
+func (m *ActivateTemplateVersionResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ActivateTemplateVersionResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ActivateTemplateVersionResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ActivateTemplateVersionResponseMultiError is an error wrapping multiple
+// validation errors returned by ActivateTemplateVersionResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ActivateTemplateVersionResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ActivateTemplateVersionResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ActivateTemplateVersionResponseMultiError) AllErrors() []error { return m }
+
+// ActivateTemplateVersionResponseValidationError is the validation error
+// returned by ActivateTemplateVersionResponse.Validate if the designated
+// constraints aren't met.
+type ActivateTemplateVersionResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ActivateTemplateVersionResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ActivateTemplateVersionResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ActivateTemplateVersionResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ActivateTemplateVersionResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ActivateTemplateVersionResponseValidationError) ErrorName() string {
+	return "ActivateTemplateVersionResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ActivateTemplateVersionResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sActivateTemplateVersionResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ActivateTemplateVersionResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ActivateTemplateVersionResponseValidationError{}
+
+// Validate checks the field values on ListTemplateVersionRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListTemplateVersionRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTemplateVersionRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTemplateVersionRequestMultiError, or nil if none found.
+func (m *ListTemplateVersionRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTemplateVersionRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetFieldMask()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListTemplateVersionRequestValidationError{
+					field:  "FieldMask",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListTemplateVersionRequestValidationError{
+					field:  "FieldMask",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFieldMask()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListTemplateVersionRequestValidationError{
+				field:  "FieldMask",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for TplId
+
+	if len(errors) > 0 {
+		return ListTemplateVersionRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTemplateVersionRequestMultiError is an error wrapping multiple
+// validation errors returned by ListTemplateVersionRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListTemplateVersionRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTemplateVersionRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTemplateVersionRequestMultiError) AllErrors() []error { return m }
+
+// ListTemplateVersionRequestValidationError is the validation error returned
+// by ListTemplateVersionRequest.Validate if the designated constraints aren't met.
+type ListTemplateVersionRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTemplateVersionRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTemplateVersionRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTemplateVersionRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTemplateVersionRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTemplateVersionRequestValidationError) ErrorName() string {
+	return "ListTemplateVersionRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTemplateVersionRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTemplateVersionRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTemplateVersionRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTemplateVersionRequestValidationError{}
+
+// Validate checks the field values on ListTemplateVersionResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListTemplateVersionResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTemplateVersionResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTemplateVersionResponseMultiError, or nil if none found.
+func (m *ListTemplateVersionResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTemplateVersionResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetVersions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListTemplateVersionResponseValidationError{
+						field:  fmt.Sprintf("Versions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListTemplateVersionResponseValidationError{
+						field:  fmt.Sprintf("Versions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListTemplateVersionResponseValidationError{
+					field:  fmt.Sprintf("Versions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListTemplateVersionResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTemplateVersionResponseMultiError is an error wrapping multiple
+// validation errors returned by ListTemplateVersionResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListTemplateVersionResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTemplateVersionResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTemplateVersionResponseMultiError) AllErrors() []error { return m }
+
+// ListTemplateVersionResponseValidationError is the validation error returned
+// by ListTemplateVersionResponse.Validate if the designated constraints
+// aren't met.
+type ListTemplateVersionResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTemplateVersionResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTemplateVersionResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTemplateVersionResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTemplateVersionResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTemplateVersionResponseValidationError) ErrorName() string {
+	return "ListTemplateVersionResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTemplateVersionResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTemplateVersionResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTemplateVersionResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTemplateVersionResponseValidationError{}
+
+// Validate checks the field values on RelatedProvider with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *RelatedProvider) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RelatedProvider with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RelatedProviderMultiError, or nil if none found.
+func (m *RelatedProvider) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RelatedProvider) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -920,19 +2135,19 @@ func (m *PreferredProvider) validate(all bool) error {
 	// no validation rules for ProviderName
 
 	if len(errors) > 0 {
-		return PreferredProviderMultiError(errors)
+		return RelatedProviderMultiError(errors)
 	}
 
 	return nil
 }
 
-// PreferredProviderMultiError is an error wrapping multiple validation errors
-// returned by PreferredProvider.ValidateAll() if the designated constraints
+// RelatedProviderMultiError is an error wrapping multiple validation errors
+// returned by RelatedProvider.ValidateAll() if the designated constraints
 // aren't met.
-type PreferredProviderMultiError []error
+type RelatedProviderMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m PreferredProviderMultiError) Error() string {
+func (m RelatedProviderMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -941,11 +2156,11 @@ func (m PreferredProviderMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m PreferredProviderMultiError) AllErrors() []error { return m }
+func (m RelatedProviderMultiError) AllErrors() []error { return m }
 
-// PreferredProviderValidationError is the validation error returned by
-// PreferredProvider.Validate if the designated constraints aren't met.
-type PreferredProviderValidationError struct {
+// RelatedProviderValidationError is the validation error returned by
+// RelatedProvider.Validate if the designated constraints aren't met.
+type RelatedProviderValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -953,24 +2168,22 @@ type PreferredProviderValidationError struct {
 }
 
 // Field function returns field value.
-func (e PreferredProviderValidationError) Field() string { return e.field }
+func (e RelatedProviderValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e PreferredProviderValidationError) Reason() string { return e.reason }
+func (e RelatedProviderValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e PreferredProviderValidationError) Cause() error { return e.cause }
+func (e RelatedProviderValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e PreferredProviderValidationError) Key() bool { return e.key }
+func (e RelatedProviderValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e PreferredProviderValidationError) ErrorName() string {
-	return "PreferredProviderValidationError"
-}
+func (e RelatedProviderValidationError) ErrorName() string { return "RelatedProviderValidationError" }
 
 // Error satisfies the builtin error interface
-func (e PreferredProviderValidationError) Error() string {
+func (e RelatedProviderValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -982,14 +2195,14 @@ func (e PreferredProviderValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sPreferredProvider.%s: %s%s",
+		"invalid %sRelatedProvider.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = PreferredProviderValidationError{}
+var _ error = RelatedProviderValidationError{}
 
 var _ interface {
 	Field() string
@@ -997,24 +2210,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = PreferredProviderValidationError{}
+} = RelatedProviderValidationError{}
 
-// Validate checks the field values on SaveProvidersRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on SaveTemplateProvidersRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SaveProvidersRequest) Validate() error {
+func (m *SaveTemplateProvidersRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SaveProvidersRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on SaveTemplateProvidersRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// SaveProvidersRequestMultiError, or nil if none found.
-func (m *SaveProvidersRequest) ValidateAll() error {
+// SaveTemplateProvidersRequestMultiError, or nil if none found.
+func (m *SaveTemplateProvidersRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SaveProvidersRequest) validate(all bool) error {
+func (m *SaveTemplateProvidersRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1025,23 +2238,23 @@ func (m *SaveProvidersRequest) validate(all bool) error {
 
 	// no validation rules for TplVersionId
 
-	for idx, item := range m.GetPreferredProviders() {
+	for idx, item := range m.GetRelatedProviders() {
 		_, _ = idx, item
 
 		if all {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, SaveProvidersRequestValidationError{
-						field:  fmt.Sprintf("PreferredProviders[%v]", idx),
+					errors = append(errors, SaveTemplateProvidersRequestValidationError{
+						field:  fmt.Sprintf("RelatedProviders[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, SaveProvidersRequestValidationError{
-						field:  fmt.Sprintf("PreferredProviders[%v]", idx),
+					errors = append(errors, SaveTemplateProvidersRequestValidationError{
+						field:  fmt.Sprintf("RelatedProviders[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1049,8 +2262,8 @@ func (m *SaveProvidersRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return SaveProvidersRequestValidationError{
-					field:  fmt.Sprintf("PreferredProviders[%v]", idx),
+				return SaveTemplateProvidersRequestValidationError{
+					field:  fmt.Sprintf("RelatedProviders[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1060,19 +2273,19 @@ func (m *SaveProvidersRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return SaveProvidersRequestMultiError(errors)
+		return SaveTemplateProvidersRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// SaveProvidersRequestMultiError is an error wrapping multiple validation
-// errors returned by SaveProvidersRequest.ValidateAll() if the designated
-// constraints aren't met.
-type SaveProvidersRequestMultiError []error
+// SaveTemplateProvidersRequestMultiError is an error wrapping multiple
+// validation errors returned by SaveTemplateProvidersRequest.ValidateAll() if
+// the designated constraints aren't met.
+type SaveTemplateProvidersRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SaveProvidersRequestMultiError) Error() string {
+func (m SaveTemplateProvidersRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1081,11 +2294,12 @@ func (m SaveProvidersRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SaveProvidersRequestMultiError) AllErrors() []error { return m }
+func (m SaveTemplateProvidersRequestMultiError) AllErrors() []error { return m }
 
-// SaveProvidersRequestValidationError is the validation error returned by
-// SaveProvidersRequest.Validate if the designated constraints aren't met.
-type SaveProvidersRequestValidationError struct {
+// SaveTemplateProvidersRequestValidationError is the validation error returned
+// by SaveTemplateProvidersRequest.Validate if the designated constraints
+// aren't met.
+type SaveTemplateProvidersRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1093,24 +2307,24 @@ type SaveProvidersRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e SaveProvidersRequestValidationError) Field() string { return e.field }
+func (e SaveTemplateProvidersRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SaveProvidersRequestValidationError) Reason() string { return e.reason }
+func (e SaveTemplateProvidersRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SaveProvidersRequestValidationError) Cause() error { return e.cause }
+func (e SaveTemplateProvidersRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SaveProvidersRequestValidationError) Key() bool { return e.key }
+func (e SaveTemplateProvidersRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SaveProvidersRequestValidationError) ErrorName() string {
-	return "SaveProvidersRequestValidationError"
+func (e SaveTemplateProvidersRequestValidationError) ErrorName() string {
+	return "SaveTemplateProvidersRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SaveProvidersRequestValidationError) Error() string {
+func (e SaveTemplateProvidersRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1122,14 +2336,14 @@ func (e SaveProvidersRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSaveProvidersRequest.%s: %s%s",
+		"invalid %sSaveTemplateProvidersRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SaveProvidersRequestValidationError{}
+var _ error = SaveTemplateProvidersRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1137,24 +2351,469 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SaveProvidersRequestValidationError{}
+} = SaveTemplateProvidersRequestValidationError{}
 
-// Validate checks the field values on SaveProvidersResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on SaveTemplateProvidersResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SaveProvidersResponse) Validate() error {
+func (m *SaveTemplateProvidersResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SaveProvidersResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SaveProvidersResponseMultiError, or nil if none found.
-func (m *SaveProvidersResponse) ValidateAll() error {
+// ValidateAll checks the field values on SaveTemplateProvidersResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SaveTemplateProvidersResponseMultiError, or nil if none found.
+func (m *SaveTemplateProvidersResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SaveProvidersResponse) validate(all bool) error {
+func (m *SaveTemplateProvidersResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SaveTemplateProvidersResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SaveTemplateProvidersResponseMultiError is an error wrapping multiple
+// validation errors returned by SaveTemplateProvidersResponse.ValidateAll()
+// if the designated constraints aren't met.
+type SaveTemplateProvidersResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SaveTemplateProvidersResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SaveTemplateProvidersResponseMultiError) AllErrors() []error { return m }
+
+// SaveTemplateProvidersResponseValidationError is the validation error
+// returned by SaveTemplateProvidersResponse.Validate if the designated
+// constraints aren't met.
+type SaveTemplateProvidersResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SaveTemplateProvidersResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SaveTemplateProvidersResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SaveTemplateProvidersResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SaveTemplateProvidersResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SaveTemplateProvidersResponseValidationError) ErrorName() string {
+	return "SaveTemplateProvidersResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SaveTemplateProvidersResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSaveTemplateProvidersResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SaveTemplateProvidersResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SaveTemplateProvidersResponseValidationError{}
+
+// Validate checks the field values on DeleteTemplateProviderRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteTemplateProviderRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteTemplateProviderRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// DeleteTemplateProviderRequestMultiError, or nil if none found.
+func (m *DeleteTemplateProviderRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteTemplateProviderRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteTemplateProviderRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteTemplateProviderRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteTemplateProviderRequest.ValidateAll()
+// if the designated constraints aren't met.
+type DeleteTemplateProviderRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteTemplateProviderRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteTemplateProviderRequestMultiError) AllErrors() []error { return m }
+
+// DeleteTemplateProviderRequestValidationError is the validation error
+// returned by DeleteTemplateProviderRequest.Validate if the designated
+// constraints aren't met.
+type DeleteTemplateProviderRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteTemplateProviderRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteTemplateProviderRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteTemplateProviderRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteTemplateProviderRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteTemplateProviderRequestValidationError) ErrorName() string {
+	return "DeleteTemplateProviderRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteTemplateProviderRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteTemplateProviderRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteTemplateProviderRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteTemplateProviderRequestValidationError{}
+
+// Validate checks the field values on DeleteTemplateProviderResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteTemplateProviderResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteTemplateProviderResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// DeleteTemplateProviderResponseMultiError, or nil if none found.
+func (m *DeleteTemplateProviderResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteTemplateProviderResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteTemplateProviderResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteTemplateProviderResponseMultiError is an error wrapping multiple
+// validation errors returned by DeleteTemplateProviderResponse.ValidateAll()
+// if the designated constraints aren't met.
+type DeleteTemplateProviderResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteTemplateProviderResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteTemplateProviderResponseMultiError) AllErrors() []error { return m }
+
+// DeleteTemplateProviderResponseValidationError is the validation error
+// returned by DeleteTemplateProviderResponse.Validate if the designated
+// constraints aren't met.
+type DeleteTemplateProviderResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteTemplateProviderResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteTemplateProviderResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteTemplateProviderResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteTemplateProviderResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteTemplateProviderResponseValidationError) ErrorName() string {
+	return "DeleteTemplateProviderResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteTemplateProviderResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteTemplateProviderResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteTemplateProviderResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteTemplateProviderResponseValidationError{}
+
+// Validate checks the field values on ListTemplateProviderRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListTemplateProviderRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTemplateProviderRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTemplateProviderRequestMultiError, or nil if none found.
+func (m *ListTemplateProviderRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTemplateProviderRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetFieldMask()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListTemplateProviderRequestValidationError{
+					field:  "FieldMask",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListTemplateProviderRequestValidationError{
+					field:  "FieldMask",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFieldMask()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListTemplateProviderRequestValidationError{
+				field:  "FieldMask",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for VersionId
+
+	if len(errors) > 0 {
+		return ListTemplateProviderRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTemplateProviderRequestMultiError is an error wrapping multiple
+// validation errors returned by ListTemplateProviderRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListTemplateProviderRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTemplateProviderRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTemplateProviderRequestMultiError) AllErrors() []error { return m }
+
+// ListTemplateProviderRequestValidationError is the validation error returned
+// by ListTemplateProviderRequest.Validate if the designated constraints
+// aren't met.
+type ListTemplateProviderRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTemplateProviderRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTemplateProviderRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTemplateProviderRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTemplateProviderRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTemplateProviderRequestValidationError) ErrorName() string {
+	return "ListTemplateProviderRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTemplateProviderRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTemplateProviderRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTemplateProviderRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTemplateProviderRequestValidationError{}
+
+// Validate checks the field values on ListTemplateProviderResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListTemplateProviderResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTemplateProviderResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTemplateProviderResponseMultiError, or nil if none found.
+func (m *ListTemplateProviderResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTemplateProviderResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1168,7 +2827,7 @@ func (m *SaveProvidersResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, SaveProvidersResponseValidationError{
+					errors = append(errors, ListTemplateProviderResponseValidationError{
 						field:  fmt.Sprintf("Providers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1176,7 +2835,7 @@ func (m *SaveProvidersResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, SaveProvidersResponseValidationError{
+					errors = append(errors, ListTemplateProviderResponseValidationError{
 						field:  fmt.Sprintf("Providers[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1185,7 +2844,7 @@ func (m *SaveProvidersResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return SaveProvidersResponseValidationError{
+				return ListTemplateProviderResponseValidationError{
 					field:  fmt.Sprintf("Providers[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1196,19 +2855,19 @@ func (m *SaveProvidersResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return SaveProvidersResponseMultiError(errors)
+		return ListTemplateProviderResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// SaveProvidersResponseMultiError is an error wrapping multiple validation
-// errors returned by SaveProvidersResponse.ValidateAll() if the designated
-// constraints aren't met.
-type SaveProvidersResponseMultiError []error
+// ListTemplateProviderResponseMultiError is an error wrapping multiple
+// validation errors returned by ListTemplateProviderResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListTemplateProviderResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SaveProvidersResponseMultiError) Error() string {
+func (m ListTemplateProviderResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1217,144 +2876,12 @@ func (m SaveProvidersResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SaveProvidersResponseMultiError) AllErrors() []error { return m }
+func (m ListTemplateProviderResponseMultiError) AllErrors() []error { return m }
 
-// SaveProvidersResponseValidationError is the validation error returned by
-// SaveProvidersResponse.Validate if the designated constraints aren't met.
-type SaveProvidersResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SaveProvidersResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SaveProvidersResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SaveProvidersResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SaveProvidersResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SaveProvidersResponseValidationError) ErrorName() string {
-	return "SaveProvidersResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SaveProvidersResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSaveProvidersResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SaveProvidersResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SaveProvidersResponseValidationError{}
-
-// Validate checks the field values on FindByIdRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *FindByIdRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on FindByIdRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// FindByIdRequestMultiError, or nil if none found.
-func (m *FindByIdRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *FindByIdRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetFieldMask()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, FindByIdRequestValidationError{
-					field:  "FieldMask",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, FindByIdRequestValidationError{
-					field:  "FieldMask",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetFieldMask()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return FindByIdRequestValidationError{
-				field:  "FieldMask",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for Id
-
-	if len(errors) > 0 {
-		return FindByIdRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// FindByIdRequestMultiError is an error wrapping multiple validation errors
-// returned by FindByIdRequest.ValidateAll() if the designated constraints
+// ListTemplateProviderResponseValidationError is the validation error returned
+// by ListTemplateProviderResponse.Validate if the designated constraints
 // aren't met.
-type FindByIdRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m FindByIdRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m FindByIdRequestMultiError) AllErrors() []error { return m }
-
-// FindByIdRequestValidationError is the validation error returned by
-// FindByIdRequest.Validate if the designated constraints aren't met.
-type FindByIdRequestValidationError struct {
+type ListTemplateProviderResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1362,22 +2889,24 @@ type FindByIdRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e FindByIdRequestValidationError) Field() string { return e.field }
+func (e ListTemplateProviderResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e FindByIdRequestValidationError) Reason() string { return e.reason }
+func (e ListTemplateProviderResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e FindByIdRequestValidationError) Cause() error { return e.cause }
+func (e ListTemplateProviderResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e FindByIdRequestValidationError) Key() bool { return e.key }
+func (e ListTemplateProviderResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e FindByIdRequestValidationError) ErrorName() string { return "FindByIdRequestValidationError" }
+func (e ListTemplateProviderResponseValidationError) ErrorName() string {
+	return "ListTemplateProviderResponseValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e FindByIdRequestValidationError) Error() string {
+func (e ListTemplateProviderResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1389,14 +2918,14 @@ func (e FindByIdRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sFindByIdRequest.%s: %s%s",
+		"invalid %sListTemplateProviderResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = FindByIdRequestValidationError{}
+var _ error = ListTemplateProviderResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1404,133 +2933,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = FindByIdRequestValidationError{}
-
-// Validate checks the field values on FindByIdResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *FindByIdResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on FindByIdResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// FindByIdResponseMultiError, or nil if none found.
-func (m *FindByIdResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *FindByIdResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetTpl()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, FindByIdResponseValidationError{
-					field:  "Tpl",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, FindByIdResponseValidationError{
-					field:  "Tpl",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTpl()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return FindByIdResponseValidationError{
-				field:  "Tpl",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return FindByIdResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// FindByIdResponseMultiError is an error wrapping multiple validation errors
-// returned by FindByIdResponse.ValidateAll() if the designated constraints
-// aren't met.
-type FindByIdResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m FindByIdResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m FindByIdResponseMultiError) AllErrors() []error { return m }
-
-// FindByIdResponseValidationError is the validation error returned by
-// FindByIdResponse.Validate if the designated constraints aren't met.
-type FindByIdResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e FindByIdResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e FindByIdResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e FindByIdResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e FindByIdResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e FindByIdResponseValidationError) ErrorName() string { return "FindByIdResponseValidationError" }
-
-// Error satisfies the builtin error interface
-func (e FindByIdResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sFindByIdResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = FindByIdResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = FindByIdResponseValidationError{}
+} = ListTemplateProviderResponseValidationError{}

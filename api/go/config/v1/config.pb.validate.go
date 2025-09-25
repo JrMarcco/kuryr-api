@@ -1546,22 +1546,22 @@ var _ interface {
 	ErrorName() string
 } = UpdateResponseValidationError{}
 
-// Validate checks the field values on FindByIdRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *FindByIdRequest) Validate() error {
+// Validate checks the field values on FindByBizIdRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *FindByBizIdRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on FindByIdRequest with the rules
+// ValidateAll checks the field values on FindByBizIdRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// FindByIdRequestMultiError, or nil if none found.
-func (m *FindByIdRequest) ValidateAll() error {
+// FindByBizIdRequestMultiError, or nil if none found.
+func (m *FindByBizIdRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *FindByIdRequest) validate(all bool) error {
+func (m *FindByBizIdRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1572,7 +1572,7 @@ func (m *FindByIdRequest) validate(all bool) error {
 		switch v := interface{}(m.GetFieldMask()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, FindByIdRequestValidationError{
+				errors = append(errors, FindByBizIdRequestValidationError{
 					field:  "FieldMask",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1580,7 +1580,7 @@ func (m *FindByIdRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, FindByIdRequestValidationError{
+				errors = append(errors, FindByBizIdRequestValidationError{
 					field:  "FieldMask",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1589,7 +1589,7 @@ func (m *FindByIdRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetFieldMask()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return FindByIdRequestValidationError{
+			return FindByBizIdRequestValidationError{
 				field:  "FieldMask",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -1597,22 +1597,22 @@ func (m *FindByIdRequest) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Id
+	// no validation rules for BizId
 
 	if len(errors) > 0 {
-		return FindByIdRequestMultiError(errors)
+		return FindByBizIdRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// FindByIdRequestMultiError is an error wrapping multiple validation errors
-// returned by FindByIdRequest.ValidateAll() if the designated constraints
+// FindByBizIdRequestMultiError is an error wrapping multiple validation errors
+// returned by FindByBizIdRequest.ValidateAll() if the designated constraints
 // aren't met.
-type FindByIdRequestMultiError []error
+type FindByBizIdRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m FindByIdRequestMultiError) Error() string {
+func (m FindByBizIdRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1621,11 +1621,11 @@ func (m FindByIdRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m FindByIdRequestMultiError) AllErrors() []error { return m }
+func (m FindByBizIdRequestMultiError) AllErrors() []error { return m }
 
-// FindByIdRequestValidationError is the validation error returned by
-// FindByIdRequest.Validate if the designated constraints aren't met.
-type FindByIdRequestValidationError struct {
+// FindByBizIdRequestValidationError is the validation error returned by
+// FindByBizIdRequest.Validate if the designated constraints aren't met.
+type FindByBizIdRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1633,22 +1633,24 @@ type FindByIdRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e FindByIdRequestValidationError) Field() string { return e.field }
+func (e FindByBizIdRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e FindByIdRequestValidationError) Reason() string { return e.reason }
+func (e FindByBizIdRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e FindByIdRequestValidationError) Cause() error { return e.cause }
+func (e FindByBizIdRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e FindByIdRequestValidationError) Key() bool { return e.key }
+func (e FindByBizIdRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e FindByIdRequestValidationError) ErrorName() string { return "FindByIdRequestValidationError" }
+func (e FindByBizIdRequestValidationError) ErrorName() string {
+	return "FindByBizIdRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e FindByIdRequestValidationError) Error() string {
+func (e FindByBizIdRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1660,14 +1662,14 @@ func (e FindByIdRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sFindByIdRequest.%s: %s%s",
+		"invalid %sFindByBizIdRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = FindByIdRequestValidationError{}
+var _ error = FindByBizIdRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1675,24 +1677,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = FindByIdRequestValidationError{}
+} = FindByBizIdRequestValidationError{}
 
-// Validate checks the field values on FindByIdResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *FindByIdResponse) Validate() error {
+// Validate checks the field values on FindByBizIdResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *FindByBizIdResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on FindByIdResponse with the rules
+// ValidateAll checks the field values on FindByBizIdResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// FindByIdResponseMultiError, or nil if none found.
-func (m *FindByIdResponse) ValidateAll() error {
+// FindByBizIdResponseMultiError, or nil if none found.
+func (m *FindByBizIdResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *FindByIdResponse) validate(all bool) error {
+func (m *FindByBizIdResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1700,28 +1702,28 @@ func (m *FindByIdResponse) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetConfig()).(type) {
+		switch v := interface{}(m.GetBizConfig()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, FindByIdResponseValidationError{
-					field:  "Config",
+				errors = append(errors, FindByBizIdResponseValidationError{
+					field:  "BizConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, FindByIdResponseValidationError{
-					field:  "Config",
+				errors = append(errors, FindByBizIdResponseValidationError{
+					field:  "BizConfig",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetConfig()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetBizConfig()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return FindByIdResponseValidationError{
-				field:  "Config",
+			return FindByBizIdResponseValidationError{
+				field:  "BizConfig",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1729,19 +1731,19 @@ func (m *FindByIdResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return FindByIdResponseMultiError(errors)
+		return FindByBizIdResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// FindByIdResponseMultiError is an error wrapping multiple validation errors
-// returned by FindByIdResponse.ValidateAll() if the designated constraints
-// aren't met.
-type FindByIdResponseMultiError []error
+// FindByBizIdResponseMultiError is an error wrapping multiple validation
+// errors returned by FindByBizIdResponse.ValidateAll() if the designated
+// constraints aren't met.
+type FindByBizIdResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m FindByIdResponseMultiError) Error() string {
+func (m FindByBizIdResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1750,11 +1752,11 @@ func (m FindByIdResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m FindByIdResponseMultiError) AllErrors() []error { return m }
+func (m FindByBizIdResponseMultiError) AllErrors() []error { return m }
 
-// FindByIdResponseValidationError is the validation error returned by
-// FindByIdResponse.Validate if the designated constraints aren't met.
-type FindByIdResponseValidationError struct {
+// FindByBizIdResponseValidationError is the validation error returned by
+// FindByBizIdResponse.Validate if the designated constraints aren't met.
+type FindByBizIdResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1762,22 +1764,24 @@ type FindByIdResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e FindByIdResponseValidationError) Field() string { return e.field }
+func (e FindByBizIdResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e FindByIdResponseValidationError) Reason() string { return e.reason }
+func (e FindByBizIdResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e FindByIdResponseValidationError) Cause() error { return e.cause }
+func (e FindByBizIdResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e FindByIdResponseValidationError) Key() bool { return e.key }
+func (e FindByBizIdResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e FindByIdResponseValidationError) ErrorName() string { return "FindByIdResponseValidationError" }
+func (e FindByBizIdResponseValidationError) ErrorName() string {
+	return "FindByBizIdResponseValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e FindByIdResponseValidationError) Error() string {
+func (e FindByBizIdResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1789,14 +1793,14 @@ func (e FindByIdResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sFindByIdResponse.%s: %s%s",
+		"invalid %sFindByBizIdResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = FindByIdResponseValidationError{}
+var _ error = FindByBizIdResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1804,4 +1808,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = FindByIdResponseValidationError{}
+} = FindByBizIdResponseValidationError{}
