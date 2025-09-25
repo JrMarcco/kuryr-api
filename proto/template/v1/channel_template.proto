@@ -3,6 +3,7 @@ syntax = "proto3";
 package template.v1;
 
 import "common/v1/types.proto";
+import "google/protobuf/field_mask.proto";
 
 option go_package = "github.com/JrMarcco/kuryr-api/api/template/v1";
 
@@ -63,6 +64,14 @@ message TemplateProvider {
   int64 updated_at = 13;
 }
 
+service TemplateService {
+  rpc Save(SaveRequest) returns (SaveResponse);
+  rpc SaveVersion(SaveVersionRequest) returns (SaveVersionResponse);
+  rpc SaveProviders(SaveProvidersRequest) returns (SaveProvidersResponse);
+
+  rpc FindById(FindByIdRequest) returns (FindByIdResponse);
+}
+
 message SaveRequest {
   uint64 biz_id = 1;
   string tpl_name = 2;
@@ -81,13 +90,16 @@ message SaveVersionRequest {
   string signature = 3;
   string content = 4;
   string apply_remark = 5;
+
+  // 可选：创建版本时预选供应商，但不强制关联
+  repeated uint64 preferred_provider_ids = 6;
 }
 
 message SaveVersionResponse {
   TemplateVersion version = 1;
 }
 
-message RelatedProvider {
+message PreferredProvider {
   uint64 provider_id = 1;
   string provider_name = 2;
 }
@@ -95,15 +107,19 @@ message RelatedProvider {
 message SaveProvidersRequest {
   uint64 tpl_id = 1;
   uint64 tpl_version_id = 2;
-  repeated RelatedProvider related_providers = 3;
+  repeated PreferredProvider preferred_providers = 3;
 }
 
 message SaveProvidersResponse {
   repeated TemplateProvider providers = 1;
 }
 
-service TemplateService {
-  rpc Save(SaveRequest) returns (SaveResponse);
-  rpc SaveVersion(SaveVersionRequest) returns (SaveVersionResponse);
-  rpc SaveProviders(SaveProvidersRequest) returns (SaveProvidersResponse);
+message FindByIdRequest {
+  google.protobuf.FieldMask field_mask = 1;
+
+  uint64 id = 2;
+}
+
+message FindByIdResponse {
+  ChannelTemplate tpl = 1;
 }
