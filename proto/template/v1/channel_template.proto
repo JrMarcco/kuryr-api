@@ -106,8 +106,16 @@ message ListTemplateByBizIdResponse {
   int64 total = 2;
 }
 
+message RelatedProvider {
+  uint64 provider_id = 1;
+  string provider_name = 2;
+}
+
 message SaveTemplateVersionRequest {
   TemplateVersion version = 1;
+
+  // 这里可以考虑增加可选参数，直接关联供应商
+  repeated RelatedProvider related_providers = 2;
 }
 
 message SaveTemplateVersionResponse {
@@ -134,11 +142,6 @@ message ListTemplateVersionRequest {
 
 message ListTemplateVersionResponse {
   repeated TemplateVersion versions = 1;
-}
-
-message RelatedProvider {
-  uint64 provider_id = 1;
-  string provider_name = 2;
 }
 
 message SaveTemplateProvidersRequest {
